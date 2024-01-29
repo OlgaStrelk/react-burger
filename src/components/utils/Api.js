@@ -1,6 +1,6 @@
+import { INGREDIENTS_API_URL } from "./consts";
 export const getIngredients = () => {
-  //   return fetch("https://norma.nomoreparties.space/api/ingredients").then((res)=>(res.ok ? res.json().data : Promise.reject(console.log(res))));
-  return fetch("https://norma.nomoreparties.space/api/ingredients").then(
-    (res) => (res.ok ? res.json() : Promise.reject(res.status))
+  return fetch(INGREDIENTS_API_URL).then((res) =>
+    res.ok ? res.json() : Promise.reject(res.status)
   );
 };
