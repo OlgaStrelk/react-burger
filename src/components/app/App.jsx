@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import styles from "./app.module.css";
 import { getIngredients } from "../utils/Api";
+import AppHeader from "../app-header/AppHeader";
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
@@ -18,7 +19,7 @@ function App() {
   console.log(ingredients);
   return (
     <div className={styles.app}>
-      <h1 className={styles.title}>Бургерная</h1>
+      <AppHeader />
       {ingredients &&
         ingredients.map((item) => <div key={item.id}>{item.name}</div>)}
     </div>

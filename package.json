@@ -10,7 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@babel/runtime": "^7.23.9",
     "@ya.praktikum/react-developer-burger-ui-components": "^1.14.0",
+    "babel": "^6.23.0",
+    "core-js": "^3.35.1",
+    "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
