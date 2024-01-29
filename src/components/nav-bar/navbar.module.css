@@ -1,0 +1,28 @@
+.nav {
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: max-content max-content 1fr;
+}
+
+.listItem {
+  box-sizing: border-box;
+  border: 1px dashed #4c4cff;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.listItem:last-of-type {
+    justify-self: flex-end;
+    margin: 0;
+}
+
+.link {
+  display: flex;
+  height: 24px;
+  align-items: center;
+}

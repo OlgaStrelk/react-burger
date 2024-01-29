@@ -16,12 +16,11 @@ function App() {
     return setIsLoading(false);
   }, []);
 
-  console.log(ingredients);
   return (
     <div className={styles.app}>
       <AppHeader />
       {ingredients &&
-        ingredients.map((item) => <div key={item.id}>{item.name}</div>)}
+        ingredients.map((item) => <div key={item._id}>{item.name}</div>)}
     </div>
   );
 }
