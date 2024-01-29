@@ -1,3 +1,6 @@
+.header {
+  background-color: #1c1c21;
+}
 .centered {
   transform: translateX(-50%);
   left: 50%;
