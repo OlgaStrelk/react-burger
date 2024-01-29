@@ -26,3 +26,7 @@
   height: 24px;
   align-items: center;
 }
+
+.text {
+    cursor: default
+}
