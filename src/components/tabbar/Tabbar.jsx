@@ -4,7 +4,7 @@ function Tabbar({ data }) {
   const [current, setCurrent] = useState(data[0].value);
 
   return (
-    <div style={{ display: "flex" }}>
+    <div style={{ display: "flex" }} className="mt-5">
       {data.map((item) => (
         <Tab key={item.id}
           value={item.value}
