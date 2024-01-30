@@ -6,14 +6,14 @@
 }
 
 .app {
-  /* @font-face {
-    font-family: Arial;
-    src: url();
-  } */
 }
 
 .title {
   font-size: larger;
   color: red;
   text-align: center;
+}
+
+.body {
+  display: flex;
 }
