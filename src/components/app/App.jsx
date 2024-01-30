@@ -26,8 +26,6 @@ function App() {
       <BurgerIngredients data={ingredients}/>
       <BurgerConstructor data={ingredients} />
       </main>
-      {ingredients &&
-        ingredients.map((item) => <div key={item._id}>{item.name}</div>)}
     </div>
   );
 }

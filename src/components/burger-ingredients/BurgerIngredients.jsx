@@ -4,12 +4,10 @@ import styles from './burger-ingredients.module.css'
 
 function BurgerIngredients({data}) {
   const BLOCK_TITLES = [
-    { title: "Булки", value: "bun", id: 1 },
-    { title: "Соусы", value: "souce", id: 2 },
-    { title: "Начинки", value: "main", id: 3 },
+    { title: "Булки", value: "bun", id: 7 },
+    { title: "Соусы", value: "souce", id: 8 },
+    { title: "Начинки", value: "main", id: 9 },
   ];
-  const filterIngredients = () => {};
-
   return (
     <div className={styles.wrapper}>
       <h2 className="title">Соберите бургер</h2>
