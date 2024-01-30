@@ -18,4 +18,5 @@
   max-width: fit-content;
   margin: auto;
   display: flex;
+  max-height: calc(100vh - 98px);
 }

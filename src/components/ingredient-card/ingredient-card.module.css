@@ -1,4 +1,10 @@
 .container {
+  position: relative;
   width: 272px;
   height: 208px;
+}
+
+.price {
+  display:block;
+  text-align: center;
 }

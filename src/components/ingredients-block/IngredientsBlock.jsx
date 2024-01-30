@@ -2,7 +2,6 @@ import { Fragment } from "react";
 import styles from './ingredients-block.module.css'
 import IngredientCard from "../ingredient-card/IngredientCard";
 function IngredientsBlock({ titles, data }) {
-    console.log(data)
   const renderFilteredIngredients = (blockTitle) => {
     const newArray = data.filter(
       (ingredient) => ingredient.type === blockTitle?.value

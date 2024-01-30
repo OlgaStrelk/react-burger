@@ -1,4 +1,19 @@
 .container {
-    height: calc(100vh - 98px);
-    overflow: scroll;
-  }
+  max-height:37vh;
+  overflow: scroll;
+}
+.section {
+  max-height: calc(100vh - 100px);
+  max-width: 600px;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.total{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
