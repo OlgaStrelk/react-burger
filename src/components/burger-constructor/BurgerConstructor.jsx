@@ -6,7 +6,7 @@ function BurgerConstructor({ data }) {
 const img = data[0]?.image
 const image=''
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+    <div className="ml-10" style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
       <ConstructorElement
         type="top"
         isLocked={true}

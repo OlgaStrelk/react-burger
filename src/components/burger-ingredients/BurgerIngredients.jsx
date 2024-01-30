@@ -1,5 +1,5 @@
 import Tabbar from "../tabbar/Tabbar";
-import IngedientsBlock from "../ingredients-block/IngedientsBlock";
+import IngredientsBlock from "../ingredients-block/IngredientsBlock";
 import styles from "./burger-ingredients.module.css";
 
 function BurgerIngredients({ data }) {
@@ -9,12 +9,12 @@ function BurgerIngredients({ data }) {
     { title: "Начинки", value: "main", id: 9 },
   ];
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.container}>
       <h2 className="text text_type_main-large mt-10">
         Соберите бургер
       </h2>
       <Tabbar data={BLOCK_TITLES} />
-      <IngedientsBlock data={data} titles={BLOCK_TITLES} />
+      <IngredientsBlock data={data} titles={BLOCK_TITLES} />
     </div>
   );
 }
