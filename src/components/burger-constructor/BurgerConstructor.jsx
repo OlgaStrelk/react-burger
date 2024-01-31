@@ -10,14 +10,14 @@ function BurgerConstructor({ data }) {
   const img = data[0]?.image;
   const renderInnerIngredients = () => {
     return data?.map((item) => (
-      <div key={item._id} className={`${styles.item}`}>
+      <li key={item._id} className={`${styles.item}`}>
         <DragIcon type="primary" />
         <ConstructorElement
           text={item.name}
           price={item.price}
           thumbnail={item.image}
         />
-      </div>
+      </li>
     ));
   };
   return (
@@ -33,9 +33,9 @@ function BurgerConstructor({ data }) {
             className="ml-8"
           />
         </div>
-        <div className={`${styles.container}  ${styles.column}`}>
+        <ul className={`${styles.container}  ${styles.column}`}>
           {renderInnerIngredients()}
-        </div>
+        </ul>
         <div className="ml-8 mt-2">
           <ConstructorElement
             type="bottom"
