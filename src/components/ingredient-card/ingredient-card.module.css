@@ -1,10 +1,19 @@
 .container {
   position: relative;
   width: 272px;
-  height: 208px;
+  min-height: 208px;
 }
 
 .price {
-  display:block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.centered {
   text-align: center;
+}
+.image {
+  width: 100%;
+  box-sizing: border-box;
 }

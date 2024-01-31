@@ -15,7 +15,7 @@ function IngredientsBlock({ titles, data }) {
     <div className={`${styles.container} mt-10`}>
       {titles.map((item) => (
         <Fragment key={item.id}>
-          <h3 style={{display:"block"}}>{item.title}</h3>
+          <h3 className={`text text_type_main-medium mb-6`}>{item.title}</h3>
           <div className={styles.block}>{renderFilteredIngredients(item)}</div>
         </Fragment>
       ))}
