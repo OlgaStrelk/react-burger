@@ -1,5 +1,6 @@
 .container {
-  max-height: 41vh;
+  /* max-height: 41vh; */
+  max-height: calc(100vh - 500px);
   overflow: scroll;
   margin: 0;
   padding: 0;

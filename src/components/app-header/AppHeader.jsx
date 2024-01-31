@@ -31,10 +31,12 @@ const NAVBAR_DATA = [
 export default function AppHeader() {
   return (
     <header className={`${styles.header} pt-5 pb-5`}>
-      <div className={styles.centered}>
-        <Logo />
-      </div>
+      <div className={`${styles.wrapper}`}>
+        <div className={styles.centered}>
+          <Logo />
+        </div>
       <Navbar data={NAVBAR_DATA} />
+      </div>
     </header>
   );
 }

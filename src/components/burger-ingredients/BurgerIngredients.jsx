@@ -9,13 +9,13 @@ function BurgerIngredients({ data }) {
     { title: "Начинки", value: "main", id: 9 },
   ];
   return (
-    <div className={styles.container}>
+    <section className={styles.container}>
       <h2 className="text text_type_main-large mt-10">
         Соберите бургер
       </h2>
       <Tabbar data={BLOCK_TITLES} />
       <IngredientsBlock data={data} titles={BLOCK_TITLES} />
-    </div>
+    </section>
   );
 }
 export default BurgerIngredients;
