@@ -10,7 +10,12 @@ function App() {
   const [ingredients, setIngredients] = useState([]);
 
   const fetchIngredients = () => {
-    getIngredients().then((data) => setIngredients(data.data));
+    getIngredients()
+      .then((data) => {
+        console.log(data);
+        setIngredients(data.data);
+      })
+      .catch((err) => console.log(err));
   };
 
   useEffect(() => {
@@ -23,8 +28,8 @@ function App() {
     <div className={styles.app}>
       <AppHeader />
       <main className={styles.main}>
-      <BurgerIngredients data={ingredients}/>
-      <BurgerConstructor data={ingredients} />
+        <BurgerIngredients data={ingredients} />
+        <BurgerConstructor data={ingredients} />
       </main>
     </div>
   );

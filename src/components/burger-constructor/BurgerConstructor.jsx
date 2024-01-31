@@ -19,44 +19,44 @@ function BurgerConstructor({ data }) {
         />
         <div className={`${styles.container}  ${styles.column}`}>
           <ConstructorElement
-            text={data[8].name}
-            price={data[8].price}
-            thumbnail={data[8].image}
+            text={data[8]?.name}
+            price={data[8]?.price}
+            thumbnail={data[8]?.image}
           />
           <ConstructorElement
-            text={data[14].name}
-            price={data[14].price}
-            thumbnail={data[14].image}
+            text={data[14]?.name}
+            price={data[14]?.price}
+            thumbnail={data[14]?.image}
           />
           <ConstructorElement
-            text={data[1].name}
-            price={data[1].price}
-            thumbnail={data[1].image}
+            text={data[1]?.name}
+            price={data[1]?.price}
+            thumbnail={data[1]?.image}
           />
           <ConstructorElement
-            text={data[6].name}
-            price={data[6].price}
-            thumbnail={data[6].image}
+            text={data[6]?.name}
+            price={data[6]?.price}
+            thumbnail={data[6]?.image}
           />
           <ConstructorElement
-            text={data[2].name}
-            price={data[2].price}
-            thumbnail={data[2].image}
+            text={data[2]?.name}
+            price={data[2]?.price}
+            thumbnail={data[2]?.image}
           />
           <ConstructorElement
-            text={data[3].name}
-            price={data[3].price}
-            thumbnail={data[3].image}
+            text={data[3]?.name}
+            price={data[3]?.price}
+            thumbnail={data[3]?.image}
           />
           <ConstructorElement
-            text={data[10].name}
-            price={data[10].price}
-            thumbnail={data[10].image}
+            text={data[10]?.name}
+            price={data[10]?.price}
+            thumbnail={data[10]?.image}
           />
           <ConstructorElement
-            text={data[13].name}
-            price={data[13].price}
-            thumbnail={data[13].image}
+            text={data[13]?.name}
+            price={data[13]?.price}
+            thumbnail={data[13]?.image}
           />
         </div>
         <ConstructorElement

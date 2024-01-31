@@ -1,5 +1,7 @@
 .container {
   max-width: 600px;
+  overflow: scroll;
+  max-height: 60vh;
 }
 .block {
   display: flex;

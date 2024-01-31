@@ -1,6 +1,5 @@
 .container {
   max-height: calc(100vh - 98px);
-  overflow: scroll;
 }
 
 .title {
