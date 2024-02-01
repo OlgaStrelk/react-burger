@@ -1,6 +1,8 @@
 import Tabbar from "../tabbar/Tabbar";
 import IngredientsBlock from "../ingredients-block/IngredientsBlock";
 import styles from "./burger-ingredients.module.css";
+import PropTypes from "prop-types";
+
 
 function BurgerIngredients({ data }) {
   const BLOCK_TITLES = [
@@ -18,4 +20,10 @@ function BurgerIngredients({ data }) {
     </section>
   );
 }
+
+
+BurgerIngredients.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object)
+}; 
+
 export default BurgerIngredients;

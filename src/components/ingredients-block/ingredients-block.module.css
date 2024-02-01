@@ -2,6 +2,8 @@
   max-width: 600px;
   overflow: scroll;
   max-height: calc(100vh - 320px);
+  scrollbar-color: #8585AD;
+  /* scrollbar-width: thin; */
 }
 .block {
   display: flex;

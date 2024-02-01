@@ -56,4 +56,8 @@ function BurgerConstructor({ data }) {
   );
 }
 
+BurgerConstructor.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object)
+}; 
+
 export default BurgerConstructor;
