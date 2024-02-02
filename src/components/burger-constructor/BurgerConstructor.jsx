@@ -4,12 +4,13 @@ import {
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
+import { cardDataShape } from "../../utils/shapes";
 import styles from "./burger-constructor.module.css";
 import Total from "../total/Total";
-function BurgerConstructor({ data }) {
-  const img = data[0]?.image;
+function BurgerConstructor({ ingredientsArray }) {
+  const img = ingredientsArray[0]?.image;
   const renderInnerIngredients = () => {
-    return data?.map((item) => (
+    return ingredientsArray?.map((item) => (
       <li key={item._id} className={`${styles.item}`}>
         <DragIcon type="primary" />
         <ConstructorElement
@@ -57,7 +58,7 @@ function BurgerConstructor({ data }) {
 }
 
 BurgerConstructor.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object)
-}; 
+  ingredientsArray: PropTypes.arrayOf(PropTypes.shape(cardDataShape)),
+};
 
 export default BurgerConstructor;

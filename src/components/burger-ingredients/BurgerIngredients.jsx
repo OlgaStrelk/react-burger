@@ -2,9 +2,10 @@ import Tabbar from "../tabbar/Tabbar";
 import IngredientsBlock from "../ingredients-block/IngredientsBlock";
 import styles from "./burger-ingredients.module.css";
 import PropTypes from "prop-types";
+import { cardDataShape } from "../../utils/shapes";
 
 
-function BurgerIngredients({ data }) {
+function BurgerIngredients({ ingredientsArray }) {
   const BLOCK_TITLES = [
     { title: "Булки", value: "bun", id: 7 },
     { title: "Соусы", value: "sauce", id: 8 },
@@ -16,14 +17,14 @@ function BurgerIngredients({ data }) {
         Соберите бургер
       </h2>
       <Tabbar data={BLOCK_TITLES} />
-      <IngredientsBlock data={data} titles={BLOCK_TITLES} />
+      <IngredientsBlock ingredientsArray={ingredientsArray} titles={BLOCK_TITLES} />
     </section>
   );
 }
 
 
 BurgerIngredients.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object)
+  ingredientsArray: PropTypes.arrayOf(PropTypes.shape(cardDataShape))
 }; 
 
 export default BurgerIngredients;

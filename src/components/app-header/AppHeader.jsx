@@ -35,7 +35,7 @@ export default function AppHeader() {
         <div className={styles.centered}>
           <Logo />
         </div>
-      <Navbar data={NAVBAR_DATA} />
+      <Navbar navbarData={NAVBAR_DATA} />
       </div>
     </header>
   );

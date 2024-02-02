@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import styles from "./app.module.css";
-import { getIngredients } from "../utils/Api";
+import { getIngredients } from "../../utils/Api";
 import AppHeader from "../app-header/AppHeader";
 import BurgerConstructor from "../burger-constructor/BurgerConstructor";
 import BurgerIngredients from "../burger-ingredients/BurgerIngredients";
@@ -12,7 +12,6 @@ function App() {
   const fetchIngredients = () => {
     getIngredients()
       .then((data) => {
-        console.log(data);
         setIngredients(data.data);
       })
       .catch((err) => console.log(err));
@@ -28,8 +27,8 @@ function App() {
     <>
       <AppHeader />
       <main className={styles.main}>
-        <BurgerIngredients data={ingredients} />
-        <BurgerConstructor data={ingredients} />
+        <BurgerIngredients ingredientsArray={ingredients} />
+        <BurgerConstructor ingredientsArray={ingredients} />
       </main>
       {/* <OverLay/> */}
     </>

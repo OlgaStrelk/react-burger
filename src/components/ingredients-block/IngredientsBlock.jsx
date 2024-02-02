@@ -1,13 +1,17 @@
 import { Fragment } from "react";
-import styles from './ingredients-block.module.css'
+import PropTypes from "prop-types";
+import { titlesArrayShape, cardDataShape } from "../../utils/shapes";
+
+import styles from "./ingredients-block.module.css";
 import IngredientCard from "../ingredient-card/IngredientCard";
-function IngredientsBlock({ titles, data }) {
+
+function IngredientsBlock({ titles, ingredientsArray }) {
   const renderFilteredIngredients = (blockTitle) => {
-    const newArray = data.filter(
+    const newArray = ingredientsArray.filter(
       (ingredient) => ingredient.type === blockTitle?.value
     );
     return newArray.map((item) => (
-      <IngredientCard key={item._id} data={item} />
+      <IngredientCard key={item._id} cardData={item} />
     ));
   };
 
@@ -22,4 +26,10 @@ function IngredientsBlock({ titles, data }) {
     </div>
   );
 }
+
+IngredientsBlock.propTypes = {
+  titles: PropTypes.arrayOf(PropTypes.shape(titlesArrayShape)),
+  ingredientsArray: PropTypes.arrayOf(PropTypes.shape(cardDataShape)),
+};
+
 export default IngredientsBlock;
