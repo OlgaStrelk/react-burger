@@ -5,13 +5,13 @@ import { titlesArrayShape, cardDataShape } from "../../utils/shapes";
 import styles from "./ingredients-block.module.css";
 import IngredientCard from "../ingredient-card/IngredientCard";
 
-function IngredientsBlock({ titles, ingredientsArray }) {
+function IngredientsBlock({ titles, ingredientsArray, handler }) {
   const renderFilteredIngredients = (blockTitle) => {
     const newArray = ingredientsArray.filter(
       (ingredient) => ingredient.type === blockTitle?.value
     );
     return newArray.map((item) => (
-      <IngredientCard key={item._id} cardData={item} />
+      <IngredientCard key={item._id} cardData={item} handler={handler}/>
     ));
   };
 
@@ -30,6 +30,7 @@ function IngredientsBlock({ titles, ingredientsArray }) {
 IngredientsBlock.propTypes = {
   titles: PropTypes.arrayOf(PropTypes.shape(titlesArrayShape)),
   ingredientsArray: PropTypes.arrayOf(PropTypes.shape(cardDataShape)),
+  handler: PropTypes.func
 };
 
 export default IngredientsBlock;

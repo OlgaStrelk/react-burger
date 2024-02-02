@@ -1,0 +1,9 @@
+.container {
+    background-color: #131316;
+    color: white;
+    max-width: 720px;
+    border-radius: 40px;
+    box-sizing: border-box;
+    position: absolute;
+    min-height: fit-content;
+}

@@ -1,14 +1,14 @@
-const modalRoot = document.getElementById("react-modals");
+import styles from "./modal.module.css";
+function Modal({ children, header, onClose, handler }) {
 
-function Modal({ children, header, onClose }) {
-  return ReactDOM.createPortal(
+
+  return (
     <>
-      <div className="Modal">
-        <ModalHeader onClose={onClose}>{header}</ModalHeader>
+      <div className={`${styles.container} pt-30 pb-30`}>
         {children}
       </div>
-      <ModalBackDrop onClose={onClose} />
-    </>,
-    modalRoot
+    </>
   );
 }
+
+export default Modal;

@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { cardDataShape } from "../../utils/shapes";
 
 
-function BurgerIngredients({ ingredientsArray }) {
+function BurgerIngredients({ ingredientsArray, handler }) {
   const BLOCK_TITLES = [
     { title: "Булки", value: "bun", id: 7 },
     { title: "Соусы", value: "sauce", id: 8 },
@@ -17,14 +17,15 @@ function BurgerIngredients({ ingredientsArray }) {
         Соберите бургер
       </h2>
       <Tabbar data={BLOCK_TITLES} />
-      <IngredientsBlock ingredientsArray={ingredientsArray} titles={BLOCK_TITLES} />
+      <IngredientsBlock handler={handler} ingredientsArray={ingredientsArray} titles={BLOCK_TITLES} />
     </section>
   );
 }
 
 
 BurgerIngredients.propTypes = {
-  ingredientsArray: PropTypes.arrayOf(PropTypes.shape(cardDataShape))
+  ingredientsArray: PropTypes.arrayOf(PropTypes.shape(cardDataShape)),
+  handler: PropTypes.func
 }; 
 
 export default BurgerIngredients;

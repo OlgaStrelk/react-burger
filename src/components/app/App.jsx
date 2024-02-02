@@ -4,10 +4,13 @@ import { getIngredients } from "../../utils/Api";
 import AppHeader from "../app-header/AppHeader";
 import BurgerConstructor from "../burger-constructor/BurgerConstructor";
 import BurgerIngredients from "../burger-ingredients/BurgerIngredients";
-
+import ModalOverlay from "../modal-overlay/ModalOverlay";
+import CardModal from "../card-modal/CardModal";
 function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [ingredients, setIngredients] = useState([]);
+  const [isCardModalOpened, setIsCardModalOpened] = useState(false);
+  const [currentCard, setCurrentCard] = useState(null);
 
   const fetchIngredients = () => {
     getIngredients()
@@ -23,14 +26,33 @@ function App() {
     return setIsLoading(false);
   }, []);
 
+  const getCurrentCardData = (e) => {
+    setCurrentCard(ingredients.find((item) => item._id === e.currentTarget.id));
+  };
+
+  const handleModalOpen = (e) => {
+    setIsCardModalOpened(true);
+    getCurrentCardData(e);
+  };
+
   return (
     <>
       <AppHeader />
       <main className={styles.main}>
-        <BurgerIngredients ingredientsArray={ingredients} />
-        <BurgerConstructor ingredientsArray={ingredients} />
+        <BurgerIngredients
+          handler={handleModalOpen}
+          ingredientsArray={ingredients}
+        />
+        <BurgerConstructor
+          handler={handleModalOpen}
+          ingredientsArray={ingredients}
+        />
       </main>
-      {/* <OverLay/> */}
+      {isCardModalOpened && (
+        <ModalOverlay ingredientsArray={ingredients}>
+          <CardModal cardData={currentCard} />
+        </ModalOverlay>
+      )}
     </>
   );
 }

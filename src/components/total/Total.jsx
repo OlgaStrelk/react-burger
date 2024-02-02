@@ -1,6 +1,5 @@
 import CurrencyIconPath from "../../images/cur-icon.svg";
 import styles from "./total.module.css";
-// import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 function Total(props) {
   return (
     <>
