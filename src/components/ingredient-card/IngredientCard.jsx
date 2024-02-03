@@ -10,6 +10,7 @@ function IngredientCard({ cardData, handler }) {
   const handleCardClick = (e) => {
     handler(e)   
   };
+  
   return (
     <div
       className={`${styles.container} ml-4 mb-8`}

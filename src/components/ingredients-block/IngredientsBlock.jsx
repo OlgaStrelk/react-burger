@@ -6,6 +6,7 @@ import styles from "./ingredients-block.module.css";
 import IngredientCard from "../ingredient-card/IngredientCard";
 
 function IngredientsBlock({ titles, ingredientsArray, handler }) {
+
   const renderFilteredIngredients = (blockTitle) => {
     const newArray = ingredientsArray.filter(
       (ingredient) => ingredient.type === blockTitle?.value
