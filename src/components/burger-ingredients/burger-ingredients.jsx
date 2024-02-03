@@ -1,7 +1,7 @@
 import styles from "./burger-ingredients.module.css";
 
-import Tabbar from "../tabbar/Tabbar";
-import IngredientsBlock from "../ingredients-block/IngredientsBlock";
+import Tabbar from "../tabbar/tabbar";
+import IngredientsBlock from "./ingredients-block/ingredients-block";
 import { useRef } from "react";
 
 import PropTypes from "prop-types";

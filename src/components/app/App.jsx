@@ -1,13 +1,13 @@
 import { useState, useRef, useEffect } from "react";
 import styles from "./app.module.css";
 import { getIngredients } from "../../utils/Api";
-import AppHeader from "../app-header/AppHeader";
-import BurgerConstructor from "../burger-constructor/BurgerConstructor";
-import BurgerIngredients from "../burger-ingredients/BurgerIngredients";
-import ModalOverlay from "../modal-overlay/ModalOverlay";
-import Modal from "../modal/Modal";
-import IngredientDetails from "../ingredient-details/IngredientDetails";
-import OrderDetails from "../order-details/OrderDetails";
+import AppHeader from "../app-header/app-header";
+import BurgerConstructor from "../burger-constructor/burger-constructor";
+import BurgerIngredients from "../burger-ingredients/burger-ingredients";
+import ModalOverlay from "../modal/modal-overlay/modal-overlay";
+import Modal from "../modal/modal";
+import IngredientDetails from "../ingredient-details/ingredient-details";
+import OrderDetails from "../order-details/order-details";
 function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [ingredients, setIngredients] = useState([]);

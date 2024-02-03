@@ -1,4 +1,4 @@
-import CurrencyIconPath from "../../images/cur-icon.svg";
+import CurrencyIconPath from '../../../images/cur-icon.svg';
 import styles from "./total.module.css";
 function Total(props) {
   return (

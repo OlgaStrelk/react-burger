@@ -6,7 +6,7 @@ import {
 import PropTypes from "prop-types";
 import { cardDataShape } from "../../utils/shapes";
 import styles from "./burger-constructor.module.css";
-import Total from "../total/Total";
+import Total from "./total/Total";
 function BurgerConstructor({ ingredientsArray, handler }) {
   const handleSubmit = (e) => {
     handler();

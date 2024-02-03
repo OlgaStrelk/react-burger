@@ -4,7 +4,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./ingredient-card.module.css";
 import PropTypes from "prop-types";
-import { cardDataShape } from "../../utils/shapes";
+import { cardDataShape } from "../../../utils/shapes";
 
 function IngredientCard({ cardData, handler }) {
   const handleCardClick = (e) => {

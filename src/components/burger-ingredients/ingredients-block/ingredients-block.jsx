@@ -1,9 +1,9 @@
 import { Fragment } from "react";
 import PropTypes from "prop-types";
-import { titlesArrayShape, cardDataShape } from "../../utils/shapes";
+import { titlesArrayShape, cardDataShape } from "../../../utils/shapes";
 
 import styles from "./ingredients-block.module.css";
-import IngredientCard from "../ingredient-card/IngredientCard";
+import IngredientCard from "../ingredient-card/ingredient-card";
 
 function IngredientsBlock({ titles, ingredientsArray, handler }) {
 
