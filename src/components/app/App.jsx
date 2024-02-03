@@ -42,6 +42,13 @@ function App() {
     setisOrderModalOpened(true);
   };
 
+  const handleCardModalClose = (e) => {
+    setCurrentCard(null);
+  };
+
+  const handleOrderModalClose = () => {
+    setisOrderModalOpened(false);
+  };
   return (
     <>
       <AppHeader />
@@ -55,19 +62,17 @@ function App() {
           ingredientsArray={ingredients}
         />
       </main>
-      {isCardModalOpened && (
+      {currentCard && (
         <ModalOverlay ingredientsArray={ingredients}>
-          <Modal>
+          <Modal onClose={handleCardModalClose}>
             <IngredientDetails cardData={currentCard} />
           </Modal>
         </ModalOverlay>
       )}
       {isOrderModalOpened && (
-        <ModalOverlay ingredientsArray={ingredients}>
-          <Modal>
-            <OrderDetails />
-          </Modal>
-        </ModalOverlay>
+        <Modal onClose={handleOrderModalClose}>
+          <OrderDetails />
+        </Modal>
       )}
     </>
   );

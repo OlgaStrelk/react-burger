@@ -7,19 +7,19 @@ function IngredientDetails({ cardData }) {
       <img src={cardData.image_large} alt={cardData.name} />
       <h5 className={`text text_type_main-medium`}>{cardData.name}</h5>
       <ul className={`${styles.list}`}>
-        <li>
+        <li className={`${styles.item}`}>
           <p>Калории,ккал</p>
           <p>{cardData.calories}</p>
         </li>
-        <li>
+        <li className={`${styles.item}`}>
           <p>Белки, г</p>
           <p>{cardData.proteins}</p>
         </li>
-        <li>
+        <li className={`${styles.item}`}>
           <p>Жиры, г</p>
           <p>{cardData.fat}</p>
         </li>
-        <li>
+        <li className={`${styles.item}`}>
           <p>Углеводы, г</p>
           <p>{cardData.carbohydrates}</p>
         </li>

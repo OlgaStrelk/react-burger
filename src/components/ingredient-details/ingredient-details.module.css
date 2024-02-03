@@ -1,4 +1,18 @@
 .list {
   list-style: none;
   display: flex;
+  margin-block: 0;
+  padding-inline-start: 0;
+  justify-content: center;
+  /* margin: auto; */
+}
+
+.item {
+  composes: ml-4 from global;
+
+}
+
+.item:first-of-type {
+  margin: 0;
+
 }
