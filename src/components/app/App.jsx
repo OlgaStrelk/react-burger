@@ -11,7 +11,6 @@ import OrderDetails from "../order-details/order-details";
 function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [ingredients, setIngredients] = useState([]);
-  const [isCardModalOpened, setIsCardModalOpened] = useState(false);
   const [isOrderModalOpened, setisOrderModalOpened] = useState(false);
   const [currentCard, setCurrentCard] = useState(null);
 
@@ -34,7 +33,6 @@ function App() {
   };
 
   const handleCardModalOpen = (e) => {
-    setIsCardModalOpened(true);
     getCurrentCardData(e);
   };
 
@@ -51,28 +49,32 @@ function App() {
   };
   return (
     <>
-      <AppHeader />
-      <main className={styles.main}>
-        <BurgerIngredients
-          handler={handleCardModalOpen}
-          ingredientsArray={ingredients}
-        />
-        <BurgerConstructor
-          handler={handleOrderModalOpen}
-          ingredientsArray={ingredients}
-        />
-      </main>
-      {currentCard && (
-        <ModalOverlay ingredientsArray={ingredients}>
-          <Modal onClose={handleCardModalClose}>
-            <IngredientDetails cardData={currentCard} />
-          </Modal>
-        </ModalOverlay>
-      )}
-      {isOrderModalOpened && (
-        <Modal onClose={handleOrderModalClose}>
-          <OrderDetails />
-        </Modal>
+      {ingredients && (
+        <>
+          <AppHeader />
+          <main className={styles.main}>
+            <BurgerIngredients
+              handler={handleCardModalOpen}
+              ingredientsArray={ingredients}
+            />
+            <BurgerConstructor
+              handler={handleOrderModalOpen}
+              ingredientsArray={ingredients}
+            />
+          </main>
+          {currentCard && (
+            <ModalOverlay ingredientsArray={ingredients}>
+              <Modal onClose={handleCardModalClose}>
+                <IngredientDetails cardData={currentCard} />
+              </Modal>
+            </ModalOverlay>
+          )}
+          {isOrderModalOpened && (
+            <Modal onClose={handleOrderModalClose}>
+              <OrderDetails />
+            </Modal>
+          )}
+        </>
       )}
     </>
   );
