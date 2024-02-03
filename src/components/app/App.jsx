@@ -64,13 +64,13 @@ function App() {
           </main>
           {currentCard && (
             <ModalOverlay ingredientsArray={ingredients}>
-              <Modal onClose={handleCardModalClose}>
+              <Modal onClose={handleCardModalClose} customStyle={"_card"}>
                 <IngredientDetails cardData={currentCard} />
               </Modal>
             </ModalOverlay>
           )}
           {isOrderModalOpened && (
-            <Modal onClose={handleOrderModalClose}>
+            <Modal onClose={handleOrderModalClose} customStyle={"_order"}>
               <OrderDetails />
             </Modal>
           )}

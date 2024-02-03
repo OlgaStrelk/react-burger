@@ -3,9 +3,9 @@ import styles from "./ingredient-details.module.css";
 function IngredientDetails({ cardData }) {
   return (
     <>
-      <h4 className={`text text_type_main-large`}> Детали ингредиента</h4>
+      <h4 className={styles.title}> Детали ингредиента</h4>
       <div className={styles.img_container}><img src={cardData.image_large} alt={cardData.name} /></div>
-      <h5 className={`text text_type_main-medium`}>{cardData.name}</h5>
+      <h5 className={`text text_type_main-medium mt-4 mb-8`}>{cardData.name}</h5>
       <ul className={`${styles.list}`}>
         <li className={`${styles.item}`}>
           <p>Калории,ккал</p>
