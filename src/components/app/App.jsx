@@ -5,11 +5,14 @@ import AppHeader from "../app-header/AppHeader";
 import BurgerConstructor from "../burger-constructor/BurgerConstructor";
 import BurgerIngredients from "../burger-ingredients/BurgerIngredients";
 import ModalOverlay from "../modal-overlay/ModalOverlay";
-import CardModal from "../card-modal/CardModal";
+import Modal from "../modal/Modal";
+import IngredientDetails from "../ingredient-details/IngredientDetails";
+import OrderDetails from "../order-details/OrderDetails";
 function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [ingredients, setIngredients] = useState([]);
   const [isCardModalOpened, setIsCardModalOpened] = useState(false);
+  const [isOrderModalOpened, setisOrderModalOpened] = useState(false);
   const [currentCard, setCurrentCard] = useState(null);
 
   const fetchIngredients = () => {
@@ -30,9 +33,13 @@ function App() {
     setCurrentCard(ingredients.find((item) => item._id === e.currentTarget.id));
   };
 
-  const handleModalOpen = (e) => {
+  const handleCardModalOpen = (e) => {
     setIsCardModalOpened(true);
     getCurrentCardData(e);
+  };
+
+  const handleOrderModalOpen = () => {
+    setisOrderModalOpened(true);
   };
 
   return (
@@ -40,17 +47,26 @@ function App() {
       <AppHeader />
       <main className={styles.main}>
         <BurgerIngredients
-          handler={handleModalOpen}
+          handler={handleCardModalOpen}
           ingredientsArray={ingredients}
         />
         <BurgerConstructor
-          handler={handleModalOpen}
+          handler={handleOrderModalOpen}
           ingredientsArray={ingredients}
         />
       </main>
       {isCardModalOpened && (
         <ModalOverlay ingredientsArray={ingredients}>
-          <CardModal cardData={currentCard} />
+          <Modal>
+            <IngredientDetails cardData={currentCard} />
+          </Modal>
+        </ModalOverlay>
+      )}
+      {isOrderModalOpened && (
+        <ModalOverlay ingredientsArray={ingredients}>
+          <Modal>
+            <OrderDetails />
+          </Modal>
         </ModalOverlay>
       )}
     </>

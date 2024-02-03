@@ -12,7 +12,7 @@ function BurgerIngredients({ ingredientsArray, handler }) {
     { title: "Начинки", value: "main", id: 9 },
   ];
   return (
-    <section className={styles.container}>
+    <section className={`${styles.container} custom-scroll`}>
       <h2 className="text text_type_main-large mt-10">
         Соберите бургер
       </h2>

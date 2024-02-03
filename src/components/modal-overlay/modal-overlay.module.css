@@ -1,5 +1,5 @@
 .overlay {
-  background-color: "grey";
+  background-color: grey;
   position: fixed;
   inset: 0px;
   display: flex;

@@ -16,7 +16,7 @@ function IngredientsBlock({ titles, ingredientsArray, handler }) {
   };
 
   return (
-    <div className={`${styles.container} mt-10`}>
+    <div className={`${styles.container} custom-scroll mt-10`}>
       {titles.map((item) => (
         <Fragment key={item.id}>
           <h3 className={`text text_type_main-medium mb-6`}>{item.title}</h3>

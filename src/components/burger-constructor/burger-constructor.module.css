@@ -2,6 +2,7 @@
   /* max-height: 41vh; */
   max-height: calc(100vh - 500px);
   overflow: scroll;
+  overflow-x: hidden;
   margin: 0;
   padding: 0;
 }
