@@ -1,8 +1,8 @@
 import styles from "./burger-ingredients.module.css";
 
 import Tabbar from "../tabbar/tabbar";
-import IngredientCard from "./ingredient-card/ingredient-card";
-import { Fragment, useRef, useState } from "react";
+import IngredientsBlock from "./ingredients-block/ingredients-block";
+import { useRef, useState } from "react";
 
 import PropTypes from "prop-types";
 import { cardDataShape } from "../../utils/shapes";
@@ -31,15 +31,6 @@ function BurgerIngredients({ ingredientsArray, handler }) {
       titleSaucesRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const renderFilteredIngredients = (blockTitle) => {
-    const newArray = ingredientsArray.filter(
-      (ingredient) => ingredient.type === blockTitle?.value
-    );
-    return newArray.map((item) => (
-      <IngredientCard key={item._id} cardData={item} handler={handler} />
-    ));
-  };
-
   return (
     <section className={`custom-scroll`}>
       <h2 className="text text_type_main-large mt-10">Соберите бургер</h2>
@@ -48,24 +39,18 @@ function BurgerIngredients({ ingredientsArray, handler }) {
         currentTab={currentTab}
         handler={onTabClick}
       />
-      <div className={`${styles.container} custom-scroll mt-10`}>
-        {BLOCK_TITLES.map((item) => (
-          <Fragment key={item.id}>
-            <h3 className={`text text_type_main-medium mb-6`} ref={item.ref}>
-              {item.title}
-            </h3>
-            <div className={styles.block}>
-              {renderFilteredIngredients(item)}
-            </div>
-          </Fragment>
-        ))}
-      </div>
+      <IngredientsBlock
+        ingredientsArray={ingredientsArray}
+        titles={BLOCK_TITLES}
+        handler={handler}
+      />
     </section>
   );
 }
 
 BurgerIngredients.propTypes = {
-  ingredientsArray: PropTypes.arrayOf(PropTypes.shape(cardDataShape)).isRequired,
+  ingredientsArray: PropTypes.arrayOf(PropTypes.shape(cardDataShape))
+    .isRequired,
   handler: PropTypes.func.isRequired,
 };
 
