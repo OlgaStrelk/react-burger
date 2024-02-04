@@ -1,4 +1,3 @@
-import { useState, forwardRef } from "react";
 import styles from "./Tabbar.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
