@@ -67,7 +67,7 @@ function BurgerConstructor({ ingredientsArray, handler }) {
 }
 
 BurgerConstructor.propTypes = {
-  ingredientsArray: PropTypes.arrayOf(PropTypes.shape(cardDataShape)),
+  ingredientsArray: PropTypes.arrayOf(PropTypes.shape(cardDataShape)).isRequired,
   handler: PropTypes.func,
 };
 

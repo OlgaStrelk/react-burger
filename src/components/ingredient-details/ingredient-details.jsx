@@ -1,4 +1,6 @@
 import styles from "./ingredient-details.module.css";
+import PropTypes from "prop-types";
+import { cardDataShape } from "../../utils/shapes";
 
 function IngredientDetails({ cardData }) {
   return (
@@ -27,5 +29,9 @@ function IngredientDetails({ cardData }) {
     </>
   );
 }
+
+IngredientDetails.propTypes = {
+  cardData: PropTypes.shape(cardDataShape).isRequired,
+};
 
 export default IngredientDetails;

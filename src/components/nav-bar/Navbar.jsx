@@ -5,9 +5,6 @@ import {
   ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-import PropTypes from "prop-types";
-import { navbarDataShape } from "../../utils/shapes";
-
 function Navbar() {
   const NAVBAR_DATA = [
     {
@@ -46,8 +43,5 @@ function Navbar() {
   );
 }
 
-Navbar.propTypes = {
-  navbarData: PropTypes.arrayOf(PropTypes.shape(navbarDataShape)),
-};
 
 export default Navbar;

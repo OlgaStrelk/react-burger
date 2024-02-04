@@ -38,8 +38,8 @@ function IngredientCard({ cardData, handler }) {
 }
 
 IngredientCard.propTypes = {
-  cardData: PropTypes.shape(cardDataShape),
-  handler: PropTypes.func,
+  cardData: PropTypes.shape(cardDataShape).isRequired,
+  handler: PropTypes.func.isRequired,
 };
 
 export default IngredientCard;

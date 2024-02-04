@@ -28,6 +28,8 @@ const Tabbar = ({ data, handler, currentTab }) => {
 
 Tabbar.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape(titlesArrayShape)),
+  handler: PropTypes.func.isRequired,
+  currentTab: PropTypes.string.isRequired,
 };
 
 export default Tabbar;

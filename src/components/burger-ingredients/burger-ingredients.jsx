@@ -65,8 +65,8 @@ function BurgerIngredients({ ingredientsArray, handler }) {
 }
 
 BurgerIngredients.propTypes = {
-  ingredientsArray: PropTypes.arrayOf(PropTypes.shape(cardDataShape)),
-  handler: PropTypes.func,
+  ingredientsArray: PropTypes.arrayOf(PropTypes.shape(cardDataShape)).isRequired,
+  handler: PropTypes.func.isRequired,
 };
 
 export default BurgerIngredients;
