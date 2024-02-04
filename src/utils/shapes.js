@@ -9,7 +9,7 @@ export const titlesArrayShape = {
 export const cardDataShape = {
   _id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  type: PropTypes.oneOf(['bun', 'main', 'souce']).isRequired,
+  type: PropTypes.oneOf(['bun', 'main', 'sauce']).isRequired,
   proteins: PropTypes.number.isRequired,
   fat: PropTypes.number.isRequired,
   carbohydrates: PropTypes.number.isRequired,
