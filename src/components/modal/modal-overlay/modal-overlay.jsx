@@ -1,9 +1,11 @@
 import styles from "./modal-overlay.module.css";
+import { createRef } from "react";
 
-function ModalOverlay({ children }) {
+function ModalOverlay({ children, innerRef }) {
+  
   return (
     <>
-      <div className={styles.overlay}>{children}</div>
+      <div className={styles.overlay} ref={innerRef}>{children}</div>
     </>
   );
 }
