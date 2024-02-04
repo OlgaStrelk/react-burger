@@ -1,6 +1,14 @@
 .container {
-
+  max-width: 600px;
+  overflow: scroll;
+  overflow-x: hidden;
+  max-height: calc(100vh - 320px);
 }
+.block {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 
 .title {
   margin-block: 0;

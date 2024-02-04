@@ -4,14 +4,9 @@ import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
 import { titlesArrayShape } from "../../utils/shapes";
 
-const Tabbar = ({ data }) => {
-  const [current, setCurrent] = useState(data[0].value);
-  const scrolLWithUseRef = (ref) => {
-    ref.current?.scrollIntoView({ block: "center", behavior: "smooth" });
-  };
+const Tabbar = ({ data, handler, currentTab }) => {
   const handleClick = (e) => {
-    setCurrent(e);
-    scrolLWithUseRef(e);
+    handler(e);
   };
 
   return (
@@ -20,10 +15,9 @@ const Tabbar = ({ data }) => {
         <Tab
           key={item.id}
           value={item.value}
-          active={current === item.value}
+          active={currentTab === item.value}
           onClick={handleClick}
           id={item.value}
-          ref={item.ref}
         >
           {item.title}
         </Tab>

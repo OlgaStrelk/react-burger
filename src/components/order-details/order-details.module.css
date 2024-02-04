@@ -1,0 +1,16 @@
+.digits {
+  composes: text text_type_digits-large from global;
+  text-shadow: #4c4cff 0 0 20px;
+}
+
+.description {
+  composes: text text_type_main-medium from global;
+}
+
+.paragraph {
+  composes: text text_type_main-small from global;
+
+}
+.paragraph_inactive {
+  composes: text text_type_main-default text_color_inactive from global;
+}
