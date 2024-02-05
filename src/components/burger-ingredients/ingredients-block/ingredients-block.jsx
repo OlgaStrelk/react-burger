@@ -1,5 +1,5 @@
 import styles from "./ingredients-block.module.css";
-import { Fragment, useState, useMemo } from "react";
+import { Fragment, memo, useMemo } from "react";
 
 import IngredientCard from "../ingredient-card/ingredient-card";
 
@@ -15,26 +15,30 @@ function IngredientsBlock({ titles, ingredientsArray, handler }) {
   const renderFilteredIngredients = (blockTitle) => {
     const newArray = filterIngredients(blockTitle);
     return newArray.map((item) => (
-      <IngredientCard key={item._id} cardData={item} handler={handler} />
+      <li key={item._id} id={item._id} onClick={handleCardClick}>
+        <IngredientCard cardData={item} />
+      </li>
     ));
   };
-  
+
+  const handleCardClick = (e) => {
+    handler(e);
+  };
+
   return (
     <>
-      <div className={`${styles.container} custom-scroll mt-10`}>
+      <ul className={`${styles.container} custom-scroll mt-10`}>
         {titles.map((item) => (
           <Fragment key={item.id}>
             <h3 className={`text text_type_main-medium mb-6`} ref={item.ref}>
               {item.title}
             </h3>
-            <div className={styles.block}>
-              {renderFilteredIngredients(item)}
-            </div>
+            <ul className={styles.block}>{renderFilteredIngredients(item)}</ul>
           </Fragment>
         ))}
-      </div>
+      </ul>
     </>
   );
 }
 
-export default IngredientsBlock;
+export default memo(IngredientsBlock);

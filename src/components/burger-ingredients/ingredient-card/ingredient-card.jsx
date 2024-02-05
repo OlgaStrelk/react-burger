@@ -5,17 +5,11 @@ import {
 import styles from "./ingredient-card.module.css";
 import PropTypes from "prop-types";
 import { cardDataShape } from "../../../utils/shapes";
+import { useCallback, memo } from "react";
 
-function IngredientCard({ cardData, handler }) {
-  const handleCardClick = (e) => {
-    handler(e)   
-  };
-  
+function IngredientCard({ cardData }) {
   return (
-    <div
-      className={`${styles.container} ml-4 mb-8`}
-      onClick={handleCardClick} id={cardData._id}
-    >
+    <div className={`${styles.container} ml-4 mb-8`}>
       <Counter count={1} size="default" extraClass="m-1" />
       <img
         className={`pl-4 pr-4 ${styles.image}`}
@@ -29,7 +23,7 @@ function IngredientCard({ cardData, handler }) {
         <CurrencyIcon />
       </p>
       <h4
-        className={`text text_type_main-default ${styles.title} ${styles.centered}`} 
+        className={`text text_type_main-default ${styles.title} ${styles.centered}`}
       >
         {cardData.name}
       </h4>
@@ -39,7 +33,6 @@ function IngredientCard({ cardData, handler }) {
 
 IngredientCard.propTypes = {
   cardData: PropTypes.shape(cardDataShape).isRequired,
-  handler: PropTypes.func.isRequired,
 };
 
-export default IngredientCard;
+export default memo(IngredientCard);

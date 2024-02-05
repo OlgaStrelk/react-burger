@@ -1,3 +1,4 @@
+import { memo } from "react";
 import {
   ConstructorElement,
   Button,
