@@ -4,22 +4,21 @@ import { Fragment, useState, useMemo } from "react";
 import IngredientCard from "../ingredient-card/ingredient-card";
 
 function IngredientsBlock({ titles, ingredientsArray, handler }) {
-  const [newArray, setNewArray] = useState(ingredientsArray);
-
   const filterIngredients = (blockTitle) =>
     useMemo(() => {
       const filteredArray = ingredientsArray.filter(
         (ingredient) => ingredient.type === blockTitle?.value
       );
-      setNewArray(filteredArray);
+      return filteredArray;
     }, [ingredientsArray]);
 
   const renderFilteredIngredients = (blockTitle) => {
-    filterIngredients(blockTitle);
+    const newArray = filterIngredients(blockTitle);
     return newArray.map((item) => (
       <IngredientCard key={item._id} cardData={item} handler={handler} />
     ));
   };
+  
   return (
     <>
       <div className={`${styles.container} custom-scroll mt-10`}>
