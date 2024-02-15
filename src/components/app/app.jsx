@@ -8,6 +8,7 @@ import ModalOverlay from "../modal/modal-overlay/modal-overlay";
 import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import OrderDetails from "../order-details/order-details";
+import { DndProvider } from "react-dnd";
 function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [ingredients, setIngredients] = useState([]);
@@ -52,16 +53,18 @@ function App() {
       {ingredients && (
         <>
           <AppHeader />
-          <main className={styles.main}>
-            <BurgerIngredients
-              handler={handleCardModalOpen}
-              ingredientsArray={ingredients}
-            />
-            <BurgerConstructor
-              handler={handleOrderModalOpen}
-              ingredientsArray={ingredients}
-            />
-          </main>
+          <DndProvider backend={HTML5Backend}>
+            <main className={styles.main}>
+              <BurgerIngredients
+                handler={handleCardModalOpen}
+                ingredientsArray={ingredients}
+              />
+              <BurgerConstructor
+                handler={handleOrderModalOpen}
+                ingredientsArray={ingredients}
+              />
+            </main>
+          </DndProvider>
           {currentCard && (
             <ModalOverlay ingredientsArray={ingredients}>
               <Modal onClose={handleCardModalClose} customStyle={"_card"}>
