@@ -53,7 +53,7 @@ function App() {
       {ingredients && (
         <>
           <AppHeader />
-          <DndProvider backend={HTML5Backend}>
+          {/* <DndProvider backend={HTML5Backend}> */}
             <main className={styles.main}>
               <BurgerIngredients
                 handler={handleCardModalOpen}
@@ -64,7 +64,7 @@ function App() {
                 ingredientsArray={ingredients}
               />
             </main>
-          </DndProvider>
+          {/* </DndProvider> */}
           {currentCard && (
             <ModalOverlay ingredientsArray={ingredients}>
               <Modal onClose={handleCardModalClose} customStyle={"_card"}>
