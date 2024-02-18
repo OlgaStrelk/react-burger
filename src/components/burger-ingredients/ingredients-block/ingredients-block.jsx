@@ -2,8 +2,10 @@ import styles from "./ingredients-block.module.css";
 import { Fragment, memo, useMemo } from "react";
 
 import IngredientCard from "../ingredient-card/ingredient-card";
+import { useSelector } from "react-redux";
 
-function IngredientsBlock({ titles, ingredientsArray, handler }) {
+function IngredientsBlock({ titles, handler }) {
+  const ingredientsArray = useSelector((state) => state.ingredients);
   const filterIngredients = (blockTitle) =>
     useMemo(() => {
       const filteredArray = ingredientsArray.filter(
