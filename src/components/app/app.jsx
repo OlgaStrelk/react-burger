@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import styles from "./app.module.css";
-import { getIngredients } from "../../utils/api";
 import AppHeader from "../app-header/app-header";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
@@ -9,24 +9,15 @@ import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import OrderDetails from "../order-details/order-details";
 import { DndProvider } from "react-dnd";
+import { fetchIngredients } from "../../services/actions/ingredients";
 function App() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [ingredients, setIngredients] = useState([]);
+  const dispatch = useDispatch();
+  const ingredients = useSelector(state => state.ingredientsReducer.ingredients);
   const [isOrderModalOpened, setisOrderModalOpened] = useState(false);
   const [currentCard, setCurrentCard] = useState(null);
 
-  const fetchIngredients = () => {
-    getIngredients()
-      .then((data) => {
-        setIngredients(data.data);
-      })
-      .catch((err) => console.log(err));
-  };
-
   useEffect(() => {
-    setIsLoading(true);
-    fetchIngredients();
-    return setIsLoading(false);
+    dispatch(fetchIngredients());
   }, []);
 
   const getCurrentCardData = (e) => {
@@ -54,19 +45,13 @@ function App() {
         <>
           <AppHeader />
           {/* <DndProvider backend={HTML5Backend}> */}
-            <main className={styles.main}>
-              <BurgerIngredients
-                handler={handleCardModalOpen}
-                ingredientsArray={ingredients}
-              />
-              <BurgerConstructor
-                handler={handleOrderModalOpen}
-                ingredientsArray={ingredients}
-              />
-            </main>
+          <main className={styles.main}>
+            <BurgerIngredients handler={handleCardModalOpen} />
+            <BurgerConstructor handler={handleOrderModalOpen} />
+          </main>
           {/* </DndProvider> */}
           {currentCard && (
-            <ModalOverlay ingredientsArray={ingredients}>
+            <ModalOverlay>
               <Modal onClose={handleCardModalClose} customStyle={"_card"}>
                 <IngredientDetails cardData={currentCard} />
               </Modal>

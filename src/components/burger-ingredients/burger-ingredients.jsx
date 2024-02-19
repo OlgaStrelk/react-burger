@@ -7,7 +7,7 @@ import { useRef, useState, memo } from "react";
 import PropTypes from "prop-types";
 import { cardDataShape } from "../../utils/shapes";
 
-function BurgerIngredients({ ingredientsArray, handler }) {
+function BurgerIngredients({ handler }) {
   const titleBunRef = useRef(null);
   const titleMainRef = useRef(null);
   const titleSaucesRef = useRef(null);
@@ -39,18 +39,12 @@ function BurgerIngredients({ ingredientsArray, handler }) {
         currentTab={currentTab}
         handler={onTabClick}
       />
-      <IngredientsBlock
-        ingredientsArray={ingredientsArray}
-        titles={BLOCK_TITLES}
-        handler={handler}
-      />
+      <IngredientsBlock titles={BLOCK_TITLES} handler={handler} />
     </section>
   );
 }
 
 BurgerIngredients.propTypes = {
-  ingredientsArray: PropTypes.arrayOf(PropTypes.shape(cardDataShape))
-    .isRequired,
   handler: PropTypes.func.isRequired,
 };
 

@@ -4,8 +4,10 @@ import { Fragment, memo, useMemo } from "react";
 import IngredientCard from "../ingredient-card/ingredient-card";
 import { useSelector } from "react-redux";
 
+// export const getIngredients=(state) => state.ingredients
+
 function IngredientsBlock({ titles, handler }) {
-  const ingredientsArray = useSelector((state) => state.ingredients);
+  const ingredientsArray = useSelector((state) => state.ingredientsReducer.ingredients);
   const filterIngredients = (blockTitle) =>
     useMemo(() => {
       const filteredArray = ingredientsArray.filter(

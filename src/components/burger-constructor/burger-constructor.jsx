@@ -1,4 +1,5 @@
 import { memo } from "react";
+import { useSelector } from "react-redux";
 import {
   ConstructorElement,
   Button,
@@ -8,14 +9,16 @@ import PropTypes from "prop-types";
 import { cardDataShape } from "../../utils/shapes";
 import styles from "./burger-constructor.module.css";
 import Total from "./total/Total";
-function BurgerConstructor({ ingredientsArray, handler }) {
+function BurgerConstructor({ handler }) {
+  const ingredients = useSelector((state) => state.ingredientsReducer.ingredients);
+
   const handleSubmit = (e) => {
     handler();
   };
 
-  const img = ingredientsArray[0]?.image;
+  const img = ingredients[0]?.image;
   const renderInnerIngredients = () => {
-    return ingredientsArray?.map((item) => (
+    return ingredients?.map((item) => (
       <li key={item._id} className={`${styles.item} mr-3`}>
         <DragIcon type="primary" />
         <ConstructorElement
@@ -29,7 +32,9 @@ function BurgerConstructor({ ingredientsArray, handler }) {
   return (
     <section className={`${styles.section} mt-25 ml-10`}>
       <div className="ml-8">
-        <div className={`${styles.wrapper} ${styles.column} ml-8 mb-2 mr-5 pr-1`}>
+        <div
+          className={`${styles.wrapper} ${styles.column} ml-8 mb-2 mr-5 pr-1`}
+        >
           <ConstructorElement
             type="top"
             isLocked={true}
@@ -68,7 +73,6 @@ function BurgerConstructor({ ingredientsArray, handler }) {
 }
 
 BurgerConstructor.propTypes = {
-  ingredientsArray: PropTypes.arrayOf(PropTypes.shape(cardDataShape)).isRequired,
   handler: PropTypes.func,
 };
 
