@@ -13,6 +13,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import {
   RESET_MODAL_INGREDIENT,
   fetchIngredients,
+  addIngredient,
 } from "../../services/actions/ingredients";
 function App() {
   const dispatch = useDispatch();
@@ -25,7 +26,6 @@ function App() {
   useEffect(() => {
     dispatch(fetchIngredients());
   }, []);
-
 
   const handleCardModalOpen = () => {
     setIsIngredientModalOpened(true);
@@ -44,9 +44,10 @@ function App() {
     setIsOrderModalOpened(false);
   };
 
-  const onDropHandler=()=>{
-
-  }
+  const onDropHandler = (ingredient) => {
+    dispatch(addIngredient(ingredient));
+  };
+  
   return (
     <>
       {ingredients && (
@@ -55,7 +56,10 @@ function App() {
           <DndProvider backend={HTML5Backend}>
             <main className={styles.main}>
               <BurgerIngredients handler={handleCardModalOpen} />
-              <BurgerConstructor onDropHandler={onDropHandler} handler={handleOrderModalOpen} />
+              <BurgerConstructor
+                onDropHandler={onDropHandler}
+                handler={handleOrderModalOpen}
+              />
             </main>
           </DndProvider>
           {isIngredientModalOpened && (

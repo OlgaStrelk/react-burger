@@ -1,4 +1,3 @@
-import { memo } from "react";
 import { useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
 import {
@@ -10,14 +9,16 @@ import PropTypes from "prop-types";
 import styles from "./burger-constructor.module.css";
 import Total from "./total/Total";
 function BurgerConstructor({ handler, onDropHandler }) {
+  const addedIngredients = useSelector(
+    (state) => state.ingredientsReducer.addedIngredients
+  );
+  console.log(addedIngredients)
   const ingredients = useSelector(
     (state) => state.ingredientsReducer.ingredients
   );
-
   const [, dropRef] = useDrop({
     accept: "ingredients",
     drop(item) {
-      console.log(item)
       onDropHandler(item);
     },
   });
@@ -27,13 +28,13 @@ function BurgerConstructor({ handler, onDropHandler }) {
 
   const img = ingredients[0]?.image;
   const renderInnerIngredients = () => {
-    return ingredients?.map((item) => (
-      <li key={item._id} className={`${styles.item} mr-3`}>
+    return addedIngredients?.map((item) => (
+      <li key={item?.id} className={`${styles.item} mr-3`}>
         <DragIcon type="primary" />
         <ConstructorElement
-          text={item.name}
-          price={item.price}
-          thumbnail={item.image}
+          text={item?.name}
+          price={item?.price}
+          thumbnail={item?.image}
         />
       </li>
     ));

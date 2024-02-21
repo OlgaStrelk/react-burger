@@ -4,6 +4,7 @@ import {
   GET_INGREDIENTS_FAILURE,
   GET_MODAL_INGREDIENT,
   RESET_MODAL_INGREDIENT,
+  ADD_INGREDIENT,
 } from "../actions/ingredients";
 
 const initialState = {
@@ -51,6 +52,13 @@ export const ingredientsReducer = (state = initialState, action) => {
       return {
         ...state,
         currentIngredient: null,
+      };
+    }
+
+    case ADD_INGREDIENT: {
+      return {
+        ...state,
+        addedIngredients: [...state.addedIngredients, action.payload],
       };
     }
     default: {
