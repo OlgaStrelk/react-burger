@@ -6,7 +6,6 @@ import {
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
-import { cardDataShape } from "../../utils/shapes";
 import styles from "./burger-constructor.module.css";
 import Total from "./total/Total";
 function BurgerConstructor({ handler }) {

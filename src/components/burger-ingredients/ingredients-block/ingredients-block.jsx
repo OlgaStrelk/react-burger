@@ -4,17 +4,22 @@ import { Fragment, memo, useMemo } from "react";
 import IngredientCard from "../ingredient-card/ingredient-card";
 import { useSelector } from "react-redux";
 
-// export const getIngredients=(state) => state.ingredients
-
 function IngredientsBlock({ titles, handler }) {
-  const ingredientsArray = useSelector((state) => state.ingredientsReducer.ingredients);
+  const ingredients = useSelector(
+    (state) => state.ingredientsReducer.ingredients
+  );
+
+  // const currentIngredient = useSelector(
+  //   (state) => state.ingredientsReducer.currentIngredient
+  // );
+
   const filterIngredients = (blockTitle) =>
     useMemo(() => {
-      const filteredArray = ingredientsArray.filter(
+      const filteredArray = ingredients.filter(
         (ingredient) => ingredient.type === blockTitle?.value
       );
       return filteredArray;
-    }, [ingredientsArray]);
+    }, [ingredients]);
 
   const renderFilteredIngredients = (blockTitle) => {
     const newArray = filterIngredients(blockTitle);
@@ -44,5 +49,4 @@ function IngredientsBlock({ titles, handler }) {
     </>
   );
 }
-
 export default memo(IngredientsBlock);

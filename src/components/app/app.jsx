@@ -9,10 +9,13 @@ import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import OrderDetails from "../order-details/order-details";
 import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 import { fetchIngredients } from "../../services/actions/ingredients";
 function App() {
   const dispatch = useDispatch();
-  const ingredients = useSelector(state => state.ingredientsReducer.ingredients);
+  const ingredients = useSelector(
+    (state) => state.ingredientsReducer.ingredients
+  );
   const [isOrderModalOpened, setisOrderModalOpened] = useState(false);
   const [currentCard, setCurrentCard] = useState(null);
 
@@ -44,12 +47,12 @@ function App() {
       {ingredients && (
         <>
           <AppHeader />
-          {/* <DndProvider backend={HTML5Backend}> */}
-          <main className={styles.main}>
-            <BurgerIngredients handler={handleCardModalOpen} />
-            <BurgerConstructor handler={handleOrderModalOpen} />
-          </main>
-          {/* </DndProvider> */}
+          <DndProvider backend={HTML5Backend}>
+            <main className={styles.main}>
+              <BurgerIngredients handler={handleCardModalOpen} />
+              <BurgerConstructor handler={handleOrderModalOpen} />
+            </main>
+          </DndProvider>
           {currentCard && (
             <ModalOverlay>
               <Modal onClose={handleCardModalClose} customStyle={"_card"}>

@@ -5,7 +5,6 @@ import IngredientsBlock from "./ingredients-block/ingredients-block";
 import { useRef, useState, memo } from "react";
 
 import PropTypes from "prop-types";
-import { cardDataShape } from "../../utils/shapes";
 
 function BurgerIngredients({ handler }) {
   const titleBunRef = useRef(null);
