@@ -10,7 +10,7 @@ import { useDrag } from "react-dnd";
 
 function IngredientCard({ cardData }) {
   const [, dragRef] = useDrag({
-    type: "ingredient",
+    type: "ingredients",
     item: cardData,
   });
   return (

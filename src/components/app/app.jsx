@@ -26,9 +26,6 @@ function App() {
     dispatch(fetchIngredients());
   }, []);
 
-  // const getCurrentCardData = (e) => {
-  //   setCurrentCard(ingredients.find((item) => item._id === e.currentTarget.id));
-  // };
 
   const handleCardModalOpen = () => {
     setIsIngredientModalOpened(true);
@@ -46,6 +43,10 @@ function App() {
   const handleOrderModalClose = () => {
     setIsOrderModalOpened(false);
   };
+
+  const onDropHandler=()=>{
+
+  }
   return (
     <>
       {ingredients && (
@@ -54,7 +55,7 @@ function App() {
           <DndProvider backend={HTML5Backend}>
             <main className={styles.main}>
               <BurgerIngredients handler={handleCardModalOpen} />
-              <BurgerConstructor handler={handleOrderModalOpen} />
+              <BurgerConstructor onDropHandler={onDropHandler} handler={handleOrderModalOpen} />
             </main>
           </DndProvider>
           {isIngredientModalOpened && (

@@ -1,5 +1,6 @@
 import { memo } from "react";
 import { useSelector } from "react-redux";
+import { useDrop } from "react-dnd";
 import {
   ConstructorElement,
   Button,
@@ -8,9 +9,18 @@ import {
 import PropTypes from "prop-types";
 import styles from "./burger-constructor.module.css";
 import Total from "./total/Total";
-function BurgerConstructor({ handler }) {
-  const ingredients = useSelector((state) => state.ingredientsReducer.ingredients);
+function BurgerConstructor({ handler, onDropHandler }) {
+  const ingredients = useSelector(
+    (state) => state.ingredientsReducer.ingredients
+  );
 
+  const [, dropRef] = useDrop({
+    accept: "ingredients",
+    drop(item) {
+      console.log(item)
+      onDropHandler(item);
+    },
+  });
   const handleSubmit = (e) => {
     handler();
   };
@@ -30,7 +40,7 @@ function BurgerConstructor({ handler }) {
   };
   return (
     <section className={`${styles.section} mt-25 ml-10`}>
-      <div className="ml-8">
+      <div className="ml-8" ref={dropRef}>
         <div
           className={`${styles.wrapper} ${styles.column} ml-8 mb-2 mr-5 pr-1`}
         >
