@@ -1,17 +1,15 @@
 import styles from "./ingredients-block.module.css";
 import { Fragment, memo, useMemo } from "react";
+import { GET_MODAL_INGREDIENT } from "../../../services/actions/ingredients";
 
 import IngredientCard from "../ingredient-card/ingredient-card";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 function IngredientsBlock({ titles, handler }) {
+  const dispatch = useDispatch();
   const ingredients = useSelector(
     (state) => state.ingredientsReducer.ingredients
   );
-
-  // const currentIngredient = useSelector(
-  //   (state) => state.ingredientsReducer.currentIngredient
-  // );
 
   const filterIngredients = (blockTitle) =>
     useMemo(() => {
@@ -31,7 +29,8 @@ function IngredientsBlock({ titles, handler }) {
   };
 
   const handleCardClick = (e) => {
-    handler(e);
+    dispatch({ type: GET_MODAL_INGREDIENT, payload: e.currentTarget.id });
+    handler()
   };
 
   return (

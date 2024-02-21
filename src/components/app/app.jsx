@@ -10,37 +10,41 @@ import IngredientDetails from "../ingredient-details/ingredient-details";
 import OrderDetails from "../order-details/order-details";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { fetchIngredients } from "../../services/actions/ingredients";
+import {
+  RESET_MODAL_INGREDIENT,
+  fetchIngredients,
+} from "../../services/actions/ingredients";
 function App() {
   const dispatch = useDispatch();
   const ingredients = useSelector(
     (state) => state.ingredientsReducer.ingredients
   );
-  const [isOrderModalOpened, setisOrderModalOpened] = useState(false);
-  const [currentCard, setCurrentCard] = useState(null);
+  const [isOrderModalOpened, setIsOrderModalOpened] = useState(false);
+  const [isIngredientModalOpened, setIsIngredientModalOpened] = useState(false);
 
   useEffect(() => {
     dispatch(fetchIngredients());
   }, []);
 
-  const getCurrentCardData = (e) => {
-    setCurrentCard(ingredients.find((item) => item._id === e.currentTarget.id));
-  };
+  // const getCurrentCardData = (e) => {
+  //   setCurrentCard(ingredients.find((item) => item._id === e.currentTarget.id));
+  // };
 
-  const handleCardModalOpen = (e) => {
-    getCurrentCardData(e);
+  const handleCardModalOpen = () => {
+    setIsIngredientModalOpened(true);
   };
 
   const handleOrderModalOpen = () => {
-    setisOrderModalOpened(true);
+    setIsOrderModalOpened(true);
   };
 
   const handleCardModalClose = (e) => {
-    setCurrentCard(null);
+    setIsIngredientModalOpened(false);
+    dispatch({ type: RESET_MODAL_INGREDIENT });
   };
 
   const handleOrderModalClose = () => {
-    setisOrderModalOpened(false);
+    setIsOrderModalOpened(false);
   };
   return (
     <>
@@ -53,10 +57,10 @@ function App() {
               <BurgerConstructor handler={handleOrderModalOpen} />
             </main>
           </DndProvider>
-          {currentCard && (
+          {isIngredientModalOpened && (
             <ModalOverlay>
               <Modal onClose={handleCardModalClose} customStyle={"_card"}>
-                <IngredientDetails cardData={currentCard} />
+                <IngredientDetails />
               </Modal>
             </ModalOverlay>
           )}
