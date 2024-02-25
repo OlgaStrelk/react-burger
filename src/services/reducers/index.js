@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 import { ingredientsReducer } from "./ingredients.js";
-import { constructorReducer } from "./constructorReducer.js";
-import {orderReducer} from './orderReducer.js'
+import { constructorReducer } from "./constructor.js";
+import {orderReducer} from './order.js'
 
 export const rootReducer = combineReducers({
   ingredientsReducer,

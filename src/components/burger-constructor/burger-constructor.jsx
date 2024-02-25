@@ -38,33 +38,39 @@ function BurgerConstructor({ handler, onDropHandler }) {
     ));
   };
 
+  const renderBuns = (style, type) => {
+    if (buns) {
+      return (
+        <div className={`ml-8 mr-2 ${style}`}>
+          <ConstructorElement
+            type={type}
+            isLocked={true}
+            text={buns?.name}
+            price={buns?.price}
+            thumbnail={buns?.image}
+          />
+        </div>
+      );
+    } else {
+      return (
+        <div className={`ml-8 mr-2 ${style}`}>
+          <ConstructorElement
+            type={type}
+            text="Выберите булки"
+          />
+        </div>
+      );
+    }
+  };
+
   return (
     <section className={`${styles.section} mt-25 ml-10`}>
       <div className="ml-8" ref={dropRef}>
-        <div
-          className={`${styles.wrapper} ${styles.column} ml-8 mb-2 mr-2 pr-1`}
-        >
-          <ConstructorElement
-            type="top"
-            isLocked={true}
-            text={buns?.name}
-            price={buns?.price}
-            thumbnail={buns?.image}
-            className="ml-8"
-          />
-        </div>
+        {renderBuns(" mb-2 pr-1", "top")}
         <ul className={`${styles.container}  ${styles.column} custom-scroll`}>
           {renderInnerIngredients()}
         </ul>
-        <div className="ml-8 mr-2 mt-2">
-          <ConstructorElement
-            type="bottom"
-            isLocked={true}
-            text={buns?.name}
-            price={buns?.price}
-            thumbnail={buns?.image}
-          />
-        </div>
+        {renderBuns("mt-2", "bottom")}
       </div>
       <div className={`mt-10 ${styles.total}`}>
         <Total />
