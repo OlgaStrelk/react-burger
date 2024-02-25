@@ -71,7 +71,7 @@ export const ingredientsReducer = (state = initialState, action) => {
       };
     }
 
-    case INCREASE_INGREDIENT_QUANTITY: {
+    case DECREASE_INGREDIENT_QUANTITY: {
       return {
         ...state,
         ingredients: state.ingredients.map((item) =>

@@ -38,7 +38,7 @@ function BurgerConstructor({ handler, onDropHandler }) {
     ));
   };
 
-  const renderBuns = (style, type) => {
+  const renderBun = (style, type) => {
     if (buns) {
       return (
         <div className={`ml-8 mr-2 ${style}`}>
@@ -66,11 +66,11 @@ function BurgerConstructor({ handler, onDropHandler }) {
   return (
     <section className={`${styles.section} mt-25 ml-10`}>
       <div className="ml-8" ref={dropRef}>
-        {renderBuns(" mb-2 pr-1", "top")}
+        {renderBun(" mb-2 pr-1", "top")}
         <ul className={`${styles.container}  ${styles.column} custom-scroll`}>
           {renderInnerIngredients()}
         </ul>
-        {renderBuns("mt-2", "bottom")}
+        {renderBun("mt-2", "bottom")}
       </div>
       <div className={`mt-10 ${styles.total}`}>
         <Total />
