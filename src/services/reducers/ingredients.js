@@ -4,16 +4,15 @@ import {
   GET_INGREDIENTS_FAILURE,
   GET_MODAL_INGREDIENT,
   RESET_MODAL_INGREDIENT,
-  ADD_INGREDIENT,
+  INCREASE_INGREDIENT_QUANTITY,
+  DECREASE_INGREDIENT_QUANTITY,
 } from "../actions/ingredients";
 
 const initialState = {
   ingredients: [],
-  addedIngredients: [],
-  currentIngredient: null,
-  order: {},
   ingredientsRequest: false,
   ingredientsFailed: false,
+  currentIngredient: null,
 };
 
 export const ingredientsReducer = (state = initialState, action) => {
@@ -28,7 +27,9 @@ export const ingredientsReducer = (state = initialState, action) => {
     case GET_INGREDIENTS_SUCCESS: {
       return {
         ...state,
-        ingredients: action.payload,
+        ingredients: action.payload.map((item) => {
+          return { ...item, quantity: 0 };
+        }),
         ingredientsRequest: false,
       };
     }
@@ -55,10 +56,25 @@ export const ingredientsReducer = (state = initialState, action) => {
       };
     }
 
-    case ADD_INGREDIENT: {
+    case INCREASE_INGREDIENT_QUANTITY: {
       return {
         ...state,
-        addedIngredients: [...state.addedIngredients, action.payload],
+        ingredients: state.ingredients.map((item) =>
+          action.payload._id === item._id && action.payload.type === "bun"
+            ? { ...item, quantity: item.quantity + 2 }
+            : action.payload._id === item._id
+            ? { ...item, quantity: ++item.quantity }
+            : item
+        ),
+      };
+    }
+
+    case DECREASE_INGREDIENT_QUANTITY: {
+      return {
+        ...state,
+        ingredients: ingredients.map((item) =>
+          action.id === item.id ? { ...state, quantity: item.quantity-- } : item
+        ),
       };
     }
     default: {

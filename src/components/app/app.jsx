@@ -14,11 +14,16 @@ import {
   RESET_MODAL_INGREDIENT,
   fetchIngredients,
   addIngredient,
+  INCREASE_INGREDIENT_QUANTITY,
+  DECREASE_INGREDIENT_QUANTITY,
 } from "../../services/actions/ingredients";
 function App() {
   const dispatch = useDispatch();
   const ingredients = useSelector(
     (state) => state.ingredientsReducer.ingredients
+  );
+  const addedIngredients = useSelector(
+    (state) => state.ingredientsReducer.addedIngredients
   );
   const [isOrderModalOpened, setIsOrderModalOpened] = useState(false);
   const [isIngredientModalOpened, setIsIngredientModalOpened] = useState(false);
@@ -45,9 +50,10 @@ function App() {
   };
 
   const onDropHandler = (ingredient) => {
+    dispatch({ type: INCREASE_INGREDIENT_QUANTITY, payload: ingredient });
     dispatch(addIngredient(ingredient));
   };
-  
+
   return (
     <>
       {ingredients && (
