@@ -13,8 +13,6 @@ function BurgerConstructor({ handler, onDropHandler }) {
     (state) => state.constructorReducer.addedIngredients
   );
 
-  console.log(buns);
-
   const [, dropRef] = useDrop({
     accept: "ingredients",
     drop(item) {
