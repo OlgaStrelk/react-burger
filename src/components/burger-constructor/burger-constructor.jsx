@@ -9,12 +9,12 @@ import PropTypes from "prop-types";
 import styles from "./burger-constructor.module.css";
 import Total from "./total/Total";
 function BurgerConstructor({ handler, onDropHandler }) {
-  const addedIngredients = useSelector(
+  const { ingredients, buns } = useSelector(
     (state) => state.constructorReducer.addedIngredients
   );
-  const ingredients = useSelector(
-    (state) => state.ingredientsReducer.ingredients
-  );
+
+  console.log(buns)
+
   const [, dropRef] = useDrop({
     accept: "ingredients",
     drop(item) {
@@ -25,9 +25,8 @@ function BurgerConstructor({ handler, onDropHandler }) {
     handler();
   };
 
-  const img = ingredients[0]?.image;
   const renderInnerIngredients = () => {
-    return addedIngredients?.map((item) => (
+    return ingredients?.map((item) => (
       <li key={item?.id} className={`${styles.item} mr-3`}>
         <DragIcon type="primary" />
         <ConstructorElement
@@ -38,6 +37,7 @@ function BurgerConstructor({ handler, onDropHandler }) {
       </li>
     ));
   };
+
   return (
     <section className={`${styles.section} mt-25 ml-10`}>
       <div className="ml-8" ref={dropRef}>
@@ -47,9 +47,9 @@ function BurgerConstructor({ handler, onDropHandler }) {
           <ConstructorElement
             type="top"
             isLocked={true}
-            text="Краторная булка N-200i (верх)"
-            price={200}
-            thumbnail={img}
+            text={buns?.name}
+            price={buns?.price}
+            thumbnail={buns?.image}
             className="ml-8"
           />
         </div>
@@ -60,9 +60,9 @@ function BurgerConstructor({ handler, onDropHandler }) {
           <ConstructorElement
             type="bottom"
             isLocked={true}
-            text="Краторная булка N-200i (низ)"
-            price={200}
-            thumbnail={img}
+            text={buns?.name}
+            price={buns?.price}
+            thumbnail={buns?.image}
           />
         </div>
       </div>

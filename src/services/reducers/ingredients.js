@@ -69,11 +69,15 @@ export const ingredientsReducer = (state = initialState, action) => {
       };
     }
 
-    case DECREASE_INGREDIENT_QUANTITY: {
+    case INCREASE_INGREDIENT_QUANTITY: {
       return {
         ...state,
-        ingredients: ingredients.map((item) =>
-          action.id === item.id ? { ...state, quantity: item.quantity-- } : item
+        ingredients: state.ingredients.map((item) =>
+          action.payload._id === item._id && action.payload.type === "bun"
+            ? { ...item, quantity: item.quantity - 2 }
+            : action.payload._id === item._id
+            ? { ...item, quantity: --item.quantity }
+            : item
         ),
       };
     }

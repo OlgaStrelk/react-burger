@@ -1,18 +1,32 @@
 import { ADD_INGREDIENT } from "../actions/ingredients";
 
 const initialState = {
-  addedIngredients: [],
+  addedIngredients: {
+    buns: null,
+    ingredients: [],
+  },
 };
 
 export const constructorReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_INGREDIENT: {
-      // const  state.ingredients.find((item)=>item._id===action.payload._id)
-      return {
-        ...state,
-        addedIngredients: [...state.addedIngredients, action.payload],
-        //   ingredients: [...state.ingredients, state.ingredients.find((item)=>item._id===action.payload._id){...state, }],
-      };
+      if (action.payload.type === "bun") {
+        return {
+          ...state,
+          addedIngredients: { ...state.addedIngredients, buns: action.payload },
+        };
+      } else {
+        return {
+          ...state,
+          addedIngredients: {
+            ...state.addedIngredients,
+            ingredients: [
+              ...state.addedIngredients.ingredients,
+              action.payload,
+            ],
+          },
+        };
+      }
     }
     default: {
       return state;
