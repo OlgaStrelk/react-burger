@@ -13,7 +13,7 @@ function BurgerConstructor({ handler, onDropHandler }) {
     (state) => state.constructorReducer.addedIngredients
   );
 
-  console.log(buns)
+  console.log(buns);
 
   const [, dropRef] = useDrop({
     accept: "ingredients",
@@ -42,7 +42,7 @@ function BurgerConstructor({ handler, onDropHandler }) {
     <section className={`${styles.section} mt-25 ml-10`}>
       <div className="ml-8" ref={dropRef}>
         <div
-          className={`${styles.wrapper} ${styles.column} ml-8 mb-2 mr-5 pr-1`}
+          className={`${styles.wrapper} ${styles.column} ml-8 mb-2 mr-2 pr-1`}
         >
           <ConstructorElement
             type="top"
@@ -56,7 +56,7 @@ function BurgerConstructor({ handler, onDropHandler }) {
         <ul className={`${styles.container}  ${styles.column} custom-scroll`}>
           {renderInnerIngredients()}
         </ul>
-        <div className="ml-8 mr-5 mt-2">
+        <div className="ml-8 mr-2 mt-2">
           <ConstructorElement
             type="bottom"
             isLocked={true}
