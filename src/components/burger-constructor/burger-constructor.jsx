@@ -45,9 +45,9 @@ function BurgerConstructor({ handler, onDropHandler }) {
           <ConstructorElement
             type={type}
             isLocked={true}
-            text={buns?.name}
-            price={buns?.price}
-            thumbnail={buns?.image}
+            text={buns.name}
+            price={buns.price}
+            thumbnail={buns.image}
           />
         </div>
       );
