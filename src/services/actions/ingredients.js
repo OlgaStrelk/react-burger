@@ -2,6 +2,7 @@ import { INGREDIENTS_API_URL } from "../../utils/consts";
 import { v4 as uuid } from "uuid";
 
 export const ADD_INGREDIENT = "ADD_INGREDIENT";
+export const SORT_INGREDIENTS = "SORT_INGREDIENTS";
 export const GET_MODAL_INGREDIENT = "GET_MODAL_INGREDIENT";
 export const RESET_MODAL_INGREDIENT = "RESET_MODAL_INGREDIENT";
 

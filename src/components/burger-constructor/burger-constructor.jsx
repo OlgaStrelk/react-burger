@@ -1,13 +1,13 @@
 import { useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
+import { SortableIngredient } from "./sortable-ingredient/sortable-ingredient.jsx";
 import {
   ConstructorElement,
   Button,
-  DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
 import styles from "./burger-constructor.module.css";
-import Total from "./total/Total";
+import Total from "./total/total";
 function BurgerConstructor({ handler, onDropHandler }) {
   const { ingredients, buns } = useSelector(
     (state) => state.constructorReducer.addedIngredients
@@ -19,20 +19,14 @@ function BurgerConstructor({ handler, onDropHandler }) {
       onDropHandler(item);
     },
   });
+
   const handleSubmit = (e) => {
     handler();
   };
 
   const renderInnerIngredients = () => {
-    return ingredients?.map((item) => (
-      <li key={item?.id} className={`${styles.item} mr-3`}>
-        <DragIcon type="primary" />
-        <ConstructorElement
-          text={item?.name}
-          price={item?.price}
-          thumbnail={item?.image}
-        />
-      </li>
+    return ingredients?.map((item, index) => (
+      <SortableIngredient key={item.id} index={index} data={item} />
     ));
   };
 
@@ -52,10 +46,7 @@ function BurgerConstructor({ handler, onDropHandler }) {
     } else {
       return (
         <div className={`ml-8 mr-2 ${style}`}>
-          <ConstructorElement
-            type={type}
-            text="Выберите булки"
-          />
+          <ConstructorElement type={type} text="Выберите булки" />
         </div>
       );
     }
