@@ -2,9 +2,12 @@ import styles from "./ingredient-details.module.css";
 import { useSelector } from "react-redux";
 
 function IngredientDetails(props) {
-  const cardData = useSelector(
-    (state) => state.ingredientsReducer.currentIngredient
-  );
+  const cardID = useSelector((store) => store.modal.currentIngredient);
+  const ingredients = useSelector((store) => store.ingredients.ingredients);
+  const cardData = ingredients.find((item) => {
+    return cardID === item._id;
+  });
+  console.log(cardData);
   return (
     <>
       <h4 className={styles.title}> Детали ингредиента</h4>

@@ -7,7 +7,6 @@ import PropTypes from "prop-types";
 import { cardDataShape } from "../../../utils/shapes";
 import { memo, useEffect, useState } from "react";
 import { useDrag } from "react-dnd";
-import { useSelector } from "react-redux";
 
 function IngredientCard({ cardData }) {
   const [, dragRef] = useDrag({

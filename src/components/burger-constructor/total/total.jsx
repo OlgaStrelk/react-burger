@@ -8,21 +8,18 @@ function Total(props) {
     (store) => store.burgerConstructor.addedIngredients
   );
 
-  let newAddedIngredients =[]
+  let newAddedIngredients = [];
 
-
-
-  console.log(addedIngredients);
   const countTotal = () =>
     useMemo(() => {
       const initialValue = 0;
-      const total = addedIngredients.ingredients.reduce(
-        (accumulator, currentValue) => accumulator + currentValue.price,
-        initialValue
-      );
-
-      console.log(total);
-    }, [addedIngredients.ingredients]);
+      const total =
+        addedIngredients.ingredients.reduce(
+          (accumulator, currentValue) => accumulator + currentValue.price,
+          initialValue
+        ) +
+        addedIngredients?.buns?.price * 2;
+    }, [addedIngredients?.ingredients]);
   return (
     <>
       <span className="mr-1 text text_type_digits-medium">{countTotal()}</span>

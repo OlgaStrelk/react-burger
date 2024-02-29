@@ -7,12 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 function IngredientsBlock({ titles, handler }) {
   const dispatch = useDispatch();
-  const ingredients = useSelector(
-    (state) => state.ingredients.ingredients
-  );
-  const currentIngredient = useSelector(
-    (state) => state.modal.currentIngredient
-  );
+  const ingredients = useSelector((state) => state.ingredients.ingredients);
 
   const filterIngredients = (blockTitle) =>
     useMemo(() => {
@@ -33,8 +28,7 @@ function IngredientsBlock({ titles, handler }) {
 
   const handleCardClick = (e) => {
     dispatch({ type: GET_MODAL_INGREDIENT, payload: e.currentTarget.id });
-    if (currentIngredient) handler();
-    else console.log(error);
+    handler();
   };
 
   return (
