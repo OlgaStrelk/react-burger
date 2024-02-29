@@ -20,11 +20,9 @@ import {
 function App() {
   const dispatch = useDispatch();
   const ingredients = useSelector(
-    (state) => state.ingredientsReducer.ingredients
+    (state) => state.ingredients?.ingredients
   );
-  const addedIngredients = useSelector(
-    (state) => state.ingredientsReducer.addedIngredients
-  );
+
   const [isOrderModalOpened, setIsOrderModalOpened] = useState(false);
   const [isIngredientModalOpened, setIsIngredientModalOpened] = useState(false);
 

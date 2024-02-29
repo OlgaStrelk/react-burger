@@ -10,7 +10,7 @@ import styles from "./burger-constructor.module.css";
 import Total from "./total/total";
 function BurgerConstructor({ handler, onDropHandler }) {
   const { ingredients, buns } = useSelector(
-    (state) => state.constructorReducer.addedIngredients
+    (state) => state.burgerConstructor.addedIngredients
   );
 
   const [, dropRef] = useDrop({

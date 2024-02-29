@@ -10,7 +10,7 @@ import { SORT_INGREDIENTS } from "../../../services/actions/ingredients";
 export const SortableIngredient = ({ data, index }) => {
   const dispatch = useDispatch();
   const ingredients = useSelector(
-    (store) => store.constructorReducer.addedIngredients.ingredients
+    (store) => store.burgerConstructor.addedIngredients.ingredients
   );
 
   const moveListItem = (dragIndex, hoverIndex) => {

@@ -8,7 +8,10 @@ import { useDispatch, useSelector } from "react-redux";
 function IngredientsBlock({ titles, handler }) {
   const dispatch = useDispatch();
   const ingredients = useSelector(
-    (state) => state.ingredientsReducer.ingredients
+    (state) => state.ingredients.ingredients
+  );
+  const currentIngredient = useSelector(
+    (state) => state.modal.currentIngredient
   );
 
   const filterIngredients = (blockTitle) =>
@@ -30,7 +33,8 @@ function IngredientsBlock({ titles, handler }) {
 
   const handleCardClick = (e) => {
     dispatch({ type: GET_MODAL_INGREDIENT, payload: e.currentTarget.id });
-    handler()
+    if (currentIngredient) handler();
+    else console.log(error);
   };
 
   return (
