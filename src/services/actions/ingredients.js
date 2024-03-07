@@ -31,7 +31,7 @@ export const fetchIngredients = () => (dispatch) => {
     .catch((err) => dispatch({ type: GET_INGREDIENTS_FAILURE }));
 };
 
-export const makeOrder = () => (dispatch) => {
+export const makeOrder = (data) => (dispatch) => {
   dispatch({ type: MAKE_ORDER_REQUEST });
   fetch(ORDER_API_URL, {
     method: "POST",

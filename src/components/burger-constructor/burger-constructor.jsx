@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
 import { SortableIngredient } from "./sortable-ingredient/sortable-ingredient.jsx";
 import {
@@ -8,10 +8,12 @@ import {
 import PropTypes from "prop-types";
 import styles from "./burger-constructor.module.css";
 import Total from "./total/total";
+import { makeOrder } from "../../services/actions/ingredients.js";
 function BurgerConstructor({ handler, onDropHandler }) {
   const { ingredients, buns } = useSelector(
     (state) => state.burgerConstructor.addedIngredients
   );
+  const dispatch = useDispatch();
 
   const [, dropRef] = useDrop({
     accept: "ingredients",
@@ -20,8 +22,16 @@ function BurgerConstructor({ handler, onDropHandler }) {
     },
   });
 
+  const orderList = () => {
+    let ingredientsIds = ingredients.map((item) => item._id);
+    ingredientsIds.push(buns._id, buns._id);
+
+    return {ingredients: ingredientsIds};
+  };
+
   const handleSubmit = (e) => {
     handler();
+    dispatch(makeOrder(orderList()));
   };
 
   const renderInnerIngredients = () => {
