@@ -1,13 +1,14 @@
 import styles from "./ingredients-block.module.css";
-import { Fragment, memo, useMemo } from "react";
+import { Fragment, memo, useMemo, forwardRef, useState } from "react";
 import { GET_MODAL_INGREDIENT } from "../../../services/actions/ingredients";
 
 import IngredientCard from "../ingredient-card/ingredient-card";
 import { useDispatch, useSelector } from "react-redux";
 
-function IngredientsBlock({ titles, handler }) {
+const IngredientsBlock = forwardRef(({ titles, handler, onScroll }, ref) => {
   const dispatch = useDispatch();
   const ingredients = useSelector((state) => state.ingredients.ingredients);
+  const [scrollTop, setScrollTop] = useState(0);
 
   const filterIngredients = (blockTitle) =>
     useMemo(() => {
@@ -33,17 +34,23 @@ function IngredientsBlock({ titles, handler }) {
 
   return (
     <>
-      <ul className={`${styles.container} custom-scroll mt-10`}>
+      <ul
+        onScroll={(event) => onScroll(event)}
+        ref={ref}
+        className={`${styles.container} custom-scroll mt-10`}
+      >
         {titles.map((item) => (
           <Fragment key={item.id}>
             <h3 className={`text text_type_main-medium mb-6`} ref={item.ref}>
               {item.title}
             </h3>
-            <ul className={styles.block}>{renderFilteredIngredients(item)}</ul>
+            <ul  className={styles.block}>
+              {renderFilteredIngredients(item)}
+            </ul>
           </Fragment>
         ))}
       </ul>
     </>
   );
-}
+});
 export default memo(IngredientsBlock);

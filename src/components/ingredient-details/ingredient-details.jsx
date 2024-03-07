@@ -7,7 +7,7 @@ function IngredientDetails(props) {
   const cardData = ingredients.find((item) => {
     return cardID === item._id;
   });
-  console.log(cardData);
+
   return (
     <>
       <h4 className={styles.title}> Детали ингредиента</h4>
