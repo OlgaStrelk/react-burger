@@ -17,7 +17,6 @@ function BurgerIngredients({ handler }) {
     { title: "Начинки", value: "main", id: 9, ref: titleMainRef },
   ];
   const [currentTab, setCurrentTab] = useState(BLOCK_TITLES[0].value);
-  // const handleScroll=(ref)=>{if window }
   const onTabClick = (tab) => {
     setCurrentTab(tab);
     if (tab === "bun")
@@ -30,9 +29,7 @@ function BurgerIngredients({ handler }) {
       titleSaucesRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const handleScroll = (event) => {
-    
-    console.log(event.currentTarget.scrollTop)
+  const handleScroll = (event) => {   
     if (event.currentTarget.scrollTop < 250) {
       setCurrentTab("bun");
     }

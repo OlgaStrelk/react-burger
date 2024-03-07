@@ -19,7 +19,9 @@ function Total(props) {
           initialValue
         ) +
         addedIngredients?.buns?.price * 2;
-    }, [addedIngredients?.ingredients]);
+
+        return total
+    }, [addedIngredients?.ingredients, addedIngredients?.buns]);
   return (
     <>
       <span className="mr-1 text text_type_digits-medium">{countTotal()}</span>
