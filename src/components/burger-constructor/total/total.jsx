@@ -8,19 +8,22 @@ function Total(props) {
     (store) => store.burgerConstructor.addedIngredients
   );
 
-  let newAddedIngredients = [];
 
   const countTotal = () =>
     useMemo(() => {
       const initialValue = 0;
-      const total =
-        addedIngredients.ingredients.reduce(
-          (accumulator, currentValue) => accumulator + currentValue.price,
-          initialValue
-        ) +
-        addedIngredients?.buns?.price * 2;
+      if (!(addedIngredients.ingredients && addedIngredients.buns)) {
+        return 0;
+      } else {
+        const total =
+          addedIngredients.ingredients.reduce(
+            (accumulator, currentValue) => accumulator + currentValue.price,
+            initialValue
+          ) +
+          addedIngredients?.buns?.price * 2;
 
-        return total
+        return total;
+      }
     }, [addedIngredients?.ingredients, addedIngredients?.buns]);
   return (
     <>
