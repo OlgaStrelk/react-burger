@@ -3,6 +3,8 @@ import { v4 as uuid } from "uuid";
 
 export const ADD_INGREDIENT = "ADD_INGREDIENT";
 export const SORT_INGREDIENTS = "SORT_INGREDIENTS";
+export const DELETE_INGREDIENT = "DELETE_INGREDIENT";
+
 export const GET_MODAL_INGREDIENT = "GET_MODAL_INGREDIENT";
 export const RESET_MODAL_INGREDIENT = "RESET_MODAL_INGREDIENT";
 
@@ -40,5 +42,10 @@ export const makeOrder = (data) => (dispatch) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
-  }).then((res) => (res.ok ? res.json() : Promise.reject(res.status))).then(data=> console.log(data));
+  })
+    .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
+    .then((res) =>
+      dispatch({ type: MAKE_ORDER_SUCCESS, payload: res.order.number })
+    )
+    .catch((err) => dispatch({ type: MAKE_ORDER_FAILURE }));
 };

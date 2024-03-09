@@ -1,4 +1,4 @@
-import { ADD_INGREDIENT, SORT_INGREDIENTS } from "../actions/ingredients";
+import { ADD_INGREDIENT, SORT_INGREDIENTS, DELETE_INGREDIENT } from "../actions/ingredients";
 
 const initialState = {
   addedIngredients: {
@@ -33,6 +33,7 @@ export const constructorReducer = (state = initialState, action) => {
         ...state,
         addedIngredients: { ...state.addedIngredients, ingredients: action.payload },
       };
+    case DELETE_INGREDIENT:{}
     default: {
       return state;
     }
