@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 const IngredientsBlock = forwardRef(({ titles, handler, onScroll }, ref) => {
   const dispatch = useDispatch();
   const ingredients = useSelector((state) => state.ingredients.ingredients);
-  const [scrollTop, setScrollTop] = useState(0);
 
   const filterIngredients = (blockTitle) =>
     useMemo(() => {

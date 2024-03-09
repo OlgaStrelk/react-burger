@@ -43,7 +43,7 @@ export const ingredientsReducer = (state = initialState, action) => {
     case GET_MODAL_INGREDIENT: {
       return {
         ...state,
-        currentIngredient: state.ingredients.find(
+        currentIngredient: [...state.ingredients].find(
           (item) => item._id === action.payload
         ),
       };
@@ -59,7 +59,7 @@ export const ingredientsReducer = (state = initialState, action) => {
     case INCREASE_INGREDIENT_QUANTITY: {
       return {
         ...state,
-        ingredients: state.ingredients.map((item) =>
+        ingredients: [...state.ingredients].map((item) =>
           action.payload.type === "bun" &&
           item.type === "bun" &&
           action.payload._id !== item._id
@@ -76,7 +76,7 @@ export const ingredientsReducer = (state = initialState, action) => {
     case DECREASE_INGREDIENT_QUANTITY: {
       return {
         ...state,
-        ingredients: state.ingredients.map((item) =>
+        ingredients: [...state.ingredients].map((item) =>
           action.payload._id === item._id && action.payload.type === "bun"
             ? { ...item, quantity: 0 }
             : action.payload._id === item._id

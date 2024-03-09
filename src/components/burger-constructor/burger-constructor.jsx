@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
 import { SortableIngredient } from "./sortable-ingredient/sortable-ingredient.jsx";
@@ -10,10 +11,25 @@ import styles from "./burger-constructor.module.css";
 import Total from "./total/total";
 import { makeOrder } from "../../services/actions/ingredients.js";
 function BurgerConstructor({ handler, onDropHandler }) {
+  const [isButtonActive, setButtonActive] = useState(false);
+  const [isError, setError] = useState("");
+
   const { ingredients, buns } = useSelector(
     (state) => state.burgerConstructor.addedIngredients
   );
   const dispatch = useDispatch();
+
+  const validateConstructor = () => {
+    if (!buns || ingredients.length === 0) {
+      setError("Добавьте ингредиенты в конструктор для заказа");
+      setButtonActive(false);
+    } else {
+      setError("");
+      setButtonActive(true);
+    }
+  };
+
+  useEffect(() => validateConstructor(), [ingredients, buns]);
 
   const [, dropRef] = useDrop({
     accept: "ingredients",
@@ -23,15 +39,23 @@ function BurgerConstructor({ handler, onDropHandler }) {
   });
 
   const orderList = () => {
-    let ingredientsIds = ingredients.map((item) => item._id);
-    ingredientsIds.push(buns._id, buns._id);
-
-    return {ingredients: ingredientsIds};
+    if (!(ingredients && buns)) {
+      return null;
+    } else {
+      let ingredientsIds = [...ingredients]?.map((item) => item._id);
+      ingredientsIds.push(buns?._id, buns?._id);
+      return { ingredients: ingredientsIds };
+    }
   };
 
   const handleSubmit = (e) => {
     handler();
-    dispatch(makeOrder(orderList()));
+    let data = orderList();
+    if (data) {
+      dispatch(makeOrder(data));
+    } else {
+      return setError("Выберите ингредиенты");
+    }
   };
 
   const renderInnerIngredients = () => {
@@ -78,6 +102,7 @@ function BurgerConstructor({ handler, onDropHandler }) {
           type="primary"
           size="large"
           onClick={handleSubmit}
+          disabled={!isButtonActive}
         >
           Оформить заказ
         </Button>
