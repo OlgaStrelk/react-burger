@@ -3,6 +3,7 @@ import {
   API_URL,
   ORDER_ENDPOINT,
 } from "../../utils/consts";
+import { checkResponse } from "../../utils/consts";
 import { v4 as uuid } from "uuid";
 
 export const ADD_INGREDIENT = "ADD_INGREDIENT";
@@ -33,12 +34,10 @@ export const decreaseQuantity = (id) => {
   return { type: DECREASE_INGREDIENT_QUANTITY, payload: id };
 };
 
-const checkResponse = (res) =>
-  res.ok ? res.json() : Promise.reject(res.status);
 export const fetchIngredients = () => (dispatch) => {
   dispatch({ type: GET_INGREDIENTS_REQUEST });
   fetch(`${API_URL}${INGREDIENTS_ENDPOINT}`)
-    .then((res) => checkResponse(res))
+    .then(checkResponse)
     .then((res) => {
       dispatch({ type: GET_INGREDIENTS_SUCCESS, payload: res.data });
     })
@@ -55,7 +54,7 @@ export const makeOrder = (data) => (dispatch) => {
     },
     body: JSON.stringify(data),
   })
-    .then((res) => checkResponse(res))
+    .then(checkResponse)
     .then((res) =>
       dispatch({ type: MAKE_ORDER_SUCCESS, payload: res.order.number })
     )
