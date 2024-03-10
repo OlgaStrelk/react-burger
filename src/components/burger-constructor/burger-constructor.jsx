@@ -48,6 +48,7 @@ function BurgerConstructor({ handler, onDropHandler }) {
     }
   };
 
+  const resetConstructor = () => {};
   const handleSubmit = (e) => {
     handler();
     let data = orderList();

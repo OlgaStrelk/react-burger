@@ -2,6 +2,7 @@ import {
   ADD_INGREDIENT,
   SORT_INGREDIENTS,
   DELETE_INGREDIENT,
+  RESET_CONSTRUCTOR,
 } from "../actions/ingredients";
 
 const initialState = {
@@ -40,6 +41,7 @@ export const constructorReducer = (state = initialState, action) => {
           ingredients: action.payload,
         },
       };
+
     case DELETE_INGREDIENT: {
       return {
         ...state,
@@ -51,6 +53,17 @@ export const constructorReducer = (state = initialState, action) => {
         },
       };
     }
+
+    case RESET_CONSTRUCTOR: {
+      return {
+        ...state,
+        addedIngredients: {
+          buns: null,
+          ingredients: [],
+        },
+      };
+    }
+    
     default: {
       return state;
     }

@@ -40,21 +40,6 @@ export const ingredientsReducer = (state = initialState, action) => {
         ingredientsRequest: false,
       };
     }
-    case GET_MODAL_INGREDIENT: {
-      return {
-        ...state,
-        currentIngredient: [...state.ingredients].find(
-          (item) => item._id === action.payload
-        ),
-      };
-    }
-
-    case RESET_MODAL_INGREDIENT: {
-      return {
-        ...state,
-        currentIngredient: null,
-      };
-    }
 
     case INCREASE_INGREDIENT_QUANTITY: {
       return {

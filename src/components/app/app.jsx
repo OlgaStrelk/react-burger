@@ -10,6 +10,7 @@ import OrderDetails from "../order-details/order-details";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import {
+  RESET_CONSTRUCTOR,
   RESET_MODAL_INGREDIENT,
   fetchIngredients,
   addIngredient,
@@ -40,6 +41,7 @@ function App() {
   };
 
   const handleOrderModalClose = () => {
+    dispatch({ type: RESET_CONSTRUCTOR });
     setIsOrderModalOpened(false);
   };
 
