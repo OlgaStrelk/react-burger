@@ -1,6 +1,6 @@
 import styles from "./burger-ingredients.module.css";
 
-import Tabbar from "../tabbar/tabbar";
+import Tabbar from "../tab-bar/tab-bar";
 import IngredientsBlock from "./ingredients-block/ingredients-block";
 import { useRef, useState } from "react";
 
