@@ -22,7 +22,12 @@ export const MAKE_ORDER_FAILURE = "MAKE_ORDER_FAILURE";
 export const addIngredient = (ingredient) => {
   return { type: ADD_INGREDIENT, payload: { ...ingredient, id: uuid() } };
 };
-
+export const deleteIngredient = (id) => {
+  return { type: DELETE_INGREDIENT, payload: id };
+};
+export const decreaseQuantity = (id) => {
+  return { type: DECREASE_INGREDIENT_QUANTITY, payload: id };
+};
 export const fetchIngredients = () => (dispatch) => {
   dispatch({ type: GET_INGREDIENTS_REQUEST });
   fetch(INGREDIENTS_API_URL)

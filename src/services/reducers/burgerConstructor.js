@@ -1,4 +1,8 @@
-import { ADD_INGREDIENT, SORT_INGREDIENTS, DELETE_INGREDIENT } from "../actions/ingredients";
+import {
+  ADD_INGREDIENT,
+  SORT_INGREDIENTS,
+  DELETE_INGREDIENT,
+} from "../actions/ingredients";
 
 const initialState = {
   addedIngredients: {
@@ -31,9 +35,22 @@ export const constructorReducer = (state = initialState, action) => {
     case SORT_INGREDIENTS:
       return {
         ...state,
-        addedIngredients: { ...state.addedIngredients, ingredients: action.payload },
+        addedIngredients: {
+          ...state.addedIngredients,
+          ingredients: action.payload,
+        },
       };
-    case DELETE_INGREDIENT:{}
+    case DELETE_INGREDIENT: {
+      return {
+        ...state,
+        addedIngredients: {
+          ...state.addedIngredients,
+          ingredients: [...state.addedIngredients.ingredients].filter(
+            (item) => item.id !== action.payload
+          ),
+        },
+      };
+    }
     default: {
       return state;
     }

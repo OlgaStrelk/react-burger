@@ -6,7 +6,11 @@ import {
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch, useSelector } from "react-redux";
-import { SORT_INGREDIENTS } from "../../../services/actions/ingredients";
+import {
+  decreaseQuantity,
+  SORT_INGREDIENTS,
+  deleteIngredient,
+} from "../../../services/actions/ingredients";
 export const SortableIngredient = ({ data, index }) => {
   const dispatch = useDispatch();
   const ingredients = useSelector(
@@ -67,14 +71,25 @@ export const SortableIngredient = ({ data, index }) => {
 
   drag(drop(ref));
 
+  const onDelete = () => {
+    dispatch(deleteIngredient(data.id));
+    dispatch(decreaseQuantity(data._id));
+  };
+
   return (
-    <li ref={ref} className={`${styles.item} mr-3`} data-handler-id={handlerId}>
+    <li
+      ref={ref}
+      id={data.id}
+      className={`${styles.item} mr-3`}
+      data-handler-id={handlerId}
+    >
       <DragIcon type="primary" />
       <ConstructorElement
         text={data.name}
         price={data.price}
         thumbnail={data.image}
         extraClass={opacity}
+        handleClose={onDelete}
       />
     </li>
   );
