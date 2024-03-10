@@ -4,7 +4,6 @@ import styles from "./app.module.css";
 import AppHeader from "../app-header/app-header";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
-import ModalOverlay from "../modal/modal-overlay/modal-overlay";
 import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import OrderDetails from "../order-details/order-details";
@@ -15,13 +14,10 @@ import {
   fetchIngredients,
   addIngredient,
   INCREASE_INGREDIENT_QUANTITY,
-  DECREASE_INGREDIENT_QUANTITY,
 } from "../../services/actions/ingredients";
 function App() {
   const dispatch = useDispatch();
-  const ingredients = useSelector(
-    (state) => state.ingredients?.ingredients
-  );
+  const ingredients = useSelector((state) => state.ingredients?.ingredients);
 
   const [isOrderModalOpened, setIsOrderModalOpened] = useState(false);
   const [isIngredientModalOpened, setIsIngredientModalOpened] = useState(false);
@@ -67,11 +63,9 @@ function App() {
             </main>
           </DndProvider>
           {isIngredientModalOpened && (
-            <ModalOverlay>
-              <Modal onClose={handleCardModalClose} customStyle={"_card"}>
-                <IngredientDetails />
-              </Modal>
-            </ModalOverlay>
+            <Modal onClose={handleCardModalClose} customStyle={"_card"}>
+              <IngredientDetails />
+            </Modal>
           )}
           {isOrderModalOpened && (
             <Modal onClose={handleOrderModalClose} customStyle={"_order"}>
