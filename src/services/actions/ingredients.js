@@ -32,10 +32,13 @@ export const deleteIngredient = (id) => {
 export const decreaseQuantity = (id) => {
   return { type: DECREASE_INGREDIENT_QUANTITY, payload: id };
 };
+
+const checkResponse = (res) =>
+  res.ok ? res.json() : Promise.reject(res.status);
 export const fetchIngredients = () => (dispatch) => {
   dispatch({ type: GET_INGREDIENTS_REQUEST });
   fetch(`${API_URL}${INGREDIENTS_ENDPOINT}`)
-    .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
+    .then((res) => checkResponse(res))
     .then((res) => {
       dispatch({ type: GET_INGREDIENTS_SUCCESS, payload: res.data });
     })
@@ -52,7 +55,7 @@ export const makeOrder = (data) => (dispatch) => {
     },
     body: JSON.stringify(data),
   })
-    .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
+    .then((res) => checkResponse(res))
     .then((res) =>
       dispatch({ type: MAKE_ORDER_SUCCESS, payload: res.order.number })
     )
