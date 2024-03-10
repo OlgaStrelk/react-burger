@@ -1,4 +1,8 @@
-import { INGREDIENTS_API_URL, ORDER_API_URL } from "../../utils/consts";
+import {
+  INGREDIENTS_ENDPOINT,
+  API_URL,
+  ORDER_ENDPOINT,
+} from "../../utils/consts";
 import { v4 as uuid } from "uuid";
 
 export const ADD_INGREDIENT = "ADD_INGREDIENT";
@@ -30,7 +34,7 @@ export const decreaseQuantity = (id) => {
 };
 export const fetchIngredients = () => (dispatch) => {
   dispatch({ type: GET_INGREDIENTS_REQUEST });
-  fetch(INGREDIENTS_API_URL)
+  fetch(`${API_URL}${INGREDIENTS_ENDPOINT}`)
     .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
     .then((res) => {
       dispatch({ type: GET_INGREDIENTS_SUCCESS, payload: res.data });
@@ -40,7 +44,7 @@ export const fetchIngredients = () => (dispatch) => {
 
 export const makeOrder = (data) => (dispatch) => {
   dispatch({ type: MAKE_ORDER_REQUEST });
-  fetch(ORDER_API_URL, {
+  fetch(`${API_URL}${ORDER_ENDPOINT}`, {
     method: "POST",
     headers: {
       Accept: "application/json",
