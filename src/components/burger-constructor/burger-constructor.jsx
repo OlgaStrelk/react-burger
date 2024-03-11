@@ -10,7 +10,7 @@ import PropTypes from "prop-types";
 import styles from "./burger-constructor.module.css";
 import Total from "./total/total";
 import { makeOrder } from "../../services/actions/ingredients.js";
-function BurgerConstructor({ handler, onDropHandler }) {
+function BurgerConstructor({ onModalOpen, onDropHandler }) {
   const [isButtonActive, setButtonActive] = useState(false);
   const [isError, setError] = useState("");
 
@@ -49,7 +49,7 @@ function BurgerConstructor({ handler, onDropHandler }) {
   };
 
   const handleSubmit = (e) => {
-    handler();
+    onModalOpen();
     let data = orderList();
     if (data) {
       dispatch(makeOrder(data));
@@ -112,7 +112,8 @@ function BurgerConstructor({ handler, onDropHandler }) {
 }
 
 BurgerConstructor.propTypes = {
-  handler: PropTypes.func,
+  onModalOpen: PropTypes.func.isRequired,
+  onDropHandler: PropTypes.func.isRequired,
 };
 
 export default BurgerConstructor;

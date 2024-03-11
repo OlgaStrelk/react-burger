@@ -60,7 +60,7 @@ function App() {
               <BurgerIngredients handler={handleCardModalOpen} />
               <BurgerConstructor
                 onDropHandler={onDropHandler}
-                handler={handleOrderModalOpen}
+                onModalOpen={handleOrderModalOpen}
               />
             </main>
           </DndProvider>
