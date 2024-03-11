@@ -22,9 +22,9 @@ function HomePage() {
   const ingredients = useSelector((state) => state.ingredients?.ingredients);
 
   const [
-    isIngredientsModalOpen,
-    onIngredientsModalOpen,
-    onIngredientsModalClose,
+    isIngredientModalOpen,
+    onIngredientModalOpen,
+    onIngredientModalClose,
   ] = useModal();
   const [isOrderModalOpen, onOrderModalOpen, onOrderModalClose] = useModal();
 
@@ -39,13 +39,13 @@ function HomePage() {
           <AppHeader />
           <DndProvider backend={HTML5Backend}>
             <main className={styles.main}>
-              <BurgerIngredients onModalOpen={onIngredientsModalOpen} />
+              <BurgerIngredients onModalOpen={onIngredientModalOpen} />
               <BurgerConstructor onModalOpen={onOrderModalOpen} />
             </main>
           </DndProvider>
-          {isIngredientsModalOpen && (
+          {isIngredientModalOpen && (
             <Modal
-              onClose={onIngredientsModalClose}
+              onClose={onIngredientModalClose}
               customStyle={"_card"}
               action={RESET_MODAL_INGREDIENT}
             >
