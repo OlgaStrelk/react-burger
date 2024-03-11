@@ -20,7 +20,7 @@ function BurgerConstructor({ handler, onDropHandler }) {
   const dispatch = useDispatch();
 
   const validateConstructor = () => {
-    if (!buns || ingredients.length === 0) {
+    if (!buns || !ingredients.length) {
       setError("Добавьте ингредиенты в конструктор для заказа");
       setButtonActive(false);
     } else {
