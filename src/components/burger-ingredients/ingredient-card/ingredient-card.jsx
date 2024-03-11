@@ -5,12 +5,18 @@ import {
 import styles from "./ingredient-card.module.css";
 import PropTypes from "prop-types";
 import { cardDataShape } from "../../../utils/shapes";
-import { useCallback, memo } from "react";
+import { memo, useEffect, useState } from "react";
+import { useDrag } from "react-dnd";
 
 function IngredientCard({ cardData }) {
+  const [, dragRef] = useDrag({
+    type: "ingredients",
+    item: cardData,
+  });
+
   return (
-    <div className={`${styles.container} ml-4 mb-8`}>
-      <Counter count={1} size="default" extraClass="m-1" />
+    <div ref={dragRef} className={`${styles.container} ml-4 mb-8`}>
+      <Counter count={cardData.quantity} size="default" extraClass="m-1" />
       <img
         className={`pl-4 pr-4 ${styles.image}`}
         src={cardData.image}

@@ -1,73 +1,73 @@
 import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import styles from "./app.module.css";
-import { getIngredients } from "../../utils/api";
 import AppHeader from "../app-header/app-header";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
-import ModalOverlay from "../modal/modal-overlay/modal-overlay";
 import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import OrderDetails from "../order-details/order-details";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import {
+  RESET_CONSTRUCTOR,
+  RESET_MODAL_INGREDIENT,
+  fetchIngredients,
+  addIngredient,
+  INCREASE_INGREDIENT_QUANTITY,
+} from "../../services/actions/ingredients";
 function App() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [ingredients, setIngredients] = useState([]);
-  const [isOrderModalOpened, setisOrderModalOpened] = useState(false);
-  const [currentCard, setCurrentCard] = useState(null);
+  const dispatch = useDispatch();
+  const ingredients = useSelector((state) => state.ingredients?.ingredients);
 
-  const fetchIngredients = () => {
-    getIngredients()
-      .then((data) => {
-        setIngredients(data.data);
-      })
-      .catch((err) => console.log(err));
-  };
+  const [isOrderModalOpened, setIsOrderModalOpened] = useState(false);
+  const [isIngredientModalOpened, setIsIngredientModalOpened] = useState(false);
 
   useEffect(() => {
-    setIsLoading(true);
-    fetchIngredients();
-    return setIsLoading(false);
+    dispatch(fetchIngredients());
   }, []);
 
-  const getCurrentCardData = (e) => {
-    setCurrentCard(ingredients.find((item) => item._id === e.currentTarget.id));
-  };
-
-  const handleCardModalOpen = (e) => {
-    getCurrentCardData(e);
+  const handleCardModalOpen = () => {
+    setIsIngredientModalOpened(true);
   };
 
   const handleOrderModalOpen = () => {
-    setisOrderModalOpened(true);
+    setIsOrderModalOpened(true);
   };
 
   const handleCardModalClose = (e) => {
-    setCurrentCard(null);
+    setIsIngredientModalOpened(false);
+    dispatch({ type: RESET_MODAL_INGREDIENT });
   };
 
   const handleOrderModalClose = () => {
-    setisOrderModalOpened(false);
+    dispatch({ type: RESET_CONSTRUCTOR });
+    setIsOrderModalOpened(false);
   };
+
+  const onDropHandler = (ingredient) => {
+    dispatch({ type: INCREASE_INGREDIENT_QUANTITY, payload: ingredient });
+    dispatch(addIngredient(ingredient));
+  };
+
   return (
     <>
       {ingredients && (
         <>
           <AppHeader />
-          <main className={styles.main}>
-            <BurgerIngredients
-              handler={handleCardModalOpen}
-              ingredientsArray={ingredients}
-            />
-            <BurgerConstructor
-              handler={handleOrderModalOpen}
-              ingredientsArray={ingredients}
-            />
-          </main>
-          {currentCard && (
-            <ModalOverlay ingredientsArray={ingredients}>
-              <Modal onClose={handleCardModalClose} customStyle={"_card"}>
-                <IngredientDetails cardData={currentCard} />
-              </Modal>
-            </ModalOverlay>
+          <DndProvider backend={HTML5Backend}>
+            <main className={styles.main}>
+              <BurgerIngredients handler={handleCardModalOpen} />
+              <BurgerConstructor
+                onDropHandler={onDropHandler}
+                handler={handleOrderModalOpen}
+              />
+            </main>
+          </DndProvider>
+          {isIngredientModalOpened && (
+            <Modal onClose={handleCardModalClose} customStyle={"_card"}>
+              <IngredientDetails />
+            </Modal>
           )}
           {isOrderModalOpened && (
             <Modal onClose={handleOrderModalClose} customStyle={"_order"}>

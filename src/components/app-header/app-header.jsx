@@ -2,7 +2,7 @@ import styles from "./app-header.module.css";
 import {
   Logo,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import Navbar from "../nav-bar/navbar";
+import Navbar from "../nav-bar/nav-bar";
 
 
 export default function AppHeader() {

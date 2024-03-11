@@ -20,10 +20,3 @@
   justify-content: flex-end;
   align-items: center;
 }
-
-.item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-left: 10px;
-}
