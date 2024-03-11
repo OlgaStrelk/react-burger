@@ -1,5 +1,5 @@
 import styles from "./home.module.css";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useModal } from "../hooks/useModal";
 import AppHeader from "../components/app-header/app-header";

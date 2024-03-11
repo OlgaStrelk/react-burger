@@ -21,7 +21,7 @@ function BurgerConstructor({ onModalOpen }) {
   const { ingredients, buns } = useSelector(
     (state) => state.burgerConstructor.addedIngredients
   );
-  
+
   const dispatch = useDispatch();
 
   const validateConstructor = () => {
@@ -69,9 +69,23 @@ function BurgerConstructor({ onModalOpen }) {
   };
 
   const renderInnerIngredients = () => {
-    return ingredients?.map((item, index) => (
-      <SortableIngredient key={item.id} index={index} data={item} />
-    ));
+    if (!ingredients.length) {
+      return (
+        <li className={styles.stub}>
+          <div className={`constructor-element 1 ml-8`}>
+            <span className="constructor-element__row">
+              <span className="constructor-element__text">
+                Выберите начинку
+              </span>
+            </span>
+          </div>
+        </li>
+      );
+    } else {
+      return ingredients?.map((item, index) => (
+        <SortableIngredient key={item.id} index={index} data={item} />
+      ));
+    }
   };
 
   const renderBun = (style, type, text) => {
@@ -89,8 +103,14 @@ function BurgerConstructor({ onModalOpen }) {
       );
     } else {
       return (
-        <div className={`ml-8 mr-2 ${style}`}>
-          <ConstructorElement type={type} text="Выберите булки" />
+        <div className={`ml-8 mr-2 ${style} ${styles.stub}`}>
+          <div
+            className={`constructor-element constructor-element_pos_${type}`}
+          >
+            <span className="constructor-element__row">
+              <span className="constructor-element__text">Выберите булки</span>
+            </span>
+          </div>
         </div>
       );
     }
