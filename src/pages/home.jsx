@@ -17,15 +17,13 @@ import {
 } from "../services/actions/ingredients";
 
 function HomePage() {
+  const modalStyle = { ingredient: "_card", order: "_order" };
   const dispatch = useDispatch();
 
   const ingredients = useSelector((state) => state.ingredients?.ingredients);
 
-  const [
-    isIngredientModalOpen,
-    onIngredientModalOpen,
-    onIngredientModalClose,
-  ] = useModal();
+  const [isIngredientModalOpen, onIngredientModalOpen, onIngredientModalClose] =
+    useModal();
   const [isOrderModalOpen, onOrderModalOpen, onOrderModalClose] = useModal();
 
   useEffect(() => {
@@ -46,7 +44,7 @@ function HomePage() {
           {isIngredientModalOpen && (
             <Modal
               onClose={onIngredientModalClose}
-              customStyle={"_card"}
+              customStyle={modalStyle.ingredient}
               action={RESET_MODAL_INGREDIENT}
             >
               <IngredientDetails />
@@ -55,7 +53,7 @@ function HomePage() {
           {isOrderModalOpen && (
             <Modal
               onClose={onOrderModalClose}
-              customStyle={"_order"}
+              customStyle={modalStyle.order}
               action={RESET_CONSTRUCTOR}
             >
               <OrderDetails />
