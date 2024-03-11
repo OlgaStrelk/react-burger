@@ -3,9 +3,9 @@ import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
 import { titlesArrayShape } from "../../utils/shapes";
 
-const Tabbar = ({ data, handler, currentTab }) => {
+const Tabbar = ({ data, onTabClick, currentTab }) => {
   const handleClick = (e) => {
-    handler(e);
+    onTabClick(e);
   };
 
   return (
@@ -27,7 +27,7 @@ const Tabbar = ({ data, handler, currentTab }) => {
 
 Tabbar.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape(titlesArrayShape)),
-  handler: PropTypes.func.isRequired,
+  onTabClick: PropTypes.func.isRequired,
   currentTab: PropTypes.string.isRequired,
 };
 

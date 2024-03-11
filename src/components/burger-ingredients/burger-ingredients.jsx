@@ -6,7 +6,7 @@ import { useRef, useState } from "react";
 
 import PropTypes from "prop-types";
 
-function BurgerIngredients({ handler }) {
+function BurgerIngredients({ onModalOpen }) {
   const titleBunRef = useRef(null);
   const titleMainRef = useRef(null);
   const titleSaucesRef = useRef(null);
@@ -42,17 +42,17 @@ function BurgerIngredients({ handler }) {
   };
 
   return (
-    <section className={`custom-scroll`}>
-      <h2 className="text text_type_main-large mt-10">Соберите бургер</h2>
+    <section>
+      <h2 className={styles.title}>Соберите бургер</h2>
       <Tabbar
         data={BLOCK_TITLES}
         currentTab={currentTab}
-        handler={onTabClick}
+        onTabClick={onTabClick}
       />
       <IngredientsBlock
         ref={containerRef}
         titles={BLOCK_TITLES}
-        handler={handler}
+        onModalOpen={onModalOpen}
         onScroll={handleScroll}
       />
     </section>
@@ -60,7 +60,7 @@ function BurgerIngredients({ handler }) {
 }
 
 BurgerIngredients.propTypes = {
-  handler: PropTypes.func.isRequired,
+  onModalOpen: PropTypes.func.isRequired,
 };
 
 export default BurgerIngredients;

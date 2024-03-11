@@ -9,8 +9,12 @@ import {
 import PropTypes from "prop-types";
 import styles from "./burger-constructor.module.css";
 import Total from "./total/total";
-import { makeOrder } from "../../services/actions/ingredients.js";
-function BurgerConstructor({ onModalOpen, onDropHandler }) {
+import {
+  makeOrder,
+  addIngredient,
+  INCREASE_INGREDIENT_QUANTITY,
+} from "../../services/actions/ingredients.js";
+function BurgerConstructor({ onModalOpen }) {
   const [isButtonActive, setButtonActive] = useState(false);
   const [isError, setError] = useState("");
 
@@ -30,6 +34,11 @@ function BurgerConstructor({ onModalOpen, onDropHandler }) {
   };
 
   useEffect(() => validateConstructor(), [ingredients, buns]);
+
+  const onDropHandler = (ingredient) => {
+    dispatch({ type: INCREASE_INGREDIENT_QUANTITY, payload: ingredient });
+    dispatch(addIngredient(ingredient));
+  };
 
   const [, dropRef] = useDrop({
     accept: "ingredients",
@@ -113,7 +122,6 @@ function BurgerConstructor({ onModalOpen, onDropHandler }) {
 
 BurgerConstructor.propTypes = {
   onModalOpen: PropTypes.func.isRequired,
-  onDropHandler: PropTypes.func.isRequired,
 };
 
 export default BurgerConstructor;
