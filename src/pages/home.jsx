@@ -1,6 +1,7 @@
 import styles from "./home.module.css";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useModal } from "../hooks/useModal";
 import AppHeader from "../components/app-header/app-header";
 import BurgerConstructor from "../components/burger-constructor/burger-constructor";
 import BurgerIngredients from "../components/burger-ingredients/burger-ingredients";
@@ -17,32 +18,19 @@ import {
 
 function HomePage() {
   const dispatch = useDispatch();
+
   const ingredients = useSelector((state) => state.ingredients?.ingredients);
 
-  const [isOrderModalOpened, setIsOrderModalOpened] = useState(false);
-  const [isIngredientModalOpened, setIsIngredientModalOpened] = useState(false);
+  const [
+    isIngredientsModalOpen,
+    onIngredientsModalOpen,
+    onIngredientsModalClose,
+  ] = useModal();
+  const [isOrderModalOpen, onOrderModalOpen, onOrderModalClose] = useModal();
 
   useEffect(() => {
     dispatch(fetchIngredients());
   }, []);
-
-  const handleCardModalOpen = () => {
-    setIsIngredientModalOpened(true);
-  };
-
-  const handleOrderModalOpen = () => {
-    setIsOrderModalOpened(true);
-  };
-
-  const handleCardModalClose = (modal, action) => {
-    dispatch({ type: RESET_MODAL_INGREDIENT });
-    setIsIngredientModalOpened(false);
-  };
-
-  const handleOrderModalClose = () => {
-    dispatch({ type: RESET_CONSTRUCTOR });
-    setIsOrderModalOpened(false);
-  };
 
   return (
     <>
@@ -51,17 +39,25 @@ function HomePage() {
           <AppHeader />
           <DndProvider backend={HTML5Backend}>
             <main className={styles.main}>
-              <BurgerIngredients onModalOpen={handleCardModalOpen} />
-              <BurgerConstructor onModalOpen={handleOrderModalOpen} />
+              <BurgerIngredients onModalOpen={onIngredientsModalOpen} />
+              <BurgerConstructor onModalOpen={onOrderModalOpen} />
             </main>
           </DndProvider>
-          {isIngredientModalOpened && (
-            <Modal onClose={handleCardModalClose} customStyle={"_card"}>
+          {isIngredientsModalOpen && (
+            <Modal
+              onClose={onIngredientsModalClose}
+              customStyle={"_card"}
+              action={RESET_MODAL_INGREDIENT}
+            >
               <IngredientDetails />
             </Modal>
           )}
-          {isOrderModalOpened && (
-            <Modal onClose={handleOrderModalClose} customStyle={"_order"}>
+          {isOrderModalOpen && (
+            <Modal
+              onClose={onOrderModalClose}
+              customStyle={"_order"}
+              action={RESET_CONSTRUCTOR}
+            >
               <OrderDetails />
             </Modal>
           )}

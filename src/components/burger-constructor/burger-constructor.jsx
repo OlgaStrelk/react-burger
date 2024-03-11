@@ -21,6 +21,7 @@ function BurgerConstructor({ onModalOpen }) {
   const { ingredients, buns } = useSelector(
     (state) => state.burgerConstructor.addedIngredients
   );
+  
   const dispatch = useDispatch();
 
   const validateConstructor = () => {
