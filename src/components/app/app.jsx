@@ -1,11 +1,49 @@
 import { Routes, Route } from "react-router-dom";
-import HomePage from "../../pages/home";
+import {
+  HomePage,
+  LoginPage,
+  RegisterPage,
+  ForgotPasswordPage,
+  ResetPasswordPage,
+  ProfilePage,
+  IngredientPage,
+  NotFoundPage,
+} from "../../pages";
+import { useLocation } from "react-router-dom";
 
 function App() {
+  const location = useLocation();
+  const background = location.state && location.state.background;
+
+  const handleModalClose = () => {
+    navigate(-1);
+  };
+
   return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-    </Routes>
+    <>
+      <Routes location={background || location}>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+        <Route path="/reset-password" element={<ResetPasswordPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/ingredients/:id" element={<IngredientPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+      {background && (
+        <Routes>
+          <Route
+            path="/ingredients/:ingredientId"
+            element={
+              <Modal onClose={handleModalClose}>
+                <IngredientsDetails />
+              </Modal>
+            }
+          />
+        </Routes>
+      )}
+    </>
   );
 }
 

@@ -21,7 +21,6 @@ function HomePage() {
   const dispatch = useDispatch();
 
   const ingredients = useSelector((state) => state.ingredients?.ingredients);
-
   const [isIngredientModalOpen, onIngredientModalOpen, onIngredientModalClose] =
     useModal();
   const [isOrderModalOpen, onOrderModalOpen, onOrderModalClose] = useModal();

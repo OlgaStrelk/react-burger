@@ -5,7 +5,7 @@ import {
 import styles from "./ingredient-card.module.css";
 import PropTypes from "prop-types";
 import { cardDataShape } from "../../../utils/shapes";
-import { memo, useEffect, useState } from "react";
+import { memo } from "react";
 import { useDrag } from "react-dnd";
 
 function IngredientCard({ cardData }) {
