@@ -39,5 +39,5 @@
 }
 
 .text {
-  composes: ml-2;
+  composes: ml-2 from global;
 }
