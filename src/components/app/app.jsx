@@ -1,4 +1,6 @@
 import { Routes, Route } from "react-router-dom";
+import AppHeader from "../app-header/app-header";
+
 import {
   HomePage,
   LoginPage,
@@ -21,6 +23,7 @@ function App() {
 
   return (
     <>
+      <AppHeader />
       <Routes location={background || location}>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />

@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import styles from "./nav-bar.module.css";
 import {
   BurgerIcon,
@@ -12,18 +13,21 @@ function Navbar() {
       text: "Конструктор",
       style: "text text_type_main-default ",
       icon: <BurgerIcon type="primary" />,
+      link: "/",
     },
     {
       id: 2,
       text: "Лента заказов",
       style: "text text_type_main-default text_color_inactive",
       icon: <ListIcon type="primary" />,
+      link: "/orders",
     },
     {
       id: 3,
       text: "Личный кабинет",
       style: "text text_type_main-default text_color_inactive",
       icon: <ProfileIcon type="primary" />,
+      link: "/profile",
     },
   ];
 
@@ -32,16 +36,20 @@ function Navbar() {
       <ul className={styles.list}>
         {NAVBAR_DATA.map((item) => (
           <li key={item.id} className={`${styles.listItem} mr-2`}>
-            <a className={`${styles.link} + ${item.style} pt-4 pb-4 pl-5 pr-5`}>
+            <NavLink
+              to={item.link}
+              className={({ isActive }) =>
+                isActive ? styles.link : styles.linkPending
+              }
+            >
               {item.icon}
               <span className={`${styles.text} ml-2`}>{item.text}</span>
-            </a>
+            </NavLink>
           </li>
         ))}
       </ul>
     </nav>
   );
 }
-
 
 export default Navbar;
