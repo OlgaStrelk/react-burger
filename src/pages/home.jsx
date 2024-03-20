@@ -2,7 +2,6 @@ import styles from "./home.module.css";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useModal } from "../hooks/useModal";
-import AppHeader from "../components/app-header/app-header";
 import BurgerConstructor from "../components/burger-constructor/burger-constructor";
 import BurgerIngredients from "../components/burger-ingredients/burger-ingredients";
 import Modal from "../components/modal/modal";
@@ -33,7 +32,6 @@ function HomePage() {
     <>
       {ingredients && (
         <>
-          <AppHeader />
           <DndProvider backend={HTML5Backend}>
             <main className={styles.main}>
               <BurgerIngredients onModalOpen={onIngredientModalOpen} />
