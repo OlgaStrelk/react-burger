@@ -26,11 +26,12 @@ function App() {
       <AppHeader />
       <Routes location={background || location}>
         <Route path="/" element={<HomePage />} />
+
+        <Route path="/profile" element={<ProfilePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/reset-password" element={<ResetPasswordPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
         <Route path="/ingredients/:id" element={<IngredientPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
