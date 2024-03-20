@@ -39,11 +39,11 @@ function Navbar() {
             <NavLink
               to={item.link}
               className={({ isActive }) =>
-                isActive ? styles.link : styles.linkPending
+                isActive ? styles.active : styles.inactive
               }
             >
               {item.icon}
-              <span className={`${styles.text} ml-2`}>{item.text}</span>
+              <span className="ml-2">{item.text}</span>
             </NavLink>
           </li>
         ))}

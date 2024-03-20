@@ -27,7 +27,12 @@
   display: flex;
   text-decoration: none;
 }
-.linkPending {
+
+.inactive {
   composes: link;
-  composes: text_color_inactive from global
+  color: var(--text-inactive-color);
+}
+.active {
+  composes: link;
+  color: var(--text-primary-color);
 }
