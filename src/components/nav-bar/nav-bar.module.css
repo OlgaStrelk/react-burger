@@ -10,6 +10,7 @@
 }
 
 .listItem {
+  composes: mr-2 from global;
   border: 1px solid transparent;
   border-radius: 40px;
   display: flex;
@@ -35,4 +36,8 @@
 .active {
   composes: link;
   color: var(--text-primary-color);
+}
+
+.text {
+  composes: ml-2;
 }

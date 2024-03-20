@@ -11,21 +11,18 @@ function Navbar() {
     {
       id: 1,
       text: "Конструктор",
-      style: "text text_type_main-default ",
       icon: <BurgerIcon type="primary" />,
       link: "/",
     },
     {
       id: 2,
       text: "Лента заказов",
-      style: "text text_type_main-default text_color_inactive",
       icon: <ListIcon type="primary" />,
       link: "/orders",
     },
     {
       id: 3,
       text: "Личный кабинет",
-      style: "text text_type_main-default text_color_inactive",
       icon: <ProfileIcon type="primary" />,
       link: "/profile",
     },
@@ -35,7 +32,7 @@ function Navbar() {
     <nav className={styles.nav}>
       <ul className={styles.list}>
         {NAVBAR_DATA.map((item) => (
-          <li key={item.id} className={`${styles.listItem} mr-2`}>
+          <li key={item.id} className={styles.listItem}>
             <NavLink
               to={item.link}
               className={({ isActive }) =>
@@ -43,7 +40,7 @@ function Navbar() {
               }
             >
               {item.icon}
-              <span className="ml-2">{item.text}</span>
+              <span className={styles.text}>{item.text}</span>
             </NavLink>
           </li>
         ))}
