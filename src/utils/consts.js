@@ -22,5 +22,6 @@ export const PATHS = {
   ingredient: "/ingredients/:id",
   ordersHistory: "/profile/orders",
   order: "/profile/orders/:number",
+  ordersList: 'orders',
   notFound: "/*",
 };

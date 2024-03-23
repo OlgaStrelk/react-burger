@@ -5,26 +5,28 @@ import {
   ListIcon,
   ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import { PATHS } from "../../utils/consts";
 
 function Navbar() {
+  const { ordersList, home, profile } = PATHS;
   const NAVBAR_DATA = [
     {
       id: 1,
       text: "Конструктор",
       icon: <BurgerIcon type="primary" />,
-      link: "/",
+      link: home,
     },
     {
       id: 2,
       text: "Лента заказов",
       icon: <ListIcon type="primary" />,
-      link: "/orders",
+      link: ordersList,
     },
     {
       id: 3,
       text: "Личный кабинет",
       icon: <ProfileIcon type="primary" />,
-      link: "/profile",
+      link: profile,
     },
   ];
 

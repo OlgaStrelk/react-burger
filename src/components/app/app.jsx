@@ -12,6 +12,7 @@ import {
   NotFoundPage,
   OrderPage,
   OrdersHistoryPage,
+  OrdersListPage,
 } from "../../pages";
 import { modalStyle } from "../../utils/consts";
 import { useLocation } from "react-router-dom";
@@ -41,6 +42,7 @@ function App() {
     ordersHistory,
     order,
     notFound,
+    ordersList,
   } = PATHS;
   return (
     <>
@@ -78,6 +80,7 @@ function App() {
         <Route path={resetPassword} element={<ResetPasswordPage />} />
         <Route path={ingredient} element={<IngredientPage />} />
         <Route path={notFound} element={<NotFoundPage />} />
+        <Route path={ordersList} element={<OrdersListPage />} />
       </Routes>
       {state?.backgroundLocation && (
         <Routes>
