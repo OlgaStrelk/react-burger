@@ -9,9 +9,9 @@ function IngredientPage() {
     dispatch(fetchIngredients());
   }, []);
   return (
-    <div>
+    <>
       <IngredientDetails />
-    </div>
+    </>
   );
 }
 

@@ -10,7 +10,6 @@ import { fetchIngredients } from "../../services/actions/ingredients";
 function IngredientDetails(props) {
   const [ingredientData, setIngredientData] = useState(null);
   const ingredients = useSelector((store) => store.ingredients?.ingredients);
-  console.log(ingredients);
 
   const { id } = useParams();
 
