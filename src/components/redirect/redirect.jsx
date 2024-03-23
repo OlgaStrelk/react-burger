@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 function Redirect({ data }) {
-  const renderNavigation = () => {
+  const renderNavigationMarkup = () => {
     return data.map(({ id, caption, link: { path, title } }) => (
       <div className="" key={id}>
         <p className="">{caption}</p>
@@ -10,10 +10,6 @@ function Redirect({ data }) {
       </div>
     ));
   };
-  return (
-    <>
-      {renderNavigation()}
-    </>
-  );
+  return <>{renderNavigationMarkup()}</>;
 }
 export default Redirect;

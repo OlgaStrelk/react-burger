@@ -88,7 +88,7 @@ function BurgerConstructor({ onModalOpen }) {
     }
   };
 
-  const renderBun = (style, type, text) => {
+  const renderBunMarkup = (style, type, text) => {
     if (buns) {
       return (
         <div className={`ml-8 mr-2 ${style}`}>
@@ -119,11 +119,11 @@ function BurgerConstructor({ onModalOpen }) {
   return (
     <section className={`${styles.section} mt-25 ml-10`}>
       <div className="ml-8" ref={dropRef}>
-        {renderBun(" mb-2 pr-1", "top", "(верх)")}
+        {renderBunMarkup(" mb-2 pr-1", "top", "(верх)")}
         <ul className={`${styles.container}  ${styles.column} custom-scroll`}>
           {renderInnerIngredientsMarkup()}
         </ul>
-        {renderBun("mt-2", "bottom", "(низ)")}
+        {renderBunMarkup("mt-2", "bottom", "(низ)")}
       </div>
       <div className={`mt-10 ${styles.total}`}>
         <Total />

@@ -37,7 +37,7 @@ function IngredientDetails(props) {
     { id: 3, title: "Жиры, г", data: ingredientData?.fat },
     { id: 4, title: "Углеводы, г", data: ingredientData?.carbohydrates },
   ];
-  const renderListItems = () => {
+  const renderListItemsMarkup = () => {
     return LIST_DATA.map(({ id, title, data }) => (
       <li key={id} className={styles.item}>
         <p>{title}</p>
@@ -55,7 +55,7 @@ function IngredientDetails(props) {
             <img src={ingredientData?.image_large} alt={ingredientData?.name} />
           </div>
           <h5 className={styles.subtitle}>{ingredientData?.name}</h5>
-          <ul className={styles.list}>{renderListItems()}</ul>
+          <ul className={styles.list}>{renderListItemsMarkup()}</ul>
         </>
       ) : (
         <div className={`${styles.container} mt-20`}>
