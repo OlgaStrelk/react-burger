@@ -1,16 +1,8 @@
-import "./AuthForm.css";
-import { joiResolver } from "@hookform/resolvers/joi";
+import styles from "./auth-form.module.css";
 
-import { FormProvider, useForm } from "react-hook-form";
-function AuthForm({ children, onSubmit, validationScema }) {
-  const methods = useForm({
-    resolver: joiResolver(validationScema),
-    mode: "onChange",
-  });
+function AuthForm({ children, onSubmit }) {
   return (
-    <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(onSubmit)}>{children}</form>
-    </FormProvider>
+      <form onSubmit={onSubmit}>{children}</form>
   );
 }
 
