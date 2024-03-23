@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import IngredientDetails from "../components/ingredient-details/ingredient-details";
 import { useEffect } from "react";
 import { fetchIngredients } from "../services/actions/ingredients";
+import styles from "./ingredient.module.css"
 
 function IngredientPage() {
   const dispatch = useDispatch();
@@ -9,9 +10,9 @@ function IngredientPage() {
     dispatch(fetchIngredients());
   }, []);
   return (
-    <>
-      <IngredientDetails />
-    </>
+    <div className={styles.container}>
+      <IngredientDetails style={styles.centered}/>
+    </div>
   );
 }
 
