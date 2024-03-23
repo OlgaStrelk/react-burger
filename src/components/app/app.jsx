@@ -26,7 +26,6 @@ function App() {
     navigate(-1);
   };
   const [isOpen, onOpen, onIngredientModalClose] = useModal();
-console.log(state)
   return (
     <>
       <AppHeader />

@@ -14,7 +14,6 @@ import {
 } from "../services/actions/ingredients";
 
 function HomePage() {
-
   const dispatch = useDispatch();
 
   const ingredients = useSelector((state) => state.ingredients?.ingredients);
@@ -34,16 +33,6 @@ function HomePage() {
               <BurgerConstructor onModalOpen={onOrderModalOpen} />
             </main>
           </DndProvider>
-          {/* {isIngredientModalOpen && (
-            <Modal
-              onClose={onIngredientModalClose}
-              customStyle={modalStyle.ingredient}
-              action={RESET_MODAL_INGREDIENT}
-              handler={handleNavigation}
-            >
-              <IngredientDetails />
-            </Modal>
-          )} */}
           {isOrderModalOpen && (
             <Modal
               onClose={onOrderModalClose}

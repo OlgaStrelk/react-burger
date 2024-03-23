@@ -5,13 +5,14 @@ import PropTypes from "prop-types";
 import { cardDataShape } from "../../utils/shapes";
 import { useNavigate, useParams } from "react-router-dom";
 import { NotFoundPage } from "../../pages";
+import { fetchIngredients } from "../../services/actions/ingredients";
 
 function IngredientDetails(props) {
   const [ingredientData, setIngredientData] = useState(null);
-  // const cardId = useSelector((store) => store.modal?.currentIngredient);
   const ingredients = useSelector((store) => store.ingredients?.ingredients);
+  console.log(ingredients);
+
   const { id } = useParams();
-  const navigate = useNavigate();
 
   const getData = (id) => {
     const currentIngredient = ingredients.find((item) => {
@@ -21,6 +22,10 @@ function IngredientDetails(props) {
       setIngredientData(currentIngredient);
     } else return null;
   };
+
+  useEffect(() => {
+    fetchIngredients();
+  }, []);
   useEffect(() => {
     if (ingredients) {
       getData(id);
@@ -64,8 +69,6 @@ function IngredientDetails(props) {
   );
 }
 
-IngredientDetails.propTypes = {
-  cardData: PropTypes.shape(cardDataShape),
-};
+IngredientDetails.propTypes = {};
 
 export default IngredientDetails;
