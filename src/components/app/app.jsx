@@ -10,6 +10,8 @@ import {
   ProfilePage,
   IngredientPage,
   NotFoundPage,
+  OrderPage,
+  OrdersPage,
 } from "../../pages";
 import { modalStyle } from "../../utils/consts";
 import { useLocation } from "react-router-dom";
@@ -49,7 +51,7 @@ function App() {
             </ProtectedRoute>
           }
         />
-                <Route
+        <Route
           path="/profile/orders/:number"
           element={
             <ProtectedRoute>
