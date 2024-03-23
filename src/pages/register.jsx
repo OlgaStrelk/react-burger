@@ -62,7 +62,7 @@ function Register(props) {
   return (
     <>
       <main className={styles.main}>
-        <h1 className={className}>{title}</h1>
+        <h1 className={styles.title}>{title}</h1>
         <AuthForm onSubmit={onSubmit} btn={text}>
           {inputsMarkup}
         </AuthForm>

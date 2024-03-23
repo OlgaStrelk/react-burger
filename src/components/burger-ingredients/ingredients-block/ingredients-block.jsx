@@ -10,6 +10,11 @@ const IngredientsBlock = forwardRef(({ titles, onScroll }, ref) => {
   const dispatch = useDispatch();
   const ingredients = useSelector((state) => state.ingredients.ingredients);
 
+  const handleCardClick = (e) => {
+    const id = e.currentTarget.id;
+    dispatch({ type: GET_MODAL_INGREDIENT, payload: id });
+  };
+
   const filterIngredients = (blockTitle) =>
     useMemo(() => {
       const filteredArray = ingredients.filter(
@@ -17,12 +22,7 @@ const IngredientsBlock = forwardRef(({ titles, onScroll }, ref) => {
       );
       return filteredArray;
     }, [ingredients]);
-
-  const handleCardClick = (e) => {
-    const id = e.currentTarget.id;
-    dispatch({ type: GET_MODAL_INGREDIENT, payload: id });
-  };
-
+    
   const renderFilteredIngredientsMarkup = (blockTitle) => {
     const newArray = filterIngredients(blockTitle);
     return newArray.map((item) => (
