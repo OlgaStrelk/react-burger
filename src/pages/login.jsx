@@ -6,7 +6,7 @@ import { useInput } from "../hooks/useInput";
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import Redirect from "../components/redirect/redirect";
 function LoginPage() {
-  const { register, resetPassword } = PATHS;
+  const { register, forgotPassword } = PATHS;
   const [value, handleInput] = useInput("hjsf");
 
   const inputRef = useRef(null);
@@ -25,7 +25,7 @@ function LoginPage() {
       {
         id: 3,
         caption: "Забыли пароль?",
-        link: { path: resetPassword, title: "Восстановить пароль" },
+        link: { path: forgotPassword, title: "Восстановить пароль" },
       },
     ],
   };

@@ -81,6 +81,7 @@ function App() {
         <Route path={ingredient} element={<IngredientPage />} />
         <Route path={notFound} element={<NotFoundPage />} />
         <Route path={ordersList} element={<OrdersListPage />} />
+        <Route path={forgotPassword} element={<ForgotPasswordPage />} />
       </Routes>
       {state?.backgroundLocation && (
         <Routes>
