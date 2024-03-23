@@ -4,10 +4,8 @@ import { PATHS } from "../utils/consts";
 import { useRef } from "react";
 import { useInput } from "../hooks/useInput";
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
-import SubmitButton from "../components/submit-button/submit-button";
-
+import Redirect from "../components/redirect/redirect";
 function Register(props) {
-  let isLoggedIn;
   const [value, handleInput] = useInput("hjsf");
 
   const inputRef = useRef(null);
@@ -17,12 +15,14 @@ function Register(props) {
   const FORM_DATA = {
     title: "Регистрация",
     className: styles.title,
-  };
-
-  const SUBMIT_BTN_DATA = {
-    btn: { title: "Зарегистрироваться", type: "submit" },
-    caption: "Уже зарегистрированы?",
-    link: { path: PATHS.login, title: "Войти" },
+    btn: { text: "Зарегистрироваться" },
+    redirect: [
+      {
+        id: 1,
+        caption: "Уже зарегистрированы?",
+        link: { path: PATHS.login, title: "Войти" },
+      },
+    ],
   };
 
   const INPUTS_DATA = [
@@ -46,33 +46,27 @@ function Register(props) {
     },
   ];
 
-  const inputsMarkup = INPUTS_DATA.map(
-    ({ id, placeholder, name, type }) => (
-      <Input
-        ref={inputRef}
-        key={id}
-        name={name}
-        placeholder={placeholder}
-        type={type}
-        value=""
-        onChange={handleInput}
-      />
-    )
-  );
+  const inputsMarkup = INPUTS_DATA.map(({ id, placeholder, name, type }) => (
+    <Input
+      ref={inputRef}
+      key={id}
+      name={name}
+      placeholder={placeholder}
+      type={type}
+      value=""
+      onChange={handleInput}
+    />
+  ));
 
   return (
     <>
       <main className={styles.main}>
         <h1 className={FORM_DATA.className}>{FORM_DATA.title}</h1>
-        <AuthForm
-          onSubmit={onSubmit}
-          // validationScema={registerValidationSchema}
-        >
+        <AuthForm onSubmit={onSubmit} btn={FORM_DATA.btn.text}>
           {inputsMarkup}
-          <SubmitButton data={SUBMIT_BTN_DATA} />
         </AuthForm>
+        <Redirect data={FORM_DATA.redirect} />
       </main>
-
     </>
   );
 }

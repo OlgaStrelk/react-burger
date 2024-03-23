@@ -30,23 +30,25 @@ function Navbar() {
     },
   ];
 
+  const renderNavBarMarkup = () => {
+    return NAVBAR_DATA.map((item) => (
+      <li key={item.id} className={styles.listItem}>
+        <NavLink
+          to={item.link}
+          className={({ isActive }) =>
+            isActive ? styles.active : styles.inactive
+          }
+        >
+          {item.icon}
+          <span className={styles.text}>{item.text}</span>
+        </NavLink>
+      </li>
+    ));
+  };
+
   return (
     <nav className={styles.nav}>
-      <ul className={styles.list}>
-        {NAVBAR_DATA.map((item) => (
-          <li key={item.id} className={styles.listItem}>
-            <NavLink
-              to={item.link}
-              className={({ isActive }) =>
-                isActive ? styles.active : styles.inactive
-              }
-            >
-              {item.icon}
-              <span className={styles.text}>{item.text}</span>
-            </NavLink>
-          </li>
-        ))}
-      </ul>
+      <ul className={styles.list}>{renderNavBarMarkup()}</ul>
     </nav>
   );
 }

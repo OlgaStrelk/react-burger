@@ -68,11 +68,11 @@ function BurgerConstructor({ onModalOpen }) {
     }
   };
 
-  const renderInnerIngredients = () => {
+  const renderInnerIngredientsMarkup = () => {
     if (!ingredients.length) {
       return (
         <li className={styles.stub}>
-          <div className={`constructor-element 1 ml-8`}>
+          <div className="constructor-element 1 ml-8">
             <span className="constructor-element__row">
               <span className="constructor-element__text">
                 Выберите начинку
@@ -121,7 +121,7 @@ function BurgerConstructor({ onModalOpen }) {
       <div className="ml-8" ref={dropRef}>
         {renderBun(" mb-2 pr-1", "top", "(верх)")}
         <ul className={`${styles.container}  ${styles.column} custom-scroll`}>
-          {renderInnerIngredients()}
+          {renderInnerIngredientsMarkup()}
         </ul>
         {renderBun("mt-2", "bottom", "(низ)")}
       </div>

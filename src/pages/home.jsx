@@ -12,6 +12,7 @@ import {
   RESET_CONSTRUCTOR,
   fetchIngredients,
 } from "../services/actions/ingredients";
+import { modalStyle } from "../utils/consts";
 
 function HomePage() {
   const dispatch = useDispatch();

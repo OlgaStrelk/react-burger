@@ -38,14 +38,12 @@ function IngredientDetails(props) {
     { id: 4, title: "Углеводы, г", data: ingredientData?.carbohydrates },
   ];
   const renderListItems = () => {
-    return LIST_DATA.map(({ id, title, data }) => {
-      return (
-        <li key={id} className={styles.item}>
-          <p>{title}</p>
-          <p>{data}</p>
-        </li>
-      );
-    });
+    return LIST_DATA.map(({ id, title, data }) => (
+      <li key={id} className={styles.item}>
+        <p>{title}</p>
+        <p>{data}</p>
+      </li>
+    ));
   };
 
   return (

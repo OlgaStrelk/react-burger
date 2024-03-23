@@ -8,21 +8,20 @@ const Tabbar = ({ data, onTabClick, currentTab }) => {
     onTabClick(e);
   };
 
-  return (
-    <div className={`${styles.container} mt-5`}>
-      {data.map((item) => (
-        <Tab
-          key={item.id}
-          value={item.value}
-          active={currentTab === item.value}
-          onClick={handleClick}
-          id={item.value}
-        >
-          {item.title}
-        </Tab>
-      ))}
-    </div>
-  );
+  const renderTabMarkup = () => {
+    return data.map((item) => (
+      <Tab
+        key={item.id}
+        value={item.value}
+        active={currentTab === item.value}
+        onClick={handleClick}
+        id={item.value}
+      >
+        {item.title}
+      </Tab>
+    ));
+  };
+  return <div className={`${styles.container} mt-5`}>{renderTabMarkup()}</div>;
 };
 
 Tabbar.propTypes = {
