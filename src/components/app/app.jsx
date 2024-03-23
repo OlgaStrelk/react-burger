@@ -19,6 +19,7 @@ import { useModal } from "../../hooks/useModal";
 import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import ProtectedRoute from "../protected_route/protected-route";
+import { PATHS } from "../../utils/consts";
 
 function App() {
   let location = useLocation();
@@ -29,14 +30,26 @@ function App() {
     navigate(-1);
   };
   const [isOpen, onOpen, onIngredientModalClose] = useModal();
+  const {
+    home,
+    profile,
+    login,
+    register,
+    forgotPassword,
+    resetPassword,
+    ingredient,
+    ordersHistory,
+    order,
+    notFound,
+  } = PATHS;
   return (
     <>
       <AppHeader />
       <Routes location={state?.backgroundLocation || location}>
-        <Route path="/" element={<HomePage />} />
+        <Route path={home} element={<HomePage />} />
 
         <Route
-          path="/profile"
+          path={profile}
           element={
             <ProtectedRoute>
               <ProfilePage />
@@ -44,7 +57,7 @@ function App() {
           }
         />
         <Route
-          path="/profile/orders"
+          path={ordersHistory}
           element={
             <ProtectedRoute>
               <OrdersHistoryPage />
@@ -52,24 +65,24 @@ function App() {
           }
         />
         <Route
-          path="/profile/orders/:number"
+          path={order}
           element={
             <ProtectedRoute>
               <OrderPage />
             </ProtectedRoute>
           }
         />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-        <Route path="/reset-password" element={<ResetPasswordPage />} />
-        <Route path="/ingredients/:id" element={<IngredientPage />} />
-        <Route path="*" element={<NotFoundPage />} />
+        <Route path={login} element={<LoginPage />} />
+        <Route path={register} element={<RegisterPage />} />
+        <Route path={forgotPassword} element={<ForgotPasswordPage />} />
+        <Route path={resetPassword} element={<ResetPasswordPage />} />
+        <Route path={ingredient} element={<IngredientPage />} />
+        <Route path={notFound} element={<NotFoundPage />} />
       </Routes>
       {state?.backgroundLocation && (
         <Routes>
           <Route
-            path="/ingredients/:id"
+            path={ingredient}
             element={
               <Modal
                 onClose={onIngredientModalClose}

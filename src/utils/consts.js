@@ -11,3 +11,16 @@ export const request = (url, options) => {
   return fetch(`${API_URL}${url}`, options).then(checkResponse);
 };
 export const modalStyle = { ingredient: "_card", order: "_order" };
+
+export const PATHS = {
+  home: "/",
+  profile: "/profile",
+  login: "/login",
+  register: "/register",
+  forgotPassword: "/forgot-password",
+  resetPassword: "/reset-password",
+  ingredient: "/ingredients/:id",
+  ordersHistory: "/profile/orders",
+  order: "/profile/orders/:number",
+  notFound: "/*",
+};
