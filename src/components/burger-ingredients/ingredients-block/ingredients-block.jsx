@@ -7,10 +7,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const IngredientsBlock = forwardRef(
-  ({ titles, onModalOpen, onScroll }, ref) => {
+  ({ titles, onScroll }, ref) => {
     const dispatch = useDispatch();
     const ingredients = useSelector((state) => state.ingredients.ingredients);
-    const navigate = useNavigate();
 
     const filterIngredients = (blockTitle) =>
       useMemo(() => {
@@ -31,9 +30,7 @@ const IngredientsBlock = forwardRef(
 
     const handleCardClick = (e) => {
       const id = e.currentTarget.id;
-      dispatch({ type: GET_MODAL_INGREDIENT, payload: e.currentTarget.id });
-      onModalOpen();
-      navigate(`ingredients/${id}`);
+      dispatch({ type: GET_MODAL_INGREDIENT, payload: id });
     };
 
     return (

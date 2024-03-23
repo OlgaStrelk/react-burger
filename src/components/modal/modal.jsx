@@ -5,16 +5,15 @@ import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import ReactDOM from "react-dom";
 import { createRef } from "react";
 import PropTypes from "prop-types";
-import { RESET_CONSTRUCTOR } from "../../services/actions/ingredients";
-import { useDispatch } from "react-redux";
 
 
 const modalRoot = document.getElementById("react-modals");
-function Modal({ children, onClose, action }) {
+function Modal({ children, onClose, action, handler }) {
   const overlayRef = createRef();
 
   const handleClose = () => {
     onClose(action);
+    handler()
   };
   const handleEscClose = (e) => {
     if (e.key === "Escape") {

@@ -4,7 +4,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./ingredient-card.module.css";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { cardDataShape } from "../../../utils/shapes";
 import { memo } from "react";
 import { useDrag } from "react-dnd";
@@ -14,9 +14,13 @@ function IngredientCard({ cardData }) {
     type: "ingredients",
     item: cardData,
   });
-
+  const location = useLocation();
   return (
-    <Link className={styles.link} ref={dragRef} >
+    <Link
+      className={styles.link}
+      to={`/ingredients/${cardData._id}`}
+      state={{ backgroundLocation: location }}
+    >
       <div ref={dragRef} className={`${styles.container} ml-4 mb-8`}>
         <Counter count={cardData.quantity} size="default" extraClass="m-1" />
         <img

@@ -6,7 +6,7 @@ import { useRef, useState } from "react";
 
 import PropTypes from "prop-types";
 
-function BurgerIngredients({ onModalOpen }) {
+function BurgerIngredients(props) {
   const titleBunRef = useRef(null);
   const titleMainRef = useRef(null);
   const titleSaucesRef = useRef(null);
@@ -52,7 +52,6 @@ function BurgerIngredients({ onModalOpen }) {
       <IngredientsBlock
         ref={containerRef}
         titles={BLOCK_TITLES}
-        onModalOpen={onModalOpen}
         onScroll={handleScroll}
       />
     </section>
@@ -60,7 +59,6 @@ function BurgerIngredients({ onModalOpen }) {
 }
 
 BurgerIngredients.propTypes = {
-  onModalOpen: PropTypes.func.isRequired,
 };
 
 export default BurgerIngredients;

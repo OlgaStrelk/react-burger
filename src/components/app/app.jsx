@@ -1,6 +1,6 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import AppHeader from "../app-header/app-header";
-
+import { RESET_MODAL_INGREDIENT } from "../../services/actions/ingredients";
 import {
   HomePage,
   LoginPage,
@@ -11,20 +11,26 @@ import {
   IngredientPage,
   NotFoundPage,
 } from "../../pages";
+import { modalStyle } from "../../utils/consts";
 import { useLocation } from "react-router-dom";
+import { useModal } from "../../hooks/useModal";
+import Modal from "../modal/modal";
+import IngredientDetails from "../ingredient-details/ingredient-details";
 
 function App() {
-  const location = useLocation();
-  const background = location.state && location.state.background;
+  let location = useLocation();
+  let state = location.state;
+  const navigate = useNavigate();
 
-  const handleModalClose = () => {
+  const handleNavigation = () => {
     navigate(-1);
   };
-
+  const [isOpen, onOpen, onIngredientModalClose] = useModal();
+console.log(state)
   return (
     <>
       <AppHeader />
-      <Routes location={background || location}>
+      <Routes location={state?.backgroundLocation || location}>
         <Route path="/" element={<HomePage />} />
 
         <Route path="/profile" element={<ProfilePage />} />
@@ -35,13 +41,18 @@ function App() {
         <Route path="/ingredients/:id" element={<IngredientPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-      {background && (
+      {state?.backgroundLocation && (
         <Routes>
           <Route
-            path="/ingredients/:ingredientId"
+            path="/ingredients/:id"
             element={
-              <Modal onClose={handleModalClose}>
-                <IngredientsDetails />
+              <Modal
+                onClose={onIngredientModalClose}
+                customStyle={modalStyle.ingredient}
+                action={RESET_MODAL_INGREDIENT}
+                handler={handleNavigation}
+              >
+                <IngredientDetails />
               </Modal>
             }
           />

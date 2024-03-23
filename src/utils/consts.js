@@ -10,3 +10,4 @@ export const checkResponse = (res) =>
 export const request = (url, options) => {
   return fetch(`${API_URL}${url}`, options).then(checkResponse);
 };
+export const modalStyle = { ingredient: "_card", order: "_order" };

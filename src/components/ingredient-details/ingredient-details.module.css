@@ -18,8 +18,22 @@
 .img_container {
   min-height: 240px;
 }
+
 .title {
   composes: ml-10 text text_type_main-large from global;
   margin-block: 0;
   text-align: start;
+}
+
+.subtitle {
+  composes: text text_type_main-medium mt-4 mb-8 from global;
+}
+
+.subtitle_centered {
+  composes: title;
+  text-align: center;
+}
+
+.container {
+  composes: mt-20 from global;
 }
