@@ -16,6 +16,7 @@ import { useLocation } from "react-router-dom";
 import { useModal } from "../../hooks/useModal";
 import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
+import ProtectedRoute from "../protected_route/protected-route";
 
 function App() {
   let location = useLocation();
@@ -32,7 +33,30 @@ function App() {
       <Routes location={state?.backgroundLocation || location}>
         <Route path="/" element={<HomePage />} />
 
-        <Route path="/profile" element={<ProfilePage />} />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <ProfilePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/profile/orders"
+          element={
+            <ProtectedRoute>
+              <OrdersPage />
+            </ProtectedRoute>
+          }
+        />
+                <Route
+          path="/profile/orders/:number"
+          element={
+            <ProtectedRoute>
+              <OrderPage />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />

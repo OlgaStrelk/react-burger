@@ -1,5 +1,5 @@
-function ProfilePage() {
+function OrderPage() {
   return <>Профиль пользователя</>;
 }
 
-export default ProfilePage;
+export default OrderPage;
