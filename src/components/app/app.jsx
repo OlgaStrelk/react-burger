@@ -11,7 +11,7 @@ import {
   IngredientPage,
   NotFoundPage,
   OrderPage,
-  OrdersPage,
+  OrdersHistoryPage,
 } from "../../pages";
 import { modalStyle } from "../../utils/consts";
 import { useLocation } from "react-router-dom";
@@ -47,7 +47,7 @@ function App() {
           path="/profile/orders"
           element={
             <ProtectedRoute>
-              <OrdersPage />
+              <OrdersHistoryPage />
             </ProtectedRoute>
           }
         />

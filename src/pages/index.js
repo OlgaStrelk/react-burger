@@ -7,7 +7,7 @@ import ResetPasswordPage from "./reset-password";
 import ForgotPasswordPage from "./forgot-password";
 import NotFoundPage from "./not-found";
 import OrderPage from "./order";
-import OrdersPage from "./orders";
+import OrdersHistoryPage from "./orders-history";
 
 export {
   HomePage,
@@ -19,5 +19,5 @@ export {
   ForgotPasswordPage,
   NotFoundPage,
   OrderPage,
-  OrdersPage,
+  OrdersHistoryPage,
 };
