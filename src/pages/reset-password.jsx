@@ -27,8 +27,14 @@ function ResetPasswordPage() {
   const INPUTS_DATA = [
     {
       id: 14,
-      placeholder: "Укажите e-mail",
-      name: "e-mail",
+      placeholder: "Введите новый пароль",
+      name: "password",
+      type: "text",
+    },
+    {
+      id: 15,
+      placeholder: "Введите код из письма",
+      name: "code",
       type: "text",
     }
   ];
@@ -45,14 +51,16 @@ function ResetPasswordPage() {
     />
   ));
 
+  const { title, btn: {text}, redirect } = FORM_DATA;
+
   return (
     <>
       <main className={styles.main}>
-        <h1 className={FORM_DATA.className}>{FORM_DATA.title}</h1>
-        <AuthForm onSubmit={onSubmit} btn={FORM_DATA.btn.text}>
+        <h1 className={styles.title}>{title}</h1>
+        <AuthForm onSubmit={onSubmit} btn={text}>
           {inputsMarkup}
         </AuthForm>
-        <Redirect data={FORM_DATA.redirect} />
+        <Redirect data={redirect} />
       </main>
     </>
   );

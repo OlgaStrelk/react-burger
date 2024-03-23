@@ -56,15 +56,15 @@ function LoginPage() {
       onChange={handleInput}
     />
   ));
-
+  const { title, btn: {text}, redirect } = FORM_DATA;
   return (
     <>
       <main className={styles.main}>
-        <h1 className={styles.title}>{FORM_DATA.title}</h1>
-        <AuthForm onSubmit={onSubmit} btn={FORM_DATA.btn.text}>
+        <h1 className={styles.title}>{title}</h1>
+        <AuthForm onSubmit={onSubmit} btn={text}>
           {inputsMarkup}
         </AuthForm>
-        <Redirect data={FORM_DATA.redirect} />
+        <Redirect data={redirect} />
       </main>
     </>
   );
