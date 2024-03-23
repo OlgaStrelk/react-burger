@@ -1,5 +1,5 @@
 function ResetPasswordPage() {
-    return <></>;
+    return <>Сбросить пароль</>;
   }
   
   export default ResetPasswordPage;

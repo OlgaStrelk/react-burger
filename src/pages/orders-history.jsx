@@ -1,5 +1,5 @@
 function OrdersHistoryPage() {
-  return <>Профиль пользователя</>;
+  return <>История заказов</>;
 }
 
 export default OrdersHistoryPage;

@@ -1,5 +1,5 @@
 function OrderPage() {
-  return <>Профиль пользователя</>;
+  return <>Заказ</>;
 }
 
 export default OrderPage;
