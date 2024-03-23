@@ -6,6 +6,7 @@ import {
   ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { PATHS } from "../../utils/consts";
+import { useMemo } from "react";
 
 function Navbar() {
   const { ordersList, home, profile } = PATHS;

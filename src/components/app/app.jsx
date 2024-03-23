@@ -25,11 +25,7 @@ import { PATHS } from "../../utils/consts";
 function App() {
   let location = useLocation();
   let state = location.state;
-  const navigate = useNavigate();
 
-  const handleNavigation = () => {
-    navigate(-1);
-  };
   const [isOpen, onOpen, onIngredientModalClose] = useModal();
   const {
     home,
@@ -92,7 +88,6 @@ function App() {
                 onClose={onIngredientModalClose}
                 customStyle={modalStyle.ingredient}
                 action={RESET_MODAL_INGREDIENT}
-                handler={handleNavigation}
               >
                 <IngredientDetails />
               </Modal>

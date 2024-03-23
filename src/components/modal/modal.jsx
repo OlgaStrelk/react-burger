@@ -8,12 +8,11 @@ import PropTypes from "prop-types";
 
 
 const modalRoot = document.getElementById("react-modals");
-function Modal({ children, onClose, action, handler }) {
+function Modal({ children, onClose, action }) {
   const overlayRef = createRef();
 
   const handleClose = () => {
     onClose(action);
-    handler()
   };
   const handleEscClose = (e) => {
     if (e.key === "Escape") {
