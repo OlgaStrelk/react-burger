@@ -1,4 +1,4 @@
-import styles from "./register.module.css";
+import formStyles from "./base-form.module.css";
 import AuthForm from "../components/auth-form/auth-form";
 import { PATHS } from "../utils/consts";
 import { useRef } from "react";
@@ -14,7 +14,6 @@ function Register(props) {
 
   const FORM_DATA = {
     title: "Регистрация",
-    className: styles.title,
     btn: { text: "Зарегистрироваться" },
     redirect: [
       {
@@ -55,14 +54,15 @@ function Register(props) {
       type={type}
       value=""
       onChange={handleInput}
+      extraClass={formStyles.input}
     />
   ));
   const { title, btn: {text}, redirect } = FORM_DATA;
 
   return (
     <>
-      <main className={styles.main}>
-        <h1 className={styles.title}>{title}</h1>
+      <main className={formStyles.main}>
+        <h1 className={formStyles.title}>{title}</h1>
         <AuthForm onSubmit={onSubmit} btn={text}>
           {inputsMarkup}
         </AuthForm>
