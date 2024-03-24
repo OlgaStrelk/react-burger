@@ -22,7 +22,7 @@ const IngredientsBlock = forwardRef(({ titles, onScroll }, ref) => {
       );
       return filteredArray;
     }, [ingredients]);
-    
+
   const renderFilteredIngredientsMarkup = (blockTitle) => {
     const newArray = filterIngredients(blockTitle);
     return newArray.map((item) => (

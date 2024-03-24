@@ -19,12 +19,13 @@ export const GET_INGREDIENTS_FAILURE = "GET_INGREDIENTS_FAILURE";
 
 export const INCREASE_INGREDIENT_QUANTITY = "INCREASE_INGREDIENT_QUANTITY";
 export const DECREASE_INGREDIENT_QUANTITY = "DECREASE_INGREDIENT_QUANTITY";
+export const RESET_INGREDIENT_QUANTITY = "RESET_INGREDIENT_QUANTITY";
 
 export const MAKE_ORDER_REQUEST = "MAKE_ORDER_REQUEST";
 export const MAKE_ORDER_SUCCESS = "MAKE_ORDER_SUCCESS";
 export const MAKE_ORDER_FAILURE = "MAKE_ORDER_FAILURE";
 
-export const NAVIGATE = ""
+export const NAVIGATE = "";
 
 export const addIngredient = (ingredient) => {
   return { type: ADD_INGREDIENT, payload: { ...ingredient, id: uuid() } };
@@ -60,5 +61,3 @@ export const makeOrder = (data) => (dispatch) => {
     )
     .catch((err) => dispatch({ type: MAKE_ORDER_FAILURE }));
 };
-
-

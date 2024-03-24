@@ -4,6 +4,7 @@ import {
   GET_INGREDIENTS_FAILURE,
   INCREASE_INGREDIENT_QUANTITY,
   DECREASE_INGREDIENT_QUANTITY,
+  RESET_INGREDIENT_QUANTITY,
 } from "../actions/ingredients";
 
 const initialState = {
@@ -66,6 +67,16 @@ export const ingredientsReducer = (state = initialState, action) => {
         ),
       };
     }
+
+    case RESET_INGREDIENT_QUANTITY: {
+      return {
+        ...state,
+        ingredients: [...state.ingredients].map((item) => {
+          return { ...item, quantity: 0 };
+        }),
+      };
+    }
+
     default: {
       return state;
     }

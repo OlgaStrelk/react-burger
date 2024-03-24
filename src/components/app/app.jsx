@@ -25,8 +25,8 @@ import { PATHS } from "../../utils/consts";
 function App() {
   let location = useLocation();
   let state = location.state;
+  const [isOpen, onOpen, onClose] = useModal();
 
-  const [isOpen, onOpen, onIngredientModalClose] = useModal();
   const {
     home,
     profile,
@@ -85,7 +85,7 @@ function App() {
             path={ingredient}
             element={
               <Modal
-                onClose={onIngredientModalClose}
+                onClose={onClose}
                 customStyle={modalStyle.ingredient}
                 action={RESET_MODAL_INGREDIENT}
               >

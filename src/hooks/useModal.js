@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+
 export const useModal = (initialValue) => {
   const dispatch = useDispatch();
 
@@ -10,7 +11,13 @@ export const useModal = (initialValue) => {
   };
 
   const onClose = (action) => {
-    dispatch({ type: action });
+    if (typeof action == "string") {
+      dispatch({ type: action });
+    } else {
+      [...action].forEach((element) => {
+        dispatch({ type: element });
+      });
+    }
     setIsOpen(false);
   };
 

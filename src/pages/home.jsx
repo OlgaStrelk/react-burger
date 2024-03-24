@@ -10,6 +10,7 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import {
   RESET_CONSTRUCTOR,
+  RESET_INGREDIENT_QUANTITY,
   fetchIngredients,
 } from "../services/actions/ingredients";
 import { modalStyle } from "../utils/consts";
@@ -38,7 +39,7 @@ function HomePage() {
             <Modal
               onClose={onOrderModalClose}
               customStyle={modalStyle.order}
-              action={RESET_CONSTRUCTOR}
+              action={[RESET_CONSTRUCTOR, RESET_INGREDIENT_QUANTITY]}
             >
               <OrderDetails />
             </Modal>
