@@ -5,13 +5,17 @@ import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import ReactDOM from "react-dom";
 import { createRef } from "react";
 import PropTypes from "prop-types";
-
+import { useNavigate } from "react-router-dom";
 
 const modalRoot = document.getElementById("react-modals");
-function Modal({ children, onClose, action }) {
+function Modal({ children, onClose, action, path }) {
+  const navigate = useNavigate();
   const overlayRef = createRef();
 
   const handleClose = () => {
+    if (path) {
+      navigate(path);
+    }
     onClose(action);
   };
   const handleEscClose = (e) => {

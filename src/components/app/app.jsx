@@ -88,6 +88,7 @@ function App() {
                 onClose={onClose}
                 customStyle={modalStyle.ingredient}
                 action={RESET_MODAL_INGREDIENT}
+                path={home}
               >
                 <IngredientDetails />
               </Modal>
