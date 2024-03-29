@@ -10,7 +10,7 @@ import Redirect from "../components/redirect/redirect";
 
 import { PATHS } from "../utils/consts";
 import { useForm } from "../hooks/useForm";
-import { resetFormValue } from "../services/actions/user";
+import { resetFormOneValue } from "../services/actions/authForms";
 
 function ResetPasswordPage() {
   const { password, code } = useSelector((state) => state.form);
@@ -55,12 +55,12 @@ function ResetPasswordPage() {
   ];
 
   const onFormChange = (e) => {
-    handleInput(e, resetFormValue);
+    handleInput(e, resetFormOneValue);
   };
 
   const onSubmit = (e) => {
     const path = PATHS.resetPasswordStepOne;
-    handleSubmit(e, email, isValid, resetPassword);
+    handleSubmit(e, email, isValid,resetPasswordStepTwo );
     navigate(path, { replace: true });
   };
 

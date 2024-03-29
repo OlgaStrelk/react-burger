@@ -5,7 +5,7 @@ import { useForm } from "../hooks/useForm";
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import Redirect from "../components/redirect/redirect";
 import { useDispatch, useSelector } from "react-redux";
-import { resetPassword, resetFormValue } from "../services/actions/user";
+import { resetPasswordStepOne, resetFormOneValue } from "../services/actions/authForms";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 function ForgotPasswordPage() {
@@ -23,13 +23,12 @@ function ForgotPasswordPage() {
   }, [email]);
 
   const onFormChange = (e) => {
-    handleInput(e, resetFormValue);
+    handleInput(e, resetFormOneValue);
   };
 
   const onSubmit = (e) => {
-    const path = PATHS.resetPasswordStepOne;
-    handleSubmit(e, email, isValid, resetPassword);
-    navigate(path, { replace: true });
+    handleSubmit(e, email, isValid, resetPasswordStepOne);
+    navigate(PATHS.resetPasswordStepOne, { replace: true });
   };
 
   const FORM_DATA = {
