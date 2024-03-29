@@ -31,7 +31,7 @@ function ForgotPasswordPage() {
   };
 
   const onSubmit = (e) => {
-    handleSubmit(e, email, isValid, resetPasswordStepOne);
+    handleSubmit(e, resetPasswordStepOne, isValid);
     navigate(PATHS.resetPassword, { replace: true });
   };
 

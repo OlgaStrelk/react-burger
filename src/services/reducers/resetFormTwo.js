@@ -8,7 +8,7 @@ import {
 const initialState = {
   form: {
     password: "",
-    code: "",
+    token: "",
   },
   resetPasswordRequest: false,
   resetPasswordFailed: false,

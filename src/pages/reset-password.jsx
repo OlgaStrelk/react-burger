@@ -10,22 +10,25 @@ import Redirect from "../components/redirect/redirect";
 
 import { PATHS } from "../utils/consts";
 import { useForm } from "../hooks/useForm";
-import { resetPasswordTwoFormValue, resetPasswordStepTwo } from "../services/actions/authForms";
+import {
+  resetPasswordTwoFormValue,
+  resetPasswordStepTwo,
+} from "../services/actions/authForms";
 
 function ResetPasswordPage() {
-  const { password, code } = useSelector((state) => state.resetFormTwo.form);
+  const { password, token } = useSelector((state) => state.resetFormTwo.form);
 
-  console.log()
+  console.log();
   const { handleInput, handleSubmit, error } = useForm();
   const [isValid, setIsValid] = useState(false);
 
   useEffect(() => {
-    if (password && code) {
+    if (password && token) {
       setIsValid(true);
     } else {
       setIsValid(false);
     }
-  }, [password, code]);
+  }, [password, token]);
 
   const FORM_DATA = {
     title: "Восстановление пароля",
@@ -50,9 +53,9 @@ function ResetPasswordPage() {
     {
       id: 15,
       placeholder: "Введите код из письма",
-      name: "code",
+      name: "token",
       type: "text",
-      value: code || "",
+      value: token || "",
     },
   ];
 
@@ -62,7 +65,7 @@ function ResetPasswordPage() {
 
   const onSubmit = (e) => {
     // const path = PATHS;
-    handleSubmit(e,resetPasswordStepTwo, isValid, );
+    handleSubmit(e, resetPasswordStepTwo, isValid);
     // navigate(path, { replace: true });
   };
 
