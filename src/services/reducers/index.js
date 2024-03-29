@@ -6,6 +6,7 @@ import { modalReducer } from "./modal.js";
 import { resetFormReducer } from "./resetForm.js";
 import { resetFormTwoReducer } from "./resetFormTwo.js";
 import { registerReducer } from "./register.js";
+import { loginReducer } from "./login.js";
 
 export const rootReducer = combineReducers({
   ingredients: ingredientsReducer,
@@ -14,5 +15,6 @@ export const rootReducer = combineReducers({
   modal: modalReducer,
   resetForm: resetFormReducer,
   resetFormTwo: resetFormTwoReducer,
-  register: registerReducer
+  register: registerReducer,
+  login: loginReducer
 });

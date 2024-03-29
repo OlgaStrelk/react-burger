@@ -10,10 +10,10 @@ import Redirect from "../components/redirect/redirect";
 
 import { PATHS } from "../utils/consts";
 import { useForm } from "../hooks/useForm";
-import { loginFormValue } from "../services/actions/authForms";
+import { login, loginFormValue } from "../services/actions/authForms";
 function LoginPage() {
   const { register, forgotPassword } = PATHS;
-  const { password, email } = useSelector((state) => state.form);
+  const { password, email } = useSelector((state) => state.login.form);
   const { handleInput, handleSubmit, error } = useForm();
   const [isValid, setIsValid] = useState(false);
 
@@ -29,8 +29,8 @@ function LoginPage() {
     handleInput(e, loginFormValue);
   };
 
-  const onSubmit = () => {
-    handleSubmit(e, data, isValid, resetPassword);
+  const onSubmit = (e) => {
+    handleSubmit(e, login, isValid);
   };
 
   const FORM_DATA = {

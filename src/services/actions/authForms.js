@@ -16,10 +16,10 @@ export const REGISTER_SUBMIT_REQUEST = "REGISTER_SUBMIT_REQUEST";
 export const REGISTER_SUBMIT_SUCCESS = "REGISTER_SUBMIT_SUCCESS";
 export const REGISTER_SUBMIT_FAILED = "REGISTER_SUBMIT_FAILED";
 
-export const RESET_PASSWORD_REQUEST = "RESET_PASSWORD_REQUEST";
-export const RESET_PASSWORD_SUCCESS = "RESET_PASSWORD_SUCCESS";
-export const RESET_PASSWORD_FAILURE = "RESET_PASSWORD_FAILURE";
 export const LOGIN_SET_VALUE = "LOGIN_SET_VALUE";
+export const LOGIN_SUBMIT_SUCCESS = "LOGIN_SUBMIT_SUCCESS";
+export const LOGIN_SUBMIT_FAILED = "LOGIN_SUBMIT_FAILED";
+export const LOGIN_SUBMIT_REQUEST = "LOGIN_SUBMIT_REQUEST";
 
 export const resetPasswordOneFormValue = (field, value) => ({
   type: RESET_FORM_ONE_SET_VALUE,
@@ -44,6 +44,7 @@ export const loginFormValue = (field, value) => ({
   field,
   value,
 });
+
 export const resetPasswordStepOne = () => (dispatch, getState) => {
   dispatch({ type: RESET_FORM_ONE_SUBMIT_REQUEST });
   request(ENDPOINT.resetPasswordStepOne, {
@@ -83,3 +84,20 @@ export const register = () => (dispatch, getState) => {
     })
     .catch((err) => dispatch({ type: REGISTER_SUBMIT_FAILED }));
 };
+
+export const login = () => (dispatch, getState) => {
+  dispatch({ type: LOGIN_SUBMIT_REQUEST });
+  request(ENDPOINT.login, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(getState().login.form),
+  })
+    .then((res) => {
+      dispatch({ type: LOGIN_SUBMIT_SUCCESS, payload: res.data });
+    })
+    .catch((err) => dispatch({ type: LOGIN_SUBMIT_FAILED }));
+};
+
