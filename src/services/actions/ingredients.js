@@ -1,5 +1,5 @@
 import {
-  PATHS,
+  ENDPOINT,
   request,
 } from "../../utils/consts";
 import { v4 as uuid } from "uuid";
@@ -37,7 +37,7 @@ export const decreaseQuantity = (id) => {
 
 export const fetchIngredients = () => (dispatch) => {
   dispatch({ type: GET_INGREDIENTS_REQUEST });
-  request(PATHS.ingredients)
+  request(ENDPOINT.ingredients)
     .then((res) => {
       dispatch({ type: GET_INGREDIENTS_SUCCESS, payload: res.data });
     })
@@ -46,7 +46,7 @@ export const fetchIngredients = () => (dispatch) => {
 
 export const makeOrder = (data) => (dispatch) => {
   dispatch({ type: MAKE_ORDER_REQUEST });
-  request(PATHS.orders, {
+  request(ENDPOINT.orders, {
     method: "POST",
     headers: {
       Accept: "application/json",
