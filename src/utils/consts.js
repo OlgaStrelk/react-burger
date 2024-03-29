@@ -16,7 +16,8 @@ export const PATHS = {
 
 export const ENDPOINT = {
   ingredients: "ingredients",
-  resetPassword: "password-reset",
+  resetPasswordStepOne: "password-reset",
+  resetPasswordStepPTwo: "password-reset/reset",
   orders: "orders",
 };
 
