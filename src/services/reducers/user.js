@@ -5,7 +5,7 @@ import {
 } from "../actions/user";
 
 const initialState = {
-  user: null,
+  user: { name:'',email: "" },
   userRequest: false,
   userFailed: false,
 };
@@ -22,7 +22,7 @@ export const userReducer = (state = initialState, action) => {
     case RESET_PASSWORD_SUCCESS: {
       return {
         ...state,
-        user: action.payload,
+        user: { ...state, email: action.payload },
         userRequest: false,
       };
     }

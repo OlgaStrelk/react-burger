@@ -1,13 +1,12 @@
 import { useDispatch } from "react-redux";
-import { useState } from "react";
 export const useForm = (initialValue) => {
   const dispatch = useDispatch();
 
-  const [value, setValue] = useState(initialValue);
-
-  const handleInput = (e) => {
-    setValue(e.target.value);
+  const handleInput = (e, reducer) => {
+    dispatch(reducer(e.target.name, e.target.value));
   };
 
-  return [value, handleInput];
+  const handleSubmit = () => {};
+
+  return { handleInput };
 };

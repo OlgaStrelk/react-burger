@@ -1,19 +1,20 @@
 import formStyles from "./base-form.module.css";
 import AuthForm from "../components/auth-form/auth-form";
 import { PATHS } from "../utils/consts";
-import { useRef } from "react";
 import { useForm } from "../hooks/useForm";
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import Redirect from "../components/redirect/redirect";
 import { useDispatch, useSelector } from "react-redux";
-import { resetPassword } from "../services/actions/user";
+import { resetPasswordFormValue } from "../services/actions/user";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 function ForgotPasswordPage() {
   const [isValid, setIsValid] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const { email } = useSelector((state) => state.form);
+  const {email} = useSelector((state) => state.form);
+  const { hanleInput } = useForm();
+  console.log(email)
 
   const dispatch = useDispatch();
 
@@ -26,12 +27,14 @@ function ForgotPasswordPage() {
 
   const onFormChange = (e) => {
     dispatch(resetPasswordFormValue(e.target.name, e.target.value));
+
   };
-  const onSubmit = (e, value) => {
+
+  const onSubmit = (e, email) => {
     const path = PATHS.resetPassword;
     e.preventDefault();
     if (isValid) {
-      dispatch(resetPassword(value));
+      dispatch(resetPassword(email));
       navigate(path, { replace: true });
     } else {
       setError("Форма не заполнена");
@@ -54,9 +57,9 @@ function ForgotPasswordPage() {
     {
       id: 14,
       placeholder: "Укажите e-mail",
-      name: "e-mail",
+      name: "email",
       type: "text",
-      value: email,
+      value: email || "",
     },
   ];
 
