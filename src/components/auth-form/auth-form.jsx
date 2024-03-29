@@ -1,7 +1,7 @@
 import styles from "./auth-form.module.css";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 
-function AuthForm({ children, onSubmit, btn }) {
+function AuthForm({ children, onSubmit, btn, isValid }) {
   return (
     <form className={styles.form} onSubmit={onSubmit}>
       {children}
@@ -10,6 +10,7 @@ function AuthForm({ children, onSubmit, btn }) {
         type="primary"
         size="large"
         extraClass={styles.button}
+        disabled={!isValid}
       >
         {btn}
       </Button>

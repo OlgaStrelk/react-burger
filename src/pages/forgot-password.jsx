@@ -7,16 +7,29 @@ import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import Redirect from "../components/redirect/redirect";
 import { useDispatch } from "react-redux";
 import { resetPassword } from "../services/actions/user";
+import { useState, useEffect } from "react";
 function ForgotPasswordPage() {
+  const [isValid, setIsValid] = useState(false);
   const [value, handleInput] = useInput("");
+  const [error, setError] = useState("");
 
   const inputRef = useRef(null);
 
   const dispatch = useDispatch();
-  const onSubmit = (e, data) => {
+
+  useEffect(() => {
+    if (value) setIsValid(true);
+    else {
+      setIsValid(false);
+    }
+  }, [value]);
+  const onSubmit = (e, value) => {
     e.preventDefault();
-    console.log(data);
-    dispatch(resetPassword(data));
+    if (isValid) {
+      dispatch(resetPassword(value));
+    } else {
+      setError("Форма не заполнена");
+    }
   };
 
   const FORM_DATA = {
@@ -63,7 +76,7 @@ function ForgotPasswordPage() {
     <>
       <main className={formStyles.main}>
         <h1 className={formStyles.title}>{title}</h1>
-        <AuthForm onSubmit={onSubmit} btn={text}>
+        <AuthForm onSubmit={onSubmit} btn={text} error={error} isValid={isValid}>
           {inputsMarkup}
         </AuthForm>
         <Redirect data={redirect} />
