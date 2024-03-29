@@ -32,7 +32,7 @@ function ForgotPasswordPage() {
 
   const onSubmit = (e) => {
     handleSubmit(e, email, isValid, resetPasswordStepOne);
-    navigate(PATHS.resetPasswordStepOne, { replace: true });
+    navigate(PATHS.resetPassword, { replace: true });
   };
 
   const FORM_DATA = {

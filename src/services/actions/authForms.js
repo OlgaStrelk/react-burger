@@ -2,7 +2,7 @@ import { request } from "../../utils/consts";
 import { ENDPOINT } from "../../utils/consts";
 
 export const RESET_FORM_ONE_SET_VALUE = "RESET_FORM_ONE_SET_VALUE";
-export const RESET_FORM_ONE_SUBMIT = "RESET_FORM_ONE_SUBMIT";
+export const RESET_FORM_ONE_SUBMIT_REQUEST = "RESET_FORM_ONE_SUBMIT_REQUEST";
 export const RESET_FORM_ONE_SUBMIT_SUCCESS = "RESET_FORM_ONE_SUBMIT_SUCCESS";
 export const RESET_FORM_ONE_SUBMIT_FAILED = "RESET_FORM_ONE_SUBMIT_FAILED";
 // export const REGISTER_SET_VALUE = "REGISTER_SET_VALUE";
@@ -46,7 +46,7 @@ export const loginFormValue = (field, value) => ({
   value,
 });
 export const resetPasswordStepOne = (email) => (dispatch) => {
-  dispatch({ type: RESET_PASSWORD_REQUEST });
+  dispatch({ type: RESET_FORM_ONE_SUBMIT_REQUEST });
   request(ENDPOINT.resetPasswordStepOne, {
     method: "POST",
     headers: {
@@ -56,9 +56,9 @@ export const resetPasswordStepOne = (email) => (dispatch) => {
     body: JSON.stringify({email: email}),
   })
     .then((res) => {
-      dispatch({ type: RESET_PASSWORD_SUCCESS, payload: res.data });
+      dispatch({ type: RESET_FORM_ONE_SUBMIT_SUCCESS, payload: res.data });
     })
-    .catch((err) => dispatch({ type: RESET_PASSWORD_FAILURE }));
+    .catch((err) => dispatch({ type: RESET_FORM_ONE_SUBMIT_FAILED }));
 };
 
 export const resetPasswordStepTwo = (data) => (dispatch) => {

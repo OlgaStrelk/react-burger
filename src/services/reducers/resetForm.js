@@ -1,8 +1,8 @@
 import {
   RESET_FORM_ONE_SET_VALUE,
-  RESET_FORM_ONE_SUBMIT,
   RESET_FORM_ONE_SUBMIT_SUCCESS,
   RESET_FORM_ONE_SUBMIT_FAILED,
+  RESET_FORM_ONE_SUBMIT_REQUEST,
 } from "../actions/authForms";
 
 const initialState = {
@@ -24,7 +24,7 @@ export const resetFormReducer = (state = initialState, action) => {
     }
     }
 
-    case RESET_FORM_ONE_SUBMIT: {
+    case RESET_FORM_ONE_SUBMIT_REQUEST: {
       return {
         ...state,
         resetPasswordRequest: true,
