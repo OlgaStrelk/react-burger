@@ -8,10 +8,10 @@ export const useForm = (initialValue) => {
     dispatch(reducer(e.target.name, e.target.value));
   };
 
-  const handleSubmit = (e, data, isValid, reducer) => {
+  const handleSubmit = (e, reducer, isValid) => {
     e.preventDefault();
     if (isValid) {
-      dispatch(reducer(data));
+      dispatch(reducer());
       setError("");
     } else {
       setError("Форма не заполнена");

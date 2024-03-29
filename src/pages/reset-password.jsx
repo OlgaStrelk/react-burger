@@ -10,10 +10,13 @@ import Redirect from "../components/redirect/redirect";
 
 import { PATHS } from "../utils/consts";
 import { useForm } from "../hooks/useForm";
-import { resetPasswordTwoFormValue } from "../services/actions/authForms";
+import { resetPasswordTwoFormValue, resetPasswordStepTwo } from "../services/actions/authForms";
 
 function ResetPasswordPage() {
-  const { password, code } = useSelector((state) => state.form);
+  const { password, code } = useSelector((state) => state.resetFormTwo.form);
+  const form = useSelector((state) => state.resetFormTwo.form);
+
+  console.log(form)
   const { handleInput, handleSubmit, error } = useForm();
   const [isValid, setIsValid] = useState(false);
 
@@ -59,9 +62,9 @@ function ResetPasswordPage() {
   };
 
   const onSubmit = (e) => {
-    const path = PATHS.resetPasswordStepOne;
-    handleSubmit(e, email, isValid,resetPasswordStepTwo );
-    navigate(path, { replace: true });
+    // const path = PATHS;
+    handleSubmit(e,resetPasswordStepTwo, isValid, );
+    // navigate(path, { replace: true });
   };
 
   const inputsMarkup = INPUTS_DATA.map(
