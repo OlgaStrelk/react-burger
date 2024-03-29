@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./ingredient-details.module.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import { cardDataShape } from "../../utils/shapes";
 import { useNavigate, useParams } from "react-router-dom";
@@ -8,6 +8,7 @@ import { NotFoundPage } from "../../pages";
 import { fetchIngredients } from "../../services/actions/ingredients";
 
 function IngredientDetails({ style }) {
+  const dispatch = useDispatch();
   const [ingredientData, setIngredientData] = useState(null);
   const ingredients = useSelector((store) => store.ingredients?.ingredients);
 
@@ -23,7 +24,7 @@ function IngredientDetails({ style }) {
   };
 
   useEffect(() => {
-    fetchIngredients();
+    dispatch(fetchIngredients());
   }, []);
   useEffect(() => {
     if (ingredients) {

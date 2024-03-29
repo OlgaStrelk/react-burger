@@ -1,6 +1,5 @@
 import {
-  INGREDIENTS_ENDPOINT,
-  ORDER_ENDPOINT,
+  PATHS,
   request,
 } from "../../utils/consts";
 import { v4 as uuid } from "uuid";
@@ -25,7 +24,6 @@ export const MAKE_ORDER_REQUEST = "MAKE_ORDER_REQUEST";
 export const MAKE_ORDER_SUCCESS = "MAKE_ORDER_SUCCESS";
 export const MAKE_ORDER_FAILURE = "MAKE_ORDER_FAILURE";
 
-export const NAVIGATE = "";
 
 export const addIngredient = (ingredient) => {
   return { type: ADD_INGREDIENT, payload: { ...ingredient, id: uuid() } };
@@ -39,7 +37,7 @@ export const decreaseQuantity = (id) => {
 
 export const fetchIngredients = () => (dispatch) => {
   dispatch({ type: GET_INGREDIENTS_REQUEST });
-  request(INGREDIENTS_ENDPOINT)
+  request(PATHS.ingredients)
     .then((res) => {
       dispatch({ type: GET_INGREDIENTS_SUCCESS, payload: res.data });
     })
@@ -48,7 +46,7 @@ export const fetchIngredients = () => (dispatch) => {
 
 export const makeOrder = (data) => (dispatch) => {
   dispatch({ type: MAKE_ORDER_REQUEST });
-  request(ORDER_ENDPOINT, {
+  request(PATHS.orders, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -61,3 +59,4 @@ export const makeOrder = (data) => (dispatch) => {
     )
     .catch((err) => dispatch({ type: MAKE_ORDER_FAILURE }));
 };
+
