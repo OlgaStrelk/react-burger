@@ -12,9 +12,8 @@ function ForgotPasswordPage() {
   const [isValid, setIsValid] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const {email} = useSelector((state) => state.form);
-  const { hanleInput } = useForm();
-  console.log(email)
+  const { email } = useSelector((state) => state.form);
+  const { handleInput } = useForm();
 
   const dispatch = useDispatch();
 
@@ -26,8 +25,7 @@ function ForgotPasswordPage() {
   }, [email]);
 
   const onFormChange = (e) => {
-    dispatch(resetPasswordFormValue(e.target.name, e.target.value));
-
+    handleInput(e, resetPasswordFormValue);
   };
 
   const onSubmit = (e, email) => {
