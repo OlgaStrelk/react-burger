@@ -2,13 +2,14 @@ import formStyles from "./base-form.module.css";
 import AuthForm from "../components/auth-form/auth-form";
 import { PATHS } from "../utils/consts";
 import { useRef } from "react";
-import { useInput } from "../hooks/useInput";
+import { useForm } from "../hooks/useForm";
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import Redirect from "../components/redirect/redirect";
 function Register(props) {
-  const [value, handleInput] = useInput("hjsf");
-
-  const inputRef = useRef(null);
+  const [value, handleInput] = useForm("hjsf");
+  const nameRef = useRef(null);
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
 
   const onSubmit = (data) => {};
 
@@ -30,18 +31,21 @@ function Register(props) {
       placeholder: "Имя",
       name: "name",
       type: "text",
+      // ref: nameRef,
     },
     {
       id: 12,
       placeholder: "E-mail",
       name: "email",
       type: "email",
+      // ref: emailRef,
     },
     {
       id: 13,
       placeholder: "Пароль",
       name: "password",
       type: "password",
+      // ref: passwordRef,
     },
   ];
 
@@ -57,7 +61,11 @@ function Register(props) {
       extraClass={formStyles.input}
     />
   ));
-  const { title, btn: {text}, redirect } = FORM_DATA;
+  const {
+    title,
+    btn: { text },
+    redirect,
+  } = FORM_DATA;
 
   return (
     <>

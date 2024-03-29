@@ -1,12 +1,12 @@
-import styles from "./register.module.css";
+import formStyles from "./base-form.module.css";
 import AuthForm from "../components/auth-form/auth-form";
 import { PATHS } from "../utils/consts";
 import { useRef } from "react";
-import { useInput } from "../hooks/useInput";
+import { useForm } from "../hooks/useForm";
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import Redirect from "../components/redirect/redirect";
 function ResetPasswordPage() {
-  const [value, handleInput] = useInput("hjsf");
+  const [value, handleInput] = useForm("hjsf");
 
   const inputRef = useRef(null);
 
@@ -48,6 +48,7 @@ function ResetPasswordPage() {
       type={type}
       value=""
       onChange={handleInput}
+      extraClass={formStyles.input}
     />
   ));
 
@@ -55,8 +56,8 @@ function ResetPasswordPage() {
 
   return (
     <>
-      <main className={styles.main}>
-        <h1 className={styles.title}>{title}</h1>
+      <main className={formStyles.main}>
+        <h1 className={formStyles.title}>{title}</h1>
         <AuthForm onSubmit={onSubmit} btn={text}>
           {inputsMarkup}
         </AuthForm>

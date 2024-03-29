@@ -3,12 +3,12 @@ import formStyles from "./base-form.module.css";
 import AuthForm from "../components/auth-form/auth-form";
 import { PATHS } from "../utils/consts";
 import { useRef } from "react";
-import { useInput } from "../hooks/useInput";
+import { useForm } from "../hooks/useForm";
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import Redirect from "../components/redirect/redirect";
 function LoginPage() {
   const { register, forgotPassword } = PATHS;
-  const [value, handleInput] = useInput("hjsf");
+  const [value, handleInput] = useForm("hjsf");
 
   const inputRef = useRef(null);
 
