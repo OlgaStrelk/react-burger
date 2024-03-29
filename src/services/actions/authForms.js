@@ -12,6 +12,9 @@ export const RESET_FORM_TWO_SUBMIT_SUCCESS = "RESET_FORM_TWO_SUBMIT_SUCCESS";
 export const RESET_FORM_TWO_SUBMIT_FAILED = "RESET_FORM_TWO_SUBMIT_FAILED";
 
 export const REGISTER_SET_VALUE = "REGISTER_SET_VALUE";
+export const REGISTER_SUBMIT_REQUEST = "REGISTER_SUBMIT_REQUEST";
+export const REGISTER_SUBMIT_SUCCESS = "REGISTER_SUBMIT_SUCCESS";
+export const REGISTER_SUBMIT_FAILED = "REGISTER_SUBMIT_FAILED";
 
 export const RESET_PASSWORD_REQUEST = "RESET_PASSWORD_REQUEST";
 export const RESET_PASSWORD_SUCCESS = "RESET_PASSWORD_SUCCESS";
@@ -63,4 +66,20 @@ export const resetPasswordStepTwo = () => (dispatch, getState) => {
       dispatch({ type: RESET_FORM_TWO_SUBMIT_SUCCESS, payload: res.data });
     })
     .catch((err) => dispatch({ type: RESET_FORM_TWO_SUBMIT_FAILED }));
+};
+
+export const register = () => (dispatch, getState) => {
+  dispatch({ type: REGISTER_SUBMIT_REQUEST });
+  request(ENDPOINT.register, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(getState().register.form),
+  })
+    .then((res) => {
+      dispatch({ type: REGISTER_SUBMIT_SUCCESS, payload: res.data });
+    })
+    .catch((err) => dispatch({ type: REGISTER_SUBMIT_FAILED }));
 };

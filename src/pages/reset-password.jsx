@@ -14,9 +14,8 @@ import { resetPasswordTwoFormValue, resetPasswordStepTwo } from "../services/act
 
 function ResetPasswordPage() {
   const { password, code } = useSelector((state) => state.resetFormTwo.form);
-  const form = useSelector((state) => state.resetFormTwo.form);
 
-  console.log(form)
+  console.log()
   const { handleInput, handleSubmit, error } = useForm();
   const [isValid, setIsValid] = useState(false);
 

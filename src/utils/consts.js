@@ -19,6 +19,7 @@ export const ENDPOINT = {
   resetPasswordStepOne: "password-reset",
   resetPasswordStepTwo: "password-reset/reset",
   orders: "orders",
+  register: "auth/register",
 };
 
 export const checkResponse = (res) =>

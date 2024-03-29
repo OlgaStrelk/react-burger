@@ -10,9 +10,9 @@ import Redirect from "../components/redirect/redirect";
 
 import { PATHS } from "../utils/consts";
 import { useForm } from "../hooks/useForm";
-import { registerFormValue } from "../services/actions/authForms";
+import { register, registerFormValue } from "../services/actions/authForms";
 function Register(props) {
-  const { name, password, email } = useSelector((state) => state.form);
+  const { name, password, email } = useSelector((state) => state.register.form);
   const { handleInput, handleSubmit, error } = useForm();
   const [isValid, setIsValid] = useState(false);
 
@@ -27,8 +27,8 @@ function Register(props) {
     handleInput(e, registerFormValue);
   };
 
-  const onSubmit = (data) => {
-    handleSubmit()
+  const onSubmit = (e) => {
+    handleSubmit(e, register, isValid);
   };
 
   const FORM_DATA = {
