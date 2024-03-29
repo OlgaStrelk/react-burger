@@ -6,7 +6,16 @@ export const useForm = (initialValue) => {
     dispatch(reducer(e.target.name, e.target.value));
   };
 
-  const handleSubmit = () => {};
 
-  return { handleInput };
+  const handleSubmit = (e, data, isValid,reducer) => {
+    e.preventDefault();
+    if (isValid) {
+      dispatch(reducer(data));
+    } else {
+      setError("Форма не заполнена");
+      return null
+    }
+  };
+
+  return { handleInput, handleSubmit };
 };

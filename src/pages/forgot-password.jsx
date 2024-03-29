@@ -13,7 +13,7 @@ function ForgotPasswordPage() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const { email } = useSelector((state) => state.form);
-  const { handleInput } = useForm();
+  const { handleInput, handleSubmit } = useForm();
 
   const dispatch = useDispatch();
 
@@ -28,15 +28,10 @@ function ForgotPasswordPage() {
     handleInput(e, resetPasswordFormValue);
   };
 
-  const onSubmit = (e, email) => {
+  const onSubmit = (e) => {
     const path = PATHS.resetPassword;
-    e.preventDefault();
-    if (isValid) {
-      dispatch(resetPassword(email));
-      navigate(path, { replace: true });
-    } else {
-      setError("Форма не заполнена");
-    }
+    handleSubmit(e, email, isValid, resetPasswordFormValue);
+    navigate(path, { replace: true });
   };
 
   const FORM_DATA = {
