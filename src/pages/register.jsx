@@ -1,15 +1,31 @@
 import formStyles from "./base-form.module.css";
-import AuthForm from "../components/auth-form/auth-form";
-import { PATHS } from "../utils/consts";
-import { useRef } from "react";
-import { useForm } from "../hooks/useForm";
+
+import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
+
+import AuthForm from "../components/auth-form/auth-form";
 import Redirect from "../components/redirect/redirect";
+
+import { PATHS } from "../utils/consts";
+import { useForm } from "../hooks/useForm";
+import { resetFormValue } from "../services/actions/user";
 function Register(props) {
-  const [value, handleInput] = useForm("hjsf");
-  const nameRef = useRef(null);
-  const emailRef = useRef(null);
-  const passwordRef = useRef(null);
+  const { name, password, email } = useSelector((state) => state.form);
+  const { handleInput, handleSubmit, error } = useForm();
+  const [isValid, setIsValid] = useState(false);
+
+  useEffect(() => {
+    if (password && email && name) {
+      setIsValid(true);
+    } else {
+      setIsValid(false);
+    }
+  }, [password, email, name]);
+  const onFormChange = (e) => {
+    handleInput(e, resetFormValue);
+  };
 
   const onSubmit = (data) => {};
 
@@ -31,36 +47,37 @@ function Register(props) {
       placeholder: "Имя",
       name: "name",
       type: "text",
-      // ref: nameRef,
+      value: name || "",
     },
     {
       id: 12,
       placeholder: "E-mail",
       name: "email",
       type: "email",
-      // ref: emailRef,
+      value: email || "",
     },
     {
       id: 13,
       placeholder: "Пароль",
       name: "password",
       type: "password",
-      // ref: passwordRef,
+      value: password || "",
     },
   ];
 
-  const inputsMarkup = INPUTS_DATA.map(({ id, placeholder, name, type }) => (
-    <Input
-      ref={inputRef}
-      key={id}
-      name={name}
-      placeholder={placeholder}
-      type={type}
-      value=""
-      onChange={handleInput}
-      extraClass={formStyles.input}
-    />
-  ));
+  const inputsMarkup = INPUTS_DATA.map(
+    ({ id, placeholder, name, type, value }) => (
+      <Input
+        key={id}
+        name={name}
+        placeholder={placeholder}
+        type={type}
+        value={value}
+        onChange={onFormChange}
+        extraClass={formStyles.input}
+      />
+    )
+  );
   const {
     title,
     btn: { text },
@@ -71,7 +88,7 @@ function Register(props) {
     <>
       <main className={formStyles.main}>
         <h1 className={formStyles.title}>{title}</h1>
-        <AuthForm onSubmit={onSubmit} btn={text}>
+        <AuthForm onSubmit={onSubmit} btn={text} isValid={isValid}>
           {inputsMarkup}
         </AuthForm>
         <Redirect data={redirect} />
