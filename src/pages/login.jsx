@@ -1,16 +1,33 @@
 import formStyles from "./base-form.module.css";
 
-import AuthForm from "../components/auth-form/auth-form";
-import { PATHS } from "../utils/consts";
-import { useRef } from "react";
-import { useForm } from "../hooks/useForm";
+import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
+
+import AuthForm from "../components/auth-form/auth-form";
 import Redirect from "../components/redirect/redirect";
+
+import { PATHS } from "../utils/consts";
+import { useForm } from "../hooks/useForm";
+import { resetFormValue } from "../services/actions/user";
 function LoginPage() {
   const { register, forgotPassword } = PATHS;
-  const [value, handleInput] = useForm("hjsf");
+  const { password, email } = useSelector((state) => state.form);
+  const { handleInput, handleSubmit, error } = useForm();
+  const [isValid, setIsValid] = useState(false);
 
-  const inputRef = useRef(null);
+  useEffect(() => {
+    if (password && email) {
+      setIsValid(true);
+    } else {
+      setIsValid(false);
+    }
+  }, [password, email]);
+
+  const onFormChange = (e) => {
+    handleInput(e, resetFormValue);
+  };
 
   const onSubmit = () => {};
 
@@ -37,27 +54,30 @@ function LoginPage() {
       placeholder: "E-mail",
       name: "email",
       type: "email",
+      value: email || "",
     },
     {
       id: 13,
       placeholder: "Пароль",
       name: "password",
       type: "password",
+      value: password || "",
     },
   ];
 
-  const inputsMarkup = INPUTS_DATA.map(({ id, placeholder, name, type }) => (
-    <Input
-      ref={inputRef}
-      key={id}
-      name={name}
-      placeholder={placeholder}
-      type={type}
-      value=""
-      onChange={handleInput}
-      extraClass={formStyles.input}
-    />
-  ));
+  const inputsMarkup = INPUTS_DATA.map(
+    ({ id, placeholder, name, type, value }) => (
+      <Input
+        key={id}
+        name={name}
+        placeholder={placeholder}
+        type={type}
+        value={value}
+        onChange={onFormChange}
+        extraClass={formStyles.input}
+      />
+    )
+  );
   const {
     title,
     btn: { text },
@@ -67,7 +87,12 @@ function LoginPage() {
     <>
       <main className={formStyles.main}>
         <h1 className={formStyles.title}>{title}</h1>
-        <AuthForm onSubmit={onSubmit} btn={text}>
+        <AuthForm
+          onSubmit={onSubmit}
+          btn={text}
+          error={error}
+          isValid={isValid}
+        >
           {inputsMarkup}
         </AuthForm>
         <Redirect data={redirect} />
