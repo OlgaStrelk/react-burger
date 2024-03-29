@@ -5,13 +5,17 @@ import { useForm } from "../hooks/useForm";
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import Redirect from "../components/redirect/redirect";
 import { useDispatch, useSelector } from "react-redux";
-import { resetPasswordStepOne, resetFormOneValue } from "../services/actions/authForms";
+import {
+  resetPasswordStepOne,
+  resetPasswordOneFormValue,
+} from "../services/actions/authForms";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 function ForgotPasswordPage() {
   const [isValid, setIsValid] = useState(false);
   const navigate = useNavigate();
-  const { email } = useSelector((state) => state.form);
+  const { email } = useSelector((state) => state.resetForm.form);
+
   const { handleInput, handleSubmit, error } = useForm();
 
   useEffect(() => {
@@ -23,7 +27,7 @@ function ForgotPasswordPage() {
   }, [email]);
 
   const onFormChange = (e) => {
-    handleInput(e, resetFormOneValue);
+    handleInput(e, resetPasswordOneFormValue);
   };
 
   const onSubmit = (e) => {

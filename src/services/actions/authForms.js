@@ -20,13 +20,15 @@ export const RESET_PASSWORD_REQUEST = "RESET_PASSWORD_REQUEST";
 export const RESET_PASSWORD_SUCCESS = "RESET_PASSWORD_SUCCESS";
 export const RESET_PASSWORD_FAILURE = "RESET_PASSWORD_FAILURE";
 export const LOGIN_SET_VALUE = "LOGIN_SET_VALUE";
-export const resetFormOneValue = (field, value) => ({
+
+
+export const resetPasswordOneFormValue = (field, value) => ({
   type: RESET_FORM_ONE_SET_VALUE,
   field,
   value,
 });
 
-export const resetFormTwoValue = (field, value) => ({
+export const resetPasswordTwoFormValue = (field, value) => ({
   type: RESET_FORM_TWO_SET_VALUE,
   field,
   value,

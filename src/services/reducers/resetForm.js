@@ -18,10 +18,10 @@ export const resetFormReducer = (state = initialState, action) => {
     case RESET_FORM_ONE_SET_VALUE: {
       return {
         form: {
-          ...state.form,
-          [action.field]: action.value,
-        },
-      };
+            ...state.form,
+            [action.field]: action.value
+        }
+    }
     }
 
     case RESET_FORM_ONE_SUBMIT: {
