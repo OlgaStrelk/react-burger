@@ -11,7 +11,6 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import {
   RESET_CONSTRUCTOR,
   RESET_INGREDIENT_QUANTITY,
-  fetchIngredients,
 } from "../services/actions/ingredients";
 import { modalStyle } from "../utils/consts";
 
@@ -20,10 +19,6 @@ function HomePage() {
 
   const ingredients = useSelector((state) => state.ingredients?.ingredients);
   const [isOrderModalOpen, onOrderModalOpen, onOrderModalClose] = useModal();
-
-  useEffect(() => {
-    dispatch(fetchIngredients());
-  }, []);
 
   return (
     <>

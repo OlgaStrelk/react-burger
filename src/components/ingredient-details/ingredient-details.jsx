@@ -5,10 +5,8 @@ import PropTypes from "prop-types";
 import { cardDataShape } from "../../utils/shapes";
 import { useNavigate, useParams } from "react-router-dom";
 import { NotFoundPage } from "../../pages";
-import { fetchIngredients } from "../../services/actions/ingredients";
 
 function IngredientDetails({ style }) {
-  const dispatch = useDispatch();
   const [ingredientData, setIngredientData] = useState(null);
   const ingredients = useSelector((store) => store.ingredients?.ingredients);
 
@@ -22,10 +20,6 @@ function IngredientDetails({ style }) {
       setIngredientData(currentIngredient);
     } else return null;
   };
-
-  useEffect(() => {
-    dispatch(fetchIngredients());
-  }, []);
   useEffect(() => {
     if (ingredients) {
       getData(id);

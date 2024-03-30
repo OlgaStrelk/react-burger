@@ -1,6 +1,9 @@
 import { Routes, Route, useNavigate } from "react-router-dom";
 import AppHeader from "../app-header/app-header";
-import { RESET_MODAL_INGREDIENT } from "../../services/actions/ingredients";
+import {
+  RESET_MODAL_INGREDIENT,
+  fetchIngredients,
+} from "../../services/actions/ingredients";
 import {
   HomePage,
   LoginPage,
@@ -21,12 +24,13 @@ import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import ProtectedRoute from "../protected_route/protected-route";
 import { PATHS } from "../../utils/consts";
+import { useEffect } from "react";
 
 function App() {
   let location = useLocation();
   let state = location.state;
-  const [isOpen, onOpen, onClose] = useModal();
-
+  const [__, _, onClose] = useModal();
+  useEffect(() => fetchIngredients(), []);
   const {
     home,
     profile,
@@ -50,7 +54,7 @@ function App() {
           path={profile}
           element={
             // <ProtectedRoute>
-              <ProfilePage />
+            <ProfilePage />
             // </ProtectedRoute>
           }
         />
