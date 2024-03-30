@@ -60,7 +60,6 @@ function ProfilePage() {
         return (
           <li key={id}>
             <PasswordInput
-              key={id}
               name={name}
               id={name}
               placeholder={placeholder}
