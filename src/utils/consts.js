@@ -21,6 +21,8 @@ export const ENDPOINT = {
   orders: "orders",
   register: "auth/register",
   login: "auth/login",
+  logout: "auth/logout",
+  refreshToken: "auth/token",
 };
 
 export const checkResponse = (res) =>

@@ -70,17 +70,34 @@ function ResetPasswordPage() {
   };
 
   const inputsMarkup = INPUTS_DATA.map(
-    ({ id, placeholder, name, type, value }) => (
-      <Input
-        key={id}
-        name={name}
-        placeholder={placeholder}
-        type={type}
-        value={value}
-        onChange={onFormChange}
-        extraClass={formStyles.input}
-      />
-    )
+    ({ id, placeholder, name, type, value }) => {
+      if (type === "password") {
+        return (
+          <PasswordInput
+            key={id}
+            name={name}
+            placeholder={placeholder}
+            type={type}
+            value={value}
+            onChange={onFormChange}
+            extraClass={formStyles.input}
+            icon="ShowIcon"
+          />
+        );
+      } else {
+        return (
+          <Input
+            key={id}
+            name={name}
+            placeholder={placeholder}
+            type={type}
+            value={value}
+            onChange={onFormChange}
+            extraClass={formStyles.input}
+          />
+        );
+      }
+    }
   );
 
   const {

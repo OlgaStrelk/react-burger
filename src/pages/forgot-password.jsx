@@ -4,7 +4,7 @@ import { PATHS } from "../utils/consts";
 import { useForm } from "../hooks/useForm";
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import Redirect from "../components/redirect/redirect";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import {
   resetPasswordStepOne,
   resetPasswordOneFormValue,

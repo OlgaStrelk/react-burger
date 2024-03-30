@@ -3,6 +3,7 @@ import styles from "./profile.module.css";
 import {
   Input,
   PasswordInput,
+  EmailInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -54,39 +55,49 @@ function ProfilePage() {
       </NavLink>
     </li>
   ));
+
   const inputsMarkup = INPUTS_DATA.map(
     ({ id, placeholder, name, type, value }) => {
-      if (type === "password") {
-        return (
-          <li key={id}>
+      switch (type) {
+        case "password": {
+          return (
             <PasswordInput
+              key={id}
               name={name}
-              id={name}
               placeholder={placeholder}
               type={type}
               value={value}
               onChange={onFormChange}
-              extraClass={styles.input}
+              extraClass={formStyles.input}
               icon="ShowIcon"
             />
-          </li>
-        );
-      } else {
-        return (
-          <li key={id}>
+          );
+        }
+        case "email": {
+          return (
+            <EmailInput
+              key={id}
+              name={name}
+              placeholder={placeholder}
+              type={type}
+              value={value}
+              onChange={onFormChange}
+              extraClass={formStyles.input}
+            />
+          );
+        }
+        default:
+          return (
             <Input
               key={id}
               name={name}
-              id={name}
               placeholder={placeholder}
               type={type}
               value={value}
               onChange={onFormChange}
-              extraClass={styles.input}
-              icon="EditIcon"
+              extraClass={formStyles.input}
             />
-          </li>
-        );
+          );
       }
     }
   );

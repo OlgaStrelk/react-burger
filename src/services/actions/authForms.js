@@ -21,6 +21,8 @@ export const LOGIN_SUBMIT_SUCCESS = "LOGIN_SUBMIT_SUCCESS";
 export const LOGIN_SUBMIT_FAILED = "LOGIN_SUBMIT_FAILED";
 export const LOGIN_SUBMIT_REQUEST = "LOGIN_SUBMIT_REQUEST";
 
+export const SET_USER_DATA = "SET_USER_DATA";
+
 export const resetPasswordOneFormValue = (field, value) => ({
   type: RESET_FORM_ONE_SET_VALUE,
   field,
@@ -69,9 +71,9 @@ export const resetPasswordStepTwo = () => (dispatch, getState) => {
     .catch((err) => dispatch({ type: RESET_FORM_TWO_SUBMIT_FAILED }));
 };
 
-export const register = () => (dispatch, getState) => {
+export const register = () => async (dispatch, getState) => {
   dispatch({ type: REGISTER_SUBMIT_REQUEST });
-  request(ENDPOINT.register, {
+  const data = await request(ENDPOINT.register, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -79,15 +81,20 @@ export const register = () => (dispatch, getState) => {
     },
     body: JSON.stringify(getState().register.form),
   })
-    .then((res) => {
-      dispatch({ type: REGISTER_SUBMIT_SUCCESS, payload: res.data });
+    .then((data) => {
+      dispatch({ type: REGISTER_SUBMIT_SUCCESS });
+      return data;
     })
     .catch((err) => dispatch({ type: REGISTER_SUBMIT_FAILED }));
+  if (data.success) {
+    dispatch({ type: SET_USER_DATA, payload: data.user });
+    //реализовать работу с токенами
+  }
 };
 
-export const login = () => (dispatch, getState) => {
+export const login = () => async (dispatch, getState) => {
   dispatch({ type: LOGIN_SUBMIT_REQUEST });
-  request(ENDPOINT.login, {
+  await request(ENDPOINT.login, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -95,9 +102,8 @@ export const login = () => (dispatch, getState) => {
     },
     body: JSON.stringify(getState().login.form),
   })
-    .then((res) => {
-      dispatch({ type: LOGIN_SUBMIT_SUCCESS, payload: res });
+    .then((data) => {
+      dispatch({ type: LOGIN_SUBMIT_SUCCESS });
     })
     .catch((err) => dispatch({ type: LOGIN_SUBMIT_FAILED }));
 };
-

@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 
 import {
+  EmailInput,
   Input,
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -72,31 +73,46 @@ function LoginPage() {
 
   const inputsMarkup = INPUTS_DATA.map(
     ({ id, placeholder, name, type, value }) => {
-      if (type === "password") {
-        return (
-          <PasswordInput
-            key={id}
-            name={name}
-            placeholder={placeholder}
-            type={type}
-            value={value}
-            onChange={onFormChange}
-            extraClass={formStyles.input}
-            icon="ShowIcon"
-          />
-        );
-      } else {
-        return (
-          <Input
-            key={id}
-            name={name}
-            placeholder={placeholder}
-            type={type}
-            value={value}
-            onChange={onFormChange}
-            extraClass={formStyles.input}
-          />
-        );
+      switch (type) {
+        case "password": {
+          return (
+            <PasswordInput
+              key={id}
+              name={name}
+              placeholder={placeholder}
+              type={type}
+              value={value}
+              onChange={onFormChange}
+              extraClass={formStyles.input}
+              icon="ShowIcon"
+            />
+          );
+        }
+        case "email": {
+          return (
+            <EmailInput
+              key={id}
+              name={name}
+              placeholder={placeholder}
+              type={type}
+              value={value}
+              onChange={onFormChange}
+              extraClass={formStyles.input}
+            />
+          );
+        }
+        default:
+          return (
+            <Input
+              key={id}
+              name={name}
+              placeholder={placeholder}
+              type={type}
+              value={value}
+              onChange={onFormChange}
+              extraClass={formStyles.input}
+            />
+          );
       }
     }
   );

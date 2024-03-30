@@ -1,21 +1,30 @@
 import formStyles from "./base-form.module.css";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 
-import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
+import {
+  Input,
+  PasswordInput,
+  EmailInput,
+} from "@ya.praktikum/react-developer-burger-ui-components";
 
 import AuthForm from "../components/auth-form/auth-form";
 import Redirect from "../components/redirect/redirect";
 
 import { PATHS } from "../utils/consts";
 import { useForm } from "../hooks/useForm";
-import { register, registerFormValue } from "../services/actions/authForms";
+import {
+  SET_USER_DATA,
+  register,
+  registerFormValue,
+} from "../services/actions/authForms";
 function Register(props) {
   const { name, password, email } = useSelector((state) => state.register.form);
 
   const { handleInput, handleSubmit, error } = useForm();
   const [isValid, setIsValid] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (password && email && name) {
@@ -67,20 +76,52 @@ function Register(props) {
       value: password || "",
     },
   ];
-
   const inputsMarkup = INPUTS_DATA.map(
-    ({ id, placeholder, name, type, value }) => (
-      <Input
-        key={id}
-        name={name}
-        placeholder={placeholder}
-        type={type}
-        value={value}
-        onChange={onFormChange}
-        extraClass={formStyles.input}
-      />
-    )
+    ({ id, placeholder, name, type, value }) => {
+      switch (type) {
+        case "password": {
+          return (
+            <PasswordInput
+              key={id}
+              name={name}
+              placeholder={placeholder}
+              type={type}
+              value={value}
+              onChange={onFormChange}
+              extraClass={formStyles.input}
+              icon="ShowIcon"
+            />
+          );
+        }
+        case "email": {
+          return (
+            <EmailInput
+              key={id}
+              name={name}
+              placeholder={placeholder}
+              type={type}
+              value={value}
+              onChange={onFormChange}
+              extraClass={formStyles.input}
+            />
+          );
+        }
+        default:
+          return (
+            <Input
+              key={id}
+              name={name}
+              placeholder={placeholder}
+              type={type}
+              value={value}
+              onChange={onFormChange}
+              extraClass={formStyles.input}
+            />
+          );
+      }
+    }
   );
+
   const {
     title,
     btn: { text },
