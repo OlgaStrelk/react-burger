@@ -96,7 +96,7 @@ export const login = () => (dispatch, getState) => {
     body: JSON.stringify(getState().login.form),
   })
     .then((res) => {
-      dispatch({ type: LOGIN_SUBMIT_SUCCESS, payload: res.data });
+      dispatch({ type: LOGIN_SUBMIT_SUCCESS, payload: res });
     })
     .catch((err) => dispatch({ type: LOGIN_SUBMIT_FAILED }));
 };

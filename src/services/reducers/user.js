@@ -1,32 +1,32 @@
 import {
-  RESET_PASSWORD_REQUEST,
-  RESET_PASSWORD_SUCCESS,
-  RESET_PASSWORD_FAILURE,
+  GET_USER_REQUEST,
+  GET_USER_SUCCESS,
+  GET_USER_FAILURE,
 } from "../actions/user";
 
 const initialState = {
-  user: { name:'',email: "" },
+  user: { name: "", login: "", password: "" },
   userRequest: false,
   userFailed: false,
 };
 
 export const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    case RESET_PASSWORD_REQUEST: {
+    case GET_USER_REQUEST: {
       return {
         ...state,
         userRequest: true,
         userFailed: false,
       };
     }
-    case RESET_PASSWORD_SUCCESS: {
+    case GET_USER_SUCCESS: {
       return {
         ...state,
         user: { ...state, email: action.payload },
         userRequest: false,
       };
     }
-    case RESET_PASSWORD_FAILURE: {
+    case GET_USER_FAILURE: {
       return {
         ...state,
         userFailed: true,

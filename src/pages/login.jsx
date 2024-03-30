@@ -3,7 +3,10 @@ import formStyles from "./base-form.module.css";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 
-import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
+import {
+  Input,
+  PasswordInput,
+} from "@ya.praktikum/react-developer-burger-ui-components";
 
 import AuthForm from "../components/auth-form/auth-form";
 import Redirect from "../components/redirect/redirect";
@@ -68,17 +71,34 @@ function LoginPage() {
   ];
 
   const inputsMarkup = INPUTS_DATA.map(
-    ({ id, placeholder, name, type, value }) => (
-      <Input
-        key={id}
-        name={name}
-        placeholder={placeholder}
-        type={type}
-        value={value}
-        onChange={onFormChange}
-        extraClass={formStyles.input}
-      />
-    )
+    ({ id, placeholder, name, type, value }) => {
+      if (type === "password") {
+        return (
+          <PasswordInput
+            key={id}
+            name={name}
+            placeholder={placeholder}
+            type={type}
+            value={value}
+            onChange={onFormChange}
+            extraClass={formStyles.input}
+            icon="ShowIcon"
+          />
+        );
+      } else {
+        return (
+          <Input
+            key={id}
+            name={name}
+            placeholder={placeholder}
+            type={type}
+            value={value}
+            onChange={onFormChange}
+            extraClass={formStyles.input}
+          />
+        );
+      }
+    }
   );
   const {
     title,

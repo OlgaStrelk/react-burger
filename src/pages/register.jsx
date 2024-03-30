@@ -13,6 +13,7 @@ import { useForm } from "../hooks/useForm";
 import { register, registerFormValue } from "../services/actions/authForms";
 function Register(props) {
   const { name, password, email } = useSelector((state) => state.register.form);
+
   const { handleInput, handleSubmit, error } = useForm();
   const [isValid, setIsValid] = useState(false);
 
