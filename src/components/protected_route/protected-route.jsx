@@ -1,11 +1,15 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
-// import { PATHS } from "../../utils/consts";
-let PATHS = { signin: "/login" };
+import { PATHS } from "../../utils/consts";
 const ProtectedRoute = ({ onlyUnAuth = false, component }) => {
   const isAuthChecked = useSelector((state) => state.user.isAuthChecked);
+  console.log(isAuthChecked)
+  console.log(onlyUnAuth)
+
   const user = useSelector((state) => state.user.user);
+  console.log(user)
+
   const location = useLocation();
 
   if (!isAuthChecked) {
@@ -17,7 +21,7 @@ const ProtectedRoute = ({ onlyUnAuth = false, component }) => {
     return <Navigate to={from} />;
   }
 
-  if (!onlyUnAuth && user) {
+  if (!onlyUnAuth && !user) {
     return <Navigate to={PATHS.signin} state={{ from: location }} />;
   }
 

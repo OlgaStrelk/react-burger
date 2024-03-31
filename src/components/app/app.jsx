@@ -33,7 +33,7 @@ function App() {
   let location = useLocation();
   let state = location.state;
   const [__, _, onClose] = useModal();
-  useEffect(() => dispatch(fetchIngredients()), []);
+  useEffect(() => dispatch(fetchIngredients()), [dispatch]);
   useEffect(() => {
     dispatch(checkUserAuth());
   }, [dispatch]);

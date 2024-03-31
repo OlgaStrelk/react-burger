@@ -4,7 +4,6 @@ import { GET_MODAL_INGREDIENT } from "../../../services/actions/ingredients";
 
 import IngredientCard from "../ingredient-card/ingredient-card";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 
 const IngredientsBlock = forwardRef(({ titles, onScroll }, ref) => {
   const dispatch = useDispatch();
