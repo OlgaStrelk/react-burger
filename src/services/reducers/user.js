@@ -6,7 +6,8 @@ import {
 } from "../actions/user";
 import { SET_USER_DATA } from "../actions/user";
 const initialState = {
-  user: { name: "", login: "", password: "" },
+  // user: { name: "", login: "", password: "" },
+  user: null,
   isAuthChecked: false,
   userRequest: false,
   userFailed: false,

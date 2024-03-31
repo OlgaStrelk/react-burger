@@ -4,11 +4,11 @@ import { Navigate, useLocation } from "react-router-dom";
 import { PATHS } from "../../utils/consts";
 const ProtectedRoute = ({ onlyUnAuth = false, component }) => {
   const isAuthChecked = useSelector((state) => state.user.isAuthChecked);
-  console.log(isAuthChecked)
-  console.log(onlyUnAuth)
+  console.log('isAuthChecked', isAuthChecked)
+  console.log('onlyUnAuth', onlyUnAuth)
 
   const user = useSelector((state) => state.user.user);
-  console.log(user)
+  console.log('user',user)
 
   const location = useLocation();
 
@@ -22,7 +22,7 @@ const ProtectedRoute = ({ onlyUnAuth = false, component }) => {
   }
 
   if (!onlyUnAuth && !user) {
-    return <Navigate to={PATHS.signin} state={{ from: location }} />;
+    return <Navigate to={PATHS.login} state={{ from: location }} />;
   }
 
   return component;
