@@ -68,7 +68,7 @@ function ProfilePage() {
               type={type}
               value={value}
               onChange={onFormChange}
-              extraClass={formStyles.input}
+              extraClass={styles.input}
               icon="ShowIcon"
             />
           );
@@ -82,7 +82,7 @@ function ProfilePage() {
               type={type}
               value={value}
               onChange={onFormChange}
-              extraClass={formStyles.input}
+              extraClass={styles.input}
             />
           );
         }
@@ -95,7 +95,7 @@ function ProfilePage() {
               type={type}
               value={value}
               onChange={onFormChange}
-              extraClass={formStyles.input}
+              extraClass={styles.input}
             />
           );
       }
