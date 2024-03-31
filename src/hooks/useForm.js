@@ -13,10 +13,9 @@ export const useForm = (initialValue) => {
     if (isValid) {
       setError("");
       const data = await dispatch(reducer());
-      if (data?.success) return data;
-    } else {
-      setError("Форма не заполнена");
-      return null;
+      if (data?.success) {
+        return data;
+      } else return null;
     }
   };
 

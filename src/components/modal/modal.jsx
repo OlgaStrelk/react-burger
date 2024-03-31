@@ -8,9 +8,15 @@ import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 
 const modalRoot = document.getElementById("react-modals");
-function Modal({ children, onClose, action, path }) {
+function Modal({ children, onClose, action, path, customStyle }) {
   const navigate = useNavigate();
   const overlayRef = createRef();
+  const containerClassName = customStyle?.modal
+    ? `${styles.container} ${customStyle.modal}`
+    : styles.container;
+  const iconClassName = customStyle?.icon
+    ? `${styles.icon} ${customStyle.icon}`
+    : styles.icon;
 
   const handleClose = () => {
     if (path) {
@@ -48,8 +54,8 @@ function Modal({ children, onClose, action, path }) {
   return ReactDOM.createPortal(
     <>
       <ModalOverlay innerRef={overlayRef}>
-        <div className={`${styles.container} pt-10 pb-15`}>
-          <div className={styles.icon}>
+        <div className={containerClassName}>
+          <div className={iconClassName}>
             <CloseIcon type="primary" onClick={handleClose} />
           </div>
           {children}

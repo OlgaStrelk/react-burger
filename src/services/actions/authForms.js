@@ -44,6 +44,10 @@ export const loginFormValue = (field, value) => ({
   value,
 });
 
+export const getRequestError = (error) => {
+  return { type: LOGIN_SUBMIT_FAILED, payload: error };
+};
+
 export const resetPasswordStepOne = () => (dispatch, getState) => {
   dispatch({ type: RESET_FORM_ONE_SUBMIT_REQUEST });
   request(ENDPOINT.resetPasswordStepOne, {
@@ -103,5 +107,7 @@ export const login = () => async (dispatch, getState) => {
     .then(() => {
       dispatch({ type: LOGIN_SUBMIT_SUCCESS });
     })
-    .catch((err) => dispatch({ type: LOGIN_SUBMIT_FAILED }));
+    .catch((err) => {
+      dispatch(getRequestError(err));
+    });
 };

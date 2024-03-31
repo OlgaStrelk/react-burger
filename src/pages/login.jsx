@@ -1,5 +1,4 @@
 import formStyles from "./base-form.module.css";
-
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 
@@ -9,17 +8,22 @@ import {
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
+import Modal from "../components/modal/modal";
 import AuthForm from "../components/auth-form/auth-form";
 import Redirect from "../components/redirect/redirect";
+import InfoTooltip from "../components/info-tooltip/info-tooltip";
 
 import { PATHS } from "../utils/consts";
 import { useForm } from "../hooks/useForm";
 import { login, loginFormValue } from "../services/actions/authForms";
+import { useModal } from "../hooks/useModal";
 function LoginPage() {
   const { register, forgotPassword } = PATHS;
   const { password, email } = useSelector((state) => state.login.form);
+  const submitError = useSelector((state) => state.login.error);
   const { handleInput, handleSubmit, error } = useForm();
   const [isValid, setIsValid] = useState(false);
+  const [isOpen, onOpen, onClose] = useModal();
 
   useEffect(() => {
     if (password && email) {
@@ -28,6 +32,13 @@ function LoginPage() {
       setIsValid(false);
     }
   }, [password, email]);
+
+  useEffect(() => {
+    if (submitError) {
+      console.log(submitError);
+      onOpen();
+    }
+  }, [submitError]);
 
   const onFormChange = (e) => {
     handleInput(e, loginFormValue);
@@ -121,6 +132,12 @@ function LoginPage() {
     btn: { text },
     redirect,
   } = FORM_DATA;
+
+  const CUSTOM_STYLES = {
+    modal: formStyles.modalContainer,
+    icon: formStyles.closeIcon,
+  };
+
   return (
     <>
       <main className={formStyles.main}>
@@ -135,6 +152,12 @@ function LoginPage() {
         </AuthForm>
         <Redirect data={redirect} />
       </main>
+
+      {isOpen && (
+        <Modal customStyle={CUSTOM_STYLES} onClose={onClose}>
+          <InfoTooltip errorCode={submitError} />
+        </Modal>
+      )}
     </>
   );
 }

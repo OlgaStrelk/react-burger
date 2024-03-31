@@ -10,3 +10,11 @@
 .input {
   composes: mt-6 from global;
 }
+.modalContainer {
+  composes: pt-20 pb-10 pr-5 pl-5 from global;
+  width: 400px;
+}
+.closeIcon {
+  top: 30px;
+  right: 20px;
+}

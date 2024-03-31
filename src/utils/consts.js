@@ -26,6 +26,15 @@ export const ENDPOINT = {
   user: "auth/user",
 };
 
+
+export const BACKEND_VALIDATION_TEXT = {
+  conflictErrorText: "к сожалению, этот email уже занят",
+  badRequestErrorText: "введенный вами email некорректен",
+  authorizationErrorText: "ошибка авторизации",
+  serverRespondErrorText: "сервер не отвечает",
+};
+
+
 export const checkResponse = (res) =>
   res.ok ? res.json() : Promise.reject(res.status);
 
