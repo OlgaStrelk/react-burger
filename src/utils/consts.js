@@ -23,6 +23,7 @@ export const ENDPOINT = {
   login: "auth/login",
   logout: "auth/logout",
   refreshToken: "auth/token",
+  user: "auth/user",
 };
 
 export const checkResponse = (res) =>

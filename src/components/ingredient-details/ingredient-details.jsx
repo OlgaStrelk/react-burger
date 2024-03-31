@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./ingredient-details.module.css";
-import { useDispatch, useSelector } from "react-redux";
-import PropTypes from "prop-types";
-import { cardDataShape } from "../../utils/shapes";
-import { useNavigate, useParams } from "react-router-dom";
-import { NotFoundPage } from "../../pages";
+import { useSelector } from "react-redux";
+import {  useParams } from "react-router-dom";
 
 function IngredientDetails({ style }) {
   const [ingredientData, setIngredientData] = useState(null);

@@ -1,4 +1,7 @@
 import { Routes, Route, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+
 import AppHeader from "../app-header/app-header";
 import {
   RESET_MODAL_INGREDIENT,
@@ -22,15 +25,18 @@ import { useLocation } from "react-router-dom";
 import { useModal } from "../../hooks/useModal";
 import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
-import ProtectedRoute from "../protected_route/protected-route";
+import { OnlyAuth, OnlyUnAuth } from "../protected_route/protected-route";
 import { PATHS } from "../../utils/consts";
-import { useEffect } from "react";
-
+import { checkUserAuth } from "../../services/actions/user";
 function App() {
+  const dispatch = useDispatch();
   let location = useLocation();
   let state = location.state;
   const [__, _, onClose] = useModal();
-  useEffect(() => fetchIngredients(), []);
+  useEffect(() => dispatch(fetchIngredients()), []);
+  useEffect(() => {
+    dispatch(checkUserAuth());
+  }, [dispatch]);
   const {
     home,
     profile,
@@ -49,39 +55,41 @@ function App() {
       <AppHeader />
       <Routes location={state?.backgroundLocation || location}>
         <Route path={home} element={<HomePage />} />
+        <Route path={ingredient} element={<IngredientPage />} />
 
         <Route
           path={profile}
-          element={
-            // <ProtectedRoute>
-            <ProfilePage />
-            // </ProtectedRoute>
-          }
+          element={<OnlyAuth component={<ProfilePage />} />}
         />
         <Route
           path={ordersHistory}
-          element={
-            <ProtectedRoute>
-              <OrdersHistoryPage />
-            </ProtectedRoute>
-          }
+          element={<OnlyAuth component={<OrdersHistoryPage />} />}
+        />
+        <Route path={order} element={<OnlyAuth component={<OrderPage />} />} />
+
+        <Route
+          path={ordersList}
+          element={<OnlyAuth component={<OrdersListPage />} />}
+        />
+
+        <Route
+          path={login}
+          element={<OnlyUnAuth component={<LoginPage />} />}
         />
         <Route
-          path={order}
-          element={
-            <ProtectedRoute>
-              <OrderPage />
-            </ProtectedRoute>
-          }
+          path={register}
+          element={<OnlyUnAuth component={<RegisterPage />} />}
         />
-        <Route path={login} element={<LoginPage />} />
-        <Route path={register} element={<RegisterPage />} />
-        <Route path={forgotPassword} element={<ForgotPasswordPage />} />
-        <Route path={resetPassword} element={<ResetPasswordPage />} />
-        <Route path={ingredient} element={<IngredientPage />} />
+        <Route
+          path={forgotPassword}
+          element={<OnlyUnAuth component={<ForgotPasswordPage />} />}
+        />
+        <Route
+          path={resetPassword}
+          element={<OnlyUnAuth component={<ResetPasswordPage />} />}
+        />
+
         <Route path={notFound} element={<NotFoundPage />} />
-        <Route path={ordersList} element={<OrdersListPage />} />
-        <Route path={forgotPassword} element={<ForgotPasswordPage />} />
       </Routes>
       {state?.backgroundLocation && (
         <Routes>

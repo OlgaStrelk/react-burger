@@ -1,13 +1,30 @@
 import React from "react";
-import { Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Navigate, useLocation } from "react-router-dom";
 // import { PATHS } from "../../utils/consts";
 let PATHS = { signin: "/login" };
-const ProtectedRoute = ({ onlyUnAuth=false, component }) => {
-  // const isAuthChecked
-  if (isLoggedIn) {
-    return children;
+const ProtectedRoute = ({ onlyUnAuth = false, component }) => {
+  const isAuthChecked = useSelector((state) => state.user.isAuthChecked);
+  const user = useSelector((state) => state.user.user);
+  const location = useLocation();
+
+  if (!isAuthChecked) {
+    return null;
   }
-  return <Navigate to={PATHS.signin} replace />;
+
+  if (onlyUnAuth && user) {
+    const { from } = location.state || { from: { pathname: PATHS.home } };
+    return <Navigate to={from} />;
+  }
+
+  if (!onlyUnAuth && user) {
+    return <Navigate to={PATHS.signin} state={{ from: location }} />;
+  }
+
+  return component;
 };
 
-export default ProtectedRoute;
+export const OnlyAuth = ProtectedRoute;
+export const OnlyUnAuth = ({ component }) => (
+  <ProtectedRoute onlyUnAuth={true} component={component} />
+);

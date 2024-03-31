@@ -1,6 +1,5 @@
-import { request } from "../../utils/consts";
-import { ENDPOINT } from "../../utils/consts";
-
+import { request, ENDPOINT } from "../../utils/consts";
+import { SET_USER_DATA } from "./user";
 export const RESET_FORM_ONE_SET_VALUE = "RESET_FORM_ONE_SET_VALUE";
 export const RESET_FORM_ONE_SUBMIT_REQUEST = "RESET_FORM_ONE_SUBMIT_REQUEST";
 export const RESET_FORM_ONE_SUBMIT_SUCCESS = "RESET_FORM_ONE_SUBMIT_SUCCESS";
@@ -20,8 +19,6 @@ export const LOGIN_SET_VALUE = "LOGIN_SET_VALUE";
 export const LOGIN_SUBMIT_SUCCESS = "LOGIN_SUBMIT_SUCCESS";
 export const LOGIN_SUBMIT_FAILED = "LOGIN_SUBMIT_FAILED";
 export const LOGIN_SUBMIT_REQUEST = "LOGIN_SUBMIT_REQUEST";
-
-export const SET_USER_DATA = "SET_USER_DATA";
 
 export const resetPasswordOneFormValue = (field, value) => ({
   type: RESET_FORM_ONE_SET_VALUE,
@@ -88,7 +85,8 @@ export const register = () => async (dispatch, getState) => {
     .catch((err) => dispatch({ type: REGISTER_SUBMIT_FAILED }));
   if (data.success) {
     dispatch({ type: SET_USER_DATA, payload: data.user });
-    //реализовать работу с токенами
+    localStorage.setItem("accessToken", data.accessToken);
+    localStorage.setItem("refreshToken", data.refreshToken);
   }
 };
 
@@ -102,7 +100,7 @@ export const login = () => async (dispatch, getState) => {
     },
     body: JSON.stringify(getState().login.form),
   })
-    .then((data) => {
+    .then(() => {
       dispatch({ type: LOGIN_SUBMIT_SUCCESS });
     })
     .catch((err) => dispatch({ type: LOGIN_SUBMIT_FAILED }));

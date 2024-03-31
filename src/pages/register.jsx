@@ -14,11 +14,7 @@ import Redirect from "../components/redirect/redirect";
 
 import { PATHS } from "../utils/consts";
 import { useForm } from "../hooks/useForm";
-import {
-  SET_USER_DATA,
-  register,
-  registerFormValue,
-} from "../services/actions/authForms";
+import { register, registerFormValue } from "../services/actions/authForms";
 function Register(props) {
   const { name, password, email } = useSelector((state) => state.register.form);
 

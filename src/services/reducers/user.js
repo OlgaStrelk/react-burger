@@ -2,10 +2,12 @@ import {
   GET_USER_REQUEST,
   GET_USER_SUCCESS,
   GET_USER_FAILURE,
+  SET_AUTH_CHECKED,
 } from "../actions/user";
-import { SET_USER_DATA } from "../actions/authForms";
+import { SET_USER_DATA } from "../actions/user";
 const initialState = {
   user: { name: "", login: "", password: "" },
+  isAuthChecked: false,
   userRequest: false,
   userFailed: false,
 };
@@ -39,6 +41,10 @@ export const userReducer = (state = initialState, action) => {
         ...state,
         user: action.payload,
       };
+    }
+
+    case SET_AUTH_CHECKED: {
+      return { ...state, isAuthChecked: action.payload };
     }
 
     default: {
