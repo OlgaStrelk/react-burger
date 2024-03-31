@@ -18,8 +18,7 @@ import {
 function ResetPasswordPage() {
   const { password, token } = useSelector((state) => state.resetFormTwo.form);
 
-  console.log();
-  const { handleInput, handleSubmit, error } = useForm();
+  const { handleInput, handleSubmit } = useForm();
   const [isValid, setIsValid] = useState(false);
 
   useEffect(() => {
@@ -113,7 +112,6 @@ function ResetPasswordPage() {
         <AuthForm
           onSubmit={onSubmit}
           btn={text}
-          error={error}
           isValid={isValid}
         >
           {inputsMarkup}

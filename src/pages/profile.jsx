@@ -12,8 +12,10 @@ import { PATHS } from "../utils/consts";
 import { useForm } from "../hooks/useForm";
 
 function ProfilePage() {
-  const { name, login, password } = useSelector((state) => state.user);
-  const { onFormChange } = useForm();
+  const { name, email, password } = useSelector((state) => state.user.user);
+
+
+  const { handleInput } = useForm();
   const INPUTS_DATA = [
     {
       id: "1",
@@ -24,8 +26,8 @@ function ProfilePage() {
     },
     {
       id: "2",
-      name: "login",
-      value: login || "",
+      name: "email",
+      value: email || "",
       placeholder: "Логин",
       type: "email",
     },
@@ -61,42 +63,54 @@ function ProfilePage() {
       switch (type) {
         case "password": {
           return (
-            <PasswordInput
-              key={id}
-              name={name}
-              placeholder={placeholder}
-              type={type}
-              value={value}
-              onChange={onFormChange}
-              extraClass={styles.input}
-              icon="ShowIcon"
-            />
+            <li className={styles.input} key={id}>
+              <PasswordInput
+                key={id}
+                name={name}
+                placeholder={placeholder}
+                type={type}
+                // value={}
+                defaultValue={value}
+                onChange={handleInput}
+                extraClass={styles.input}
+                icon="ShowIcon"
+                isIcon={true}
+              />
+            </li>
           );
         }
         case "email": {
           return (
-            <EmailInput
-              key={id}
-              name={name}
-              placeholder={placeholder}
-              type={type}
-              value={value}
-              onChange={onFormChange}
-              extraClass={styles.input}
-            />
+            <li className={styles.input} key={id}>
+              <EmailInput
+                key={id}
+                name={name}
+                placeholder={placeholder}
+                type={type}
+                // value={value}
+                defaultValue={value}
+                onChange={handleInput}
+                extraClass={styles.input}
+                isIcon={true}
+                icon="EditIcon"
+              />
+            </li>
           );
         }
         default:
           return (
-            <Input
-              key={id}
-              name={name}
-              placeholder={placeholder}
-              type={type}
-              value={value}
-              onChange={onFormChange}
-              extraClass={styles.input}
-            />
+            <li className={styles.input} key={id}>
+              <Input
+                name={name}
+                placeholder={placeholder}
+                type={type}
+                // value={value}
+                defaultValue={value}
+                onChange={handleInput}
+                isIcon={true}
+                icon="EditIcon"
+              />
+            </li>
           );
       }
     }

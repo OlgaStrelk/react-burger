@@ -3,6 +3,7 @@ import {
   LOGIN_SUBMIT_SUCCESS,
   LOGIN_SUBMIT_FAILED,
   LOGIN_SUBMIT_REQUEST,
+  // RESET_SUBMIT_ERROR,
 } from "../actions/authForms";
 
 const initialState = {
@@ -31,7 +32,6 @@ export const loginReducer = (state = initialState, action) => {
         ...state,
         loginRequest: true,
         loginFailed: false,
-        error: null,
       };
     }
     case LOGIN_SUBMIT_SUCCESS: {
@@ -48,7 +48,6 @@ export const loginReducer = (state = initialState, action) => {
         ...state,
         loginRequest: false,
         loginFailed: true,
-        error: action.payload,
       };
     }
 

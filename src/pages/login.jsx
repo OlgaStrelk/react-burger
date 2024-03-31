@@ -16,14 +16,12 @@ import InfoTooltip from "../components/info-tooltip/info-tooltip";
 import { PATHS } from "../utils/consts";
 import { useForm } from "../hooks/useForm";
 import { login, loginFormValue } from "../services/actions/authForms";
-import { useModal } from "../hooks/useModal";
+
 function LoginPage() {
   const { register, forgotPassword } = PATHS;
   const { password, email } = useSelector((state) => state.login.form);
-  const submitError = useSelector((state) => state.login.error);
-  const { handleInput, handleSubmit, error } = useForm();
+  const { handleInput, handleSubmit } = useForm();
   const [isValid, setIsValid] = useState(false);
-  const [isOpen, onOpen, onClose] = useModal();
 
   useEffect(() => {
     if (password && email) {
@@ -32,13 +30,6 @@ function LoginPage() {
       setIsValid(false);
     }
   }, [password, email]);
-
-  useEffect(() => {
-    if (submitError) {
-      console.log(submitError);
-      onOpen();
-    }
-  }, [submitError]);
 
   const onFormChange = (e) => {
     handleInput(e, loginFormValue);
@@ -133,31 +124,30 @@ function LoginPage() {
     redirect,
   } = FORM_DATA;
 
-  const CUSTOM_STYLES = {
-    modal: formStyles.modalContainer,
-    icon: formStyles.closeIcon,
-  };
+  // const CUSTOM_STYLES = {
+  //   modal: formStyles.modalContainer,
+  //   icon: formStyles.closeIcon,
+  // };
 
   return (
     <>
       <main className={formStyles.main}>
         <h1 className={formStyles.title}>{title}</h1>
-        <AuthForm
-          onSubmit={onSubmit}
-          btn={text}
-          error={error}
-          isValid={isValid}
-        >
+        <AuthForm onSubmit={onSubmit} btn={text} isValid={isValid}>
           {inputsMarkup}
         </AuthForm>
         <Redirect data={redirect} />
       </main>
 
-      {isOpen && (
-        <Modal customStyle={CUSTOM_STYLES} onClose={onClose}>
-          <InfoTooltip errorCode={submitError} />
+      {/* {isOpen && (
+        <Modal
+          customStyle={CUSTOM_STYLES}
+          onClose={onClose}
+          action={RESET_SUBMIT_ERROR}
+        >
+          <InfoTooltip errorCode={""}/>
         </Modal>
-      )}
+      )} */}
     </>
   );
 }

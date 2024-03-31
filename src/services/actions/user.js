@@ -15,11 +15,16 @@ export const getUser = () => {
   return (dispatch) => {
     return request(ENDPOINT.user, {
       method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("accessToken"),
+      },
     }).then((data) => {
       dispatch(setUser(data.user));
     });
   };
 };
+
 export const checkUserAuth = () => {
   return (dispatch) => {
     if (localStorage.getItem("accessToken")) {

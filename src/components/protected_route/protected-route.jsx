@@ -4,11 +4,8 @@ import { Navigate, useLocation } from "react-router-dom";
 import { PATHS } from "../../utils/consts";
 const ProtectedRoute = ({ onlyUnAuth = false, component }) => {
   const isAuthChecked = useSelector((state) => state.user.isAuthChecked);
-  console.log('isAuthChecked', isAuthChecked)
-  console.log('onlyUnAuth', onlyUnAuth)
 
   const user = useSelector((state) => state.user.user);
-  console.log('user',user)
 
   const location = useLocation();
 

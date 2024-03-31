@@ -22,6 +22,7 @@ import {
 } from "../../pages";
 import { modalStyle } from "../../utils/consts";
 import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { useModal } from "../../hooks/useModal";
 import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
@@ -29,6 +30,8 @@ import { OnlyAuth, OnlyUnAuth } from "../protected_route/protected-route";
 import { PATHS } from "../../utils/consts";
 import { checkUserAuth } from "../../services/actions/user";
 function App() {
+  const user = useSelector((state) => state.user.user);
+
   const dispatch = useDispatch();
   let location = useLocation();
   let state = location.state;
@@ -37,6 +40,7 @@ function App() {
   useEffect(() => {
     dispatch(checkUserAuth());
   }, [dispatch]);
+
   const {
     home,
     profile,

@@ -19,6 +19,7 @@ export const LOGIN_SET_VALUE = "LOGIN_SET_VALUE";
 export const LOGIN_SUBMIT_SUCCESS = "LOGIN_SUBMIT_SUCCESS";
 export const LOGIN_SUBMIT_FAILED = "LOGIN_SUBMIT_FAILED";
 export const LOGIN_SUBMIT_REQUEST = "LOGIN_SUBMIT_REQUEST";
+// export const RESET_SUBMIT_ERROR = "RESET_SUBMIT_ERROR";
 
 export const resetPasswordOneFormValue = (field, value) => ({
   type: RESET_FORM_ONE_SET_VALUE,
@@ -44,9 +45,9 @@ export const loginFormValue = (field, value) => ({
   value,
 });
 
-export const getRequestError = (error) => {
-  return { type: LOGIN_SUBMIT_FAILED, payload: error };
-};
+// export const getRequestError = (error) => {
+//   return { type: LOGIN_SUBMIT_FAILED, payload: error };
+// };
 
 export const resetPasswordStepOne = () => (dispatch, getState) => {
   dispatch({ type: RESET_FORM_ONE_SUBMIT_REQUEST });
@@ -108,6 +109,7 @@ export const login = () => async (dispatch, getState) => {
       dispatch({ type: LOGIN_SUBMIT_SUCCESS });
     })
     .catch((err) => {
-      dispatch(getRequestError(err));
+      dispatch({ type: LOGIN_SUBMIT_FAILED });
+      // dispatch({ type: SET_ERROR, payload: err });
     });
 };

@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 export const useForm = (initialValue) => {
   const dispatch = useDispatch();
-  const [error, setError] = useState("");
 
   const handleInput = (e, reducer) => {
     dispatch(reducer(e.target.name, e.target.value));
@@ -11,7 +10,6 @@ export const useForm = (initialValue) => {
   const handleSubmit = async (e, reducer, isValid) => {
     e.preventDefault();
     if (isValid) {
-      setError("");
       const data = await dispatch(reducer());
       if (data?.success) {
         return data;
@@ -19,5 +17,5 @@ export const useForm = (initialValue) => {
     }
   };
 
-  return { handleInput, handleSubmit, error };
+  return { handleInput, handleSubmit };
 };
