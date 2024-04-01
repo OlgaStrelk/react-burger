@@ -14,7 +14,8 @@ import { useForm } from "../hooks/useForm";
 function ProfilePage() {
   const { name, email, password } = useSelector((state) => state.user.user);
   const { handleInput } = useForm();
-
+  const user = useSelector((state) => state.user.user);
+  console.log(user);
   const INPUTS_DATA = [
     {
       id: "1",
@@ -69,7 +70,7 @@ function ProfilePage() {
                 placeholder={placeholder}
                 type={type}
                 value={value || ""}
-                defaultValue={value || ""}
+                // defaultValue={value || ""}
                 onChange={handleInput}
                 icon="ShowIcon"
                 // isIcon={true}
@@ -86,7 +87,7 @@ function ProfilePage() {
                 placeholder={placeholder}
                 type={type}
                 value={value || ""}
-                defaultValue={value}
+                // defaultValue={value}
                 onChange={handleInput}
                 // isIcon={true}
                 icon="EditIcon"
@@ -101,7 +102,7 @@ function ProfilePage() {
                 name={name}
                 placeholder={placeholder}
                 type={type}
-                defaultValue={value}
+                // defaultValue={value}
                 onChange={handleInput}
                 // isIcon={true}
                 value={value || ""}

@@ -30,7 +30,10 @@ export const getUser = () => async (dispatch) => {
   })
     .then((data) => {
       dispatch({ type: GET_USER_SUCCESS });
-      dispatch(updateUser(data.user));
+      console.log(data.user);
+      for (let [key, value] of Object.entries(data.user)) {
+        dispatch(updateUser(key, value));
+      }
     })
     .catch((err) => {
       dispatch({ type: GET_USER_FAILURE });
