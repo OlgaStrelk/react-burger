@@ -10,25 +10,23 @@ import { useSelector } from "react-redux";
 
 import { PATHS } from "../utils/consts";
 import { useForm } from "../hooks/useForm";
-import { useEffect } from "react";
 
 function ProfilePage() {
   const { name, email, password } = useSelector((state) => state.user.user);
   const { handleInput } = useForm();
 
-
   const INPUTS_DATA = [
     {
       id: "1",
       name: "name",
-      value: name || "",
+      value: name,
       placeholder: "Имя",
       type: "text",
     },
     {
       id: "2",
       name: "email",
-      value: email || "",
+      value: email,
       placeholder: "Логин",
       type: "email",
     },
@@ -36,7 +34,7 @@ function ProfilePage() {
       id: "3",
       name: "password",
       placeholder: "Пароль",
-      value: password || "",
+      value: password,
       type: "password",
     },
   ];
@@ -70,10 +68,11 @@ function ProfilePage() {
                 name={name}
                 placeholder={placeholder}
                 type={type}
-                defaultValue={value}
+                value={value || ""}
+                defaultValue={value || ""}
                 onChange={handleInput}
                 icon="ShowIcon"
-                isIcon={true}
+                // isIcon={true}
               />
             </li>
           );
@@ -86,9 +85,10 @@ function ProfilePage() {
                 name={name}
                 placeholder={placeholder}
                 type={type}
+                value={value || ""}
                 defaultValue={value}
                 onChange={handleInput}
-                isIcon={true}
+                // isIcon={true}
                 icon="EditIcon"
               />
             </li>
@@ -103,7 +103,8 @@ function ProfilePage() {
                 type={type}
                 defaultValue={value}
                 onChange={handleInput}
-                isIcon={true}
+                // isIcon={true}
+                value={value || ""}
                 icon="EditIcon"
               />
             </li>

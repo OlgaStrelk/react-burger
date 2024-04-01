@@ -5,7 +5,7 @@ const checkReponse = (res) => {
 };
 
 export const refreshToken = () => {
-  return fetch(`${BURGER_API_URL}/auth/token`, {
+  return fetch(`${API_URL}auth/token`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
