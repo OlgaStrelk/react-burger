@@ -67,9 +67,48 @@ export const login = () => async (dispatch, getState) => {
     for (let [key, value] of Object.entries(data.user)) {
       dispatch(updateUser(key, value));
     }
-
-    // dispatch(updateUser(data.user));
+    dispatch(updateUser(data.user));
     localStorage.setItem("accessToken", data.accessToken);
     localStorage.setItem("refreshToken", data.refreshToken);
   }
+};
+
+export const resetPasswordStepOne = () => (dispatch, getState) => {
+  dispatch({ type: RESET_FORM_ONE_SUBMIT_REQUEST });
+  request(ENDPOINT.resetPasswordStepOne, {
+    method: "POST",
+    mode: "cors",
+    cache: "no-cache",
+    credentials: "same-origin",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    redirect: "follow",
+    referrerPolicy: "no-referrer",
+    body: JSON.stringify(getState().resetForm.form),
+  })
+    .then((res) => {
+      dispatch({ type: RESET_FORM_ONE_SUBMIT_SUCCESS, payload: res.data });
+    })
+    .catch((err) => dispatch({ type: RESET_FORM_ONE_SUBMIT_FAILED }));
+};
+
+export const resetPasswordStepTwo = () => (dispatch, getState) => {
+  dispatch({ type: RESET_FORM_TWO_SUBMIT_REQUEST });
+  request(ENDPOINT.resetPasswordStepTwo, {
+    method: "POST",
+    mode: "cors",
+    cache: "no-cache",
+    credentials: "same-origin",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    redirect: "follow",
+    referrerPolicy: "no-referrer",
+    body: JSON.stringify(getState().resetFormTwo.form),
+  })
+    .then((res) => {
+      dispatch({ type: RESET_FORM_TWO_SUBMIT_SUCCESS, payload: res.data });
+    })
+    .catch((err) => dispatch({ type: RESET_FORM_TWO_SUBMIT_FAILED }));
 };

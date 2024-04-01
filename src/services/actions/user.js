@@ -7,7 +7,12 @@ export const GET_USER_SUCCESS = "GET_USER_SUCCESS";
 export const GET_USER_FAILURE = "GET_USER_FAILURE";
 export const SET_AUTH_CHECKED = "SET_AUTH_CHECKED";
 
+export const EDIT_PROFILE_SUBMIT_SUCCESS = "EDIT_PROFILE_SUBMIT_SUCCESS";
+export const EDIT_PROFILE_SUBMIT_FAILED = "EDIT_PROFILE_SUBMIT_FAILED";
+export const EDIT_PROFILE_SUBMIT_REQUEST = "EDIT_PROFILE_SUBMIT_REQUEST";
+
 export const UPDATE_USER_DATA = "UPDATE_USER_DATA";
+
 export const updateUser = (name, value) => ({
   type: UPDATE_USER_DATA,
   name,
@@ -30,7 +35,6 @@ export const getUser = () => async (dispatch) => {
   })
     .then((data) => {
       dispatch({ type: GET_USER_SUCCESS });
-      console.log(data.user);
       for (let [key, value] of Object.entries(data.user)) {
         dispatch(updateUser(key, value));
       }

@@ -13,6 +13,14 @@ export const REGISTER_SET_VALUE = "REGISTER_SET_VALUE";
 
 export const LOGIN_SET_VALUE = "LOGIN_SET_VALUE";
 
+export const EDIT_PROFILE_SET_VALUE="EDIT_PROFILE_SET_VALUE"
+
+export const editProfileFormValue = (field, value) => ({
+  type: EDIT_PROFILE_SET_VALUE,
+  field,
+  value,
+});
+
 export const resetPasswordOneFormValue = (field, value) => ({
   type: RESET_FORM_ONE_SET_VALUE,
   field,

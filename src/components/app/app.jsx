@@ -30,8 +30,6 @@ import { OnlyAuth, OnlyUnAuth } from "../protected_route/protected-route";
 import { PATHS } from "../../utils/consts";
 import { checkUserAuth } from "../../services/actions/user";
 function App() {
-  const user = useSelector((state) => state.user.user);
-
   const dispatch = useDispatch();
   let location = useLocation();
   let state = location.state;
@@ -40,6 +38,7 @@ function App() {
   useEffect(() => {
     dispatch(checkUserAuth());
   }, [dispatch]);
+  
 
 
   const {

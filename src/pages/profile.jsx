@@ -7,16 +7,25 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { PATHS } from "../utils/consts";
 import { useForm } from "../hooks/useForm";
+import { useEffect } from "react";
+import { updateUser } from "../services/actions/user";
 
 function ProfilePage() {
   const { name, email, password } = useSelector((state) => state.user.user);
+  const dispatch = useDispatch();
+
+
   const { handleInput } = useForm();
   const user = useSelector((state) => state.user.user);
-  console.log(user);
+  useEffect(() => {
+    if (!password) {
+      dispatch(updateUser("password", "********"));
+    }
+  }, [user]);
   const INPUTS_DATA = [
     {
       id: "1",
@@ -73,8 +82,7 @@ function ProfilePage() {
                 value={value || ""}
                 // defaultValue={value || ""}
                 onChange={handleInput}
-                icon="ShowIcon"
-                // isIcon={true}
+                icon="EditIcon"
               />
             </li>
           );
@@ -88,9 +96,7 @@ function ProfilePage() {
                 placeholder={placeholder}
                 type={type}
                 value={value || ""}
-                // defaultValue={value}
                 onChange={handleInput}
-                // isIcon={true}
                 icon="EditIcon"
               />
             </li>
@@ -103,9 +109,7 @@ function ProfilePage() {
                 name={name}
                 placeholder={placeholder}
                 type={type}
-                // defaultValue={value}
                 onChange={handleInput}
-                // isIcon={true}
                 value={value || ""}
                 icon="EditIcon"
               />
@@ -124,7 +128,9 @@ function ProfilePage() {
       <form className={styles.form}>
         <ul className={styles.list}>{inputsMarkup}</ul>
         <div className={styles.buttons}>
-          <Button htmlType="button" type="secondary" size="medium">Отмена</Button>
+          <Button htmlType="button" type="secondary" size="medium">
+            Отмена
+          </Button>
           <Button htmlType="submit">Сохранть</Button>
         </div>
       </form>
