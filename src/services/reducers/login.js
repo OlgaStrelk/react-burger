@@ -1,10 +1,9 @@
+import { LOGIN_SET_VALUE } from "../actions/authForms";
 import {
-  LOGIN_SET_VALUE,
   LOGIN_SUBMIT_SUCCESS,
   LOGIN_SUBMIT_FAILED,
   LOGIN_SUBMIT_REQUEST,
-  // RESET_SUBMIT_ERROR,
-} from "../actions/authForms";
+} from "../actions/auth";
 
 const initialState = {
   form: {

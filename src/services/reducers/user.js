@@ -3,8 +3,8 @@ import {
   GET_USER_SUCCESS,
   GET_USER_FAILURE,
   SET_AUTH_CHECKED,
+  SET_USER_DATA,
 } from "../actions/user";
-import { SET_USER_DATA } from "../actions/user";
 const initialState = {
   // user: { name: "", login: "", password: "" },
   user: null,

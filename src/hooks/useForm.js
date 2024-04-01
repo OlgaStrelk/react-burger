@@ -10,11 +10,8 @@ export const useForm = (initialValue) => {
   const handleSubmit = async (e, reducer, isValid) => {
     e.preventDefault();
     if (isValid) {
-      const data = await dispatch(reducer());
-      if (data?.success) {
-        return data;
-      } else return null;
-    }
+      dispatch(reducer());
+    } else return;
   };
 
   return { handleInput, handleSubmit };

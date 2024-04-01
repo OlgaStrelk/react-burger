@@ -15,7 +15,8 @@ import InfoTooltip from "../components/info-tooltip/info-tooltip";
 
 import { PATHS } from "../utils/consts";
 import { useForm } from "../hooks/useForm";
-import { login, loginFormValue } from "../services/actions/authForms";
+import { loginFormValue } from "../services/actions/authForms";
+import { login } from "../services/actions/auth";
 
 function LoginPage() {
   const { register, forgotPassword } = PATHS;
@@ -36,7 +37,7 @@ function LoginPage() {
   };
 
   const onSubmit = (e) => {
-    handleSubmit(e, login, isValid);
+    handleSubmit(e, login, isValid)
   };
 
   const FORM_DATA = {

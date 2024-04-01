@@ -1,9 +1,9 @@
 import {
-  REGISTER_SET_VALUE,
   REGISTER_SUBMIT_SUCCESS,
   REGISTER_SUBMIT_FAILED,
   REGISTER_SUBMIT_REQUEST,
-} from "../actions/authForms";
+} from "../actions/auth";
+import { REGISTER_SET_VALUE } from "../actions/authForms";
 
 const initialState = {
   form: {

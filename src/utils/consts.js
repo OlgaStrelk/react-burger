@@ -26,7 +26,6 @@ export const ENDPOINT = {
   user: "auth/user",
 };
 
-
 export const BACKEND_VALIDATION_TEXT = {
   conflictErrorText: "к сожалению, этот email уже занят",
   badRequestErrorText: "введенный вами email некорректен",
@@ -34,12 +33,11 @@ export const BACKEND_VALIDATION_TEXT = {
   serverRespondErrorText: "сервер не отвечает",
 };
 
-
-export const checkResponse = (res) =>
-  res.ok ? res.json() : Promise.reject(res.status);
+export const modalStyle = { ingredient: "_card", order: "_order" };
 
 export const request = (url, options) => {
   return fetch(`${API_URL}${url}`, options).then(checkResponse);
 };
 
-export const modalStyle = { ingredient: "_card", order: "_order" };
+export const checkResponse = (res) =>
+  res.ok ? res.json() : Promise.reject(res.status);
