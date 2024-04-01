@@ -4,6 +4,7 @@ import {
   Input,
   PasswordInput,
   EmailInput,
+  Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -122,6 +123,10 @@ function ProfilePage() {
       </p>
       <form className={styles.form}>
         <ul className={styles.list}>{inputsMarkup}</ul>
+        <div className={styles.buttons}>
+          <Button htmlType="button" type="secondary" size="medium">Отмена</Button>
+          <Button htmlType="submit">Сохранть</Button>
+        </div>
       </form>
     </div>
   );
