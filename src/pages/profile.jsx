@@ -10,12 +10,13 @@ import { useSelector } from "react-redux";
 
 import { PATHS } from "../utils/consts";
 import { useForm } from "../hooks/useForm";
+import { useEffect } from "react";
 
 function ProfilePage() {
   const { name, email, password } = useSelector((state) => state.user.user);
-
-
   const { handleInput } = useForm();
+
+
   const INPUTS_DATA = [
     {
       id: "1",
@@ -69,10 +70,8 @@ function ProfilePage() {
                 name={name}
                 placeholder={placeholder}
                 type={type}
-                // value={}
                 defaultValue={value}
                 onChange={handleInput}
-                extraClass={styles.input}
                 icon="ShowIcon"
                 isIcon={true}
               />
@@ -87,10 +86,8 @@ function ProfilePage() {
                 name={name}
                 placeholder={placeholder}
                 type={type}
-                // value={value}
                 defaultValue={value}
                 onChange={handleInput}
-                extraClass={styles.input}
                 isIcon={true}
                 icon="EditIcon"
               />
@@ -104,7 +101,6 @@ function ProfilePage() {
                 name={name}
                 placeholder={placeholder}
                 type={type}
-                // value={value}
                 defaultValue={value}
                 onChange={handleInput}
                 isIcon={true}

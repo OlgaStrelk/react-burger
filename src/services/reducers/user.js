@@ -3,7 +3,8 @@ import {
   GET_USER_SUCCESS,
   GET_USER_FAILURE,
   SET_AUTH_CHECKED,
-  SET_USER_DATA,
+  UPDATE_USER_DATA,
+  DELETE_USER,
 } from "../actions/user";
 const initialState = {
   // user: { name: "", login: "", password: "" },
@@ -25,7 +26,7 @@ export const userReducer = (state = initialState, action) => {
     case GET_USER_SUCCESS: {
       return {
         ...state,
-        user: { ...state, email: action.payload },
+        user: action.payload,
         userRequest: false,
       };
     }
@@ -37,15 +38,19 @@ export const userReducer = (state = initialState, action) => {
       };
     }
 
-    case SET_USER_DATA: {
+    case DELETE_USER: {
       return {
         ...state,
-        user: action.payload,
+        user: { ...state.user.initialState },
       };
     }
 
     case SET_AUTH_CHECKED: {
       return { ...state, isAuthChecked: action.payload };
+    }
+
+    case UPDATE_USER_DATA: {
+      return { ...state, user: { ...state.user, [action.name]: action.value } };
     }
 
     default: {

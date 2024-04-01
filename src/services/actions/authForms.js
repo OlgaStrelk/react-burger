@@ -1,5 +1,4 @@
 import { request, ENDPOINT } from "../../utils/consts";
-import { setUser } from "./user";
 export const RESET_FORM_ONE_SET_VALUE = "RESET_FORM_ONE_SET_VALUE";
 export const RESET_FORM_ONE_SUBMIT_REQUEST = "RESET_FORM_ONE_SUBMIT_REQUEST";
 export const RESET_FORM_ONE_SUBMIT_SUCCESS = "RESET_FORM_ONE_SUBMIT_SUCCESS";
