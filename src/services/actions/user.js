@@ -60,3 +60,27 @@ export const checkUserAuth = () => {
     }
   };
 };
+
+export const editProfile = () => (dispatch, getState) => {
+  dispatch({ type: EDIT_PROFILE_SUBMIT_REQUEST });
+  fetchWithRefresh(ENDPOINT.user, {
+    method: "PATCH",
+    mode: "cors",
+    cache: "no-cache",
+    credentials: "same-origin",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: localStorage.getItem("accessToken"),
+    },
+    redirect: "follow",
+    referrerPolicy: "no-referrer",
+    body: JSON.stringify(getState().profile.form),
+  })
+    .then((res) => {
+      dispatch({ type: EDIT_PROFILE_SUBMIT_SUCCESS });
+      for (let [key, value] of Object.entries(res.user)) {
+        dispatch(updateUser(key, value));
+      }
+    })
+    .catch((err) => dispatch({ type: EDIT_PROFILE_SUBMIT_FAILED }));
+};

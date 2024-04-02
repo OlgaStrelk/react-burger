@@ -36,9 +36,9 @@ export const editProfileFormReducer = (state = initialState, action) => {
     case EDIT_PROFILE_SUBMIT_SUCCESS: {
       return {
         ...state,
-        form: {
-          ...initialState.form,
-        },
+        // form: {
+        //   ...initialState.form,
+        // },
         editProfileRequest: false,
       };
     }

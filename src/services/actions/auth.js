@@ -1,6 +1,7 @@
 import { updateUser } from "./user";
 import { request } from "../../utils/consts";
 import { ENDPOINT } from "../../utils/consts";
+import { fetchWithRefresh } from "../../utils/api";
 export const REGISTER_SUBMIT_REQUEST = "REGISTER_SUBMIT_REQUEST";
 export const REGISTER_SUBMIT_SUCCESS = "REGISTER_SUBMIT_SUCCESS";
 export const REGISTER_SUBMIT_FAILED = "REGISTER_SUBMIT_FAILED";
@@ -113,4 +114,3 @@ export const resetPasswordStepTwo = () => (dispatch, getState) => {
     .catch((err) => dispatch({ type: RESET_FORM_TWO_SUBMIT_FAILED }));
 };
 
-export const editProfile = () => (dispatch, getState) => {};

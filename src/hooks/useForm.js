@@ -4,11 +4,11 @@ export const useForm = (initialValue) => {
   const dispatch = useDispatch();
 
   const handleInput = (e, reducer) => {
-    console.log(e.target.value)
+    console.log(e.target.value);
     dispatch(reducer(e.target.name, e.target.value));
   };
 
-  const handleSubmit = async (e, reducer, isValid) => {
+  const handleSubmit = (e, reducer, isValid) => {
     e.preventDefault();
     if (isValid) {
       dispatch(reducer());

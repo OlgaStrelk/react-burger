@@ -11,9 +11,9 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { PATHS } from "../utils/consts";
 import { useForm } from "../hooks/useForm";
-import { useEffect, useState } from "react";
-import { updateUser } from "../services/actions/user";
+import { useEffect } from "react";
 import { editProfileFormValue } from "../services/actions/authForms";
+import { editProfile } from "../services/actions/user";
 
 function ProfilePage() {
   const { name, email } = useSelector((state) => state.user.user);
@@ -21,20 +21,24 @@ function ProfilePage() {
 
   const dispatch = useDispatch();
 
-  const { handleInput } = useForm();
-  const onPasswordChange = (e) => {
+  const { handleInput, handleSubmit } = useForm();
+  const onPasswordChange = () => {
     dispatch(editProfileFormValue("password", null));
-
-    // onFormChange(e);
   };
   const onFormChange = (e) => {
     handleInput(e, editProfileFormValue);
   };
-  const user = useSelector((state) => state.user.user);
+
+  const onSubmit = (e) => {
+    let isValid = true;
+    handleSubmit(e, editProfile, isValid);
+  };
+
+  // const user = useSelector((state) => state.user.user);
   useEffect(() => {
     dispatch(editProfileFormValue("name", name));
     dispatch(editProfileFormValue("email", email));
-  }, [user]);
+  }, [name, email]);
 
   const resetForm = () => {};
   const INPUTS_DATA = [
@@ -138,7 +142,7 @@ function ProfilePage() {
       <p className={styles.paragraph}>
         В этом разделе вы можете изменить свои персональные данные
       </p>
-      <form className={styles.form}>
+      <form onSubmit={onSubmit} className={styles.form}>
         <ul className={styles.list}>{inputsMarkup}</ul>
         <div className={styles.buttons}>
           <Button
