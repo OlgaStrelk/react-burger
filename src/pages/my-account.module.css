@@ -1,0 +1,40 @@
+.grid {
+  max-width: 1280px;
+  margin: 100px auto;
+  display: grid;
+  grid-template-columns: 320px 480px;
+  grid-template-areas:
+    "navbar form"
+    "paragraph form";
+  gap: 80px 60px;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav_bar {
+  composes: text text_type_main-medium from global;
+  list-style: none;
+  grid-area: navbar;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.active {
+  composes: link;
+  color: var(--text-primary-color);
+}
+
+.inactive {
+  composes: link;
+  color: var(--text-inactive-color);
+}
+
+.nav_item {
+  composes: mt-4 from global;
+}

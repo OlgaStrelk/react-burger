@@ -6,7 +6,7 @@ import {
   EmailInput,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { PATHS } from "../utils/consts";
@@ -68,20 +68,32 @@ function ProfilePage() {
   const NAVLINKS_DATA = [
     { id: "5", text: "Профиль", path: PATHS.profile },
     { id: "6", text: "История заказов", path: PATHS.ordersHistory },
-    { id: "7", text: "Выход", path: PATHS.ingredient },
+    { id: "7", text: "Выход" },
   ];
-  const navBarMarkup = NAVLINKS_DATA.map(({ id, text, path }) => (
-    <li className={styles.nav_item} key={id}>
-      <NavLink
-        className={({ isActive }) =>
-          isActive ? styles.active : styles.inactive
-        }
-        to={path}
-      >
-        {text}
-      </NavLink>
-    </li>
-  ));
+  const navBarMarkup = NAVLINKS_DATA.map(({ id, text, path }) => {
+    if (path) {
+      return (
+        <li className={styles.nav_item} key={id}>
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? styles.active : styles.inactive
+            }
+            to={path}
+          >
+            {text}
+          </NavLink>
+        </li>
+      );
+    } else {
+      return (
+        <li className={styles.nav_item} key={id}>
+          <Link to=".." relative="path">
+            Выйти
+          </Link>
+        </li>
+      );
+    }
+  });
 
   const inputsMarkup = INPUTS_DATA.map(
     ({ id, placeholder, name, type, value }) => {
@@ -137,8 +149,7 @@ function ProfilePage() {
   );
 
   return (
-    <div className={styles.grid}>
-      <ul className={styles.nav_bar}>{navBarMarkup}</ul>
+    <>
       <p className={styles.paragraph}>
         В этом разделе вы можете изменить свои персональные данные
       </p>
@@ -153,10 +164,10 @@ function ProfilePage() {
           >
             Отмена
           </Button>
-          <Button htmlType="submit">Сохранть</Button>
+          <Button htmlType="submit">Сохранить</Button>
         </div>
       </form>
-    </div>
+    </>
   );
 }
 

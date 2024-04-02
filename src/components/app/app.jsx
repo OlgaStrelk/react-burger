@@ -29,6 +29,7 @@ import IngredientDetails from "../ingredient-details/ingredient-details";
 import { OnlyAuth, OnlyUnAuth } from "../protected_route/protected-route";
 import { PATHS } from "../../utils/consts";
 import { checkUserAuth } from "../../services/actions/user";
+import MyAccountPage from "../../pages/my-account";
 function App() {
   const dispatch = useDispatch();
   let location = useLocation();
@@ -58,18 +59,24 @@ function App() {
       <Routes location={state?.backgroundLocation || location}>
         <Route path={home} element={<HomePage />} />
         <Route path={ingredient} element={<IngredientPage />} />
-
         <Route
           path={profile}
-          element={<OnlyAuth component={<ProfilePage />} />}
+          element={<OnlyAuth component={<MyAccountPage />} />}
         >
+          <Route
+            path={profile}
+            element={<OnlyAuth component={<ProfilePage />} />}
+          />
           <Route
             path={ordersHistory}
             element={<OnlyAuth component={<OrdersHistoryPage />} />}
-          />
+          >
+            <Route
+              path={order}
+              element={<OnlyAuth component={<OrderPage />} />}
+            />
+          </Route>
         </Route>
-
-        <Route path={order} element={<OnlyAuth component={<OrderPage />} />} />
 
         <Route
           path={ordersList}
