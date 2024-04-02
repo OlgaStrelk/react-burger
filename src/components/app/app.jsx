@@ -62,11 +62,13 @@ function App() {
         <Route
           path={profile}
           element={<OnlyAuth component={<ProfilePage />} />}
-        />
-        <Route
-          path={ordersHistory}
-          element={<OnlyAuth component={<OrdersHistoryPage />} />}
-        />
+        >
+          <Route
+            path={ordersHistory}
+            element={<OnlyAuth component={<OrdersHistoryPage />} />}
+          />
+        </Route>
+
         <Route path={order} element={<OnlyAuth component={<OrderPage />} />} />
 
         <Route
