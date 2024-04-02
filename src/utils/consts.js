@@ -8,8 +8,8 @@ export const PATHS = {
   forgotPassword: "/forgot-password",
   resetPassword: "/reset-password",
   ingredient: "/ingredients/:id",
-  ordersHistory: "/profile/orders",
-  order: "/profile/orders/:number",
+  ordersHistory: "orders",
+  order: ":number",
   ordersList: "orders",
   notFound: "/*",
 };

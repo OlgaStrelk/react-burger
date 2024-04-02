@@ -17,7 +17,7 @@ function MyAccountPage() {
     if (path) {
       return (
         <li className={styles.nav_item} key={id}>
-          <NavLink
+          <NavLink end={true}
             className={({ isActive }) =>
               isActive ? styles.active : styles.inactive
             }
@@ -30,7 +30,12 @@ function MyAccountPage() {
     } else {
       return (
         <li className={styles.nav_item} key={id}>
-          <Link to=".." relative="path" onClick={onClick}>
+          <Link
+            className={styles.inactive}
+            to=".."
+            relative="path"
+            onClick={onClick}
+          >
             {text}
           </Link>
         </li>

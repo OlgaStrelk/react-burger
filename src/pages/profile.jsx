@@ -65,36 +65,6 @@ function ProfilePage() {
     },
   ];
 
-  const NAVLINKS_DATA = [
-    { id: "5", text: "Профиль", path: PATHS.profile },
-    { id: "6", text: "История заказов", path: PATHS.ordersHistory },
-    { id: "7", text: "Выход" },
-  ];
-  const navBarMarkup = NAVLINKS_DATA.map(({ id, text, path }) => {
-    if (path) {
-      return (
-        <li className={styles.nav_item} key={id}>
-          <NavLink
-            className={({ isActive }) =>
-              isActive ? styles.active : styles.inactive
-            }
-            to={path}
-          >
-            {text}
-          </NavLink>
-        </li>
-      );
-    } else {
-      return (
-        <li className={styles.nav_item} key={id}>
-          <Link to=".." relative="path">
-            Выйти
-          </Link>
-        </li>
-      );
-    }
-  });
-
   const inputsMarkup = INPUTS_DATA.map(
     ({ id, placeholder, name, type, value }) => {
       switch (type) {
