@@ -11,38 +11,44 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { PATHS } from "../utils/consts";
 import { useForm } from "../hooks/useForm";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { updateUser } from "../services/actions/user";
 import { editProfileFormValue } from "../services/actions/authForms";
 
 function ProfilePage() {
-  const { name, email, password } = useSelector((state) => state.user.user);
+  const { name, email } = useSelector((state) => state.user.user);
+  const form = useSelector((state) => state.profile.form);
+
   const dispatch = useDispatch();
 
-
   const { handleInput } = useForm();
+  const onPasswordChange = (e) => {
+    dispatch(editProfileFormValue("password", null));
 
+    // onFormChange(e);
+  };
   const onFormChange = (e) => {
     handleInput(e, editProfileFormValue);
   };
   const user = useSelector((state) => state.user.user);
   useEffect(() => {
-    if (!password) {
-      dispatch(updateUser("password", "********"));
-    }
+    dispatch(editProfileFormValue("name", name));
+    dispatch(editProfileFormValue("email", email));
   }, [user]);
+
+  const resetForm = () => {};
   const INPUTS_DATA = [
     {
       id: "1",
       name: "name",
-      value: name,
+      value: form.name,
       placeholder: "Имя",
       type: "text",
     },
     {
       id: "2",
       name: "email",
-      value: email,
+      value: form.email,
       placeholder: "Логин",
       type: "email",
     },
@@ -50,7 +56,7 @@ function ProfilePage() {
       id: "3",
       name: "password",
       placeholder: "Пароль",
-      value: password,
+      value: form.password,
       type: "password",
     },
   ];
@@ -88,6 +94,7 @@ function ProfilePage() {
                 // defaultValue={value || ""}
                 onChange={onFormChange}
                 icon="EditIcon"
+                onFocus={onPasswordChange}
               />
             </li>
           );
@@ -102,7 +109,8 @@ function ProfilePage() {
                 type={type}
                 value={value || ""}
                 onChange={onFormChange}
-                icon="EditIcon"
+                // icon="EditIcon"
+                isIcon={true}
               />
             </li>
           );
@@ -133,7 +141,12 @@ function ProfilePage() {
       <form className={styles.form}>
         <ul className={styles.list}>{inputsMarkup}</ul>
         <div className={styles.buttons}>
-          <Button htmlType="button" type="secondary" size="medium">
+          <Button
+            onClick={resetForm}
+            htmlType="button"
+            type="secondary"
+            size="medium"
+          >
             Отмена
           </Button>
           <Button htmlType="submit">Сохранть</Button>

@@ -8,6 +8,7 @@ import { resetFormTwoReducer } from "./resetFormTwo.js";
 import { registerReducer } from "./register.js";
 import { loginReducer } from "./login.js";
 import { userReducer } from "./user.js";
+import { editProfileFormReducer } from "./profileForm.js";
 
 export const rootReducer = combineReducers({
   ingredients: ingredientsReducer,
@@ -19,4 +20,5 @@ export const rootReducer = combineReducers({
   register: registerReducer,
   login: loginReducer,
   user: userReducer,
+  profile: editProfileFormReducer
 });

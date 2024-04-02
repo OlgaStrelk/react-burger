@@ -5,16 +5,17 @@ import {
   EDIT_PROFILE_SUBMIT_REQUEST,
 } from "../actions/user";
 
-
 const initialState = {
   form: {
+    name: "",
     email: "",
+    password: "01010101",
   },
   editProfileRequest: false,
   editProfileFailed: false,
 };
 
-export const resetFormReducer = (state = initialState, action) => {
+export const editProfileFormReducer = (state = initialState, action) => {
   switch (action.type) {
     case EDIT_PROFILE_SET_VALUE: {
       return {
