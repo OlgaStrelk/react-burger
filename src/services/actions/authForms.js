@@ -45,26 +45,4 @@ export const loginFormValue = (field, value) => ({
   value,
 });
 
-export const resetPasswordStepOne = () => (dispatch, getState) => {
-  dispatch({ type: RESET_FORM_ONE_SUBMIT_REQUEST });
-  request(ENDPOINT.resetPasswordStepOne, {
-    method: "POST",
-    body: JSON.stringify(getState().resetForm.form),
-  })
-    .then((res) => {
-      dispatch({ type: RESET_FORM_ONE_SUBMIT_SUCCESS, payload: res.data });
-    })
-    .catch((err) => dispatch({ type: RESET_FORM_ONE_SUBMIT_FAILED }));
-};
 
-export const resetPasswordStepTwo = () => (dispatch, getState) => {
-  dispatch({ type: RESET_FORM_TWO_SUBMIT_REQUEST });
-  request(ENDPOINT.resetPasswordStepTwo, {
-    method: "POST",
-    body: JSON.stringify(getState().resetFormTwo.form),
-  })
-    .then((res) => {
-      dispatch({ type: RESET_FORM_TWO_SUBMIT_SUCCESS, payload: res.data });
-    })
-    .catch((err) => dispatch({ type: RESET_FORM_TWO_SUBMIT_FAILED }));
-};

@@ -4,11 +4,9 @@ import { PATHS } from "../utils/consts";
 import { useForm } from "../hooks/useForm";
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import Redirect from "../components/redirect/redirect";
-import {  useSelector } from "react-redux";
-import {
-  resetPasswordStepOne,
-  resetPasswordOneFormValue,
-} from "../services/actions/authForms";
+import { useSelector } from "react-redux";
+import { resetPasswordStepOne } from "../services/actions/auth";
+import { resetPasswordOneFormValue } from "../services/actions/authForms";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 function ForgotPasswordPage() {

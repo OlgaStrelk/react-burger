@@ -12,8 +12,10 @@ import { PATHS } from "../utils/consts";
 import { useForm } from "../hooks/useForm";
 import {
   resetPasswordTwoFormValue,
-  resetPasswordStepTwo,
 } from "../services/actions/authForms";
+import {
+  resetPasswordStepTwo,
+} from "../services/actions/auth";
 
 function ResetPasswordPage() {
   const { password, token } = useSelector((state) => state.resetFormTwo.form);

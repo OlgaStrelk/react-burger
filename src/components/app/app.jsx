@@ -38,8 +38,6 @@ function App() {
   useEffect(() => {
     dispatch(checkUserAuth());
   }, [dispatch]);
-  
-
 
   const {
     home,

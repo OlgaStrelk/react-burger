@@ -112,3 +112,10 @@ export const resetPasswordStepTwo = () => (dispatch, getState) => {
     })
     .catch((err) => dispatch({ type: RESET_FORM_TWO_SUBMIT_FAILED }));
 };
+
+
+export const editProfile= () => (dispatch, getState) => {
+    const prevValue = getState().user.user
+    delete prevValue.password
+    
+}

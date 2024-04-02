@@ -13,6 +13,7 @@ import { PATHS } from "../utils/consts";
 import { useForm } from "../hooks/useForm";
 import { useEffect } from "react";
 import { updateUser } from "../services/actions/user";
+import { editProfileFormValue } from "../services/actions/authForms";
 
 function ProfilePage() {
   const { name, email, password } = useSelector((state) => state.user.user);
@@ -20,6 +21,10 @@ function ProfilePage() {
 
 
   const { handleInput } = useForm();
+
+  const onFormChange = (e) => {
+    handleInput(e, editProfileFormValue);
+  };
   const user = useSelector((state) => state.user.user);
   useEffect(() => {
     if (!password) {
@@ -81,7 +86,7 @@ function ProfilePage() {
                 type={type}
                 value={value || ""}
                 // defaultValue={value || ""}
-                onChange={handleInput}
+                onChange={onFormChange}
                 icon="EditIcon"
               />
             </li>
@@ -96,7 +101,7 @@ function ProfilePage() {
                 placeholder={placeholder}
                 type={type}
                 value={value || ""}
-                onChange={handleInput}
+                onChange={onFormChange}
                 icon="EditIcon"
               />
             </li>
@@ -109,7 +114,7 @@ function ProfilePage() {
                 name={name}
                 placeholder={placeholder}
                 type={type}
-                onChange={handleInput}
+                onChange={onFormChange}
                 value={value || ""}
                 icon="EditIcon"
               />

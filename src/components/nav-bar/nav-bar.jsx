@@ -6,9 +6,12 @@ import {
   ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { PATHS } from "../../utils/consts";
+import { useSelector } from "react-redux";
 
 function Navbar() {
   const { ordersList, home, profile } = PATHS;
+  const user = useSelector((state) => state.user.user);
+  const profileLinkText = user && user.name ? user.name : "Личный кабинет";
   const NAVBAR_DATA = [
     {
       id: 1,
@@ -24,7 +27,7 @@ function Navbar() {
     },
     {
       id: 3,
-      text: "Личный кабинет",
+      text: profileLinkText,
       icon: <ProfileIcon type="primary" />,
       link: profile,
     },
