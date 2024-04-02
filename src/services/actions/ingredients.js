@@ -14,7 +14,7 @@ export const RESET_MODAL_INGREDIENT = "RESET_MODAL_INGREDIENT";
 
 export const GET_INGREDIENTS_REQUEST = "GET_INGREDIENTS_REQUEST";
 export const GET_INGREDIENTS_SUCCESS = "GET_INGREDIENTS_SUCCESS";
-export const GET_INGREDIENTS_FAILURE = "GET_INGREDIENTS_FAILURE";
+export const GET_INGREDIENTS_FAILED = "GET_INGREDIENTS_FAILED";
 
 export const INCREASE_INGREDIENT_QUANTITY = "INCREASE_INGREDIENT_QUANTITY";
 export const DECREASE_INGREDIENT_QUANTITY = "DECREASE_INGREDIENT_QUANTITY";
@@ -22,7 +22,7 @@ export const RESET_INGREDIENT_QUANTITY = "RESET_INGREDIENT_QUANTITY";
 
 export const MAKE_ORDER_REQUEST = "MAKE_ORDER_REQUEST";
 export const MAKE_ORDER_SUCCESS = "MAKE_ORDER_SUCCESS";
-export const MAKE_ORDER_FAILURE = "MAKE_ORDER_FAILURE";
+export const MAKE_ORDER_FAILED = "MAKE_ORDER_FAILED";
 
 
 export const addIngredient = (ingredient) => {
@@ -41,7 +41,7 @@ export const fetchIngredients = () => (dispatch) => {
     .then((res) => {
       dispatch({ type: GET_INGREDIENTS_SUCCESS, payload: res.data });
     })
-    .catch((err) => dispatch({ type: GET_INGREDIENTS_FAILURE }));
+    .catch((err) => dispatch({ type: GET_INGREDIENTS_FAILED }));
 };
 
 export const makeOrder = (data) => (dispatch) => {
@@ -57,6 +57,6 @@ export const makeOrder = (data) => (dispatch) => {
     .then((res) =>
       dispatch({ type: MAKE_ORDER_SUCCESS, payload: res.order.number })
     )
-    .catch((err) => dispatch({ type: MAKE_ORDER_FAILURE }));
+    .catch((err) => dispatch({ type: MAKE_ORDER_FAILED }));
 };
 

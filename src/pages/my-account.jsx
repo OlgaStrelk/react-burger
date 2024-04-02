@@ -3,21 +3,26 @@ import styles from "./my-account.module.css";
 import { Link, NavLink, Outlet } from "react-router-dom";
 
 import { PATHS } from "../utils/consts";
+import { useDispatch } from "react-redux";
+import { logout } from "../services/actions/auth";
 
 function MyAccountPage() {
-  const logout = () => {
-    console.log("logout");
+  const dispatch = useDispatch();
+  const signout = () => {
+    dispatch(logout());
+    console.log("signout");
   };
   const NAVLINKS_DATA = [
     { id: "5", text: "Профиль", path: PATHS.profile },
     { id: "6", text: "История заказов", path: PATHS.ordersHistory },
-    { id: "7", text: "Выход", onClick: logout },
+    { id: "7", text: "Выход", onClick: signout },
   ];
   const navBarMarkup = NAVLINKS_DATA.map(({ id, text, path, onClick }) => {
     if (path) {
       return (
         <li className={styles.nav_item} key={id}>
-          <NavLink end={true}
+          <NavLink
+            end={true}
             className={({ isActive }) =>
               isActive ? styles.active : styles.inactive
             }

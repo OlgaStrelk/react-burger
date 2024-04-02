@@ -40,6 +40,8 @@ function App() {
     dispatch(checkUserAuth());
   }, [dispatch]);
 
+  const user = useSelector((state) => state.user);
+  console.log(user);
   const {
     home,
     profile,
@@ -63,10 +65,7 @@ function App() {
           path={profile}
           element={<OnlyAuth component={<MyAccountPage />} />}
         >
-          <Route
-            path=""
-            element={<OnlyAuth component={<ProfilePage />} />}
-          />
+          <Route path="" element={<OnlyAuth component={<ProfilePage />} />} />
           <Route
             path={ordersHistory}
             element={<OnlyAuth component={<OrdersHistoryPage />} />}
