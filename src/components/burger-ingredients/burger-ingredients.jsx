@@ -58,7 +58,5 @@ function BurgerIngredients(props) {
   );
 }
 
-BurgerIngredients.propTypes = {
-};
 
 export default BurgerIngredients;
