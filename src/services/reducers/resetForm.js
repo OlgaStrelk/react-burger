@@ -1,9 +1,10 @@
+import { RESET_FORM_ONE_SET_VALUE } from "../actions/authForms";
+
 import {
-  RESET_FORM_ONE_SET_VALUE,
   RESET_FORM_ONE_SUBMIT_SUCCESS,
   RESET_FORM_ONE_SUBMIT_FAILED,
   RESET_FORM_ONE_SUBMIT_REQUEST,
-} from "../actions/authForms";
+} from "../actions/auth";
 
 const initialState = {
   form: {
@@ -18,10 +19,10 @@ export const resetFormReducer = (state = initialState, action) => {
     case RESET_FORM_ONE_SET_VALUE: {
       return {
         form: {
-            ...state.form,
-            [action.field]: action.value
-        }
-    }
+          ...state.form,
+          [action.field]: action.value,
+        },
+      };
     }
 
     case RESET_FORM_ONE_SUBMIT_REQUEST: {

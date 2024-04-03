@@ -10,15 +10,19 @@ import Redirect from "../components/redirect/redirect";
 
 import { PATHS } from "../utils/consts";
 import { useForm } from "../hooks/useForm";
-import {
-  resetPasswordTwoFormValue,
-} from "../services/actions/authForms";
-import {
-  resetPasswordStepTwo,
-} from "../services/actions/auth";
+import { resetPasswordTwoFormValue } from "../services/actions/authForms";
+import { resetPasswordStepTwo } from "../services/actions/auth";
+import { useNavigate } from "react-router-dom";
 
 function ResetPasswordPage() {
   const { password, token } = useSelector((state) => state.resetFormTwo.form);
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!localStorage.getItem("emailsSent")) {
+      navigate(PATHS.forgotPassword);
+    }
+  }, []);
 
   const { handleInput, handleSubmit } = useForm();
   const [isValid, setIsValid] = useState(false);
@@ -111,11 +115,7 @@ function ResetPasswordPage() {
     <>
       <main className={formStyles.main}>
         <h1 className={formStyles.title}>{title}</h1>
-        <AuthForm
-          onSubmit={onSubmit}
-          btn={text}
-          isValid={isValid}
-        >
+        <AuthForm onSubmit={onSubmit} btn={text} isValid={isValid}>
           {inputsMarkup}
         </AuthForm>
         <Redirect data={redirect} />

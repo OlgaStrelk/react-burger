@@ -30,7 +30,8 @@ function ForgotPasswordPage() {
 
   const onSubmit = (e) => {
     handleSubmit(e, resetPasswordStepOne, isValid);
-    // navigate(PATHS.resetPassword, { replace: true });
+    localStorage.setItem('emailsSent', 'true')
+    navigate(PATHS.resetPassword, { replace: true });
   };
 
   const FORM_DATA = {

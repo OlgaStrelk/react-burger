@@ -1,10 +1,9 @@
+import { RESET_FORM_TWO_SET_VALUE } from "../actions/authForms";
 import {
-  RESET_FORM_TWO_SET_VALUE,
   RESET_FORM_TWO_SUBMIT_SUCCESS,
   RESET_FORM_TWO_SUBMIT_FAILED,
   RESET_FORM_TWO_SUBMIT_REQUEST,
-} from "../actions/authForms";
-
+} from "../actions/auth";
 const initialState = {
   form: {
     password: "",

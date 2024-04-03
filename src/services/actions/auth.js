@@ -1,6 +1,7 @@
 import { updateUser } from "./user";
 import { request } from "../../utils/consts";
 import { ENDPOINT } from "../../utils/consts";
+
 export const REGISTER_SUBMIT_REQUEST = "REGISTER_SUBMIT_REQUEST";
 export const REGISTER_SUBMIT_SUCCESS = "REGISTER_SUBMIT_SUCCESS";
 export const REGISTER_SUBMIT_FAILED = "REGISTER_SUBMIT_FAILED";
@@ -12,6 +13,14 @@ export const LOGIN_SUBMIT_REQUEST = "LOGIN_SUBMIT_REQUEST";
 export const LOGOUT_REQUEST = "LOGOUT_REQUEST";
 export const LOGOUT_FAILED = "LOGOUT_FAILED";
 export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
+
+export const RESET_FORM_ONE_SUBMIT_REQUEST = "RESET_FORM_ONE_SUBMIT_REQUEST";
+export const RESET_FORM_ONE_SUBMIT_SUCCESS = "RESET_FORM_ONE_SUBMIT_SUCCESS";
+export const RESET_FORM_ONE_SUBMIT_FAILED = "RESET_FORM_ONE_SUBMIT_FAILED";
+
+export const RESET_FORM_TWO_SUBMIT_REQUEST = "RESET_FORM_TWO_SUBMIT_REQUEST";
+export const RESET_FORM_TWO_SUBMIT_SUCCESS = "RESET_FORM_TWO_SUBMIT_SUCCESS";
+export const RESET_FORM_TWO_SUBMIT_FAILED = "RESET_FORM_TWO_SUBMIT_FAILED";
 
 export const register = () => async (dispatch, getState) => {
   dispatch({ type: REGISTER_SUBMIT_REQUEST });
@@ -59,7 +68,7 @@ export const login = () => async (dispatch, getState) => {
     body: JSON.stringify(getState().login.form),
   })
     .then((data) => {
-      console.log(data)
+      console.log(data);
       const value = getState().login.form.password;
       dispatch(updateUser("password", value));
       dispatch({ type: LOGIN_SUBMIT_SUCCESS });
