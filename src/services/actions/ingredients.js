@@ -1,7 +1,4 @@
-import {
-  ENDPOINT,
-  request,
-} from "../../utils/consts";
+import { ENDPOINT, request } from "../../utils/consts";
 import { v4 as uuid } from "uuid";
 
 export const ADD_INGREDIENT = "ADD_INGREDIENT";
@@ -23,7 +20,6 @@ export const RESET_INGREDIENT_QUANTITY = "RESET_INGREDIENT_QUANTITY";
 export const MAKE_ORDER_REQUEST = "MAKE_ORDER_REQUEST";
 export const MAKE_ORDER_SUCCESS = "MAKE_ORDER_SUCCESS";
 export const MAKE_ORDER_FAILED = "MAKE_ORDER_FAILED";
-
 
 export const addIngredient = (ingredient) => {
   return { type: ADD_INGREDIENT, payload: { ...ingredient, id: uuid() } };
@@ -51,6 +47,7 @@ export const makeOrder = (data) => (dispatch) => {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
+      Authorization: localStorage.getItem("accessToken"),
     },
     body: JSON.stringify(data),
   })
@@ -59,4 +56,3 @@ export const makeOrder = (data) => (dispatch) => {
     )
     .catch((err) => dispatch({ type: MAKE_ORDER_FAILED }));
 };
-

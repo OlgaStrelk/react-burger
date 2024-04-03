@@ -14,22 +14,25 @@ import {
   addIngredient,
   INCREASE_INGREDIENT_QUANTITY,
 } from "../../services/actions/ingredients.js";
+import { Navigate } from "react-router-dom";
+import { PATHS } from "../../utils/consts.js";
 function BurgerConstructor({ onModalOpen }) {
   const [isButtonActive, setButtonActive] = useState(false);
-  const [isError, setError] = useState("");
+  const [isNavigated, setNavigated] = useState(false);
 
   const { ingredients, buns } = useSelector(
     (state) => state.burgerConstructor.addedIngredients
   );
 
+  const user = useSelector((state) => state.user.user);
+
   const dispatch = useDispatch();
 
   const validateConstructor = () => {
     if (!buns || !ingredients.length) {
-      setError("Добавьте ингредиенты в конструктор для заказа");
+      // setError("Добавьте ингредиенты в конструктор для заказа");
       setButtonActive(false);
     } else {
-      setError("");
       setButtonActive(true);
     }
   };
@@ -58,13 +61,16 @@ function BurgerConstructor({ onModalOpen }) {
     }
   };
 
-  const handleSubmit = (e) => {
-    onModalOpen();
+  const handleSubmit = () => {
     let data = orderList();
-    if (data) {
+    console.log("data", data);
+    console.log("user", user);
+
+    if (user && data) {
+      onModalOpen();
       dispatch(makeOrder(data));
     } else {
-      return setError("Выберите ингредиенты");
+      setNavigated(true);
     }
   };
 
@@ -117,27 +123,35 @@ function BurgerConstructor({ onModalOpen }) {
   };
 
   return (
-    <section className={`${styles.section} mt-25 ml-10`}>
-      <div className="ml-8" ref={dropRef}>
-        {renderBunMarkup(" mb-2 pr-1", "top", "(верх)")}
-        <ul className={`${styles.container}  ${styles.column} custom-scroll`}>
-          {renderInnerIngredientsMarkup()}
-        </ul>
-        {renderBunMarkup("mt-2", "bottom", "(низ)")}
-      </div>
-      <div className={`mt-10 ${styles.total}`}>
-        <Total />
-        <Button
-          htmlType="button"
-          type="primary"
-          size="large"
-          onClick={handleSubmit}
-          disabled={!isButtonActive}
-        >
-          Оформить заказ
-        </Button>
-      </div>
-    </section>
+    <>
+      {!isNavigated ? (
+        <section className={`${styles.section} mt-25 ml-10`}>
+          <div className="ml-8" ref={dropRef}>
+            {renderBunMarkup(" mb-2 pr-1", "top", "(верх)")}
+            <ul
+              className={`${styles.container}  ${styles.column} custom-scroll`}
+            >
+              {renderInnerIngredientsMarkup()}
+            </ul>
+            {renderBunMarkup("mt-2", "bottom", "(низ)")}
+          </div>
+          <div className={`mt-10 ${styles.total}`}>
+            <Total />
+            <Button
+              htmlType="button"
+              type="primary"
+              size="large"
+              onClick={handleSubmit}
+              disabled={!isButtonActive}
+            >
+              Оформить заказ
+            </Button>
+          </div>
+        </section>
+      ) : (
+        <Navigate to={PATHS.login} />
+      )}
+    </>
   );
 }
 

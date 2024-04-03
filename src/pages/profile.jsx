@@ -34,13 +34,15 @@ function ProfilePage() {
     handleSubmit(e, editProfile, isValid);
   };
 
-  // const user = useSelector((state) => state.user.user);
   useEffect(() => {
     dispatch(editProfileFormValue("name", name));
     dispatch(editProfileFormValue("email", email));
-  }, [name, email]);
+  }, []);
 
-  const resetForm = () => {};
+  const resetForm = () => {
+    dispatch(editProfileFormValue("name", name));
+    dispatch(editProfileFormValue("email", email));
+  };
   const INPUTS_DATA = [
     {
       id: "1",
@@ -77,7 +79,6 @@ function ProfilePage() {
                 placeholder={placeholder}
                 type={type}
                 value={value || ""}
-                // defaultValue={value || ""}
                 onChange={onFormChange}
                 icon="EditIcon"
                 onFocus={onPasswordChange}
@@ -95,7 +96,6 @@ function ProfilePage() {
                 type={type}
                 value={value || ""}
                 onChange={onFormChange}
-                // icon="EditIcon"
                 isIcon={true}
               />
             </li>

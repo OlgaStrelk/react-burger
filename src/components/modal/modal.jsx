@@ -1,16 +1,15 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import ModalOverlay from "./modal-overlay/modal-overlay";
 import styles from "./modal.module.css";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import ReactDOM from "react-dom";
-import { createRef } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 
 const modalRoot = document.getElementById("react-modals");
 function Modal({ children, onClose, action, path, customStyle }) {
   const navigate = useNavigate();
-  const overlayRef = createRef();
+  const overlayRef = useRef();
   const containerClassName = customStyle?.modal
     ? `${styles.container} ${customStyle.modal}`
     : styles.container;

@@ -40,8 +40,6 @@ function App() {
     dispatch(checkUserAuth());
   }, [dispatch]);
 
-  const user = useSelector((state) => state.user);
-  console.log(user);
   const {
     home,
     profile,

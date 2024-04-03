@@ -1,7 +1,6 @@
-import { DELETE_USER, updateUser } from "./user";
+import { updateUser } from "./user";
 import { request } from "../../utils/consts";
 import { ENDPOINT } from "../../utils/consts";
-import { fetchWithRefresh } from "../../utils/api";
 export const REGISTER_SUBMIT_REQUEST = "REGISTER_SUBMIT_REQUEST";
 export const REGISTER_SUBMIT_SUCCESS = "REGISTER_SUBMIT_SUCCESS";
 export const REGISTER_SUBMIT_FAILED = "REGISTER_SUBMIT_FAILED";
@@ -60,6 +59,7 @@ export const login = () => async (dispatch, getState) => {
     body: JSON.stringify(getState().login.form),
   })
     .then((data) => {
+      console.log(data)
       const value = getState().login.form.password;
       dispatch(updateUser("password", value));
       dispatch({ type: LOGIN_SUBMIT_SUCCESS });
