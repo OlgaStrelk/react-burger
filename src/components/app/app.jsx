@@ -22,8 +22,6 @@ import {
 } from "../../pages";
 import { modalStyle } from "../../utils/consts";
 import { useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useModal } from "../../hooks/useModal";
 import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import { OnlyAuth, OnlyUnAuth } from "../protected_route/protected-route";
@@ -34,7 +32,6 @@ function App() {
   const dispatch = useDispatch();
   let location = useLocation();
   let state = location.state;
-  const [__, _, onClose] = useModal();
   useEffect(() => dispatch(fetchIngredients()), [dispatch]);
   useEffect(() => {
     dispatch(checkUserAuth());
@@ -105,7 +102,6 @@ function App() {
             path={ingredient}
             element={
               <Modal
-                onClose={onClose}
                 customStyle={modalStyle.ingredient}
                 action={RESET_MODAL_INGREDIENT}
                 path={home}

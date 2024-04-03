@@ -21,7 +21,7 @@ function Modal({ children, onClose, action, path, customStyle }) {
     if (path) {
       navigate(path);
     }
-    onClose(action);
+    else if (onClose) onClose(action);
   };
   const handleEscClose = (e) => {
     if (e.key === "Escape") {
@@ -70,7 +70,7 @@ Modal.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]).isRequired,
-  onClose: PropTypes.func.isRequired,
+  onClose: PropTypes.func,
 };
 
 export default Modal;
