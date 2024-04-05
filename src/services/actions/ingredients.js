@@ -1,8 +1,4 @@
-import {
-  INGREDIENTS_ENDPOINT,
-  ORDER_ENDPOINT,
-  request,
-} from "../../utils/consts";
+import { ENDPOINT, request } from "../../utils/consts";
 import { v4 as uuid } from "uuid";
 
 export const ADD_INGREDIENT = "ADD_INGREDIENT";
@@ -15,14 +11,15 @@ export const RESET_MODAL_INGREDIENT = "RESET_MODAL_INGREDIENT";
 
 export const GET_INGREDIENTS_REQUEST = "GET_INGREDIENTS_REQUEST";
 export const GET_INGREDIENTS_SUCCESS = "GET_INGREDIENTS_SUCCESS";
-export const GET_INGREDIENTS_FAILURE = "GET_INGREDIENTS_FAILURE";
+export const GET_INGREDIENTS_FAILED = "GET_INGREDIENTS_FAILED";
 
 export const INCREASE_INGREDIENT_QUANTITY = "INCREASE_INGREDIENT_QUANTITY";
 export const DECREASE_INGREDIENT_QUANTITY = "DECREASE_INGREDIENT_QUANTITY";
+export const RESET_INGREDIENT_QUANTITY = "RESET_INGREDIENT_QUANTITY";
 
 export const MAKE_ORDER_REQUEST = "MAKE_ORDER_REQUEST";
 export const MAKE_ORDER_SUCCESS = "MAKE_ORDER_SUCCESS";
-export const MAKE_ORDER_FAILURE = "MAKE_ORDER_FAILURE";
+export const MAKE_ORDER_FAILED = "MAKE_ORDER_FAILED";
 
 export const addIngredient = (ingredient) => {
   return { type: ADD_INGREDIENT, payload: { ...ingredient, id: uuid() } };
@@ -36,25 +33,26 @@ export const decreaseQuantity = (id) => {
 
 export const fetchIngredients = () => (dispatch) => {
   dispatch({ type: GET_INGREDIENTS_REQUEST });
-  request(INGREDIENTS_ENDPOINT)
+  request(ENDPOINT.ingredients)
     .then((res) => {
       dispatch({ type: GET_INGREDIENTS_SUCCESS, payload: res.data });
     })
-    .catch((err) => dispatch({ type: GET_INGREDIENTS_FAILURE }));
+    .catch((err) => dispatch({ type: GET_INGREDIENTS_FAILED }));
 };
 
 export const makeOrder = (data) => (dispatch) => {
   dispatch({ type: MAKE_ORDER_REQUEST });
-  request(ORDER_ENDPOINT, {
+  request(ENDPOINT.orders, {
     method: "POST",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
+      Authorization: localStorage.getItem("accessToken"),
     },
     body: JSON.stringify(data),
   })
     .then((res) =>
       dispatch({ type: MAKE_ORDER_SUCCESS, payload: res.order.number })
     )
-    .catch((err) => dispatch({ type: MAKE_ORDER_FAILURE }));
+    .catch((err) => dispatch({ type: MAKE_ORDER_FAILED }));
 };

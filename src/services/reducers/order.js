@@ -1,7 +1,7 @@
 import {
   MAKE_ORDER_REQUEST,
   MAKE_ORDER_SUCCESS,
-  MAKE_ORDER_FAILURE,
+  MAKE_ORDER_FAILED,
 } from "../actions/ingredients";
 
 const initialState = {
@@ -26,7 +26,7 @@ export const orderReducer = (state = initialState, action) => {
         orderRequest: false,
       };
     }
-    case MAKE_ORDER_FAILURE: {
+    case MAKE_ORDER_FAILED: {
       return {
         ...state,
         orderFailed: true,

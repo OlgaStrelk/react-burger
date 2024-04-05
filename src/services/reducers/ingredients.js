@@ -1,11 +1,10 @@
 import {
   GET_INGREDIENTS_REQUEST,
   GET_INGREDIENTS_SUCCESS,
-  GET_INGREDIENTS_FAILURE,
+  GET_INGREDIENTS_FAILED,
   INCREASE_INGREDIENT_QUANTITY,
   DECREASE_INGREDIENT_QUANTITY,
-  RESET_MODAL_INGREDIENT,
-  GET_MODAL_INGREDIENT,
+  RESET_INGREDIENT_QUANTITY,
 } from "../actions/ingredients";
 
 const initialState = {
@@ -33,7 +32,7 @@ export const ingredientsReducer = (state = initialState, action) => {
         ingredientsRequest: false,
       };
     }
-    case GET_INGREDIENTS_FAILURE: {
+    case GET_INGREDIENTS_FAILED: {
       return {
         ...state,
         ingredientsFailed: true,
@@ -68,6 +67,16 @@ export const ingredientsReducer = (state = initialState, action) => {
         ),
       };
     }
+
+    case RESET_INGREDIENT_QUANTITY: {
+      return {
+        ...state,
+        ingredients: [...state.ingredients].map((item) => {
+          return { ...item, quantity: 0 };
+        }),
+      };
+    }
+
     default: {
       return state;
     }

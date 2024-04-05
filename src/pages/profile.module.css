@@ -1,0 +1,36 @@
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.paragraph {
+  composes: text text_type_main-default text_color_inactive from global;
+  grid-area: paragraph;
+}
+.form {
+  grid-area: form;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.input {
+  composes: mb-4 from global;
+}
+
+.active {
+  composes: link;
+  color: var(--text-primary-color);
+}
+
+.inactive {
+  composes: link;
+  color: var(--text-inactive-color);
+}
+
+.buttons {
+  display: flex;
+  justify-content: end;
+}

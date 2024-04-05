@@ -10,6 +10,7 @@
 }
 
 .listItem {
+  composes: mr-2 from global;
   border: 1px solid transparent;
   border-radius: 40px;
   display: flex;
@@ -23,11 +24,20 @@
 }
 
 .link {
+  composes: text text_type_main-default pt-4 pb-4 pl-5 pr-5 from global;
   display: flex;
-  /* height: 100%;
-  width: 100%;
-  align-items: center; */
+  text-decoration: none;
+}
+
+.inactive {
+  composes: link;
+  color: var(--text-inactive-color);
+}
+.active {
+  composes: link;
+  color: var(--text-primary-color);
 }
 
 .text {
+  composes: ml-2 from global;
 }

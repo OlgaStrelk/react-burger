@@ -5,9 +5,14 @@ import { GET_MODAL_INGREDIENT } from "../../../services/actions/ingredients";
 import IngredientCard from "../ingredient-card/ingredient-card";
 import { useDispatch, useSelector } from "react-redux";
 
-const IngredientsBlock = forwardRef(({ titles, handler, onScroll }, ref) => {
+const IngredientsBlock = forwardRef(({ titles, onScroll }, ref) => {
   const dispatch = useDispatch();
   const ingredients = useSelector((state) => state.ingredients.ingredients);
+
+  const handleCardClick = (e) => {
+    const id = e.currentTarget.id;
+    dispatch({ type: GET_MODAL_INGREDIENT, payload: id });
+  };
 
   const filterIngredients = (blockTitle) =>
     useMemo(() => {
@@ -17,7 +22,7 @@ const IngredientsBlock = forwardRef(({ titles, handler, onScroll }, ref) => {
       return filteredArray;
     }, [ingredients]);
 
-  const renderFilteredIngredients = (blockTitle) => {
+  const renderFilteredIngredientsMarkup = (blockTitle) => {
     const newArray = filterIngredients(blockTitle);
     return newArray.map((item) => (
       <li key={item._id} id={item._id} onClick={handleCardClick}>
@@ -26,9 +31,17 @@ const IngredientsBlock = forwardRef(({ titles, handler, onScroll }, ref) => {
     ));
   };
 
-  const handleCardClick = (e) => {
-    dispatch({ type: GET_MODAL_INGREDIENT, payload: e.currentTarget.id });
-    handler();
+  const renderIngredientsMarkup = () => {
+    return titles.map((item) => (
+      <Fragment key={item.id}>
+        <h3 className={`text text_type_main-medium mb-6`} ref={item.ref}>
+          {item.title}
+        </h3>
+        <ul className={styles.block}>
+          {renderFilteredIngredientsMarkup(item)}
+        </ul>
+      </Fragment>
+    ));
   };
 
   return (
@@ -38,16 +51,7 @@ const IngredientsBlock = forwardRef(({ titles, handler, onScroll }, ref) => {
         ref={ref}
         className={`${styles.container} custom-scroll mt-10`}
       >
-        {titles.map((item) => (
-          <Fragment key={item.id}>
-            <h3 className={`text text_type_main-medium mb-6`} ref={item.ref}>
-              {item.title}
-            </h3>
-            <ul  className={styles.block}>
-              {renderFilteredIngredients(item)}
-            </ul>
-          </Fragment>
-        ))}
+        {renderIngredientsMarkup()}
       </ul>
     </>
   );

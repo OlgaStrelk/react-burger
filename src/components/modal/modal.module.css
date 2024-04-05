@@ -1,4 +1,5 @@
 .container {
+  composes: pt-10 pb-15 from global;
   background-color: #1c1c21;
   color: white;
   width: 720px;
@@ -14,4 +15,5 @@
   height: 24px;
   right: 40px;
   top: 50px;
+  cursor: pointer;
 }

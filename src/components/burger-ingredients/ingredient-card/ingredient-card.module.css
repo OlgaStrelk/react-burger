@@ -1,3 +1,7 @@
+.link {
+  color: var(--text-primary-color);
+  text-decoration: none;
+}
 .container {
   position: relative;
   max-width: 272px;

@@ -1,17 +1,27 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import ModalOverlay from "./modal-overlay/modal-overlay";
 import styles from "./modal.module.css";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import ReactDOM from "react-dom";
-import { createRef } from "react";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
 
 const modalRoot = document.getElementById("react-modals");
-function Modal({ children, onClose }) {
-  const overlayRef = createRef();
+function Modal({ children, onClose, action, path, customStyle }) {
+  const navigate = useNavigate();
+  const overlayRef = useRef();
+  const containerClassName = customStyle?.modal
+    ? `${styles.container} ${customStyle.modal}`
+    : styles.container;
+  const iconClassName = customStyle?.icon
+    ? `${styles.icon} ${customStyle.icon}`
+    : styles.icon;
 
-  const handleClose = (e) => {
-    onClose(e);
+  const handleClose = () => {
+    if (path) {
+      navigate(path);
+    }
+    else if (onClose) onClose(action);
   };
   const handleEscClose = (e) => {
     if (e.key === "Escape") {
@@ -43,8 +53,8 @@ function Modal({ children, onClose }) {
   return ReactDOM.createPortal(
     <>
       <ModalOverlay innerRef={overlayRef}>
-        <div className={`${styles.container} pt-10 pb-15`}>
-          <div className={styles.icon}>
+        <div className={containerClassName}>
+          <div className={iconClassName}>
             <CloseIcon type="primary" onClick={handleClose} />
           </div>
           {children}
@@ -60,7 +70,7 @@ Modal.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]).isRequired,
-  onClose: PropTypes.func.isRequired,
+  onClose: PropTypes.func,
 };
 
 export default Modal;

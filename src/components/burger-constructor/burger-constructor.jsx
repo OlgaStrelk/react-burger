@@ -9,27 +9,40 @@ import {
 import PropTypes from "prop-types";
 import styles from "./burger-constructor.module.css";
 import Total from "./total/total";
-import { makeOrder } from "../../services/actions/ingredients.js";
-function BurgerConstructor({ handler, onDropHandler }) {
+import {
+  makeOrder,
+  addIngredient,
+  INCREASE_INGREDIENT_QUANTITY,
+} from "../../services/actions/ingredients.js";
+import { Navigate } from "react-router-dom";
+import { PATHS } from "../../utils/consts.js";
+function BurgerConstructor({ onModalOpen }) {
   const [isButtonActive, setButtonActive] = useState(false);
-  const [isError, setError] = useState("");
+  const [isNavigated, setNavigated] = useState(false);
 
   const { ingredients, buns } = useSelector(
     (state) => state.burgerConstructor.addedIngredients
   );
+
+  const user = useSelector((state) => state.user.user);
+
   const dispatch = useDispatch();
 
   const validateConstructor = () => {
-    if (!buns || ingredients.length === 0) {
-      setError("Добавьте ингредиенты в конструктор для заказа");
+    if (!buns || !ingredients.length) {
+      // setError("Добавьте ингредиенты в конструктор для заказа");
       setButtonActive(false);
     } else {
-      setError("");
       setButtonActive(true);
     }
   };
 
   useEffect(() => validateConstructor(), [ingredients, buns]);
+
+  const onDropHandler = (ingredient) => {
+    dispatch({ type: INCREASE_INGREDIENT_QUANTITY, payload: ingredient });
+    dispatch(addIngredient(ingredient));
+  };
 
   const [, dropRef] = useDrop({
     accept: "ingredients",
@@ -48,24 +61,40 @@ function BurgerConstructor({ handler, onDropHandler }) {
     }
   };
 
-  const resetConstructor = () => {};
-  const handleSubmit = (e) => {
-    handler();
+  const handleSubmit = () => {
     let data = orderList();
-    if (data) {
+    console.log("data", data);
+    console.log("user", user);
+
+    if (user && data) {
+      onModalOpen();
       dispatch(makeOrder(data));
     } else {
-      return setError("Выберите ингредиенты");
+      setNavigated(true);
     }
   };
 
-  const renderInnerIngredients = () => {
-    return ingredients?.map((item, index) => (
-      <SortableIngredient key={item.id} index={index} data={item} />
-    ));
+  const renderInnerIngredientsMarkup = () => {
+    if (!ingredients.length) {
+      return (
+        <li className={styles.stub}>
+          <div className="constructor-element 1 ml-8">
+            <span className="constructor-element__row">
+              <span className="constructor-element__text">
+                Выберите начинку
+              </span>
+            </span>
+          </div>
+        </li>
+      );
+    } else {
+      return ingredients?.map((item, index) => (
+        <SortableIngredient key={item.id} index={index} data={item} />
+      ));
+    }
   };
 
-  const renderBun = (style, type, text) => {
+  const renderBunMarkup = (style, type, text) => {
     if (buns) {
       return (
         <div className={`ml-8 mr-2 ${style}`}>
@@ -80,40 +109,54 @@ function BurgerConstructor({ handler, onDropHandler }) {
       );
     } else {
       return (
-        <div className={`ml-8 mr-2 ${style}`}>
-          <ConstructorElement type={type} text="Выберите булки" />
+        <div className={`ml-8 mr-2 ${style} ${styles.stub}`}>
+          <div
+            className={`constructor-element constructor-element_pos_${type}`}
+          >
+            <span className="constructor-element__row">
+              <span className="constructor-element__text">Выберите булки</span>
+            </span>
+          </div>
         </div>
       );
     }
   };
 
   return (
-    <section className={`${styles.section} mt-25 ml-10`}>
-      <div className="ml-8" ref={dropRef}>
-        {renderBun(" mb-2 pr-1", "top", "(верх)")}
-        <ul className={`${styles.container}  ${styles.column} custom-scroll`}>
-          {renderInnerIngredients()}
-        </ul>
-        {renderBun("mt-2", "bottom", "(низ)")}
-      </div>
-      <div className={`mt-10 ${styles.total}`}>
-        <Total />
-        <Button
-          htmlType="button"
-          type="primary"
-          size="large"
-          onClick={handleSubmit}
-          disabled={!isButtonActive}
-        >
-          Оформить заказ
-        </Button>
-      </div>
-    </section>
+    <>
+      {!isNavigated ? (
+        <section className={`${styles.section} mt-25 ml-10`}>
+          <div className="ml-8" ref={dropRef}>
+            {renderBunMarkup(" mb-2 pr-1", "top", "(верх)")}
+            <ul
+              className={`${styles.container}  ${styles.column} custom-scroll`}
+            >
+              {renderInnerIngredientsMarkup()}
+            </ul>
+            {renderBunMarkup("mt-2", "bottom", "(низ)")}
+          </div>
+          <div className={`mt-10 ${styles.total}`}>
+            <Total />
+            <Button
+              htmlType="button"
+              type="primary"
+              size="large"
+              onClick={handleSubmit}
+              disabled={!isButtonActive}
+            >
+              Оформить заказ
+            </Button>
+          </div>
+        </section>
+      ) : (
+        <Navigate to={PATHS.login} />
+      )}
+    </>
   );
 }
 
 BurgerConstructor.propTypes = {
-  handler: PropTypes.func,
+  onModalOpen: PropTypes.func.isRequired,
 };
 
 export default BurgerConstructor;

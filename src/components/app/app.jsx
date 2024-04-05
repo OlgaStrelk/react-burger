@@ -1,80 +1,116 @@
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import styles from "./app.module.css";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+
 import AppHeader from "../app-header/app-header";
-import BurgerConstructor from "../burger-constructor/burger-constructor";
-import BurgerIngredients from "../burger-ingredients/burger-ingredients";
-import Modal from "../modal/modal";
-import IngredientDetails from "../ingredient-details/ingredient-details";
-import OrderDetails from "../order-details/order-details";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
 import {
-  RESET_CONSTRUCTOR,
   RESET_MODAL_INGREDIENT,
   fetchIngredients,
-  addIngredient,
-  INCREASE_INGREDIENT_QUANTITY,
 } from "../../services/actions/ingredients";
+import {
+  HomePage,
+  LoginPage,
+  RegisterPage,
+  ForgotPasswordPage,
+  ResetPasswordPage,
+  ProfilePage,
+  IngredientPage,
+  NotFoundPage,
+  OrderPage,
+  OrdersHistoryPage,
+  OrdersListPage,
+} from "../../pages";
+import { modalStyle } from "../../utils/consts";
+import { useLocation } from "react-router-dom";
+import Modal from "../modal/modal";
+import IngredientDetails from "../ingredient-details/ingredient-details";
+import { OnlyAuth, OnlyUnAuth } from "../protected_route/protected-route";
+import { PATHS } from "../../utils/consts";
+import { checkUserAuth } from "../../services/actions/user";
+import MyAccountPage from "../../pages/my-account";
 function App() {
   const dispatch = useDispatch();
-  const ingredients = useSelector((state) => state.ingredients?.ingredients);
-
-  const [isOrderModalOpened, setIsOrderModalOpened] = useState(false);
-  const [isIngredientModalOpened, setIsIngredientModalOpened] = useState(false);
-
+  let location = useLocation();
+  let state = location.state;
+  useEffect(() => dispatch(fetchIngredients()), [dispatch]);
   useEffect(() => {
-    dispatch(fetchIngredients());
-  }, []);
+    dispatch(checkUserAuth());
+  }, [dispatch]);
 
-  const handleCardModalOpen = () => {
-    setIsIngredientModalOpened(true);
-  };
-
-  const handleOrderModalOpen = () => {
-    setIsOrderModalOpened(true);
-  };
-
-  const handleCardModalClose = (e) => {
-    setIsIngredientModalOpened(false);
-    dispatch({ type: RESET_MODAL_INGREDIENT });
-  };
-
-  const handleOrderModalClose = () => {
-    dispatch({ type: RESET_CONSTRUCTOR });
-    setIsOrderModalOpened(false);
-  };
-
-  const onDropHandler = (ingredient) => {
-    dispatch({ type: INCREASE_INGREDIENT_QUANTITY, payload: ingredient });
-    dispatch(addIngredient(ingredient));
-  };
-
+  const {
+    home,
+    profile,
+    login,
+    register,
+    forgotPassword,
+    resetPassword,
+    ingredient,
+    ordersHistory,
+    order,
+    notFound,
+    ordersList,
+  } = PATHS;
   return (
     <>
-      {ingredients && (
-        <>
-          <AppHeader />
-          <DndProvider backend={HTML5Backend}>
-            <main className={styles.main}>
-              <BurgerIngredients handler={handleCardModalOpen} />
-              <BurgerConstructor
-                onDropHandler={onDropHandler}
-                handler={handleOrderModalOpen}
-              />
-            </main>
-          </DndProvider>
-          {isIngredientModalOpened && (
-            <Modal onClose={handleCardModalClose} customStyle={"_card"}>
-              <IngredientDetails />
-            </Modal>
-          )}
-          {isOrderModalOpened && (
-            <Modal onClose={handleOrderModalClose} customStyle={"_order"}>
-              <OrderDetails />
-            </Modal>
-          )}
-        </>
+      <AppHeader />
+      <Routes location={state?.backgroundLocation || location}>
+        <Route path={home} element={<HomePage />} />
+        <Route path={ingredient} element={<IngredientPage />} />
+        <Route
+          path={profile}
+          element={<OnlyAuth component={<MyAccountPage />} />}
+        >
+          <Route path="" element={<OnlyAuth component={<ProfilePage />} />} />
+          <Route
+            path={ordersHistory}
+            element={<OnlyAuth component={<OrdersHistoryPage />} />}
+          >
+            <Route
+              path={order}
+              element={<OnlyAuth component={<OrderPage />} />}
+            />
+          </Route>
+        </Route>
+
+        <Route
+          path={ordersList}
+          element={<OnlyAuth component={<OrdersListPage />} />}
+        />
+
+        <Route
+          path={login}
+          element={<OnlyUnAuth component={<LoginPage />} />}
+        />
+        <Route
+          path={register}
+          element={<OnlyUnAuth component={<RegisterPage />} />}
+        />
+        <Route
+          path={forgotPassword}
+          element={<OnlyUnAuth component={<ForgotPasswordPage />} />}
+        />
+        <Route
+          path={resetPassword}
+          element={<OnlyUnAuth component={<ResetPasswordPage />} />}
+        />
+
+        <Route path={notFound} element={<NotFoundPage />} />
+      </Routes>
+      {state?.backgroundLocation && (
+        <Routes>
+          <Route
+            path={ingredient}
+            element={
+              <Modal
+                customStyle={modalStyle.ingredient}
+                action={RESET_MODAL_INGREDIENT}
+                path={home}
+              >
+                <IngredientDetails />
+              </Modal>
+            }
+          />
+        </Routes>
       )}
     </>
   );

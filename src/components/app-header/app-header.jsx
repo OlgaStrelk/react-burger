@@ -3,15 +3,17 @@ import {
   Logo,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import Navbar from "../nav-bar/nav-bar";
+import { Link } from "react-router-dom";
+import { PATHS } from "../../utils/consts";
 
 
 export default function AppHeader() {
   return (
     <header className={`${styles.header} pt-5 pb-5`}>
       <div className={`${styles.wrapper}`}>
-        <div className={styles.centered}>
+        <Link to={PATHS.home} className={styles.centered}>
           <Logo />
-        </div>
+        </Link>
       <Navbar />
       </div>
     </header>

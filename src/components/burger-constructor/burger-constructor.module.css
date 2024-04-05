@@ -20,3 +20,7 @@
   justify-content: flex-end;
   align-items: center;
 }
+
+.stub {
+  width: 524px;
+}

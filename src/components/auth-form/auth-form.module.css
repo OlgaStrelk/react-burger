@@ -1,0 +1,8 @@
+.button {
+  composes: mt-6 mb-20 from global;
+}
+.form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
