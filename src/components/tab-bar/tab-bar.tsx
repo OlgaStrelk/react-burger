@@ -1,7 +1,7 @@
 import styles from "./tab-bar.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
-import { titlesArrayShape } from "../../utils/shapes";
+import { titlesArrayShape } from "../../utils/types";
 
 const Tabbar = ({ data, onTabClick, currentTab }) => {
   const handleClick = (e) => {

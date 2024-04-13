@@ -5,7 +5,7 @@ import {
 import styles from "./ingredient-card.module.css";
 import PropTypes from "prop-types";
 import { Link, useLocation } from "react-router-dom";
-import { cardDataShape } from "../../../utils/shapes";
+import { cardDataShape } from "../../../utils/types";
 import { memo } from "react";
 import { useDrag } from "react-dnd";
 

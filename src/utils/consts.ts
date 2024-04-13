@@ -35,9 +35,9 @@ export const BACKEND_VALIDATION_TEXT = {
 
 export const modalStyle = { ingredient: "_card", order: "_order" };
 
-export const request = (url, options) => {
+export const request = (url: string, options: object) => {
   return fetch(`${API_URL}${url}`, options).then(checkResponse);
 };
 
-export const checkResponse = (res) =>
+export const checkResponse = (res: any) =>
   res.ok ? res.json() : Promise.reject(res.status);

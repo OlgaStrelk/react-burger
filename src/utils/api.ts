@@ -1,7 +1,9 @@
 import { API_URL } from "./consts";
 
-const checkReponse = (res) => {
-  return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
+const checkReponse = (res: any) => {
+  return res.ok
+    ? res.json()
+    : res.json().then((err: any) => Promise.reject(err));
 };
 
 export const refreshToken = () => {
@@ -25,11 +27,11 @@ export const refreshToken = () => {
     });
 };
 
-export const fetchWithRefresh = async (url, options) => {
+export const fetchWithRefresh = async (url:string, options:any) => {
   try {
     const res = await fetch(`${API_URL}${url}`, options);
     return await checkReponse(res);
-  } catch (err) {
+  } catch (err:any) {
     console.log(err);
     if (err.message === "jwt expired") {
       const refreshData = await refreshToken();
