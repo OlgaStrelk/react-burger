@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import CurrencyIconPath from "../../../images/cur-icon.svg";
-import styles from "./total.module.css";
+// import styles from "./total.module.css";
 import { useMemo } from "react";
 
 function Total(props) {
