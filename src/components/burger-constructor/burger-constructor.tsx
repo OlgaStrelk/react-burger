@@ -1,21 +1,21 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
-import { SortableIngredient } from "./sortable-ingredient/sortable-ingredient.jsx";
+import { SortableIngredient } from "./sortable-ingredient/sortable-ingredient.tsx";
 import {
   ConstructorElement,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
 import styles from "./burger-constructor.module.css";
-import Total from "./total/total";
+import Total from "./total/total.tsx";
 import {
   makeOrder,
   addIngredient,
   INCREASE_INGREDIENT_QUANTITY,
-} from "../../services/actions/ingredients.js";
+} from "../../services/actions/ingredients.ts";
 import { Navigate } from "react-router-dom";
-import { PATHS } from "../../utils/consts.js";
+import { PATHS } from "../../utils/consts.ts";
 function BurgerConstructor({ onModalOpen }) {
   const [isButtonActive, setButtonActive] = useState(false);
   const [isNavigated, setNavigated] = useState(false);
