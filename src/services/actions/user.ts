@@ -13,13 +13,13 @@ export const EDIT_PROFILE_SUBMIT_REQUEST = "EDIT_PROFILE_SUBMIT_REQUEST";
 
 export const UPDATE_USER_DATA = "UPDATE_USER_DATA";
 
-export const updateUser = (name, value) => ({
+export const updateUser = (name:string, value:string) => ({
   type: UPDATE_USER_DATA,
   name,
   value,
 });
 
-export const setAuthChecked = (isChecked) => ({
+export const setAuthChecked = (isChecked:boolean) => ({
   type: SET_AUTH_CHECKED,
   payload: isChecked,
 });

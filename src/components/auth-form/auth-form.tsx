@@ -1,7 +1,14 @@
+import { FC, ReactNode } from "react";
 import styles from "./auth-form.module.css";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
+interface IAuthForm {
+  onSubmit: () => void;
+  btn: string;
+  isValid: boolean;
+  children?: ReactNode
 
-function AuthForm({ children, onSubmit, btn, isValid }) {
+}
+const AuthForm: FC<IAuthForm> = ({ onSubmit, btn, isValid, children }) => {
   return (
     <form className={styles.form} onSubmit={onSubmit}>
       {children}
@@ -16,6 +23,6 @@ function AuthForm({ children, onSubmit, btn, isValid }) {
       </Button>
     </form>
   );
-}
+};
 
 export default AuthForm;
