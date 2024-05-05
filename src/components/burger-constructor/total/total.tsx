@@ -3,7 +3,7 @@ import CurrencyIconPath from "../../../images/cur-icon.svg";
 // import styles from "./total.module.css";
 import { useMemo } from "react";
 
-function Total(props) {
+function Total() {
   const addedIngredients = useSelector(
     (store) => store.burgerConstructor.addedIngredients
   );
@@ -17,7 +17,7 @@ function Total(props) {
       } else {
         const total =
           addedIngredients.ingredients.reduce(
-            (accumulator, currentValue) => accumulator + currentValue.price,
+            (accumulator: any, currentValue: { price: any; }) => accumulator + currentValue.price,
             initialValue
           ) +
           addedIngredients?.buns?.price * 2;

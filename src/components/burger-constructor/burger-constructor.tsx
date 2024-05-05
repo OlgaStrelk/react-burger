@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
 import { SortableIngredient } from "./sortable-ingredient/sortable-ingredient.tsx";
@@ -16,14 +16,20 @@ import {
 } from "../../services/actions/ingredients.ts";
 import { Navigate } from "react-router-dom";
 import { PATHS } from "../../utils/consts.ts";
-function BurgerConstructor({ onModalOpen }) {
+import { TConstructorIngredient, TIngredient } from "../../utils/types.ts";
+
+export interface IBurgerConstructorProps {
+  onModalOpen: () => void;
+}
+function BurgerConstructor({ onModalOpen }: IBurgerConstructorProps) {
   const [isButtonActive, setButtonActive] = useState(false);
   const [isNavigated, setNavigated] = useState(false);
 
   const { ingredients, buns } = useSelector(
+    // @ts-ignore
     (state) => state.burgerConstructor.addedIngredients
   );
-
+  // @ts-ignore
   const user = useSelector((state) => state.user.user);
 
   const dispatch = useDispatch();
@@ -39,14 +45,14 @@ function BurgerConstructor({ onModalOpen }) {
 
   useEffect(() => validateConstructor(), [ingredients, buns]);
 
-  const onDropHandler = (ingredient) => {
+  const onDropHandler = (ingredient: TIngredient) => {
     dispatch({ type: INCREASE_INGREDIENT_QUANTITY, payload: ingredient });
     dispatch(addIngredient(ingredient));
   };
 
   const [, dropRef] = useDrop({
     accept: "ingredients",
-    drop(item) {
+    drop(item: TIngredient) {
       onDropHandler(item);
     },
   });
@@ -63,11 +69,9 @@ function BurgerConstructor({ onModalOpen }) {
 
   const handleSubmit = () => {
     let data = orderList();
-    console.log("data", data);
-    console.log("user", user);
-
     if (user && data) {
       onModalOpen();
+      // @ts-ignore
       dispatch(makeOrder(data));
     } else {
       setNavigated(true);
@@ -88,13 +92,14 @@ function BurgerConstructor({ onModalOpen }) {
         </li>
       );
     } else {
-      return ingredients?.map((item, index) => (
+      return ingredients?.map((item: TConstructorIngredient, index:number) => (
         <SortableIngredient key={item.id} index={index} data={item} />
       ));
     }
   };
 
-  const renderBunMarkup = (style, type, text) => {
+  type TBunType = 'top'|'bottom'|undefined
+  const renderBunMarkup = (style:string, type:TBunType, text:string) => {
     if (buns) {
       return (
         <div className={`ml-8 mr-2 ${style}`}>

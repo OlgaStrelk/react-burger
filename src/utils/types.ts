@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 export type TTitle = { title: string; value: string; id: number };
 
-export interface ICard {
+export type TIngredient ={
   _id: string;
   name: string;
   type: "bun" | "main" | "sauce";
@@ -14,6 +14,8 @@ export interface ICard {
   image_mobile: string;
   image_large: string;
 }
+
+export type TConstructorIngredient = Omit<TIngredient, '_id'>&{id: string;}
 
 export interface INavBar {
   id: string | number;
