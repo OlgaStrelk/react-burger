@@ -1,16 +1,22 @@
 import { useEffect, useState } from "react";
 import styles from "./ingredient-details.module.css";
 import { useSelector } from "react-redux";
-import {  useParams } from "react-router-dom";
-
-function IngredientDetails({ style }) {
-  const [ingredientData, setIngredientData] = useState(null);
+import { useParams } from "react-router-dom";
+import { TIngredient } from "../../utils/types";
+interface IngredientDetailsProps {
+  style: string | undefined;
+}
+function IngredientDetails({ style }: IngredientDetailsProps) {
+  const [ingredientData, setIngredientData] = useState<TIngredient | null>(
+    null
+  );
+  //@ts-ignore
   const ingredients = useSelector((store) => store.ingredients?.ingredients);
 
   const { id } = useParams();
 
-  const getData = (id) => {
-    const currentIngredient = ingredients.find((item) => {
+  const getData = (id: string) => {
+    const currentIngredient = ingredients.find((item: { _id: string }) => {
       return id === item._id;
     });
     if (currentIngredient) {
@@ -18,7 +24,7 @@ function IngredientDetails({ style }) {
     } else return null;
   };
   useEffect(() => {
-    if (ingredients) {
+    if (ingredients && typeof id === "string") {
       getData(id);
     }
   }, [ingredients, id]);

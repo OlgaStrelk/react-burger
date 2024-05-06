@@ -32,8 +32,10 @@ function App() {
   const dispatch = useDispatch();
   let location = useLocation();
   let state = location.state;
+  //@ts-ignore
   useEffect(() => dispatch(fetchIngredients()), [dispatch]);
   useEffect(() => {
+      //@ts-ignore
     dispatch(checkUserAuth());
   }, [dispatch]);
 

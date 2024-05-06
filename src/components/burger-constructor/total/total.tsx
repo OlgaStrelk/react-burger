@@ -18,7 +18,7 @@ function Total() {
       } else {
         const total =
           addedIngredients.ingredients.reduce(
-            (accumulator: any, currentValue: { price: any; }) => accumulator + currentValue.price,
+            (accumulator: number, currentValue: { price: number; }) => accumulator + currentValue.price,
             initialValue
           ) +
           addedIngredients?.buns?.price * 2;
