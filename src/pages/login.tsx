@@ -1,6 +1,6 @@
 import formStyles from "./base-form.module.css";
 import { useSelector } from "react-redux";
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 
 import {
   EmailInput,
@@ -8,10 +8,8 @@ import {
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-import Modal from "../components/modal/modal";
 import AuthForm from "../components/auth-form/auth-form";
 import Redirect from "../components/redirect/redirect";
-import InfoTooltip from "../components/info-tooltip/info-tooltip";
 
 import { PATHS } from "../utils/consts";
 import { useForm } from "../hooks/useForm";
@@ -20,7 +18,9 @@ import { login } from "../services/actions/auth";
 
 function LoginPage() {
   const { register, forgotPassword } = PATHS;
+  //@ts-ignore
   const { password, email } = useSelector((state) => state.login.form);
+  //@ts-ignore
   const { handleInput, handleSubmit } = useForm();
   const [isValid, setIsValid] = useState(false);
 
@@ -32,12 +32,12 @@ function LoginPage() {
     }
   }, [password, email]);
 
-  const onFormChange = (e) => {
+  const onFormChange = (e: ChangeEvent<HTMLInputElement>) => {
     handleInput(e, loginFormValue);
   };
 
-  const onSubmit = (e) => {
-    handleSubmit(e, login, isValid)
+  const onSubmit = (e: SubmitEvent) => {
+    handleSubmit(e, login, isValid);
   };
 
   const FORM_DATA = {
@@ -57,7 +57,15 @@ function LoginPage() {
     ],
   };
 
-  const INPUTS_DATA = [
+  type TInput = {
+    id: number;
+    placeholder: string;
+    name: string;
+    type: "password" | "email" | "text" | undefined;
+    value: string;
+  };
+
+  const INPUTS_DATA: TInput[] = [
     {
       id: 12,
       placeholder: "E-mail",
@@ -74,7 +82,7 @@ function LoginPage() {
     },
   ];
 
-  const inputsMarkup = INPUTS_DATA.map(
+  const inputsMarkup: JSX.Element[] = INPUTS_DATA.map(
     ({ id, placeholder, name, type, value }) => {
       switch (type) {
         case "password": {
@@ -83,7 +91,6 @@ function LoginPage() {
               key={id}
               name={name}
               placeholder={placeholder}
-              type={type}
               value={value}
               onChange={onFormChange}
               extraClass={formStyles.input}
@@ -97,7 +104,6 @@ function LoginPage() {
               key={id}
               name={name}
               placeholder={placeholder}
-              type={type}
               value={value}
               onChange={onFormChange}
               extraClass={formStyles.input}

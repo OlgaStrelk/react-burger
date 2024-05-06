@@ -15,8 +15,7 @@ import {
 import { modalStyle } from "../utils/consts";
 
 function HomePage() {
-  const dispatch = useDispatch();
-
+//@ts-ignore
   const ingredients = useSelector((state) => state.ingredients?.ingredients);
   const [isOrderModalOpen, onOrderModalOpen, onOrderModalClose] = useModal();
 

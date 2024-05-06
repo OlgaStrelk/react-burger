@@ -12,9 +12,10 @@ import { useNavigate } from "react-router-dom";
 function ForgotPasswordPage() {
   const [isValid, setIsValid] = useState(false);
   const navigate = useNavigate();
+  //@ts-ignore
   const { email } = useSelector((state) => state.resetForm.form);
 
-  const { handleInput, handleSubmit, error } = useForm();
+  const { handleInput, handleSubmit } = useForm();
 
   useEffect(() => {
     if (email) {
@@ -84,7 +85,6 @@ function ForgotPasswordPage() {
         <AuthForm
           onSubmit={onSubmit}
           btn={text}
-          error={error}
           isValid={isValid}
         >
           {inputsMarkup}
