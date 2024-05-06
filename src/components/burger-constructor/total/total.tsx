@@ -5,6 +5,7 @@ import { useMemo } from "react";
 
 function Total() {
   const addedIngredients = useSelector(
+    // @ts-ignore
     (store) => store.burgerConstructor.addedIngredients
   );
 

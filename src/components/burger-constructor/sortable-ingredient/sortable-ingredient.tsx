@@ -1,3 +1,5 @@
+import type { Identifier, XYCoord } from 'dnd-core'
+
 import { useDrag, useDrop } from "react-dnd";
 import { useRef } from "react";
 import styles from "./sortable-ingredient.module.css";
@@ -11,13 +13,28 @@ import {
   SORT_INGREDIENTS,
   deleteIngredient,
 } from "../../../services/actions/ingredients";
-export const SortableIngredient = ({ data, index }) => {
+import { TConstructorIngredient } from "../../../utils/types";
+
+
+export interface ISortableIngredientProps {
+  data: TConstructorIngredient
+  index: number
+}
+
+interface DragItem {
+  index: number
+  id: string
+  type: string
+}
+
+export const SortableIngredient = ({ data, index }:ISortableIngredientProps) => {
   const dispatch = useDispatch();
   const ingredients = useSelector(
+    //@ts-ignore
     (store) => store.burgerConstructor.addedIngredients.ingredients
   );
 
-  const moveListItem = (dragIndex, hoverIndex) => {
+  const moveListItem = (dragIndex: number, hoverIndex:number) => {
     const dragCard = ingredients[dragIndex];
     const newIngredients = [...ingredients];
     newIngredients.splice(dragIndex, 1);
@@ -25,14 +42,18 @@ export const SortableIngredient = ({ data, index }) => {
     dispatch({ type: SORT_INGREDIENTS, payload: newIngredients });
   };
 
-  const [{ handlerId }, drop] = useDrop({
+  const [{ handlerId }, drop] = useDrop<
+  DragItem,
+  void,
+  { handlerId: Identifier | null }
+>({
     accept: "listItem",
     collect(monitor) {
       return {
         handlerId: monitor.getHandlerId(),
       };
     },
-    hover: (item, monitor) => {
+    hover: (item: DragItem, monitor) => {
       if (!ref.current) {
         return;
       }
@@ -45,7 +66,7 @@ export const SortableIngredient = ({ data, index }) => {
       const hoverMiddleY =
         (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
       const clientOffset = monitor.getClientOffset();
-      const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+      const hoverClientY = (clientOffset as XYCoord).y - hoverBoundingRect.top;
       if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
         return;
       }
@@ -57,7 +78,7 @@ export const SortableIngredient = ({ data, index }) => {
     },
   });
 
-  const ref = useRef(null);
+  const ref = useRef<HTMLLIElement>(null);
 
   const [{ isDragging }, drag] = useDrag({
     type: "listItem",
@@ -67,7 +88,7 @@ export const SortableIngredient = ({ data, index }) => {
     collect: (monitor) => ({ isDragging: monitor.isDragging() }),
   });
 
-  const opacity = isDragging ? 0 : 1;
+  const opacity = isDragging ? styles.opacity_visible : styles.opacity_invisible;
 
   drag(drop(ref));
 
