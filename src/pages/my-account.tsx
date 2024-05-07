@@ -9,8 +9,8 @@ import { logout } from "../services/actions/auth";
 function MyAccountPage() {
   const dispatch = useDispatch();
   const signout = () => {
+    //@ts-ignore
     dispatch(logout());
-    console.log("signout");
   };
   const NAVLINKS_DATA = [
     { id: "5", text: "Профиль", path: PATHS.profile },

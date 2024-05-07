@@ -4,7 +4,6 @@ export const useForm = (initialValue) => {
   const dispatch = useDispatch();
 
   const handleInput = (e, reducer) => {
-    console.log(e.target.value);
     dispatch(reducer(e.target.name, e.target.value));
   };
 

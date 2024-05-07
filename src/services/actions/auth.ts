@@ -68,7 +68,6 @@ export const login = () => async (dispatch, getState) => {
     body: JSON.stringify(getState().login.form),
   })
     .then((data) => {
-      console.log(data);
       const value = getState().login.form.password;
       dispatch(updateUser("password", value));
       dispatch({ type: LOGIN_SUBMIT_SUCCESS });

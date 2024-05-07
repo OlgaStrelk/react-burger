@@ -34,8 +34,6 @@ export const SortableIngredient = ({ data, index }:ISortableIngredientProps) => 
     (store) => store.burgerConstructor.addedIngredients.ingredients
   );
 
-  console.log(data)
-
   const moveListItem = (dragIndex: number, hoverIndex:number) => {
     const dragCard = ingredients[dragIndex];
     const newIngredients = [...ingredients];
