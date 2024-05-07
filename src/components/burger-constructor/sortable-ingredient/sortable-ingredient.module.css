@@ -6,10 +6,10 @@
     margin-left: 10px;
   }
 
-.opacity_invisible {
+.opacity_visible {
   opacity: 0
 }
 
-.opacity_visible {
+.opacity_invisible {
   opacity: 1
 }
