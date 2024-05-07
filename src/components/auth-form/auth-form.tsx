@@ -1,8 +1,8 @@
-import { FC, ReactNode } from "react";
+import { FC, ReactNode, SyntheticEvent } from "react";
 import styles from "./auth-form.module.css";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 interface IAuthForm {
-  onSubmit: (e: React.SyntheticEvent) => void;
+  onSubmit: (e: SyntheticEvent<HTMLFormElement>) => void;
   btn: string;
   isValid: boolean;
   children?: ReactNode;

@@ -35,13 +35,9 @@ function Modal({
     : styles.icon;
 
   const updateData = (action: string | string[]) => {
-    // if (typeof action == "string") {
-    //   dispatch({ type: action });
-    // } else {
     [...action].forEach((element) => {
       dispatch({ type: element });
     });
-    // }
   };
 
   const handleClose = () => {

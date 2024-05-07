@@ -1,6 +1,6 @@
 import formStyles from "./base-form.module.css";
 import { useSelector } from "react-redux";
-import { useState, useEffect, ChangeEvent } from "react";
+import { useState, useEffect, ChangeEvent, FormEventHandler, SyntheticEvent } from "react";
 
 import {
   EmailInput,
@@ -20,7 +20,6 @@ function LoginPage() {
   const { register, forgotPassword } = PATHS;
   //@ts-ignore
   const { password, email } = useSelector((state) => state.login.form);
-  //@ts-ignore
   const { handleInput, handleSubmit } = useForm();
   const [isValid, setIsValid] = useState(false);
 
@@ -36,7 +35,7 @@ function LoginPage() {
     handleInput(e, loginFormValue);
   };
 
-  const onSubmit = (e: SubmitEvent) => {
+  const onSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
     handleSubmit(e, login, isValid);
   };
 
@@ -82,7 +81,7 @@ function LoginPage() {
     },
   ];
 
-  const inputsMarkup: JSX.Element[] = INPUTS_DATA.map(
+  const inputsMarkup = INPUTS_DATA.map(
     ({ id, placeholder, name, type, value }) => {
       switch (type) {
         case "password": {
@@ -130,11 +129,6 @@ function LoginPage() {
     btn: { text },
     redirect,
   } = FORM_DATA;
-
-  // const CUSTOM_STYLES = {
-  //   modal: formStyles.modalContainer,
-  //   icon: formStyles.closeIcon,
-  // };
 
   return (
     <>

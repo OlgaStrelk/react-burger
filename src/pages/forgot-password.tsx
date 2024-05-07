@@ -7,7 +7,7 @@ import Redirect from "../components/redirect/redirect";
 import { useSelector } from "react-redux";
 import { resetPasswordStepOne } from "../services/actions/auth";
 import { resetPasswordOneFormValue } from "../services/actions/authForms";
-import { useState, useEffect, ChangeEvent } from "react";
+import { useState, useEffect, ChangeEvent, SyntheticEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { TInput } from "../utils/types";
 function ForgotPasswordPage() {
@@ -30,7 +30,7 @@ function ForgotPasswordPage() {
     handleInput(e, resetPasswordOneFormValue);
   };
 
-  const onSubmit = (e: React.SyntheticEvent<Element, Event>) => {
+  const onSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
     handleSubmit(e, resetPasswordStepOne, isValid);
     localStorage.setItem("emailsSent", "true");
     navigate(PATHS.resetPassword, { replace: true });
