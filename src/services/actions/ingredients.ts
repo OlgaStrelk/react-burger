@@ -42,19 +42,20 @@ export const fetchIngredients = () => (dispatch) => {
     .catch((err) => dispatch({ type: GET_INGREDIENTS_FAILED }));
 };
 
-export const makeOrder = (data: string[]) => (dispatch: any) => {
-  dispatch({ type: MAKE_ORDER_REQUEST });
-  request(ENDPOINT.orders, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      Authorization: localStorage.getItem("accessToken"),
-    },
-    body: JSON.stringify(data),
-  })
-    .then((res) =>
-      dispatch({ type: MAKE_ORDER_SUCCESS, payload: res.order.number })
-    )
-    .catch((err) => dispatch({ type: MAKE_ORDER_FAILED }));
-};
+export const makeOrder =
+  (data: { ingredients: string[] }) => (dispatch: any) => {
+    dispatch({ type: MAKE_ORDER_REQUEST });
+    request(ENDPOINT.orders, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("accessToken"),
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) =>
+        dispatch({ type: MAKE_ORDER_SUCCESS, payload: res.order.number })
+      )
+      .catch((err) => dispatch({ type: MAKE_ORDER_FAILED }));
+  };

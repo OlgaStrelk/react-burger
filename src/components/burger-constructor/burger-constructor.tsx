@@ -21,6 +21,9 @@ import { TConstructorIngredient, TIngredient } from "../../utils/types.ts";
 export interface IBurgerConstructorProps {
   onModalOpen: () => void;
 }
+
+export type TOrderList = { ingredients: string[] } | null;
+
 function BurgerConstructor({ onModalOpen }: IBurgerConstructorProps) {
   const [isButtonActive, setButtonActive] = useState(false);
   const [isNavigated, setNavigated] = useState(false);
@@ -57,7 +60,7 @@ function BurgerConstructor({ onModalOpen }: IBurgerConstructorProps) {
     },
   });
 
-  const orderList = () => {
+  const orderList = (): TOrderList => {
     if (!(ingredients && buns)) {
       return null;
     } else {
@@ -71,9 +74,8 @@ function BurgerConstructor({ onModalOpen }: IBurgerConstructorProps) {
     let data = orderList();
     if (user && data) {
       onModalOpen();
-      // @ts-ignore
+      //@ts-ignore
       dispatch(makeOrder(data));
-      console.log(data)
     } else {
       setNavigated(true);
     }
@@ -93,14 +95,14 @@ function BurgerConstructor({ onModalOpen }: IBurgerConstructorProps) {
         </li>
       );
     } else {
-      return ingredients?.map((item: TConstructorIngredient, index:number) => (
+      return ingredients?.map((item: TConstructorIngredient, index: number) => (
         <SortableIngredient key={item.id} index={index} data={item} />
       ));
     }
   };
 
-  type TBunType = 'top'|'bottom'|undefined
-  const renderBunMarkup = (style:string, type:TBunType, text:string) => {
+  type TBunType = "top" | "bottom" | undefined;
+  const renderBunMarkup = (style: string, type: TBunType, text: string) => {
     if (buns) {
       return (
         <div className={`ml-8 mr-2 ${style}`}>
