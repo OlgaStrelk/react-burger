@@ -13,17 +13,17 @@ export const EDIT_PROFILE_SUBMIT_REQUEST = "EDIT_PROFILE_SUBMIT_REQUEST";
 
 export const UPDATE_USER_DATA = "UPDATE_USER_DATA";
 
-export const updateUser = (name:string, value:string) => ({
+export const updateUser = (name: string, value: string) => ({
   type: UPDATE_USER_DATA,
   name,
   value,
 });
 
-export const setAuthChecked = (isChecked:boolean) => ({
+export const setAuthChecked = (isChecked: boolean) => ({
   type: SET_AUTH_CHECKED,
   payload: isChecked,
 });
-
+//@ts-ignore
 export const getUser = () => async (dispatch) => {
   dispatch({ type: GET_USER_REQUEST });
   await fetchWithRefresh(ENDPOINT.user, {
@@ -36,6 +36,7 @@ export const getUser = () => async (dispatch) => {
     .then((data) => {
       dispatch({ type: GET_USER_SUCCESS });
       for (let [key, value] of Object.entries(data.user)) {
+        //@ts-ignore
         dispatch(updateUser(key, value));
       }
     })
@@ -45,9 +46,11 @@ export const getUser = () => async (dispatch) => {
 };
 
 export const checkUserAuth = () => {
+  //@ts-ignore
   return (dispatch) => {
     if (localStorage.getItem("accessToken")) {
       dispatch(getUser())
+      //@ts-ignore
         .catch((err) => {
           console.log(err);
           localStorage.removeItem("accessToken");
@@ -60,7 +63,7 @@ export const checkUserAuth = () => {
     }
   };
 };
-
+//@ts-ignore
 export const editProfile = () => (dispatch, getState) => {
   dispatch({ type: EDIT_PROFILE_SUBMIT_REQUEST });
   fetchWithRefresh(ENDPOINT.user, {
@@ -79,6 +82,7 @@ export const editProfile = () => (dispatch, getState) => {
     .then((res) => {
       dispatch({ type: EDIT_PROFILE_SUBMIT_SUCCESS });
       for (let [key, value] of Object.entries(res.user)) {
+        //@ts-ignore
         dispatch(updateUser(key, value));
       }
     })

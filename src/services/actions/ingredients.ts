@@ -1,5 +1,6 @@
 import { ENDPOINT, request } from "../../utils/consts";
 import { v4 as uuid } from "uuid";
+import { TIngredient } from "../../utils/types";
 
 export const ADD_INGREDIENT = "ADD_INGREDIENT";
 export const SORT_INGREDIENTS = "SORT_INGREDIENTS";
@@ -21,26 +22,27 @@ export const MAKE_ORDER_REQUEST = "MAKE_ORDER_REQUEST";
 export const MAKE_ORDER_SUCCESS = "MAKE_ORDER_SUCCESS";
 export const MAKE_ORDER_FAILED = "MAKE_ORDER_FAILED";
 
-export const addIngredient = (ingredient) => {
+export const addIngredient = (ingredient: TIngredient) => {
   return { type: ADD_INGREDIENT, payload: { ...ingredient, id: uuid() } };
 };
-export const deleteIngredient = (id) => {
+export const deleteIngredient = (id: number) => {
   return { type: DELETE_INGREDIENT, payload: id };
 };
-export const decreaseQuantity = (id) => {
+export const decreaseQuantity = (id: number) => {
   return { type: DECREASE_INGREDIENT_QUANTITY, payload: id };
 };
+//@ts-ignore
 
 export const fetchIngredients = () => (dispatch) => {
   dispatch({ type: GET_INGREDIENTS_REQUEST });
-  request(ENDPOINT.ingredients)
+  request(ENDPOINT.ingredients, {})
     .then((res) => {
       dispatch({ type: GET_INGREDIENTS_SUCCESS, payload: res.data });
     })
     .catch((err) => dispatch({ type: GET_INGREDIENTS_FAILED }));
 };
 
-export const makeOrder = (data) => (dispatch) => {
+export const makeOrder = (data: string[]) => (dispatch: any) => {
   dispatch({ type: MAKE_ORDER_REQUEST });
   request(ENDPOINT.orders, {
     method: "POST",

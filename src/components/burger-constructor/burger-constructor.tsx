@@ -73,6 +73,7 @@ function BurgerConstructor({ onModalOpen }: IBurgerConstructorProps) {
       onModalOpen();
       // @ts-ignore
       dispatch(makeOrder(data));
+      console.log(data)
     } else {
       setNavigated(true);
     }

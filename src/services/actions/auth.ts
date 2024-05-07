@@ -22,6 +22,7 @@ export const RESET_FORM_TWO_SUBMIT_REQUEST = "RESET_FORM_TWO_SUBMIT_REQUEST";
 export const RESET_FORM_TWO_SUBMIT_SUCCESS = "RESET_FORM_TWO_SUBMIT_SUCCESS";
 export const RESET_FORM_TWO_SUBMIT_FAILED = "RESET_FORM_TWO_SUBMIT_FAILED";
 
+//@ts-ignore
 export const register = () => async (dispatch, getState) => {
   dispatch({ type: REGISTER_SUBMIT_REQUEST });
   const data = await request(ENDPOINT.register, {
@@ -46,6 +47,8 @@ export const register = () => async (dispatch, getState) => {
     });
   if (data && data.success) {
     for (let [key, value] of Object.entries(data.user)) {
+      //@ts-ignore
+
       dispatch(updateUser(key, value));
     }
     localStorage.setItem("accessToken", data.accessToken);
@@ -53,6 +56,7 @@ export const register = () => async (dispatch, getState) => {
   }
 };
 
+//@ts-ignore
 export const login = () => async (dispatch, getState) => {
   dispatch({ type: LOGIN_SUBMIT_REQUEST });
   const data = await request(ENDPOINT.login, {
@@ -80,6 +84,7 @@ export const login = () => async (dispatch, getState) => {
     });
   if (data && data.success) {
     for (let [key, value] of Object.entries(data.user)) {
+      //@ts-ignore
       dispatch(updateUser(key, value));
     }
     localStorage.setItem("accessToken", data.accessToken);
@@ -87,6 +92,7 @@ export const login = () => async (dispatch, getState) => {
   }
 };
 
+//@ts-ignore
 export const resetPasswordStepOne = () => (dispatch, getState) => {
   dispatch({ type: RESET_FORM_ONE_SUBMIT_REQUEST });
   request(ENDPOINT.resetPasswordStepOne, {
@@ -106,7 +112,7 @@ export const resetPasswordStepOne = () => (dispatch, getState) => {
     })
     .catch((err) => dispatch({ type: RESET_FORM_ONE_SUBMIT_FAILED }));
 };
-
+//@ts-ignore
 export const resetPasswordStepTwo = () => (dispatch, getState) => {
   dispatch({ type: RESET_FORM_TWO_SUBMIT_REQUEST });
   request(ENDPOINT.resetPasswordStepTwo, {
@@ -127,6 +133,7 @@ export const resetPasswordStepTwo = () => (dispatch, getState) => {
     .catch((err) => dispatch({ type: RESET_FORM_TWO_SUBMIT_FAILED }));
 };
 
+//@ts-ignore
 export const logout = () => (dispatch) => {
   dispatch({ type: LOGOUT_REQUEST });
   request(ENDPOINT.logout, {

@@ -24,3 +24,7 @@ export interface INavBar {
   style: string;
   icon: ReactNode | string;
 }
+
+export type TOrder = {
+  buns: number;
+};

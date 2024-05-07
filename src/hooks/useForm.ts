@@ -1,6 +1,5 @@
-import { useState } from "react";
 import { useDispatch } from "react-redux";
-export const useForm = (initialValue) => {
+export const useForm = () => {
   const dispatch = useDispatch();
 
   const handleInput = (e, reducer) => {

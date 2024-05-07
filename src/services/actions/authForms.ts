@@ -8,31 +8,31 @@ export const LOGIN_SET_VALUE = "LOGIN_SET_VALUE";
 
 export const EDIT_PROFILE_SET_VALUE = "EDIT_PROFILE_SET_VALUE";
 
-export const editProfileFormValue = (field, value) => ({
+export const editProfileFormValue = (field: string, value: string) => ({
   type: EDIT_PROFILE_SET_VALUE,
   field,
   value,
 });
 
-export const resetPasswordOneFormValue = (field, value) => ({
+export const resetPasswordOneFormValue = (field: string, value: string) => ({
   type: RESET_FORM_ONE_SET_VALUE,
   field,
   value,
 });
 
-export const resetPasswordTwoFormValue = (field, value) => ({
+export const resetPasswordTwoFormValue = (field: string, value: string) => ({
   type: RESET_FORM_TWO_SET_VALUE,
   field,
   value,
 });
 
-export const registerFormValue = (field, value) => ({
+export const registerFormValue = (field: string, value: string) => ({
   type: REGISTER_SET_VALUE,
   field,
   value,
 });
 
-export const loginFormValue = (field, value) => ({
+export const loginFormValue = (field: string, value: string) => ({
   type: LOGIN_SET_VALUE,
   field,
   value,
