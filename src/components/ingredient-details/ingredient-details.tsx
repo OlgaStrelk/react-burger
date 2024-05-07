@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { TIngredient } from "../../utils/types";
 interface IngredientDetailsProps {
-  style: string | undefined;
+  style?: string;
 }
 function IngredientDetails({ style }: IngredientDetailsProps) {
   const [ingredientData, setIngredientData] = useState<TIngredient | null>(

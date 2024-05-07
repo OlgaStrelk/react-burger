@@ -1,6 +1,5 @@
 import styles from "./home.module.css";
-import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../hooks/useModal";
 import BurgerConstructor from "../components/burger-constructor/burger-constructor";
 import BurgerIngredients from "../components/burger-ingredients/burger-ingredients";
@@ -13,12 +12,29 @@ import {
   RESET_INGREDIENT_QUANTITY,
 } from "../services/actions/ingredients";
 import { modalStyle } from "../utils/consts";
+import { useState } from "react";
 
 function HomePage() {
-//@ts-ignore
-  const ingredients = useSelector((state) => state.ingredients?.ingredients);
-  const [isOrderModalOpen, onOrderModalOpen, onOrderModalClose] = useModal();
+  const dispatch = useDispatch();
 
+  //@ts-ignore
+  const ingredients = useSelector((state) => state.ingredients?.ingredients);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const onOpen = () => {
+    setIsOpen(true);
+  };
+
+  const onClose = (action: string | string[]) => {
+    if (typeof action == "string") {
+      dispatch({ type: action });
+    } else {
+      [...action].forEach((element) => {
+        dispatch({ type: element });
+      });
+    }
+    setIsOpen(false);
+  };
   return (
     <>
       {ingredients && (
@@ -26,14 +42,14 @@ function HomePage() {
           <DndProvider backend={HTML5Backend}>
             <main className={styles.main}>
               <BurgerIngredients />
-              <BurgerConstructor onModalOpen={onOrderModalOpen} />
+              <BurgerConstructor onModalOpen={onOpen} />
             </main>
           </DndProvider>
-          {isOrderModalOpen && (
+          {isOpen && (
             <Modal
-              onClose={onOrderModalClose}
-              customStyle={modalStyle.order}
+              onClose={onClose}
               action={[RESET_CONSTRUCTOR, RESET_INGREDIENT_QUANTITY]}
+              customStyle={modalStyle.order}
             >
               <OrderDetails />
             </Modal>

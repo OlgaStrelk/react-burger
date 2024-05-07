@@ -3,13 +3,12 @@ import {
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./ingredient-card.module.css";
-import PropTypes from "prop-types";
 import { Link, useLocation } from "react-router-dom";
-import { cardDataShape } from "../../../utils/types";
 import { memo } from "react";
 import { useDrag } from "react-dnd";
+import { TIngredient } from "../../../utils/types";
 
-function IngredientCard({ cardData }) {
+function IngredientCard(cardData: TIngredient) {
   const [, dragRef] = useDrag({
     type: "ingredients",
     item: cardData,
@@ -32,7 +31,7 @@ function IngredientCard({ cardData }) {
           className={`text text_type_digits-default mt-1 mb-1 ${styles.price} ${styles.centered}`}
         >
           <span className="mr-1">{cardData.price}</span>
-          <CurrencyIcon />
+          <CurrencyIcon type="primary" />
         </p>
         <h4
           className={`text text_type_main-default ${styles.title} ${styles.centered}`}
@@ -43,9 +42,5 @@ function IngredientCard({ cardData }) {
     </Link>
   );
 }
-
-IngredientCard.propTypes = {
-  cardData: PropTypes.shape(cardDataShape).isRequired,
-};
 
 export default memo(IngredientCard);

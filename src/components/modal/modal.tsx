@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { ReactNode, useEffect, useRef } from "react";
 import ModalOverlay from "./modal-overlay/modal-overlay";
 import styles from "./modal.module.css";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -7,21 +7,36 @@ import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 
 const modalRoot = document.getElementById("react-modals");
-function Modal({ children, onClose, action, path, customStyle }) {
+type PropsWithChildren<P = unknown> = P & { children: ReactNode };
+
+interface IModal {
+  onClose?: () => void;
+  action: string | string[];
+  path?: string;
+  customStyle?: string;
+  // customStyle?: { modal?: string; icon?: string };
+}
+
+function Modal({
+  children,
+  onClose,
+  action,
+  path,
+  customStyle,
+}: PropsWithChildren<IModal>) {
   const navigate = useNavigate();
   const overlayRef = useRef();
-  const containerClassName = customStyle?.modal
-    ? `${styles.container} ${customStyle.modal}`
+  const containerClassName = customStyle
+    ? `${styles.container} ${customStyle}`
     : styles.container;
-  const iconClassName = customStyle?.icon
-    ? `${styles.icon} ${customStyle.icon}`
+  const iconClassName = customStyle
+    ? `${styles.icon} ${customStyle}`
     : styles.icon;
 
   const handleClose = () => {
     if (path) {
       navigate(path);
-    }
-    else if (onClose) onClose(action);
+    } else if (onClose) onClose(action);
   };
   const handleEscClose = (e) => {
     if (e.key === "Escape") {
@@ -61,7 +76,7 @@ function Modal({ children, onClose, action, path, customStyle }) {
         </div>
       </ModalOverlay>
     </>,
-    modalRoot
+    modalRoot as Element
   );
 }
 

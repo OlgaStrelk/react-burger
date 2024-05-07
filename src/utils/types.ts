@@ -13,6 +13,7 @@ export type TIngredient = {
   image: string;
   image_mobile: string;
   image_large: string;
+  quantity: number;
 };
 
 export type TConstructorIngredient = TIngredient & { id: string };

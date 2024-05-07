@@ -35,7 +35,7 @@ function App() {
   //@ts-ignore
   useEffect(() => dispatch(fetchIngredients()), [dispatch]);
   useEffect(() => {
-      //@ts-ignore
+    //@ts-ignore
     dispatch(checkUserAuth());
   }, [dispatch]);
 

@@ -145,16 +145,6 @@ function LoginPage() {
         </AuthForm>
         <Redirect data={redirect} />
       </main>
-
-      {/* {isOpen && (
-        <Modal
-          customStyle={CUSTOM_STYLES}
-          onClose={onClose}
-          action={RESET_SUBMIT_ERROR}
-        >
-          <InfoTooltip errorCode={""}/>
-        </Modal>
-      )} */}
     </>
   );
 }
