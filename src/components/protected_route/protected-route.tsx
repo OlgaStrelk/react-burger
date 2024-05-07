@@ -4,7 +4,7 @@ import { Navigate, useLocation } from "react-router-dom";
 import { PATHS } from "../../utils/consts";
 
 interface IProtectedRoute {
-  onlyUnAuth: boolean;
+  onlyUnAuth?: boolean;
   component: ReactNode;
 }
 const ProtectedRoute = ({ onlyUnAuth = false, component }: IProtectedRoute) => {

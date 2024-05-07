@@ -2,22 +2,20 @@ import styles from "./burger-ingredients.module.css";
 
 import Tabbar from "../tab-bar/tab-bar";
 import IngredientsBlock from "./ingredients-block/ingredients-block";
-import { useRef, useState } from "react";
+import { SetStateAction, SyntheticEvent, useRef, useState } from "react";
 
-import PropTypes from "prop-types";
-
-function BurgerIngredients(props) {
-  const titleBunRef = useRef(null);
-  const titleMainRef = useRef(null);
-  const titleSaucesRef = useRef(null);
-  const containerRef = useRef(null);
+function BurgerIngredients() {
+  const titleBunRef = useRef<HTMLHeadingElement>(null);
+  const titleMainRef = useRef<HTMLHeadingElement>(null);
+  const titleSaucesRef = useRef<HTMLHeadingElement>(null);
+  const containerRef = useRef<HTMLUListElement>(null);
   const BLOCK_TITLES = [
     { title: "Булки", value: "bun", id: 7, ref: titleBunRef },
     { title: "Соусы", value: "sauce", id: 8, ref: titleSaucesRef },
     { title: "Начинки", value: "main", id: 9, ref: titleMainRef },
   ];
   const [currentTab, setCurrentTab] = useState(BLOCK_TITLES[0].value);
-  const onTabClick = (tab) => {
+  const onTabClick = (tab: SetStateAction<string>) => {
     setCurrentTab(tab);
     if (tab === "bun")
       titleBunRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -29,7 +27,7 @@ function BurgerIngredients(props) {
       titleSaucesRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const handleScroll = (event) => {   
+  const handleScroll = (event: SyntheticEvent) => {
     if (event.currentTarget.scrollTop < 250) {
       setCurrentTab("bun");
     }
@@ -57,6 +55,5 @@ function BurgerIngredients(props) {
     </section>
   );
 }
-
 
 export default BurgerIngredients;
