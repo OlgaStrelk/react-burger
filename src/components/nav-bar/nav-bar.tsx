@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 
 function Navbar() {
   const { ordersList, home, profile } = PATHS;
+  //@ts-ignore
   const user = useSelector((state) => state.user.user);
   const profileLinkText = user && user.name ? user.name : "Личный кабинет";
   const NAVBAR_DATA = [

@@ -3,7 +3,9 @@ import CheckMarkIcon from "../../images/done.svg";
 import styles from "./order-details.module.css";
 
 function OrderDetails() {
+  //@ts-ignore
   const isLoading = useSelector((store) => store.order.orderRequest);
+  //@ts-ignore
   const orderNumber = useSelector((store) => store.order.order);
   return isLoading ? (
     "Загрузка..."
