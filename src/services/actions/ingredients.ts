@@ -25,10 +25,10 @@ export const MAKE_ORDER_FAILED = "MAKE_ORDER_FAILED";
 export const addIngredient = (ingredient: TIngredient) => {
   return { type: ADD_INGREDIENT, payload: { ...ingredient, id: uuid() } };
 };
-export const deleteIngredient = (id: number) => {
+export const deleteIngredient = (id: string) => {
   return { type: DELETE_INGREDIENT, payload: id };
 };
-export const decreaseQuantity = (id: number) => {
+export const decreaseQuantity = (id: string) => {
   return { type: DECREASE_INGREDIENT_QUANTITY, payload: id };
 };
 //@ts-ignore
