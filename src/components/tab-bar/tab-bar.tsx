@@ -1,9 +1,15 @@
+import { SyntheticEvent } from "react";
+import { TTitles } from "../../utils/types";
 import styles from "./tab-bar.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-
-const Tabbar = ({ data, onTabClick, currentTab }) => {
-  const handleClick = (e) => {
-    onTabClick(e);
+interface ITabbar {
+  data: TTitles[],
+  onTabClick: (value: string) => void,
+  currentTab: string
+}
+const Tabbar = ({ data, onTabClick, currentTab }:ITabbar) => {
+  const handleClick = (value:string) => {
+    onTabClick(value);
   };
 
   const renderTabMarkup = () => {
@@ -13,7 +19,6 @@ const Tabbar = ({ data, onTabClick, currentTab }) => {
         value={item.value}
         active={currentTab === item.value}
         onClick={handleClick}
-        id={item.value}
       >
         {item.title}
       </Tab>

@@ -1,4 +1,4 @@
-import { ForwardedRef, LegacyRef, ReactNode, RefObject } from "react";
+import {  LegacyRef, ReactNode, RefObject } from "react";
 export type TTitle = { title: string; value: string; id: number };
 
 export type TIngredient = {
@@ -36,8 +36,8 @@ export type TOrder = {
 };
 
 export type TTitles = {
-  id?: string | number;
-  ref?: LegacyRef<HTMLDivElement> | undefined;
-  title?: string;
-  value?: string;
+  id: string | number;
+  ref: LegacyRef<HTMLDivElement>;
+  title: string;
+  value: string;
 };
