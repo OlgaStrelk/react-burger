@@ -15,7 +15,13 @@ export type TIngredient = {
   image_large: string;
   quantity: number;
 };
-
+export type TInput = {
+  id: number;
+  placeholder: string;
+  name: string;
+  type: "email" | "text" | "password" | undefined;
+  value: string;
+};
 export type TConstructorIngredient = TIngredient & { id: string };
 
 export interface INavBar {

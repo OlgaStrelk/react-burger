@@ -1,7 +1,15 @@
-import styles from './redirect.module.css'
+import { FC } from "react";
+import styles from "./redirect.module.css";
 import { Link } from "react-router-dom";
-
-function Redirect({ data }) {
+export interface IRedirect {
+  data: Array<{
+    id: number | string
+    ;
+    caption: string;
+    link: { path: string; title: string };
+  }>;
+}
+const Redirect: FC<IRedirect> = ({ data }) => {
   const renderNavigationMarkup = () => {
     return data.map(({ id, caption, link: { path, title } }) => (
       <div className="" key={id}>
@@ -15,5 +23,5 @@ function Redirect({ data }) {
     ));
   };
   return <>{renderNavigationMarkup()}</>;
-}
+};
 export default Redirect;

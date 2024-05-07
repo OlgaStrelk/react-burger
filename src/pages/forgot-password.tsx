@@ -7,8 +7,9 @@ import Redirect from "../components/redirect/redirect";
 import { useSelector } from "react-redux";
 import { resetPasswordStepOne } from "../services/actions/auth";
 import { resetPasswordOneFormValue } from "../services/actions/authForms";
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
+import { TInput } from "../utils/types";
 function ForgotPasswordPage() {
   const [isValid, setIsValid] = useState(false);
   const navigate = useNavigate();
@@ -25,13 +26,13 @@ function ForgotPasswordPage() {
     }
   }, [email]);
 
-  const onFormChange = (e) => {
+  const onFormChange = (e: ChangeEvent) => {
     handleInput(e, resetPasswordOneFormValue);
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: React.SyntheticEvent<Element, Event>) => {
     handleSubmit(e, resetPasswordStepOne, isValid);
-    localStorage.setItem('emailsSent', 'true')
+    localStorage.setItem("emailsSent", "true");
     navigate(PATHS.resetPassword, { replace: true });
   };
 
@@ -47,7 +48,7 @@ function ForgotPasswordPage() {
     ],
   };
 
-  const INPUTS_DATA = [
+  const INPUTS_DATA: Array<TInput> = [
     {
       id: 14,
       placeholder: "Укажите e-mail",
@@ -82,11 +83,7 @@ function ForgotPasswordPage() {
     <>
       <main className={formStyles.main}>
         <h1 className={formStyles.title}>{title}</h1>
-        <AuthForm
-          onSubmit={onSubmit}
-          btn={text}
-          isValid={isValid}
-        >
+        <AuthForm onSubmit={onSubmit} btn={text} isValid={isValid}>
           {inputsMarkup}
         </AuthForm>
         <Redirect data={redirect} />
