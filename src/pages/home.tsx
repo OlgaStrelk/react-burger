@@ -1,6 +1,6 @@
 import styles from "./home.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { useModal } from "../hooks/useModal";
+// import { useModal } from "../hooks/useModal";
 import BurgerConstructor from "../components/burger-constructor/burger-constructor";
 import BurgerIngredients from "../components/burger-ingredients/burger-ingredients";
 import Modal from "../components/modal/modal";
@@ -15,7 +15,6 @@ import { modalStyle } from "../utils/consts";
 import { useState } from "react";
 
 function HomePage() {
-  const dispatch = useDispatch();
 
   //@ts-ignore
   const ingredients = useSelector((state) => state.ingredients?.ingredients);
@@ -25,14 +24,7 @@ function HomePage() {
     setIsOpen(true);
   };
 
-  const onClose = (action: string | string[]) => {
-    if (typeof action == "string") {
-      dispatch({ type: action });
-    } else {
-      [...action].forEach((element) => {
-        dispatch({ type: element });
-      });
-    }
+  const onClose = () => {
     setIsOpen(false);
   };
   return (

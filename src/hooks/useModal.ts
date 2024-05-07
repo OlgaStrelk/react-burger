@@ -1,25 +1,25 @@
-import { useDispatch } from "react-redux";
-import { useState } from "react";
+// import { useDispatch } from "react-redux";
+// import { useState } from "react";
 
-export const useModal = (initialValue: any) => {
-  const dispatch = useDispatch();
+// export const useModal = (initialValue: any) => {
+//   const dispatch = useDispatch();
 
-  const [isOpen, setIsOpen] = useState(initialValue);
+//   const [isOpen, setIsOpen] = useState(initialValue);
 
-  const onOpen = () => {
-    setIsOpen(true);
-  };
+//   const onOpen = () => {
+//     setIsOpen(true);
+//   };
 
-  const onClose = (action: string | string[]) => {
-    if (typeof action == "string") {
-      dispatch({ type: action });
-    } else {
-      [...action].forEach((element) => {
-        dispatch({ type: element });
-      });
-    }
-    setIsOpen(false);
-  };
+//   const onClose = (action: string | string[]) => {
+//     if (typeof action == "string") {
+//       dispatch({ type: action });
+//     } else {
+//       [...action].forEach((element) => {
+//         dispatch({ type: element });
+//       });
+//     }
+//     setIsOpen(false);
+//   };
 
-  return [isOpen, onOpen, onClose];
-};
+//   return [isOpen, onOpen, onClose];
+// };

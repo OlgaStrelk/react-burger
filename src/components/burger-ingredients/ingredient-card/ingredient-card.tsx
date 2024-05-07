@@ -7,8 +7,10 @@ import { Link, useLocation } from "react-router-dom";
 import { memo } from "react";
 import { useDrag } from "react-dnd";
 import { TIngredient } from "../../../utils/types";
-
-function IngredientCard(cardData: TIngredient) {
+interface IIngredientCard {
+  cardData: TIngredient;
+}
+function IngredientCard({ cardData }: IIngredientCard) {
   const [, dragRef] = useDrag({
     type: "ingredients",
     item: cardData,
