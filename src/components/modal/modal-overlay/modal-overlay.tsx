@@ -1,7 +1,11 @@
+import { LegacyRef, PropsWithChildren } from "react";
 import styles from "./modal-overlay.module.css";
 import PropTypes from "prop-types";
 
-function ModalOverlay({ children, innerRef }) {
+function ModalOverlay({
+  children,
+  innerRef,
+}: PropsWithChildren<{ innerRef: LegacyRef<HTMLDivElement> }>) {
   return (
     <>
       <div className={styles.overlay} ref={innerRef}>
