@@ -1,4 +1,4 @@
-import { ReactNode, SyntheticEvent, useEffect, useRef } from "react";
+import { LegacyRef, ReactNode, SyntheticEvent, useEffect, useRef } from "react";
 import ModalOverlay from "./modal-overlay/modal-overlay";
 import styles from "./modal.module.css";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -26,7 +26,7 @@ function Modal({
 }: PropsWithChildren<IModal>) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const overlayRef = useRef();
+  const overlayRef = useRef<HTMLDivElement>(null);
   const containerClassName = customStyle
     ? `${styles.container} ${customStyle}`
     : styles.container;
