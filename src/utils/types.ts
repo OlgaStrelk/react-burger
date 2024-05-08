@@ -15,6 +15,7 @@ export type TIngredient = {
   image_large: string;
   quantity: number;
 };
+
 export type TInput = {
   id: number | string;
   placeholder: string;

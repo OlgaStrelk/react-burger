@@ -32,7 +32,6 @@ export const decreaseQuantity = (id: string) => {
   return { type: DECREASE_INGREDIENT_QUANTITY, payload: id };
 };
 //@ts-ignore
-
 export const fetchIngredients = () => (dispatch) => {
   dispatch({ type: GET_INGREDIENTS_REQUEST });
   request(ENDPOINT.ingredients, {})
