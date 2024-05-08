@@ -1,5 +1,5 @@
 import styles from "./home.module.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 // import { useModal } from "../hooks/useModal";
 import BurgerConstructor from "../components/burger-constructor/burger-constructor";
 import BurgerIngredients from "../components/burger-ingredients/burger-ingredients";
@@ -15,9 +15,9 @@ import { modalStyle } from "../utils/consts";
 import { useState } from "react";
 
 function HomePage() {
-
   //@ts-ignore
   const ingredients = useSelector((state) => state.ingredients?.ingredients);
+  console.log(Boolean(ingredients));
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const onOpen = () => {
@@ -29,7 +29,7 @@ function HomePage() {
   };
   return (
     <>
-      {ingredients && (
+      {ingredients.length > 0 ? (
         <>
           <DndProvider backend={HTML5Backend}>
             <main className={styles.main}>
@@ -47,6 +47,13 @@ function HomePage() {
             </Modal>
           )}
         </>
+      ) : (
+        <main className={styles.main_error}>
+          <h2 className={styles.title}>
+            Не удалось загрузить данные. <br/> Проверте соединение с интернетом или
+            попробуйте позже
+          </h2>
+        </main>
       )}
     </>
   );

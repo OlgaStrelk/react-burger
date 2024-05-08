@@ -3,7 +3,10 @@ import formStyles from "./base-form.module.css";
 import { useSelector } from "react-redux";
 import { useState, useEffect, SyntheticEvent, ChangeEvent } from "react";
 
-import { Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
+import {
+  Input,
+  PasswordInput,
+} from "@ya.praktikum/react-developer-burger-ui-components";
 
 import AuthForm from "../components/auth-form/auth-form";
 import Redirect from "../components/redirect/redirect";
@@ -49,7 +52,7 @@ function ResetPasswordPage() {
     ],
   };
 
-  const INPUTS_DATA:TInput[] = [
+  const INPUTS_DATA: TInput[] = [
     {
       id: 14,
       placeholder: "Введите новый пароль",
@@ -71,9 +74,9 @@ function ResetPasswordPage() {
   };
 
   const onSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
-    // const path = PATHS;
+    const path = PATHS.home;
     handleSubmit(e, resetPasswordStepTwo, isValid);
-    // navigate(path, { replace: true });
+    navigate(path, { replace: true });
   };
 
   const inputsMarkup = INPUTS_DATA.map(
