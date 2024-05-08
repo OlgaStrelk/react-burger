@@ -15,6 +15,7 @@ import { PATHS } from "../utils/consts";
 import { useForm } from "../hooks/useForm";
 import { loginFormValue } from "../services/actions/authForms";
 import { login } from "../services/actions/auth";
+import { TInput } from "../utils/types";
 
 function LoginPage() {
   const { register, forgotPassword } = PATHS;
@@ -54,14 +55,6 @@ function LoginPage() {
         link: { path: forgotPassword, title: "Восстановить пароль" },
       },
     ],
-  };
-
-  type TInput = {
-    id: number;
-    placeholder: string;
-    name: string;
-    type: "password" | "email" | "text" | undefined;
-    value: string;
   };
 
   const INPUTS_DATA: TInput[] = [

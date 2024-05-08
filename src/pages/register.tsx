@@ -1,7 +1,7 @@
 import formStyles from "./base-form.module.css";
 
-import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useState, useEffect, SyntheticEvent, ChangeEvent } from "react";
 
 import {
   Input,
@@ -16,13 +16,14 @@ import { PATHS } from "../utils/consts";
 import { useForm } from "../hooks/useForm";
 import { registerFormValue } from "../services/actions/authForms";
 import { register } from "../services/actions/auth";
+import { TInput } from "../utils/types";
 
-function Register(props) {
+function Register() {
+  //@ts-ignore
   const { name, password, email } = useSelector((state) => state.register.form);
 
   const { handleInput, handleSubmit } = useForm();
   const [isValid, setIsValid] = useState(false);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     if (password && email && name) {
@@ -31,11 +32,12 @@ function Register(props) {
       setIsValid(false);
     }
   }, [password, email, name]);
-  const onFormChange = (e) => {
+  
+  const onFormChange = (e: ChangeEvent<HTMLInputElement>) => {
     handleInput(e, registerFormValue);
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
     handleSubmit(e, register, isValid);
   };
 
@@ -51,7 +53,7 @@ function Register(props) {
     ],
   };
 
-  const INPUTS_DATA = [
+  const INPUTS_DATA: TInput[] = [
     {
       id: 11,
       placeholder: "Имя",
@@ -83,7 +85,6 @@ function Register(props) {
               key={id}
               name={name}
               placeholder={placeholder}
-              type={type}
               value={value}
               onChange={onFormChange}
               extraClass={formStyles.input}
@@ -97,7 +98,6 @@ function Register(props) {
               key={id}
               name={name}
               placeholder={placeholder}
-              type={type}
               value={value}
               onChange={onFormChange}
               extraClass={formStyles.input}

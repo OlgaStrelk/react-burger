@@ -1,9 +1,9 @@
 import formStyles from "./base-form.module.css";
 
 import { useSelector } from "react-redux";
-import { useState, useEffect } from "react";
+import { useState, useEffect, SyntheticEvent, ChangeEvent } from "react";
 
-import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 
 import AuthForm from "../components/auth-form/auth-form";
 import Redirect from "../components/redirect/redirect";
@@ -13,8 +13,10 @@ import { useForm } from "../hooks/useForm";
 import { resetPasswordTwoFormValue } from "../services/actions/authForms";
 import { resetPasswordStepTwo } from "../services/actions/auth";
 import { useNavigate } from "react-router-dom";
+import { TInput } from "../utils/types";
 
 function ResetPasswordPage() {
+  //@ts-ignore
   const { password, token } = useSelector((state) => state.resetFormTwo.form);
 
   const navigate = useNavigate();
@@ -47,7 +49,7 @@ function ResetPasswordPage() {
     ],
   };
 
-  const INPUTS_DATA = [
+  const INPUTS_DATA:TInput[] = [
     {
       id: 14,
       placeholder: "Введите новый пароль",
@@ -64,11 +66,11 @@ function ResetPasswordPage() {
     },
   ];
 
-  const onFormChange = (e) => {
+  const onFormChange = (e: ChangeEvent<HTMLInputElement>) => {
     handleInput(e, resetPasswordTwoFormValue);
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
     // const path = PATHS;
     handleSubmit(e, resetPasswordStepTwo, isValid);
     // navigate(path, { replace: true });
@@ -82,7 +84,6 @@ function ResetPasswordPage() {
             key={id}
             name={name}
             placeholder={placeholder}
-            type={type}
             value={value}
             onChange={onFormChange}
             extraClass={formStyles.input}

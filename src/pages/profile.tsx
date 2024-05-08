@@ -6,30 +6,32 @@ import {
   EmailInput,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { PATHS } from "../utils/consts";
 import { useForm } from "../hooks/useForm";
-import { useEffect } from "react";
+import { ChangeEvent, SyntheticEvent, useEffect } from "react";
 import { editProfileFormValue } from "../services/actions/authForms";
 import { editProfile } from "../services/actions/user";
+import { TInput } from "../utils/types";
 
 function ProfilePage() {
+  //@ts-ignore
   const { name, email } = useSelector((state) => state.user.user);
+  //@ts-ignore
   const form = useSelector((state) => state.profile.form);
 
   const dispatch = useDispatch();
 
   const { handleInput, handleSubmit } = useForm();
   const onPasswordChange = () => {
+    //@ts-ignore
     dispatch(editProfileFormValue("password", null));
   };
-  const onFormChange = (e) => {
+  const onFormChange = (e: ChangeEvent<HTMLInputElement>) => {
     handleInput(e, editProfileFormValue);
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
     let isValid = true;
     handleSubmit(e, editProfile, isValid);
   };
@@ -43,7 +45,7 @@ function ProfilePage() {
     dispatch(editProfileFormValue("name", name));
     dispatch(editProfileFormValue("email", email));
   };
-  const INPUTS_DATA = [
+  const INPUTS_DATA: TInput[] = [
     {
       id: "1",
       name: "name",
@@ -77,7 +79,6 @@ function ProfilePage() {
                 key={id}
                 name={name}
                 placeholder={placeholder}
-                type={type}
                 value={value || ""}
                 onChange={onFormChange}
                 icon="EditIcon"
@@ -93,7 +94,6 @@ function ProfilePage() {
                 key={id}
                 name={name}
                 placeholder={placeholder}
-                type={type}
                 value={value || ""}
                 onChange={onFormChange}
                 isIcon={true}
