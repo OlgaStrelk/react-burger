@@ -1,4 +1,4 @@
-import { ENDPOINT } from "../../utils/consts";
+import { ENDPOINT, handleError } from "../../utils/consts";
 import { fetchWithRefresh } from "../../utils/api";
 import { string } from "prop-types";
 
@@ -43,9 +43,7 @@ export const getUser = () => async (dispatch) => {
         dispatch(updateUser(key, value));
       }
     })
-    .catch(() => {
-      dispatch({ type: GET_USER_FAILED });
-    });
+    .catch((err) => handleError(GET_USER_FAILED, err, dispatch));
 };
 // };
 
@@ -54,12 +52,10 @@ export const checkUserAuth = () => {
   return (dispatch) => {
     if (localStorage.getItem("accessToken")) {
       dispatch(getUser())
-        //@ts-ignore
-        .catch((err) => {
-          console.log(err);
+        .catch((err: Error) => {
+          handleError(DELETE_USER, err, dispatch);
           localStorage.removeItem("accessToken");
           localStorage.removeItem("refreshToken");
-          dispatch({ type: DELETE_USER });
         })
         .finally(() => dispatch(setAuthChecked(true)));
     } else {
@@ -70,7 +66,7 @@ export const checkUserAuth = () => {
 //@ts-ignore
 export const editProfile = () => (dispatch, getState) => {
   dispatch({ type: EDIT_PROFILE_SUBMIT_REQUEST });
-  let token = localStorage.getItem("accessToken")
+  let token = localStorage.getItem("accessToken");
   fetchWithRefresh(ENDPOINT.user, {
     method: "PATCH",
     mode: "cors",
@@ -91,5 +87,5 @@ export const editProfile = () => (dispatch, getState) => {
         dispatch(updateUser(key, value));
       }
     })
-    .catch(() => dispatch({ type: EDIT_PROFILE_SUBMIT_FAILED }));
+    .catch((err) => handleError(EDIT_PROFILE_SUBMIT_FAILED, err, dispatch));
 };

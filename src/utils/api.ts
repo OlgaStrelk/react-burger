@@ -1,11 +1,10 @@
 import { API_URL } from "./consts";
-interface CustomResponse<T> extends Body {
+interface CustomResponse extends Body {
   readonly headers: Headers;
   readonly ok: boolean;
   readonly redirected: boolean;
   readonly status: number;
   readonly statusText: string;
-  readonly trailer: Promise<Headers>;
   readonly type: ResponseType;
   readonly url: string;
   clone(): Response;
@@ -13,7 +12,7 @@ interface CustomResponse<T> extends Body {
   readonly bodyUsed: boolean;
 
   // readonly body: T;
-};
+}
 
 type TOptions = {
   method: "GET" | "POST" | "PATCH";
@@ -33,10 +32,9 @@ interface TTokenResponse extends Response {
   success: true;
   accessToken: string;
   refreshToken: string;
-};
+}
 
-
-const checkReponse = (res)=> {
+const checkReponse = (res: CustomResponse) => {
   return res.ok
     ? res.json()
     : res.json().then((err: any) => Promise.reject(err));
@@ -63,19 +61,20 @@ export const refreshToken = () => {
     });
 };
 
-export const fetchWithRefresh = async <T>(url: string, options: TOptions):Promise<T> => {
+export const fetchWithRefresh = async (url: string, options: TOptions) => {
   try {
     const res = await fetch(`${API_URL}${url}`, options);
     return await checkReponse(res);
-  } catch (err: any) {
-    if (err.message === "jwt expired") {
-      const refreshData = await refreshToken();
-      options.headers.authorization = refreshData.accessToken;
-      const res = await fetch(`${API_URL}${url}`, options);
-      return await checkReponse(res);
-    } else {
-      console.log(err);
-
+  } catch (err) {
+    if (err instanceof Error) {
+      if (err.message === "jwt expired") {
+        const refreshData = await refreshToken();
+        options.headers.authorization = refreshData.accessToken;
+        const res = await fetch(`${API_URL}${url}`, options);
+        return await checkReponse(res);
+      } else {
+        console.log(err);
+      }
       return Promise.reject(err);
     }
   }

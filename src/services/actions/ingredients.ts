@@ -1,4 +1,4 @@
-import { ENDPOINT, request } from "../../utils/consts";
+import { ENDPOINT, handleError, request } from "../../utils/consts";
 import { v4 as uuid } from "uuid";
 import { TIngredient } from "../../utils/types";
 
@@ -38,7 +38,7 @@ export const fetchIngredients = () => (dispatch) => {
     .then((res) => {
       dispatch({ type: GET_INGREDIENTS_SUCCESS, payload: res.data });
     })
-    .catch((err) => dispatch({ type: GET_INGREDIENTS_FAILED }));
+    .catch((err) => handleError(GET_INGREDIENTS_FAILED, err, dispatch));
 };
 
 export const makeOrder =
@@ -56,5 +56,5 @@ export const makeOrder =
       .then((res) =>
         dispatch({ type: MAKE_ORDER_SUCCESS, payload: res.order.number })
       )
-      .catch((err) => dispatch({ type: MAKE_ORDER_FAILED }));
+      .catch((err) => handleError(MAKE_ORDER_FAILED, err, dispatch));
   };
