@@ -1,5 +1,5 @@
 import { updateUser } from "./user";
-import { request } from "../../utils/consts";
+import { handleError, request } from "../../utils/consts";
 import { ENDPOINT } from "../../utils/consts";
 
 export const REGISTER_SUBMIT_REQUEST = "REGISTER_SUBMIT_REQUEST";
@@ -41,10 +41,8 @@ export const register = () => async (dispatch, getState) => {
       dispatch({ type: REGISTER_SUBMIT_SUCCESS });
       return data;
     })
-    .catch((err) => {
-      console.log(err);
-      dispatch({ type: REGISTER_SUBMIT_FAILED });
-    });
+    .catch((err) => handleError(REGISTER_SUBMIT_FAILED, err, dispatch));
+
   if (data && data.success) {
     for (let [key, value] of Object.entries(data.user)) {
       //@ts-ignore
@@ -77,11 +75,7 @@ export const login = () => async (dispatch, getState) => {
       dispatch({ type: LOGIN_SUBMIT_SUCCESS });
       return data;
     })
-    .catch((err) => {
-      console.log(err);
-
-      dispatch({ type: LOGIN_SUBMIT_FAILED });
-    });
+    .catch((err) => handleError(LOGIN_SUBMIT_FAILED, err, dispatch));
   if (data && data.success) {
     for (let [key, value] of Object.entries(data.user)) {
       //@ts-ignore
@@ -110,7 +104,7 @@ export const resetPasswordStepOne = () => (dispatch, getState) => {
     .then((res) => {
       dispatch({ type: RESET_FORM_ONE_SUBMIT_SUCCESS, payload: res.data });
     })
-    .catch((err) => dispatch({ type: RESET_FORM_ONE_SUBMIT_FAILED }));
+    .catch((err) => handleError(RESET_FORM_ONE_SUBMIT_FAILED, err, dispatch));
 };
 //@ts-ignore
 export const resetPasswordStepTwo = () => (dispatch, getState) => {
@@ -130,7 +124,7 @@ export const resetPasswordStepTwo = () => (dispatch, getState) => {
     .then((res) => {
       dispatch({ type: RESET_FORM_TWO_SUBMIT_SUCCESS, payload: res.data });
     })
-    .catch((err) => dispatch({ type: RESET_FORM_TWO_SUBMIT_FAILED }));
+    .catch((err) => handleError(RESET_FORM_TWO_SUBMIT_FAILED, err, dispatch));
 };
 
 //@ts-ignore
@@ -149,13 +143,10 @@ export const logout = () => (dispatch) => {
     referrerPolicy: "no-referrer",
     body: JSON.stringify({ token: localStorage.getItem("refreshToken") }),
   })
-    .then((res) => {
+    .then(() => {
       dispatch({ type: LOGOUT_SUCCESS });
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
     })
-    .catch((err) => {
-      console.log(err);
-      dispatch({ type: LOGOUT_FAILED });
-    });
+    .catch((err) => handleError(LOGOUT_FAILED, err, dispatch));
 };

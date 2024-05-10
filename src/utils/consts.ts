@@ -41,3 +41,10 @@ export const request = (url: string, options: object) => {
 
 export const checkResponse = (res: any) =>
   res.ok ? res.json() : Promise.reject(res.status);
+
+export const handleError = (action: string, err: Error, dispatch: any) => {
+  if (err instanceof Error) {
+    console.log(err);
+    dispatch({ type: action });
+  }
+};

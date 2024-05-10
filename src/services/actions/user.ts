@@ -1,5 +1,6 @@
 import { ENDPOINT } from "../../utils/consts";
 import { fetchWithRefresh } from "../../utils/api";
+import { string } from "prop-types";
 
 export const DELETE_USER = "DELETE_USER";
 export const GET_USER_REQUEST = "GET_USER_REQUEST";
@@ -26,11 +27,13 @@ export const setAuthChecked = (isChecked: boolean) => ({
 //@ts-ignore
 export const getUser = () => async (dispatch) => {
   dispatch({ type: GET_USER_REQUEST });
+  let token = localStorage.getItem("accessToken");
+  // if (typeof token == "string") {
   await fetchWithRefresh(ENDPOINT.user, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: localStorage.getItem("accessToken"),
+      authorization: token as string,
     },
   })
     .then((data) => {
@@ -40,17 +43,18 @@ export const getUser = () => async (dispatch) => {
         dispatch(updateUser(key, value));
       }
     })
-    .catch((err) => {
+    .catch(() => {
       dispatch({ type: GET_USER_FAILED });
     });
 };
+// };
 
 export const checkUserAuth = () => {
   //@ts-ignore
   return (dispatch) => {
     if (localStorage.getItem("accessToken")) {
       dispatch(getUser())
-      //@ts-ignore
+        //@ts-ignore
         .catch((err) => {
           console.log(err);
           localStorage.removeItem("accessToken");
@@ -66,6 +70,7 @@ export const checkUserAuth = () => {
 //@ts-ignore
 export const editProfile = () => (dispatch, getState) => {
   dispatch({ type: EDIT_PROFILE_SUBMIT_REQUEST });
+  let token = localStorage.getItem("accessToken")
   fetchWithRefresh(ENDPOINT.user, {
     method: "PATCH",
     mode: "cors",
@@ -73,7 +78,7 @@ export const editProfile = () => (dispatch, getState) => {
     credentials: "same-origin",
     headers: {
       "Content-Type": "application/json",
-      Authorization: localStorage.getItem("accessToken"),
+      authorization: token as string,
     },
     redirect: "follow",
     referrerPolicy: "no-referrer",
@@ -86,5 +91,5 @@ export const editProfile = () => (dispatch, getState) => {
         dispatch(updateUser(key, value));
       }
     })
-    .catch((err) => dispatch({ type: EDIT_PROFILE_SUBMIT_FAILED }));
+    .catch(() => dispatch({ type: EDIT_PROFILE_SUBMIT_FAILED }));
 };

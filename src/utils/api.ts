@@ -1,6 +1,42 @@
 import { API_URL } from "./consts";
+interface CustomResponse<T> extends Body {
+  readonly headers: Headers;
+  readonly ok: boolean;
+  readonly redirected: boolean;
+  readonly status: number;
+  readonly statusText: string;
+  readonly trailer: Promise<Headers>;
+  readonly type: ResponseType;
+  readonly url: string;
+  clone(): Response;
+  json(): any;
+  readonly bodyUsed: boolean;
 
-const checkReponse = (res: any) => {
+  // readonly body: T;
+};
+
+type TOptions = {
+  method: "GET" | "POST" | "PATCH";
+  headers: Headers & {
+    authorization?: string;
+    "Content-Type": "application/json";
+  };
+  mode: "cors";
+  cache: "no-cache";
+  credentials: "same-origin";
+  redirect: "follow";
+  referrerPolicy: "no-referrer";
+  body: string;
+};
+
+interface TTokenResponse extends Response {
+  success: true;
+  accessToken: string;
+  refreshToken: string;
+};
+
+
+const checkReponse = (res)=> {
   return res.ok
     ? res.json()
     : res.json().then((err: any) => Promise.reject(err));
@@ -23,11 +59,11 @@ export const refreshToken = () => {
       }
       localStorage.setItem("refreshToken", refreshData.refreshToken);
       localStorage.setItem("accessToken", refreshData.accessToken);
-      return refreshData;
+      return refreshData as TTokenResponse;
     });
 };
 
-export const fetchWithRefresh = async (url:string, options:any) => {
+export const fetchWithRefresh = async <T>(url: string, options: TOptions):Promise<T> => {
   try {
     const res = await fetch(`${API_URL}${url}`, options);
     return await checkReponse(res);

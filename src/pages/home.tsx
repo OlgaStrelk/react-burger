@@ -17,7 +17,6 @@ import { useState } from "react";
 function HomePage() {
   //@ts-ignore
   const ingredients = useSelector((state) => state.ingredients?.ingredients);
-  console.log(Boolean(ingredients));
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const onOpen = () => {

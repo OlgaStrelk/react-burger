@@ -13,7 +13,6 @@ export type Ref = HTMLUListElement;
 
 const IngredientsBlock = forwardRef<Ref, Props>(({ titles, onScroll }, ref) => {
 
-  console.log(ref)
   const dispatch = useDispatch();
   //@ts-ignore
   const ingredients = useSelector((state) => state.ingredients.ingredients);
