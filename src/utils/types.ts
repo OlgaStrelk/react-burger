@@ -71,3 +71,10 @@ export interface ITokenResponse extends ISuccessResponse {
   accessToken: string;
   refreshToken: string;
 }
+
+export type TLoginData = {
+  success: boolean;
+  user: { email: string; password: string };
+  accessToken: string;
+  refreshToken: string;
+};

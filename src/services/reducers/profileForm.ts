@@ -1,4 +1,4 @@
-import { EDIT_PROFILE_SET_VALUE } from "../actions/authForms";
+import { CLEAR_PROFILE_FORM, EDIT_PROFILE_SET_VALUE } from "../actions/authForms";
 import {
   EDIT_PROFILE_SUBMIT_SUCCESS,
   EDIT_PROFILE_SUBMIT_FAILED,
@@ -23,6 +23,12 @@ export const editProfileFormReducer = (state = initialState, action) => {
           ...state.form,
           [action.field]: action.value,
         },
+      };
+    }
+
+    case CLEAR_PROFILE_FORM: {
+      return {
+        form: initialState.form,
       };
     }
 

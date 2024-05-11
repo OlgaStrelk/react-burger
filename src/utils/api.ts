@@ -47,13 +47,19 @@ export const fetchWithRefresh = async (
   options: TRequestOptions
 ) => {
   try {
-    const res = await fetch(`${API_URL}${url}`, optionsWithAuth);
+    const res = await fetch(`${API_URL}${url}`, {
+      ...optionsWithAuth,
+      ...options,
+    });
     return await checkReponse(res);
   } catch (err) {
     if (err instanceof Error) {
       if (err.message === "jwt expired") {
         const refreshData = await refreshToken();
+        console.log("do", options.headers.Authorization);
         options.headers.Authorization = refreshData.accessToken;
+        console.log("posle", options.headers.Authorization);
+
         const res = await fetch(`${API_URL}${url}`, optionsWithAuth);
         return await checkReponse(res);
       } else {

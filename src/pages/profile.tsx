@@ -12,15 +12,16 @@ import { useForm } from "../hooks/useForm";
 import { ChangeEvent, SyntheticEvent, useEffect } from "react";
 import { editProfileFormValue } from "../services/actions/authForms";
 import { editProfile } from "../services/actions/user";
-import { TInput } from "../utils/types";
+import { TInput, TUser } from "../utils/types";
+import Preloader from "../components/preloader/preloader";
 
 function ProfilePage() {
   //@ts-ignore
-  const { name, email } = useSelector((state) => state.user.user);
+  const { name, email }: TUser = useSelector((state) => state.user.user);
   //@ts-ignore
 
-  const user = useSelector((state) => state.user);
-
+  const isLoading: boolean = useSelector((state) => state.user.userRequest);
+  console.log(isLoading);
   //@ts-ignore
   const form = useSelector((state) => state.profile.form);
 
@@ -121,26 +122,38 @@ function ProfilePage() {
       }
     }
   );
-
   return (
     <>
-      <p className={styles.paragraph}>
-        В этом разделе вы можете изменить свои персональные данные
-      </p>
-      <form onSubmit={onSubmit} className={styles.form}>
-        <ul className={styles.list}>{inputsMarkup}</ul>
-        <div className={styles.buttons}>
-          <Button
-            onClick={resetForm}
-            htmlType="button"
-            type="secondary"
-            size="medium"
-          >
-            Отмена
-          </Button>
-          <Button htmlType="submit">Сохранить</Button>
-        </div>
-      </form>
+      {isLoading ? (
+        <Preloader />
+      ) : name && email ? (
+        <>
+          <p className={styles.paragraph}>
+            В этом разделе вы можете изменить свои персональные данные
+          </p>
+          <form onSubmit={onSubmit} className={styles.form}>
+            <ul className={styles.list}>{inputsMarkup}</ul>
+            <div className={styles.buttons}>
+              <Button
+                onClick={resetForm}
+                htmlType="button"
+                type="secondary"
+                size="medium"
+              >
+                Отмена
+              </Button>
+              <Button htmlType="submit">Сохранить</Button>
+            </div>
+          </form>
+        </>
+      ) : (
+        <main className={styles.main_error}>
+          <h2 className={styles.title}>
+            Не&nbsp;удалось загрузить данные. Проверте соединение
+            с&nbsp;интернетом или попробуйте позже
+          </h2>
+        </main>
+      )}
     </>
   );
 }

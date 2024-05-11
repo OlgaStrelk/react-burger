@@ -1,6 +1,8 @@
 import { updateUser } from "./user";
 import { handleError, optionsWithAuth, request } from "../../utils/consts";
 import { ENDPOINT } from "../../utils/consts";
+import { TLoginData } from "../../utils/types";
+import { CLEAR_PROFILE_FORM } from "./authForms";
 
 export const REGISTER_SUBMIT_REQUEST = "REGISTER_SUBMIT_REQUEST";
 export const REGISTER_SUBMIT_SUCCESS = "REGISTER_SUBMIT_SUCCESS";
@@ -44,13 +46,6 @@ export const register = () => async (dispatch, getState) => {
     localStorage.setItem("accessToken", data.accessToken);
     localStorage.setItem("refreshToken", data.refreshToken);
   }
-};
-
-export type TLoginData = {
-  success: boolean;
-  user: { email: string; password: string };
-  accessToken: string;
-  refreshToken: string;
 };
 
 export const login =
@@ -128,6 +123,7 @@ export const logout = () => (dispatch) => {
       dispatch({ type: LOGOUT_SUCCESS });
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
+      dispatch({ type: CLEAR_PROFILE_FORM });
     })
     .catch((err) => handleError(LOGOUT_FAILED, err, dispatch));
 };

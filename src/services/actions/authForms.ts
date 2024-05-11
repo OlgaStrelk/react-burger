@@ -8,6 +8,8 @@ export const LOGIN_SET_VALUE = "LOGIN_SET_VALUE";
 
 export const EDIT_PROFILE_SET_VALUE = "EDIT_PROFILE_SET_VALUE";
 
+export const CLEAR_PROFILE_FORM = "CLEAR_PROFILE_FORM";
+
 export const editProfileFormValue = (field: string, value: string) => ({
   type: EDIT_PROFILE_SET_VALUE,
   field,

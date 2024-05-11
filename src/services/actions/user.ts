@@ -1,7 +1,7 @@
 import { ENDPOINT, handleError } from "../../utils/consts";
 import { fetchWithRefresh } from "../../utils/api";
 import { optionsWithAuth } from "../../utils/consts";
-import { IUserSuccessResponse } from "../../utils/types";
+import { IUserSuccessResponse, TUser } from "../../utils/types";
 export const DELETE_USER = "DELETE_USER";
 export const GET_USER_REQUEST = "GET_USER_REQUEST";
 export const GET_USER_SUCCESS = "GET_USER_SUCCESS";
@@ -24,33 +24,34 @@ export const setAuthChecked = (isChecked: boolean) => ({
   payload: isChecked,
 });
 
-export const getUser = (data: IUserSuccessResponse) => ({
+export const getUser = (user: TUser) => ({
   type: GET_USER_SUCCESS,
-  payload: data.user,
+  payload: user,
 });
 
 //@ts-ignore
 export const fetchUser = () => async (dispatch) => {
   dispatch({ type: GET_USER_REQUEST });
 
-  await fetchWithRefresh(ENDPOINT.user, {
-    ...optionsWithAuth,
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: localStorage.getItem("accessToken") as string,
-    },
-  })
-    .then(
-      (data: IUserSuccessResponse) => {
-        if (data.success) {
-          dispatch({ type: GET_USER_SUCCESS, payload: data.user });
-        }
-      }
-    )
+  const data: IUserSuccessResponse | void = await fetchWithRefresh(
+    ENDPOINT.user,
+    {
+      ...optionsWithAuth,
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("accessToken") as string,
+      },
+    }
+  )
+    .then((data: IUserSuccessResponse) => data)
     .catch((err) => {
       handleError(GET_USER_FAILED, err, dispatch);
     });
+
+  if (data && data.success) {
+    dispatch(getUser(data.user));
+  }
 };
 
 export const checkUserAuth = () => {
@@ -70,16 +71,24 @@ export const checkUserAuth = () => {
   };
 };
 //@ts-ignore
-export const editProfile = () => (dispatch, getState) => {
+export const editProfile = () => async (dispatch, getState) => {
   dispatch({ type: EDIT_PROFILE_SUBMIT_REQUEST });
-  fetchWithRefresh(ENDPOINT.user, {
-    ...optionsWithAuth,
-    method: "PATCH",
-    body: JSON.stringify(getState().profile.form),
-  })
-    .then((res) => {
-      dispatch({ type: EDIT_PROFILE_SUBMIT_SUCCESS });
-      dispatch(updateUser(res.user));
-    })
+  console.log('то что отправляю серверу', getState().profile.form)
+  let data: IUserSuccessResponse | void = await fetchWithRefresh(
+    ENDPOINT.user,
+    {
+      ...optionsWithAuth,
+      method: "PATCH",
+      body: JSON.stringify(getState().profile.form),
+    }
+  )
+    .then((data: IUserSuccessResponse) => data)
     .catch((err) => handleError(EDIT_PROFILE_SUBMIT_FAILED, err, dispatch));
+
+  if (data && data.success) {
+    dispatch({ type: EDIT_PROFILE_SUBMIT_SUCCESS });
+
+    console.log('ответ сервера',data)
+    dispatch(updateUser(data.user));
+  }
 };

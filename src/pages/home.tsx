@@ -13,10 +13,17 @@ import {
 } from "../services/actions/ingredients";
 import { modalStyle } from "../utils/consts";
 import { useState } from "react";
+import Preloader from "../components/preloader/preloader";
 
 function HomePage() {
   //@ts-ignore
-  const ingredients = useSelector((state) => state.ingredients?.ingredients);
+  const ingredients = useSelector((state) => state.ingredients.ingredients);
+  const isLoading = useSelector(
+    //@ts-ignore
+
+    (state) => state.ingredients.ingredientsRequest
+  );
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const onOpen = () => {
@@ -29,23 +36,27 @@ function HomePage() {
   return (
     <>
       {ingredients.length > 0 ? (
-        <>
-          <DndProvider backend={HTML5Backend}>
-            <main className={styles.main}>
-              <BurgerIngredients />
-              <BurgerConstructor onModalOpen={onOpen} />
-            </main>
-          </DndProvider>
-          {isOpen && (
-            <Modal
-              onClose={onClose}
-              action={[RESET_CONSTRUCTOR, RESET_INGREDIENT_QUANTITY]}
-              customStyle={modalStyle.order}
-            >
-              <OrderDetails />
-            </Modal>
-          )}
-        </>
+        isLoading ? (
+          <Preloader />
+        ) : (
+          <>
+            <DndProvider backend={HTML5Backend}>
+              <main className={styles.main}>
+                <BurgerIngredients />
+                <BurgerConstructor onModalOpen={onOpen} />
+              </main>
+            </DndProvider>
+            {isOpen && (
+              <Modal
+                onClose={onClose}
+                action={[RESET_CONSTRUCTOR, RESET_INGREDIENT_QUANTITY]}
+                customStyle={modalStyle.order}
+              >
+                <OrderDetails />
+              </Modal>
+            )}
+          </>
+        )
       ) : (
         <main className={styles.main_error}>
           <h2 className={styles.title}>
