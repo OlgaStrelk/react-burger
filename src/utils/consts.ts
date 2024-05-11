@@ -44,8 +44,8 @@ export const checkResponse = (res: any) =>
 
 export const handleError = (action: string, err: Error, dispatch: any) => {
   if (err instanceof Error) {
-    console.log(err);
     dispatch({ type: action });
+    console.log(err);
   }
 };
 
@@ -72,3 +72,12 @@ export type TOptions = {
 };
 
 export type TMethod = { method: "GET" | "POST" | "PATCH" };
+
+export type TUser = { name: string; email: string; password?: string };
+export interface ISuccessRequest {
+  success: true;
+}
+
+export interface IUserSuccessRequest extends ISuccessRequest {
+  user: TUser;
+}

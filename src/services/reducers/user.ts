@@ -28,7 +28,7 @@ export const userReducer = (state = initialState, action) => {
     case GET_USER_SUCCESS: {
       return {
         ...state,
-        user: "userworking",
+        user: { ...action.payload },
         userRequest: false,
       };
     }

@@ -39,7 +39,6 @@ export const register = () => async (dispatch, getState) => {
     .catch((err) => handleError(REGISTER_SUBMIT_FAILED, err, dispatch));
 
   if (data && data.success) {
-    console.log("reg", data.user);
     //@ts-ignore
     dispatch(updateUser(data.user));
     localStorage.setItem("accessToken", data.accessToken);
@@ -72,7 +71,6 @@ export const login =
       })
       .catch((err) => handleError(LOGIN_SUBMIT_FAILED, err, dispatch));
     if (data && data.success) {
-      console.log("залогинился");
       //@ts-ignore
 
       const value = getState().login.form.password;

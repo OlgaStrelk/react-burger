@@ -38,7 +38,6 @@ function App() {
   useEffect(() => {
     //@ts-ignore
     dispatch(checkUserAuth());
-    console.log(localStorage.getItem("accessToken"));
   }, [dispatch]);
   const {
     home,

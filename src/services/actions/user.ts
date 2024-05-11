@@ -1,4 +1,4 @@
-import { ENDPOINT, handleError } from "../../utils/consts";
+import { ENDPOINT, IUserSuccessRequest, handleError } from "../../utils/consts";
 import { fetchWithRefresh } from "../../utils/api";
 import { optionsWithAuth } from "../../utils/consts";
 export const DELETE_USER = "DELETE_USER";
@@ -16,8 +16,6 @@ export const UPDATE_USER_DATA = "UPDATE_USER_DATA";
 export const updateUser = (user: { [key in string]: string }) => ({
   type: UPDATE_USER_DATA,
   payload: user,
-  // name,
-  // value,
 });
 
 export const setAuthChecked = (isChecked: boolean) => ({
@@ -25,10 +23,16 @@ export const setAuthChecked = (isChecked: boolean) => ({
   payload: isChecked,
 });
 
+export const getUser = (data: IUserSuccessRequest) => ({
+  type: GET_USER_SUCCESS,
+  payload: data.user,
+});
+
 //@ts-ignore
-export const getUser = () => async (dispatch) => {
+export const fetchUser = () => async (dispatch) => {
   dispatch({ type: GET_USER_REQUEST });
-  let data = await fetchWithRefresh(ENDPOINT.user, {
+
+  await fetchWithRefresh(ENDPOINT.user, {
     ...optionsWithAuth,
     method: "GET",
     headers: {
@@ -36,33 +40,23 @@ export const getUser = () => async (dispatch) => {
       Authorization: localStorage.getItem("accessToken") as string,
     },
   })
-    // .then((data: any) => {
-    //   if (data.success) {
-    //     dispatch({ type: GET_USER_SUCCESS, payload: data.user });
-    //     console.log("getUser", data);
-    //     //@ts-ignore
-    //     // dispatch(updateUser(data.user));
-    //   }
-    // })
-    .then((data) => data)
+    .then(
+      (data: { success: boolean; user: { email: string; nale: string } }) => {
+        if (data.success) {
+          dispatch({ type: GET_USER_SUCCESS, payload: data.user });
+        }
+      }
+    )
     .catch((err) => {
-      console.log(err);
       handleError(GET_USER_FAILED, err, dispatch);
     });
-  console.log(data);
-  if (data & data.success) {
-    dispatch({ type: GET_USER_SUCCESS, payload: data.user });
-    //     console.log("getUser", data);
-    //     //@ts-ignore
-    //     // dispatch(updateUser(data.user));
-  }
 };
 
 export const checkUserAuth = () => {
   //@ts-ignore
   return (dispatch) => {
     if (localStorage.getItem("accessToken")) {
-      dispatch(getUser())
+      dispatch(fetchUser())
         .catch((err: Error) => {
           handleError(DELETE_USER, err, dispatch);
           localStorage.removeItem("accessToken");
@@ -76,7 +70,6 @@ export const checkUserAuth = () => {
 };
 //@ts-ignore
 export const editProfile = () => (dispatch, getState) => {
-  console.log("form", getState().profile.form);
   dispatch({ type: EDIT_PROFILE_SUBMIT_REQUEST });
   fetchWithRefresh(ENDPOINT.user, {
     ...optionsWithAuth,
@@ -85,7 +78,6 @@ export const editProfile = () => (dispatch, getState) => {
   })
     .then((res) => {
       dispatch({ type: EDIT_PROFILE_SUBMIT_SUCCESS });
-      console.log("editProfile", res);
       dispatch(updateUser(res.user));
     })
     .catch((err) => handleError(EDIT_PROFILE_SUBMIT_FAILED, err, dispatch));
