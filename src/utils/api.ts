@@ -1,4 +1,5 @@
-import { API_URL, TMethod, TOptions, optionsWithAuth } from "./consts";
+import { API_URL, optionsWithAuth } from "./consts";
+import { ITokenResponse, TRequestOptions } from "./types";
 interface CustomResponse extends Body {
   readonly headers: Headers;
   readonly ok: boolean;
@@ -12,12 +13,6 @@ interface CustomResponse extends Body {
   readonly bodyUsed: boolean;
 
   // readonly body: T;
-}
-
-interface TTokenResponse extends Response {
-  success: true;
-  accessToken: string;
-  refreshToken: string;
 }
 
 const checkReponse = (res: CustomResponse) => {
@@ -43,13 +38,13 @@ export const refreshToken = () => {
       }
       localStorage.setItem("refreshToken", refreshData.refreshToken);
       localStorage.setItem("accessToken", refreshData.accessToken);
-      return refreshData as TTokenResponse;
+      return refreshData as ITokenResponse;
     });
 };
 
 export const fetchWithRefresh = async (
   url: string,
-  options: TOptions & TMethod
+  options: TRequestOptions
 ) => {
   try {
     const res = await fetch(`${API_URL}${url}`, optionsWithAuth);

@@ -34,7 +34,7 @@ export interface INavBar {
 }
 
 export type TOrder = {
-  buns: number;
+  // buns: number;
 };
 
 export type TTitles = {
@@ -43,3 +43,31 @@ export type TTitles = {
   title: string;
   value: string;
 };
+
+export type TOptions = {
+  headers: { Authorization?: string; "Content-Type": string };
+  mode?: RequestMode;
+  cache?: RequestCache;
+  credentials?: RequestCredentials;
+  redirect?: RequestRedirect;
+  referrerPolicy?: ReferrerPolicy;
+  body?: string;
+};
+
+export type TMethod = { method: "GET" | "POST" | "PATCH" };
+
+export type TRequestOptions = TOptions & TMethod;
+
+export type TUser = { name: string; email: string; password?: string };
+export interface ISuccessResponse extends Response {
+  success: true;
+}
+
+export interface IUserSuccessRequest extends ISuccessResponse {
+  user: TUser;
+}
+
+export interface ITokenResponse extends ISuccessResponse {
+  accessToken: string;
+  refreshToken: string;
+}

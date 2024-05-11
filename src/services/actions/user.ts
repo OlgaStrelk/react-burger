@@ -1,6 +1,7 @@
-import { ENDPOINT, IUserSuccessRequest, handleError } from "../../utils/consts";
+import { ENDPOINT, handleError } from "../../utils/consts";
 import { fetchWithRefresh } from "../../utils/api";
 import { optionsWithAuth } from "../../utils/consts";
+import { IUserSuccessRequest } from "../../utils/types";
 export const DELETE_USER = "DELETE_USER";
 export const GET_USER_REQUEST = "GET_USER_REQUEST";
 export const GET_USER_SUCCESS = "GET_USER_SUCCESS";

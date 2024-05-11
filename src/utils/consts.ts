@@ -1,3 +1,5 @@
+import { TOptions } from "./types";
+
 export const API_URL = "https://norma.nomoreparties.space/api/";
 
 export const PATHS = {
@@ -60,24 +62,3 @@ export const optionsWithAuth: TOptions = {
   redirect: "follow",
   referrerPolicy: "no-referrer",
 };
-
-export type TOptions = {
-  headers: { Authorization?: string; "Content-Type": string };
-  mode?: RequestMode;
-  cache?: RequestCache;
-  credentials?: RequestCredentials;
-  redirect?: RequestRedirect;
-  referrerPolicy?: ReferrerPolicy;
-  body?: string;
-};
-
-export type TMethod = { method: "GET" | "POST" | "PATCH" };
-
-export type TUser = { name: string; email: string; password?: string };
-export interface ISuccessRequest {
-  success: true;
-}
-
-export interface IUserSuccessRequest extends ISuccessRequest {
-  user: TUser;
-}
