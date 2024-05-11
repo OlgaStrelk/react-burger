@@ -24,7 +24,7 @@ export const setAuthChecked = (isChecked: boolean) => ({
   payload: isChecked,
 });
 
-export const getUser = (data: IUserSuccessRequest) => ({
+export const getUser = (data: IUserSuccessResponse) => ({
   type: GET_USER_SUCCESS,
   payload: data.user,
 });
