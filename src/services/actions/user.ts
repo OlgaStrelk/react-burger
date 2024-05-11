@@ -1,7 +1,6 @@
 import { ENDPOINT, handleError } from "../../utils/consts";
 import { fetchWithRefresh } from "../../utils/api";
-import { string } from "prop-types";
-
+import { optionsWithAuth } from "../../utils/consts";
 export const DELETE_USER = "DELETE_USER";
 export const GET_USER_REQUEST = "GET_USER_REQUEST";
 export const GET_USER_SUCCESS = "GET_USER_SUCCESS";
@@ -14,38 +13,50 @@ export const EDIT_PROFILE_SUBMIT_REQUEST = "EDIT_PROFILE_SUBMIT_REQUEST";
 
 export const UPDATE_USER_DATA = "UPDATE_USER_DATA";
 
-export const updateUser = (name: string, value: string) => ({
+export const updateUser = (user: { [key in string]: string }) => ({
   type: UPDATE_USER_DATA,
-  name,
-  value,
+  payload: user,
+  // name,
+  // value,
 });
 
 export const setAuthChecked = (isChecked: boolean) => ({
   type: SET_AUTH_CHECKED,
   payload: isChecked,
 });
+
 //@ts-ignore
 export const getUser = () => async (dispatch) => {
   dispatch({ type: GET_USER_REQUEST });
-  let token = localStorage.getItem("accessToken");
-  // if (typeof token == "string") {
-  await fetchWithRefresh(ENDPOINT.user, {
+  let data = await fetchWithRefresh(ENDPOINT.user, {
+    ...optionsWithAuth,
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      authorization: token as string,
+      Authorization: localStorage.getItem("accessToken") as string,
     },
   })
-    .then((data) => {
-      dispatch({ type: GET_USER_SUCCESS });
-      for (let [key, value] of Object.entries(data.user)) {
-        //@ts-ignore
-        dispatch(updateUser(key, value));
-      }
-    })
-    .catch((err) => handleError(GET_USER_FAILED, err, dispatch));
+    // .then((data: any) => {
+    //   if (data.success) {
+    //     dispatch({ type: GET_USER_SUCCESS, payload: data.user });
+    //     console.log("getUser", data);
+    //     //@ts-ignore
+    //     // dispatch(updateUser(data.user));
+    //   }
+    // })
+    .then((data) => data)
+    .catch((err) => {
+      console.log(err);
+      handleError(GET_USER_FAILED, err, dispatch);
+    });
+  console.log(data);
+  if (data & data.success) {
+    dispatch({ type: GET_USER_SUCCESS, payload: data.user });
+    //     console.log("getUser", data);
+    //     //@ts-ignore
+    //     // dispatch(updateUser(data.user));
+  }
 };
-// };
 
 export const checkUserAuth = () => {
   //@ts-ignore
@@ -65,27 +76,17 @@ export const checkUserAuth = () => {
 };
 //@ts-ignore
 export const editProfile = () => (dispatch, getState) => {
+  console.log("form", getState().profile.form);
   dispatch({ type: EDIT_PROFILE_SUBMIT_REQUEST });
-  let token = localStorage.getItem("accessToken");
   fetchWithRefresh(ENDPOINT.user, {
+    ...optionsWithAuth,
     method: "PATCH",
-    mode: "cors",
-    cache: "no-cache",
-    credentials: "same-origin",
-    headers: {
-      "Content-Type": "application/json",
-      authorization: token as string,
-    },
-    redirect: "follow",
-    referrerPolicy: "no-referrer",
     body: JSON.stringify(getState().profile.form),
   })
     .then((res) => {
       dispatch({ type: EDIT_PROFILE_SUBMIT_SUCCESS });
-      for (let [key, value] of Object.entries(res.user)) {
-        //@ts-ignore
-        dispatch(updateUser(key, value));
-      }
+      console.log("editProfile", res);
+      dispatch(updateUser(res.user));
     })
     .catch((err) => handleError(EDIT_PROFILE_SUBMIT_FAILED, err, dispatch));
 };

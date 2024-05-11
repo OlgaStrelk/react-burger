@@ -1,4 +1,4 @@
-import { API_URL } from "./consts";
+import { API_URL, TMethod, TOptions, optionsWithAuth } from "./consts";
 interface CustomResponse extends Body {
   readonly headers: Headers;
   readonly ok: boolean;
@@ -13,20 +13,6 @@ interface CustomResponse extends Body {
 
   // readonly body: T;
 }
-
-type TOptions = {
-  method: "GET" | "POST" | "PATCH";
-  headers: Headers & {
-    authorization?: string;
-    "Content-Type": "application/json";
-  };
-  mode: "cors";
-  cache: "no-cache";
-  credentials: "same-origin";
-  redirect: "follow";
-  referrerPolicy: "no-referrer";
-  body: string;
-};
 
 interface TTokenResponse extends Response {
   success: true;
@@ -61,16 +47,20 @@ export const refreshToken = () => {
     });
 };
 
-export const fetchWithRefresh = async (url: string, options: TOptions) => {
+export const fetchWithRefresh = async (
+  url: string,
+  options: TOptions & TMethod
+) => {
   try {
-    const res = await fetch(`${API_URL}${url}`, options);
+    const res = await fetch(`${API_URL}${url}`, optionsWithAuth);
     return await checkReponse(res);
   } catch (err) {
     if (err instanceof Error) {
       if (err.message === "jwt expired") {
+        console.log('я тут')
         const refreshData = await refreshToken();
-        options.headers.authorization = refreshData.accessToken;
-        const res = await fetch(`${API_URL}${url}`, options);
+        options.headers.Authorization = refreshData.accessToken;
+        const res = await fetch(`${API_URL}${url}`, optionsWithAuth);
         return await checkReponse(res);
       } else {
         console.log(err);

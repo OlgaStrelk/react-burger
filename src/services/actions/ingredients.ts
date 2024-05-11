@@ -1,4 +1,9 @@
-import { ENDPOINT, handleError, request } from "../../utils/consts";
+import {
+  ENDPOINT,
+  handleError,
+  optionsWithAuth,
+  request,
+} from "../../utils/consts";
 import { v4 as uuid } from "uuid";
 import { TIngredient } from "../../utils/types";
 
@@ -45,12 +50,8 @@ export const makeOrder =
   (data: { ingredients: string[] }) => (dispatch: any) => {
     dispatch({ type: MAKE_ORDER_REQUEST });
     request(ENDPOINT.orders, {
+      optionsWithAuth,
       method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: localStorage.getItem("accessToken"),
-      },
       body: JSON.stringify(data),
     })
       .then((res) =>

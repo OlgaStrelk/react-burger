@@ -18,6 +18,10 @@ function ProfilePage() {
   //@ts-ignore
   const { name, email } = useSelector((state) => state.user.user);
   //@ts-ignore
+
+  const user = useSelector((state) => state.user);
+
+  //@ts-ignore
   const form = useSelector((state) => state.profile.form);
 
   const dispatch = useDispatch();

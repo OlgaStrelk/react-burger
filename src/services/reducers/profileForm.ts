@@ -14,7 +14,7 @@ const initialState = {
   editProfileRequest: false,
   editProfileFailed: false,
 };
-
+//@ts-ignore
 export const editProfileFormReducer = (state = initialState, action) => {
   switch (action.type) {
     case EDIT_PROFILE_SET_VALUE: {
@@ -36,9 +36,6 @@ export const editProfileFormReducer = (state = initialState, action) => {
     case EDIT_PROFILE_SUBMIT_SUCCESS: {
       return {
         ...state,
-        // form: {
-        //   ...initialState.form,
-        // },
         editProfileRequest: false,
       };
     }

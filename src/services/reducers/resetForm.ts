@@ -13,7 +13,7 @@ const initialState = {
   resetPasswordRequest: false,
   resetPasswordFailed: false,
 };
-
+//@ts-ignore
 export const resetFormReducer = (state = initialState, action) => {
   switch (action.type) {
     case RESET_FORM_ONE_SET_VALUE: {

@@ -14,7 +14,7 @@ const initialState = {
   loginFailed: false,
   error: null,
 };
-
+//@ts-ignore
 export const loginReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_SET_VALUE: {

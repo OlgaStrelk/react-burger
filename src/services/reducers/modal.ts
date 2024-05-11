@@ -6,7 +6,7 @@ import {
 const initialState = {
   currentIngredient: null,
 };
-
+//@ts-ignore
 export const modalReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_MODAL_INGREDIENT: {

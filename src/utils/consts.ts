@@ -48,3 +48,27 @@ export const handleError = (action: string, err: Error, dispatch: any) => {
     dispatch({ type: action });
   }
 };
+
+export const optionsWithAuth: TOptions = {
+  mode: "cors",
+  cache: "no-cache",
+  credentials: "same-origin",
+  headers: {
+    Authorization: localStorage.getItem("accessToken") as string,
+    "Content-Type": "application/json",
+  },
+  redirect: "follow",
+  referrerPolicy: "no-referrer",
+};
+
+export type TOptions = {
+  headers: { Authorization?: string; "Content-Type": string };
+  mode?: RequestMode;
+  cache?: RequestCache;
+  credentials?: RequestCredentials;
+  redirect?: RequestRedirect;
+  referrerPolicy?: ReferrerPolicy;
+  body?: string;
+};
+
+export type TMethod = { method: "GET" | "POST" | "PATCH" };

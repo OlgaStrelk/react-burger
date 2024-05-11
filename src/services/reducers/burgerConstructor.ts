@@ -11,7 +11,7 @@ const initialState = {
     ingredients: [],
   },
 };
-
+//@ts-ignore
 export const constructorReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_INGREDIENT: {
@@ -48,6 +48,7 @@ export const constructorReducer = (state = initialState, action) => {
         addedIngredients: {
           ...state.addedIngredients,
           ingredients: [...state.addedIngredients.ingredients].filter(
+            //@ts-ignore
             (item) => item.id !== action.payload
           ),
         },
@@ -63,7 +64,7 @@ export const constructorReducer = (state = initialState, action) => {
         },
       };
     }
-    
+
     default: {
       return state;
     }

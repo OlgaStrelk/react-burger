@@ -34,11 +34,12 @@ function App() {
   let state = location.state;
   //@ts-ignore
   useEffect(() => dispatch(fetchIngredients()), [dispatch]);
+
   useEffect(() => {
     //@ts-ignore
     dispatch(checkUserAuth());
+    console.log(localStorage.getItem("accessToken"));
   }, [dispatch]);
-
   const {
     home,
     profile,

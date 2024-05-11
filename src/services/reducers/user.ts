@@ -15,7 +15,7 @@ const initialState = {
   logoutRequest: false,
   logoutFailed: false,
 };
-
+//@ts-ignore
 export const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_USER_REQUEST: {
@@ -28,7 +28,7 @@ export const userReducer = (state = initialState, action) => {
     case GET_USER_SUCCESS: {
       return {
         ...state,
-        user: action.payload,
+        user: "userworking",
         userRequest: false,
       };
     }
@@ -74,7 +74,8 @@ export const userReducer = (state = initialState, action) => {
     }
 
     case UPDATE_USER_DATA: {
-      return { ...state, user: { ...state.user, [action.name]: action.value } };
+      //@ts-ignore
+      return { ...state, user: { ...action.payload } };
     }
 
     default: {

@@ -9,7 +9,7 @@ const initialState = {
   orderRequest: false,
   orderFailed: false,
 };
-
+//@ts-ignore
 export const orderReducer = (state = initialState, action) => {
   switch (action.type) {
     case MAKE_ORDER_REQUEST: {
