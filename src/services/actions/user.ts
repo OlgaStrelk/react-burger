@@ -1,7 +1,7 @@
 import { ENDPOINT, handleError } from "../../utils/consts";
 import { fetchWithRefresh } from "../../utils/api";
 import { optionsWithAuth } from "../../utils/consts";
-import { IUserSuccessRequest } from "../../utils/types";
+import { IUserSuccessResponse } from "../../utils/types";
 export const DELETE_USER = "DELETE_USER";
 export const GET_USER_REQUEST = "GET_USER_REQUEST";
 export const GET_USER_SUCCESS = "GET_USER_SUCCESS";
@@ -42,7 +42,7 @@ export const fetchUser = () => async (dispatch) => {
     },
   })
     .then(
-      (data: { success: boolean; user: { email: string; nale: string } }) => {
+      (data: IUserSuccessResponse) => {
         if (data.success) {
           dispatch({ type: GET_USER_SUCCESS, payload: data.user });
         }

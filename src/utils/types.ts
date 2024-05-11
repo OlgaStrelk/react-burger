@@ -63,7 +63,7 @@ export interface ISuccessResponse extends Response {
   success: true;
 }
 
-export interface IUserSuccessRequest extends ISuccessResponse {
+export interface IUserSuccessResponse extends ISuccessResponse {
   user: TUser;
 }
 
