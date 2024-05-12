@@ -50,6 +50,7 @@ export const fetchUser = () => async (dispatch) => {
     }));
 
   if (data && data.success) {
+    console.log("getUserSuc")
     dispatch(getUser(data.user));
   }
 };

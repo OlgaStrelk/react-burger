@@ -9,7 +9,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 import { useForm } from "../hooks/useForm";
-import { ChangeEvent, SyntheticEvent, useEffect } from "react";
+import { ChangeEvent, SyntheticEvent, useEffect, useState } from "react";
 import { editProfileFormValue } from "../services/actions/authForms";
 import { editProfile } from "../services/actions/user";
 import { TInput, TUser } from "../utils/types";
@@ -17,6 +17,7 @@ import Preloader from "../components/preloader/preloader";
 import { passwordStub } from "../utils/consts";
 
 function ProfilePage() {
+  const [isDisabled, setDisabled] = useState<boolean>(true);
   const { name, email }: TUser = useSelector(
     //@ts-ignore
     (state) => state.user.user
@@ -30,9 +31,10 @@ function ProfilePage() {
   const dispatch = useDispatch();
 
   const { handleInput, handleSubmit } = useForm();
-  const onPasswordChange = () => {
+  const onPasswordFocus = () => {
     //@ts-ignore
     dispatch(editProfileFormValue("password", null));
+    setDisabled(false);
   };
 
   useEffect(() => console.log(password));
@@ -41,6 +43,7 @@ function ProfilePage() {
     if (password === "" || password === null || password.length < 8) {
       dispatch(editProfileFormValue("password", passwordStub));
     }
+    setDisabled(true);
   };
   const onFormChange = (e: ChangeEvent<HTMLInputElement>) => {
     handleInput(e, editProfileFormValue);
@@ -51,17 +54,17 @@ function ProfilePage() {
     handleSubmit(e, editProfile, isValid);
   };
 
-  const getInitialtValues = () => {
+  const putInitialtValues = () => {
     dispatch(editProfileFormValue("name", name));
     dispatch(editProfileFormValue("email", email));
   };
 
   useEffect(() => {
-    getInitialtValues();
+    putInitialtValues();
   }, []);
 
   const resetForm = () => {
-    getInitialtValues();
+    putInitialtValues();
   };
   const INPUTS_DATA: TInput[] = [
     {
@@ -93,15 +96,16 @@ function ProfilePage() {
         case "password": {
           return (
             <li className={styles.input} key={id}>
-              <PasswordInput
+              <Input
                 key={id}
                 name={name}
                 placeholder={placeholder}
                 value={value || ""}
                 onChange={onFormChange}
                 icon="EditIcon"
-                onFocus={onPasswordChange}
+                onFocus={onPasswordFocus}
                 onBlur={onPasswordBlur}
+                type={type}
               />
             </li>
           );
