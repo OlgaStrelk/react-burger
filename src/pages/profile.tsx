@@ -16,13 +16,20 @@ import Preloader from "../components/preloader/preloader";
 import { passwordStub } from "../utils/consts";
 
 function ProfilePage() {
-  const { name, email }: TUser = useSelector(
+  const user: TUser = useSelector(
     //@ts-ignore
     (state) => state.user.user
   );
-  //@ts-ignore
 
-  const password: string = useSelector((state) => state.profile.form.password);
+  const { name, email }: TUser = useSelector(
+    //@ts-ignore
+    (state) => state.profile.form
+  );
+
+  const password: string = useSelector(
+    //@ts-ignore
+    (state) => state.profile.form.password
+  );
   //@ts-ignore
   const isLoading: boolean = useSelector((state) => state.user.userRequest);
   //@ts-ignore
@@ -54,8 +61,8 @@ function ProfilePage() {
   };
 
   const putInitialtValues = () => {
-    dispatch(editProfileFormValue("name", name));
-    dispatch(editProfileFormValue("email", email));
+    dispatch(editProfileFormValue("name", user.name));
+    dispatch(editProfileFormValue("email", user.email));
   };
 
   const resetForm = () => {
@@ -139,7 +146,7 @@ function ProfilePage() {
     <>
       {isLoading ? (
         <Preloader />
-      ) : name && email ? (
+      ) : user.name && user.email ? (
         <>
           <p className={styles.paragraph}>
             В этом разделе вы можете изменить свои персональные данные
