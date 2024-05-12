@@ -76,13 +76,20 @@ export interface ITokenResponse extends ISuccessResponse {
   refreshToken: string;
 }
 
-export type TLoginResponse = {
-  success: boolean;
-  user: TUser;
-  accessToken: string;
-  refreshToken: string;
-};
 export interface IResetPasswordResponse extends ISuccessResponse {
   message: string;
 }
 export type TAuthorizationResonse = IUserSuccessResponse & ITokenResponse;
+
+export interface IIngredientsResponse extends ISuccessResponse {
+  data: TIngredient[];
+}
+
+export interface IOrderResponse extends ISuccessResponse {
+  name: string;
+  order: {
+    number: number;
+  };
+}
+
+export type TOrderRequest = { ingredients: string[] };
