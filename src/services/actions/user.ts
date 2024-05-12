@@ -1,5 +1,5 @@
-import { ENDPOINT, handleError } from "../../utils/consts";
-import { fetchWithRefresh } from "../../utils/api";
+import { ENDPOINT } from "../../utils/consts";
+import { fetchWithRefresh, handleError } from "../../utils/api";
 import { optionsWithAuth } from "../../utils/consts";
 import { IUserSuccessResponse, TUser } from "../../utils/types";
 export const DELETE_USER = "DELETE_USER";
@@ -33,7 +33,7 @@ export const getUser = (user: TUser) => ({
 export const fetchUser = () => async (dispatch) => {
   dispatch({ type: GET_USER_REQUEST });
 
-  const data = await <Promise<IUserSuccessResponse>>fetchWithRefresh(
+  const data = await (<Promise<IUserSuccessResponse>>fetchWithRefresh(
     ENDPOINT.user,
     {
       ...optionsWithAuth,
@@ -47,7 +47,7 @@ export const fetchUser = () => async (dispatch) => {
     .then((data) => data)
     .catch((err) => {
       handleError(GET_USER_FAILED, err, dispatch);
-    });
+    }));
 
   if (data && data.success) {
     dispatch(getUser(data.user));
@@ -73,22 +73,25 @@ export const checkUserAuth = () => {
 //@ts-ignore
 export const editProfile = () => async (dispatch, getState) => {
   dispatch({ type: EDIT_PROFILE_SUBMIT_REQUEST });
-  console.log('то что отправляю серверу', getState().profile.form)
-  let data = await <Promise<IUserSuccessResponse>>fetchWithRefresh(
+  let formData = getState().profile.form;
+  //поправить - если пароль не изменен, он не должен отправляться
+  //{name:form.name, email:form.email}, сделать валидацию формы
+  //если форма равна initialState, то пароль не отправляем,если введенный пароль не валиден, возвращаем initialState
+  let data = await (<Promise<IUserSuccessResponse>>fetchWithRefresh(
     ENDPOINT.user,
     {
       ...optionsWithAuth,
       method: "PATCH",
-      body: JSON.stringify(getState().profile.form),
+      body: JSON.stringify(formData),
     }
   )
     .then((data) => data)
-    .catch((err) => handleError(EDIT_PROFILE_SUBMIT_FAILED, err, dispatch));
+    .catch((err) => handleError(EDIT_PROFILE_SUBMIT_FAILED, err, dispatch)));
 
   if (data && data.success) {
     dispatch({ type: EDIT_PROFILE_SUBMIT_SUCCESS });
 
-    console.log('ответ сервера',data)
+    console.log("ответ сервера", data);
     dispatch(updateUser(data.user));
   }
 };

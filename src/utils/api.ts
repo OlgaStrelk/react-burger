@@ -1,5 +1,10 @@
 import { API_URL, optionsWithAuth } from "./consts";
-import { ITokenResponse, TRequestOptions } from "./types";
+import {
+  ITokenResponse,
+  TAuthOptions,
+  TOptions,
+  TRequestOptions,
+} from "./types";
 interface CustomResponse extends Body {
   readonly headers: Headers;
   readonly ok: boolean;
@@ -15,7 +20,7 @@ interface CustomResponse extends Body {
   // readonly body: T;
 }
 
-const checkReponse = <T>(res: CustomResponse):T => {
+const checkReponse = <T>(res: CustomResponse): T => {
   return res.ok
     ? res.json()
     : res.json().then((err: any) => Promise.reject(err));
@@ -33,7 +38,7 @@ export const refreshToken = () => {
   })
     .then(checkReponse<ITokenResponse>)
     .then((refreshData) => {
-      console.log(refreshData)
+      console.log(refreshData);
       if (!refreshData.success) {
         return Promise.reject(refreshData);
       }
@@ -45,14 +50,14 @@ export const refreshToken = () => {
 
 export const fetchWithRefresh = async <U>(
   url: string,
-  options: TRequestOptions
+  options: TRequestOptions<TAuthOptions>
 ) => {
   try {
     const res = await fetch(`${API_URL}${url}`, {
       ...optionsWithAuth,
       ...options,
     });
-    return await <U>checkReponse(res);
+    return await (<U>checkReponse(res));
   } catch (err) {
     if (err instanceof Error) {
       if (err.message === "jwt expired") {
@@ -68,5 +73,19 @@ export const fetchWithRefresh = async <U>(
       }
       return Promise.reject(err);
     }
+  }
+};
+
+export const request = (
+  url: string,
+  options: TRequestOptions<TOptions> | TRequestOptions<TAuthOptions>
+) => {
+  return fetch(`${API_URL}${url}`, options).then(checkReponse);
+};
+
+export const handleError = (action: string, err: Error, dispatch: any) => {
+  if (err instanceof Error) {
+    dispatch({ type: action });
+    console.log(err);
   }
 };

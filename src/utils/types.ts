@@ -45,7 +45,7 @@ export type TTitles = {
 };
 
 export type TOptions = {
-  headers: { Authorization?: string; "Content-Type": string };
+  headers: { "Content-Type": string };
   mode?: RequestMode;
   cache?: RequestCache;
   credentials?: RequestCredentials;
@@ -54,9 +54,13 @@ export type TOptions = {
   body?: string;
 };
 
+export type TAuthOptions = TOptions & {
+  headers: { Authorization: string };
+};
+
 export type TMethod = { method: "GET" | "POST" | "PATCH" };
 
-export type TRequestOptions = TOptions & TMethod;
+export type TRequestOptions<Auth> = TMethod & Auth
 
 export type TUser = { name: string; email: string; password?: string };
 export interface ISuccessResponse extends Response {

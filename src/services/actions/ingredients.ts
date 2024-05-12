@@ -1,11 +1,7 @@
-import {
-  ENDPOINT,
-  handleError,
-  optionsWithAuth,
-  request,
-} from "../../utils/consts";
+import { ENDPOINT, optionsUnAuth, optionsWithAuth } from "../../utils/consts";
 import { v4 as uuid } from "uuid";
 import { TIngredient } from "../../utils/types";
+import { handleError, request } from "../../utils/api";
 
 export const ADD_INGREDIENT = "ADD_INGREDIENT";
 export const SORT_INGREDIENTS = "SORT_INGREDIENTS";
@@ -39,7 +35,7 @@ export const decreaseQuantity = (id: string) => {
 //@ts-ignore
 export const fetchIngredients = () => (dispatch) => {
   dispatch({ type: GET_INGREDIENTS_REQUEST });
-  request(ENDPOINT.ingredients, {})
+  request(ENDPOINT.ingredients, { ...optionsUnAuth, method: "GET" })
     .then((res) => {
       dispatch({ type: GET_INGREDIENTS_SUCCESS, payload: res.data });
     })
@@ -50,7 +46,7 @@ export const makeOrder =
   (data: { ingredients: string[] }) => (dispatch: any) => {
     dispatch({ type: MAKE_ORDER_REQUEST });
     request(ENDPOINT.orders, {
-      optionsWithAuth,
+      ...optionsWithAuth,
       method: "POST",
       body: JSON.stringify(data),
     })

@@ -1,4 +1,4 @@
-import { TOptions } from "./types";
+import { TAuthOptions, TOptions } from "./types";
 
 export const API_URL = "https://norma.nomoreparties.space/api/";
 
@@ -37,28 +37,20 @@ export const BACKEND_VALIDATION_TEXT = {
 
 export const modalStyle = { ingredient: "_card", order: "_order" };
 
-export const request = (url: string, options: object) => {
-  return fetch(`${API_URL}${url}`, options).then(checkResponse);
-};
-
-export const checkResponse = (res: any) =>
-  res.ok ? res.json() : Promise.reject(res.status);
-
-export const handleError = (action: string, err: Error, dispatch: any) => {
-  if (err instanceof Error) {
-    dispatch({ type: action });
-    console.log(err);
-  }
-};
-
-export const optionsWithAuth: TOptions = {
+export const optionsUnAuth: TOptions = {
   mode: "cors",
   cache: "no-cache",
   credentials: "same-origin",
   headers: {
-    Authorization: localStorage.getItem("accessToken") as string,
     "Content-Type": "application/json",
   },
   redirect: "follow",
   referrerPolicy: "no-referrer",
+};
+export const optionsWithAuth: TAuthOptions = {
+  ...optionsUnAuth,
+  headers: {
+    ...optionsUnAuth.headers,
+    Authorization: localStorage.getItem("accessToken") as string,
+  },
 };

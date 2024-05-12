@@ -1,8 +1,9 @@
 import { updateUser } from "./user";
-import { handleError, optionsWithAuth, request } from "../../utils/consts";
+import { optionsUnAuth, optionsWithAuth } from "../../utils/consts";
 import { ENDPOINT } from "../../utils/consts";
 import { TLoginData } from "../../utils/types";
 import { CLEAR_PROFILE_FORM } from "./authForms";
+import { handleError, request } from "../../utils/api";
 
 export const REGISTER_SUBMIT_REQUEST = "REGISTER_SUBMIT_REQUEST";
 export const REGISTER_SUBMIT_SUCCESS = "REGISTER_SUBMIT_SUCCESS";
@@ -28,10 +29,8 @@ export const RESET_FORM_TWO_SUBMIT_FAILED = "RESET_FORM_TWO_SUBMIT_FAILED";
 export const register = () => async (dispatch, getState) => {
   dispatch({ type: REGISTER_SUBMIT_REQUEST });
   const data = await request(ENDPOINT.register, {
+    ...optionsUnAuth,
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
     body: JSON.stringify(getState().register.form),
   })
     .then((data) => {
@@ -54,10 +53,8 @@ export const login =
   async (dispatch, getState): void => {
     dispatch({ type: LOGIN_SUBMIT_REQUEST });
     const data: TLoginData = await request(ENDPOINT.login, {
+      ...optionsUnAuth,
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
       body: JSON.stringify(getState().login.form),
     })
       .then((data) => {
@@ -79,11 +76,8 @@ export const login =
 export const resetPasswordStepOne = () => (dispatch, getState) => {
   dispatch({ type: RESET_FORM_ONE_SUBMIT_REQUEST });
   request(ENDPOINT.resetPasswordStepOne, {
-    ...optionsWithAuth,
+    ...optionsUnAuth,
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
     body: JSON.stringify(getState().resetForm.form),
   })
     .then((res) => {
@@ -95,11 +89,8 @@ export const resetPasswordStepOne = () => (dispatch, getState) => {
 export const resetPasswordStepTwo = () => (dispatch, getState) => {
   dispatch({ type: RESET_FORM_TWO_SUBMIT_REQUEST });
   request(ENDPOINT.resetPasswordStepTwo, {
-    ...optionsWithAuth,
+    ...optionsUnAuth,
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
     body: JSON.stringify(getState().resetFormTwo.form),
   })
     .then((res) => {
@@ -112,11 +103,8 @@ export const resetPasswordStepTwo = () => (dispatch, getState) => {
 export const logout = () => (dispatch) => {
   dispatch({ type: LOGOUT_REQUEST });
   request(ENDPOINT.logout, {
+    ...optionsWithAuth,
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: localStorage.getItem("accessToken"),
-    },
     body: JSON.stringify({ token: localStorage.getItem("refreshToken") }),
   })
     .then(() => {
