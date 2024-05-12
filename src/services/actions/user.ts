@@ -1,4 +1,4 @@
-import { ENDPOINT } from "../../utils/consts";
+import { ENDPOINT, passwordStub } from "../../utils/consts";
 import { fetchWithRefresh, handleError } from "../../utils/api";
 import { optionsWithAuth } from "../../utils/consts";
 import { IUserSuccessResponse, TUser } from "../../utils/types";
@@ -50,7 +50,7 @@ export const fetchUser = () => async (dispatch) => {
     }));
 
   if (data && data.success) {
-    console.log("getUserSuc")
+    console.log("getUserSuc");
     dispatch(getUser(data.user));
   }
 };
@@ -74,16 +74,16 @@ export const checkUserAuth = () => {
 //@ts-ignore
 export const editProfile = () => async (dispatch, getState) => {
   dispatch({ type: EDIT_PROFILE_SUBMIT_REQUEST });
-  let formData = getState().profile.form;
-  //поправить - если пароль не изменен, он не должен отправляться
-  //{name:form.name, email:form.email}, сделать валидацию формы
-  //если форма равна initialState, то пароль не отправляем,если введенный пароль не валиден, возвращаем initialState
+  let form = getState().profile.form;
+  const { name, email, password }: TUser = form;
+  let requestData: TUser =
+    password === passwordStub ? { name, email } : { name, email, password };
   let data = await (<Promise<IUserSuccessResponse>>fetchWithRefresh(
     ENDPOINT.user,
     {
       ...optionsWithAuth,
       method: "PATCH",
-      body: JSON.stringify(formData),
+      body: JSON.stringify(requestData),
     }
   )
     .then((data) => data)
