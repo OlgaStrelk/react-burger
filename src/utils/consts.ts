@@ -1,5 +1,6 @@
 import { TAuthOptions, TOptions } from "./types";
 
+export const passwordStub = "01010101";
 export const API_URL = "https://norma.nomoreparties.space/api/";
 
 export const PATHS = {

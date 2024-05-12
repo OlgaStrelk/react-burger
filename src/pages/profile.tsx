@@ -14,23 +14,33 @@ import { editProfileFormValue } from "../services/actions/authForms";
 import { editProfile } from "../services/actions/user";
 import { TInput, TUser } from "../utils/types";
 import Preloader from "../components/preloader/preloader";
+import { passwordStub } from "../utils/consts";
 
 function ProfilePage() {
-  //@ts-ignore
-  const { name, email }: TUser = useSelector((state) => state.user.user);
+  const { name, email }: TUser = useSelector(
+    //@ts-ignore
+    (state) => state.user.user
+  );
   //@ts-ignore
 
+  const password: string = useSelector((state) => state.profile.form.password);
+  //@ts-ignore
   const isLoading: boolean = useSelector((state) => state.user.userRequest);
-  console.log(isLoading);
   //@ts-ignore
-  const form = useSelector((state) => state.profile.form);
-
   const dispatch = useDispatch();
 
   const { handleInput, handleSubmit } = useForm();
   const onPasswordChange = () => {
     //@ts-ignore
     dispatch(editProfileFormValue("password", null));
+  };
+
+  useEffect(() => console.log(password));
+
+  const onPasswordBlur = () => {
+    if (password === "" || password === null || password.length < 8) {
+      dispatch(editProfileFormValue("password", passwordStub));
+    }
   };
   const onFormChange = (e: ChangeEvent<HTMLInputElement>) => {
     handleInput(e, editProfileFormValue);
@@ -41,27 +51,30 @@ function ProfilePage() {
     handleSubmit(e, editProfile, isValid);
   };
 
-  useEffect(() => {
+  const getInitialtValues = () => {
     dispatch(editProfileFormValue("name", name));
     dispatch(editProfileFormValue("email", email));
+  };
+
+  useEffect(() => {
+    getInitialtValues();
   }, []);
 
   const resetForm = () => {
-    dispatch(editProfileFormValue("name", name));
-    dispatch(editProfileFormValue("email", email));
+    getInitialtValues();
   };
   const INPUTS_DATA: TInput[] = [
     {
       id: "1",
       name: "name",
-      value: form.name,
+      value: name,
       placeholder: "Имя",
       type: "text",
     },
     {
       id: "2",
       name: "email",
-      value: form.email,
+      value: email,
       placeholder: "Логин",
       type: "email",
     },
@@ -69,7 +82,7 @@ function ProfilePage() {
       id: "3",
       name: "password",
       placeholder: "Пароль",
-      value: form.password,
+      value: password as string,
       type: "password",
     },
   ];
@@ -88,6 +101,7 @@ function ProfilePage() {
                 onChange={onFormChange}
                 icon="EditIcon"
                 onFocus={onPasswordChange}
+                onBlur={onPasswordBlur}
               />
             </li>
           );

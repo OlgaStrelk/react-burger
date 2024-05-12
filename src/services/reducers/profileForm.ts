@@ -1,3 +1,4 @@
+import { passwordStub } from "../../utils/consts";
 import { CLEAR_PROFILE_FORM, EDIT_PROFILE_SET_VALUE } from "../actions/authForms";
 import {
   EDIT_PROFILE_SUBMIT_SUCCESS,
@@ -9,7 +10,7 @@ const initialState = {
   form: {
     name: "",
     email: "",
-    password: "01010101",
+    password: passwordStub,
   },
   editProfileRequest: false,
   editProfileFailed: false,
