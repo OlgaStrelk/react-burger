@@ -15,7 +15,7 @@ interface CustomResponse extends Body {
   // readonly body: T;
 }
 
-const checkReponse = (res: CustomResponse) => {
+const checkReponse = <T>(res: CustomResponse):T => {
   return res.ok
     ? res.json()
     : res.json().then((err: any) => Promise.reject(err));
@@ -31,8 +31,9 @@ export const refreshToken = () => {
       token: localStorage.getItem("refreshToken"),
     }),
   })
-    .then(checkReponse)
+    .then(checkReponse<ITokenResponse>)
     .then((refreshData) => {
+      console.log(refreshData)
       if (!refreshData.success) {
         return Promise.reject(refreshData);
       }
@@ -42,7 +43,7 @@ export const refreshToken = () => {
     });
 };
 
-export const fetchWithRefresh = async (
+export const fetchWithRefresh = async <U>(
   url: string,
   options: TRequestOptions
 ) => {
@@ -51,7 +52,7 @@ export const fetchWithRefresh = async (
       ...optionsWithAuth,
       ...options,
     });
-    return await checkReponse(res);
+    return await <U>checkReponse(res);
   } catch (err) {
     if (err instanceof Error) {
       if (err.message === "jwt expired") {

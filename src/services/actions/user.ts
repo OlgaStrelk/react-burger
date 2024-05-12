@@ -33,7 +33,7 @@ export const getUser = (user: TUser) => ({
 export const fetchUser = () => async (dispatch) => {
   dispatch({ type: GET_USER_REQUEST });
 
-  const data: IUserSuccessResponse | void = await fetchWithRefresh(
+  const data = await <Promise<IUserSuccessResponse>>fetchWithRefresh(
     ENDPOINT.user,
     {
       ...optionsWithAuth,
@@ -44,7 +44,7 @@ export const fetchUser = () => async (dispatch) => {
       },
     }
   )
-    .then((data: IUserSuccessResponse) => data)
+    .then((data) => data)
     .catch((err) => {
       handleError(GET_USER_FAILED, err, dispatch);
     });
@@ -74,7 +74,7 @@ export const checkUserAuth = () => {
 export const editProfile = () => async (dispatch, getState) => {
   dispatch({ type: EDIT_PROFILE_SUBMIT_REQUEST });
   console.log('то что отправляю серверу', getState().profile.form)
-  let data: IUserSuccessResponse | void = await fetchWithRefresh(
+  let data = await <Promise<IUserSuccessResponse>>fetchWithRefresh(
     ENDPOINT.user,
     {
       ...optionsWithAuth,
@@ -82,7 +82,7 @@ export const editProfile = () => async (dispatch, getState) => {
       body: JSON.stringify(getState().profile.form),
     }
   )
-    .then((data: IUserSuccessResponse) => data)
+    .then((data) => data)
     .catch((err) => handleError(EDIT_PROFILE_SUBMIT_FAILED, err, dispatch));
 
   if (data && data.success) {
