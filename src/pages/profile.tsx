@@ -2,9 +2,9 @@ import styles from "./profile.module.css";
 
 import {
   Input,
-  PasswordInput,
   EmailInput,
   Button,
+  PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -15,9 +15,9 @@ import { editProfile } from "../services/actions/user";
 import { TInput, TUser } from "../utils/types";
 import Preloader from "../components/preloader/preloader";
 import { passwordStub } from "../utils/consts";
+// import PasswordInput from "../components/password-input/password-input";
 
 function ProfilePage() {
-  const [isDisabled, setDisabled] = useState<boolean>(true);
   const { name, email }: TUser = useSelector(
     //@ts-ignore
     (state) => state.user.user
@@ -34,7 +34,6 @@ function ProfilePage() {
   const onPasswordFocus = () => {
     //@ts-ignore
     dispatch(editProfileFormValue("password", null));
-    setDisabled(false);
   };
 
   useEffect(() => console.log(password));
@@ -43,7 +42,6 @@ function ProfilePage() {
     if (password === "" || password === null || password.length < 8) {
       dispatch(editProfileFormValue("password", passwordStub));
     }
-    setDisabled(true);
   };
   const onFormChange = (e: ChangeEvent<HTMLInputElement>) => {
     handleInput(e, editProfileFormValue);
@@ -96,15 +94,22 @@ function ProfilePage() {
         case "password": {
           return (
             <li className={styles.input} key={id}>
-              <Input
-                key={id}
-                name={name}
-                placeholder={placeholder}
+              {/* <PasswordInput
+                icon="EditIcon"
                 value={value || ""}
                 onChange={onFormChange}
-                icon="EditIcon"
                 onFocus={onPasswordFocus}
                 onBlur={onPasswordBlur}
+                name={name}
+              /> */}
+              <Input
+                icon="EditIcon"
+                value={value || ""}
+                onChange={onFormChange}
+                onFocus={onPasswordFocus}
+                onBlur={onPasswordBlur}
+                name={name}
+                placeholder={placeholder}
                 type={type}
               />
             </li>

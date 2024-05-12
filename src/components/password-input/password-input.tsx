@@ -1,0 +1,66 @@
+import { useState } from "react";
+
+const PasswordInput = ({ value }) => {
+    const [isFocus,setIsFocus]=useState(false)
+    const setFocus=()=>{setIsFocus(true)}
+  return (
+    <>
+      <div className="input pr-6 pl-6 input_type_password input_size_default input_status_disabled">
+        <label className="input__placeholder text noselect text_type_main-default input__placeholder-filled input__placeholder-disabled">
+          Логин
+        </label>
+        <input
+          className="text input__textfield text_type_main-default input__textfield-disabled"
+          type="password"
+          disabled
+          name="password"
+          value={value}
+        />
+        <div className="input__icon input__icon-action">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="#F2F2F3"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M3.9897 16.8541L2.67591 20.3576C2.44981 20.9605 3.03858 21.5493 3.6415 21.3232L7.14496 20.0094C7.54594 19.859 7.91009 19.6245 8.21291 19.3217L18.36 9.17461C18.36 9.17461 18.0064 8.11395 16.9458 7.05329C15.8851 5.99263 14.8244 5.63908 14.8244 5.63908L4.67737 15.7862C4.37455 16.089 4.14007 16.4532 3.9897 16.8541ZM16.2386 4.22486L17.6224 2.84111C17.8705 2.59298 18.2009 2.43512 18.5471 2.4925C19.0338 2.57318 19.7785 2.81495 20.4813 3.51776C21.1841 4.22056 21.4259 4.96528 21.5065 5.45198C21.5639 5.79816 21.4061 6.12852 21.1579 6.37664L19.7742 7.7604C19.7742 7.7604 19.4206 6.69974 18.36 5.63908C17.2993 4.57842 16.2386 4.22486 16.2386 4.22486Z"
+            ></path>
+          </svg>
+        </div>
+      </div>
+      <div className="input__container ">
+        <div className="input pr-6 pl-6 input_type_password input_size_default input_status_active">
+          <label className="input__placeholder text noselect text_type_main-default input__placeholder-focused input__placeholder-filled">
+            Логин
+          </label>
+          <input
+            className="text input__textfield text_type_main-default"
+            type="password"
+            name="password"
+            value={value}
+          />
+          <div className="input__icon input__icon-action" onClick={setFocus} >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="#F2F2F3"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M3.9897 16.8541L2.67591 20.3576C2.44981 20.9605 3.03858 21.5493 3.6415 21.3232L7.14496 20.0094C7.54594 19.859 7.91009 19.6245 8.21291 19.3217L18.36 9.17461C18.36 9.17461 18.0064 8.11395 16.9458 7.05329C15.8851 5.99263 14.8244 5.63908 14.8244 5.63908L4.67737 15.7862C4.37455 16.089 4.14007 16.4532 3.9897 16.8541ZM16.2386 4.22486L17.6224 2.84111C17.8705 2.59298 18.2009 2.43512 18.5471 2.4925C19.0338 2.57318 19.7785 2.81495 20.4813 3.51776C21.1841 4.22056 21.4259 4.96528 21.5065 5.45198C21.5639 5.79816 21.4061 6.12852 21.1579 6.37664L19.7742 7.7604C19.7742 7.7604 19.4206 6.69974 18.36 5.63908C17.2993 4.57842 16.2386 4.22486 16.2386 4.22486Z"
+              ></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+export default PasswordInput;
