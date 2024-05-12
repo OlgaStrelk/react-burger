@@ -72,7 +72,6 @@ function BurgerConstructor({ onModalOpen }: IBurgerConstructorProps) {
 
   const handleSubmit = () => {
     let data = orderList();
-    console.log(data)
     if (user && data) {
       onModalOpen();
       //@ts-ignore

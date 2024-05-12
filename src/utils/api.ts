@@ -38,7 +38,6 @@ export const refreshToken = () => {
   })
     .then(checkReponse<ITokenResponse>)
     .then((refreshData) => {
-      console.log(refreshData);
       if (!refreshData.success) {
         return Promise.reject(refreshData);
       }
@@ -62,10 +61,7 @@ export const fetchWithRefresh = async <U>(
     if (err instanceof Error) {
       if (err.message === "jwt expired") {
         const refreshData = await refreshToken();
-        console.log("do", options.headers.Authorization);
         options.headers.Authorization = refreshData.accessToken;
-        console.log("posle", options.headers.Authorization);
-
         const res = await fetch(`${API_URL}${url}`, optionsWithAuth);
         return await checkReponse(res);
       } else {

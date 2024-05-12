@@ -1,6 +1,11 @@
 import { ENDPOINT, optionsUnAuth, optionsWithAuth } from "../../utils/consts";
 import { v4 as uuid } from "uuid";
-import { IIngredientsResponse, IOrderResponse, TIngredient, TOrderRequest } from "../../utils/types";
+import {
+  IIngredientsResponse,
+  IOrderResponse,
+  TIngredient,
+  TOrderRequest,
+} from "../../utils/types";
 import { handleError, request } from "../../utils/api";
 
 export const ADD_INGREDIENT = "ADD_INGREDIENT";
@@ -35,24 +40,25 @@ export const decreaseQuantity = (id: string) => {
 //@ts-ignore
 export const fetchIngredients = () => (dispatch) => {
   dispatch({ type: GET_INGREDIENTS_REQUEST });
-  request<IIngredientsResponse>(ENDPOINT.ingredients, { ...optionsUnAuth, method: "GET" })
+  request<IIngredientsResponse>(ENDPOINT.ingredients, {
+    ...optionsUnAuth,
+    method: "GET",
+  })
     .then((res) => {
-      console.log(res)
       dispatch({ type: GET_INGREDIENTS_SUCCESS, payload: res.data });
     })
     .catch((err) => handleError(GET_INGREDIENTS_FAILED, err, dispatch));
 };
 
-export const makeOrder =
-  (data: TOrderRequest) => (dispatch: any) => {
-    dispatch({ type: MAKE_ORDER_REQUEST });
-    request<IOrderResponse>(ENDPOINT.orders, {
-      ...optionsWithAuth,
-      method: "POST",
-      body: JSON.stringify(data),
-    })
-      .then((res) =>
-        dispatch({ type: MAKE_ORDER_SUCCESS, payload: res.order.number })
-      )
-      .catch((err) => handleError(MAKE_ORDER_FAILED, err, dispatch));
-  };
+export const makeOrder = (data: TOrderRequest) => (dispatch: any) => {
+  dispatch({ type: MAKE_ORDER_REQUEST });
+  request<IOrderResponse>(ENDPOINT.orders, {
+    ...optionsWithAuth,
+    method: "POST",
+    body: JSON.stringify(data),
+  })
+    .then((res) =>
+      dispatch({ type: MAKE_ORDER_SUCCESS, payload: res.order.number })
+    )
+    .catch((err) => handleError(MAKE_ORDER_FAILED, err, dispatch));
+};

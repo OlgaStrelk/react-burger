@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import CheckMarkIcon from "../../images/done.svg";
 import styles from "./order-details.module.css";
+import Preloader from "../preloader/preloader";
 
 function OrderDetails() {
   //@ts-ignore
@@ -8,7 +9,10 @@ function OrderDetails() {
   //@ts-ignore
   const orderNumber = useSelector((store) => store.order.order);
   return isLoading ? (
-    "Загрузка..."
+    <>
+      <h2 className={styles.title}>Мы уже начали оформлять ваш заказ</h2>
+      <Preloader />
+    </>
   ) : (
     <div className="mt-20 mb-15">
       <div className={styles.wrapper}>

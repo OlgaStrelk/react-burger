@@ -50,7 +50,6 @@ export const fetchUser = () => async (dispatch) => {
     }));
 
   if (data && data.success) {
-    console.log("getUserSuc");
     dispatch(getUser(data.user));
   }
 };
@@ -92,7 +91,6 @@ export const editProfile = () => async (dispatch, getState) => {
   if (data && data.success) {
     dispatch({ type: EDIT_PROFILE_SUBMIT_SUCCESS });
 
-    console.log("ответ сервера", data);
     dispatch(updateUser(data.user));
   }
 };

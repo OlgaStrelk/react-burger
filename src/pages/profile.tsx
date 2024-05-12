@@ -4,18 +4,16 @@ import {
   Input,
   EmailInput,
   Button,
-  PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useForm } from "../hooks/useForm";
-import { ChangeEvent, SyntheticEvent, useEffect, useState } from "react";
+import { ChangeEvent, SyntheticEvent, useEffect } from "react";
 import { editProfileFormValue } from "../services/actions/authForms";
 import { editProfile } from "../services/actions/user";
 import { TInput, TUser } from "../utils/types";
 import Preloader from "../components/preloader/preloader";
 import { passwordStub } from "../utils/consts";
-// import PasswordInput from "../components/password-input/password-input";
 
 function ProfilePage() {
   const { name, email }: TUser = useSelector(
@@ -31,12 +29,15 @@ function ProfilePage() {
   const dispatch = useDispatch();
 
   const { handleInput, handleSubmit } = useForm();
+
+  useEffect(() => {
+    putInitialtValues();
+  }, []);
+
   const onPasswordFocus = () => {
     //@ts-ignore
     dispatch(editProfileFormValue("password", null));
   };
-
-  useEffect(() => console.log(password));
 
   const onPasswordBlur = () => {
     if (password === "" || password === null || password.length < 8) {
@@ -57,13 +58,10 @@ function ProfilePage() {
     dispatch(editProfileFormValue("email", email));
   };
 
-  useEffect(() => {
-    putInitialtValues();
-  }, []);
-
   const resetForm = () => {
     putInitialtValues();
   };
+
   const INPUTS_DATA: TInput[] = [
     {
       id: "1",
@@ -94,14 +92,6 @@ function ProfilePage() {
         case "password": {
           return (
             <li className={styles.input} key={id}>
-              {/* <PasswordInput
-                icon="EditIcon"
-                value={value || ""}
-                onChange={onFormChange}
-                onFocus={onPasswordFocus}
-                onBlur={onPasswordBlur}
-                name={name}
-              /> */}
               <Input
                 icon="EditIcon"
                 value={value || ""}

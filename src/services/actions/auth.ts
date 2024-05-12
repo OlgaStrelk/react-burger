@@ -105,16 +105,18 @@ export const resetPasswordStepTwo = () => (dispatch, getState) => {
 //@ts-ignore
 export const logout = () => (dispatch) => {
   dispatch({ type: LOGOUT_REQUEST });
-  request<IResetPasswordResponse>(ENDPOINT.logout, {
-    ...optionsWithAuth,
-    method: "POST",
-    body: JSON.stringify({ token: localStorage.getItem("refreshToken") }),
-  })
-    .then(() => {
-      dispatch({ type: LOGOUT_SUCCESS });
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("refreshToken");
-      dispatch({ type: CLEAR_PROFILE_FORM });
+  if (localStorage.getItem("accessToken")) {
+    request<IResetPasswordResponse>(ENDPOINT.logout, {
+      ...optionsWithAuth,
+      method: "POST",
+      body: JSON.stringify({ token: localStorage.getItem("refreshToken") }),
     })
-    .catch((err) => handleError(LOGOUT_FAILED, err, dispatch));
+      .then(() => {
+        dispatch({ type: LOGOUT_SUCCESS });
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+        dispatch({ type: CLEAR_PROFILE_FORM });
+      })
+      .catch((err) => handleError(LOGOUT_FAILED, err, dispatch));
+  } else throw Error('В хранилище нет токена');
 };
