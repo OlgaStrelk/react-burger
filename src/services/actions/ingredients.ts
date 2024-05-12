@@ -37,6 +37,7 @@ export const fetchIngredients = () => (dispatch) => {
   dispatch({ type: GET_INGREDIENTS_REQUEST });
   request(ENDPOINT.ingredients, { ...optionsUnAuth, method: "GET" })
     .then((res) => {
+      console.log(res)
       dispatch({ type: GET_INGREDIENTS_SUCCESS, payload: res.data });
     })
     .catch((err) => handleError(GET_INGREDIENTS_FAILED, err, dispatch));

@@ -76,16 +76,16 @@ export const fetchWithRefresh = async <U>(
   }
 };
 
-export const request = (
+export const request = <T>(
   url: string,
   options: TRequestOptions<TOptions> | TRequestOptions<TAuthOptions>
-) => {
-  return fetch(`${API_URL}${url}`, options).then(checkReponse);
+): Promise<T> => {
+  return <Promise<T>>fetch(`${API_URL}${url}`, options).then(checkReponse);
 };
 
 export const handleError = (action: string, err: Error, dispatch: any) => {
   if (err instanceof Error) {
     dispatch({ type: action });
-    console.log(err);
+    console.log(err.message);
   }
 };

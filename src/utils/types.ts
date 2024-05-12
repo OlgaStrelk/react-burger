@@ -60,7 +60,7 @@ export type TAuthOptions = TOptions & {
 
 export type TMethod = { method: "GET" | "POST" | "PATCH" };
 
-export type TRequestOptions<Auth> = TMethod & Auth
+export type TRequestOptions<Auth> = TMethod & Auth;
 
 export type TUser = { name: string; email: string; password?: string };
 export interface ISuccessResponse extends Response {
@@ -76,9 +76,13 @@ export interface ITokenResponse extends ISuccessResponse {
   refreshToken: string;
 }
 
-export type TLoginData = {
+export type TLoginResponse = {
   success: boolean;
-  user: { email: string; password: string };
+  user: TUser;
   accessToken: string;
   refreshToken: string;
 };
+export interface IResetPasswordResponse extends ISuccessResponse {
+  message: string;
+}
+export type TAuthorizationResonse = IUserSuccessResponse & ITokenResponse;

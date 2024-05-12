@@ -1,7 +1,10 @@
 import { updateUser } from "./user";
 import { optionsUnAuth, optionsWithAuth } from "../../utils/consts";
 import { ENDPOINT } from "../../utils/consts";
-import { TLoginData } from "../../utils/types";
+import {
+  IResetPasswordResponse,
+  TAuthorizationResonse,
+} from "../../utils/types";
 import { CLEAR_PROFILE_FORM } from "./authForms";
 import { handleError, request } from "../../utils/api";
 
@@ -28,7 +31,7 @@ export const RESET_FORM_TWO_SUBMIT_FAILED = "RESET_FORM_TWO_SUBMIT_FAILED";
 //@ts-ignore
 export const register = () => async (dispatch, getState) => {
   dispatch({ type: REGISTER_SUBMIT_REQUEST });
-  const data = await request(ENDPOINT.register, {
+  const data = await request<TAuthorizationResonse>(ENDPOINT.register, {
     ...optionsUnAuth,
     method: "POST",
     body: JSON.stringify(getState().register.form),
@@ -52,7 +55,7 @@ export const login =
   //@ts-ignore
   async (dispatch, getState): void => {
     dispatch({ type: LOGIN_SUBMIT_REQUEST });
-    const data: TLoginData = await request(ENDPOINT.login, {
+    const data = await request<TAuthorizationResonse>(ENDPOINT.login, {
       ...optionsUnAuth,
       method: "POST",
       body: JSON.stringify(getState().login.form),
@@ -80,21 +83,21 @@ export const resetPasswordStepOne = () => (dispatch, getState) => {
     method: "POST",
     body: JSON.stringify(getState().resetForm.form),
   })
-    .then((res) => {
-      dispatch({ type: RESET_FORM_ONE_SUBMIT_SUCCESS, payload: res.data });
+    .then(() => {
+      dispatch({ type: RESET_FORM_ONE_SUBMIT_SUCCESS });
     })
     .catch((err) => handleError(RESET_FORM_ONE_SUBMIT_FAILED, err, dispatch));
 };
 //@ts-ignore
 export const resetPasswordStepTwo = () => (dispatch, getState) => {
   dispatch({ type: RESET_FORM_TWO_SUBMIT_REQUEST });
-  request(ENDPOINT.resetPasswordStepTwo, {
+  request<IResetPasswordResponse>(ENDPOINT.resetPasswordStepTwo, {
     ...optionsUnAuth,
     method: "POST",
     body: JSON.stringify(getState().resetFormTwo.form),
   })
-    .then((res) => {
-      dispatch({ type: RESET_FORM_TWO_SUBMIT_SUCCESS, payload: res.data });
+    .then(() => {
+      dispatch({ type: RESET_FORM_TWO_SUBMIT_SUCCESS });
     })
     .catch((err) => handleError(RESET_FORM_TWO_SUBMIT_FAILED, err, dispatch));
 };
@@ -102,7 +105,7 @@ export const resetPasswordStepTwo = () => (dispatch, getState) => {
 //@ts-ignore
 export const logout = () => (dispatch) => {
   dispatch({ type: LOGOUT_REQUEST });
-  request(ENDPOINT.logout, {
+  request<IResetPasswordResponse>(ENDPOINT.logout, {
     ...optionsWithAuth,
     method: "POST",
     body: JSON.stringify({ token: localStorage.getItem("refreshToken") }),
