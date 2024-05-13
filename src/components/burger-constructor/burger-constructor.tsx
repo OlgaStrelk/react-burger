@@ -6,7 +6,6 @@ import {
   ConstructorElement,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from "prop-types";
 import styles from "./burger-constructor.module.css";
 import Total from "./total/total.tsx";
 import {
@@ -162,9 +161,5 @@ function BurgerConstructor({ onModalOpen }: IBurgerConstructorProps) {
     </>
   );
 }
-
-BurgerConstructor.propTypes = {
-  onModalOpen: PropTypes.func.isRequired,
-};
 
 export default BurgerConstructor;

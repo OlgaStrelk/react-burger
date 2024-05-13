@@ -1,9 +1,8 @@
-import { LegacyRef, ReactNode, SyntheticEvent, useEffect, useRef } from "react";
+import { ReactNode, useEffect, useRef } from "react";
 import ModalOverlay from "./modal-overlay/modal-overlay";
 import styles from "./modal.module.css";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import ReactDOM from "react-dom";
-import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
@@ -88,13 +87,5 @@ function Modal({
     modalRoot as Element
   );
 }
-
-Modal.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]).isRequired,
-  onClose: PropTypes.func,
-};
 
 export default Modal;
