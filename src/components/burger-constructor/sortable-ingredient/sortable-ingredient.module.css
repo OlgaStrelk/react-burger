@@ -4,4 +4,12 @@
     align-items: center;
     justify-content: space-between;
     margin-left: 10px;
-  }  
+  }
+
+.opacity_visible {
+  opacity: 0
+}
+
+.opacity_invisible {
+  opacity: 1
+}

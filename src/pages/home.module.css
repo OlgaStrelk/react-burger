@@ -1,12 +1,19 @@
-.title {
-  font-size: larger;
-  color: red;
+.main {
+  max-width: fit-content;
+  max-height: calc(100vh - 98px);
+  margin: auto;
+  display: flex;
+}
+
+.main_error {
+  composes: main;
+  max-width: 700px;
+  margin-top: 20vh;
+  min-height: 300px;
   text-align: center;
 }
 
-.main {
-  max-width: fit-content;
+.title {
+  composes: text text_type_main-default text_color_inactive from global;
   margin: auto;
-  display: flex;
-  max-height: calc(100vh - 98px);
 }

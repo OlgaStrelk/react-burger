@@ -1,5 +1,5 @@
 .header {
-  background-color: #1c1c21;
+  background-color: var(--background);
 }
 .centered {
   transform: translateX(-50%);
