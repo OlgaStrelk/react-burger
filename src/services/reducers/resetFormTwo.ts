@@ -4,7 +4,14 @@ import {
   RESET_FORM_TWO_SUBMIT_FAILED,
   RESET_FORM_TWO_SUBMIT_REQUEST,
 } from "../actions/auth";
-const initialState = {
+
+export interface ResetFormTwoState {
+  form: { password: string; token: string };
+  resetPasswordRequest: boolean;
+  resetPasswordFailed: boolean;
+}
+
+const initialState: ResetFormTwoState = {
   form: {
     password: "",
     token: "",

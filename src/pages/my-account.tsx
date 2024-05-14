@@ -3,11 +3,11 @@ import styles from "./my-account.module.css";
 import { Link, NavLink, Outlet } from "react-router-dom";
 
 import { PATHS } from "../utils/consts";
-import { useDispatch } from "react-redux";
 import { logout } from "../services/actions/auth";
+import { useAppDispatch } from "../hooks/types";
 
 function MyAccountPage() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const signout = () => {
     //@ts-ignore
     dispatch(logout());

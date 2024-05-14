@@ -62,7 +62,9 @@ export type TMethod = { method: "GET" | "POST" | "PATCH" };
 
 export type TRequestOptions<Auth> = TMethod & Auth;
 
-export type TUser = { name: string; email: string; password?: string };
+export type TUser = { name: string; email: string };
+
+export type TUserWithPassword = TUser & { password: string };
 export interface ISuccessResponse extends Response {
   success: true;
 }

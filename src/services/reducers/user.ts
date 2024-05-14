@@ -7,7 +7,17 @@ import {
   DELETE_USER,
 } from "../actions/user";
 import { LOGOUT_REQUEST, LOGOUT_FAILED, LOGOUT_SUCCESS } from "../actions/auth";
-const initialState = {
+import { TUser } from "../../utils/types";
+export interface UserState {
+  user: TUser | null;
+  isAuthChecked: boolean;
+  userRequest: boolean;
+  userFailed: boolean;
+  logoutRequest: boolean;
+  logoutFailed: boolean;
+}
+
+const initialState: UserState = {
   user: null,
   isAuthChecked: false,
   userRequest: false,

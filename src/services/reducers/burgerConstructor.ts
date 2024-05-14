@@ -1,11 +1,14 @@
+import { TIngredient } from "../../utils/types";
 import {
   ADD_INGREDIENT,
   SORT_INGREDIENTS,
   DELETE_INGREDIENT,
   RESET_CONSTRUCTOR,
 } from "../actions/ingredients";
-
-const initialState = {
+export interface ConstructorState {
+  addedIngredients: { buns: TIngredient | null; ingredients: TIngredient[] };
+}
+const initialState: ConstructorState = {
   addedIngredients: {
     buns: null,
     ingredients: [],
@@ -58,10 +61,7 @@ export const constructorReducer = (state = initialState, action) => {
     case RESET_CONSTRUCTOR: {
       return {
         ...state,
-        addedIngredients: {
-          buns: null,
-          ingredients: [],
-        },
+        addedIngredients: initialState.addedIngredients,
       };
     }
 

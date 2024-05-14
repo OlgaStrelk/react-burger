@@ -1,9 +1,13 @@
+import { TIngredient } from "../../utils/types";
 import {
   RESET_MODAL_INGREDIENT,
   GET_MODAL_INGREDIENT,
 } from "../actions/ingredients";
 
-const initialState = {
+export interface ModalState {
+  currentIngredient: TIngredient | null;
+}
+const initialState: ModalState = {
   currentIngredient: null,
 };
 //@ts-ignore

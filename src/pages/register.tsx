@@ -1,6 +1,5 @@
 import formStyles from "./base-form.module.css";
 
-import { useSelector } from "react-redux";
 import { useState, useEffect, SyntheticEvent, ChangeEvent } from "react";
 
 import {
@@ -17,10 +16,12 @@ import { useForm } from "../hooks/useForm";
 import { registerFormValue } from "../services/actions/authForms";
 import { register } from "../services/actions/auth";
 import { TInput } from "../utils/types";
+import { useAppSelector } from "../hooks/types";
 
 function Register() {
-  //@ts-ignore
-  const { name, password, email } = useSelector((state) => state.register.form);
+  const { name, password, email } = useAppSelector(
+    (state) => state.register.form
+  );
 
   const { handleInput, handleSubmit } = useForm();
   const [isValid, setIsValid] = useState(false);
@@ -32,7 +33,7 @@ function Register() {
       setIsValid(false);
     }
   }, [password, email, name]);
-  
+
   const onFormChange = (e: ChangeEvent<HTMLInputElement>) => {
     handleInput(e, registerFormValue);
   };

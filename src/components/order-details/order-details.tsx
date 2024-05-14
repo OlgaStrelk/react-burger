@@ -1,13 +1,12 @@
-import { useSelector } from "react-redux";
 import CheckMarkIcon from "../../images/done.svg";
 import styles from "./order-details.module.css";
 import Preloader from "../preloader/preloader";
+import { useAppSelector } from "../../hooks/types";
 
 function OrderDetails() {
-  //@ts-ignore
-  const isLoading = useSelector((store) => store.order.orderRequest);
-  //@ts-ignore
-  const orderNumber = useSelector((store) => store.order.order);
+  const { orderRequest: isLoading, order: orderNumber } = useAppSelector(
+    (store) => store.order
+  );
   return isLoading ? (
     <>
       <h2 className={styles.title}>Мы уже начали оформлять ваш заказ</h2>

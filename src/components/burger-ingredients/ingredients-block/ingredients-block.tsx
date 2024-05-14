@@ -3,8 +3,8 @@ import { Fragment, memo, useMemo, forwardRef, SyntheticEvent } from "react";
 import { GET_MODAL_INGREDIENT } from "../../../services/actions/ingredients";
 
 import IngredientCard from "../ingredient-card/ingredient-card";
-import { useDispatch, useSelector } from "react-redux";
 import { TIngredient, TTitles } from "../../../utils/types";
+import { useAppDispatch, useAppSelector } from "../../../hooks/types";
 interface Props {
   titles: TTitles[];
   onScroll: (arg0: SyntheticEvent) => void;
@@ -13,9 +13,9 @@ export type Ref = HTMLUListElement;
 
 const IngredientsBlock = forwardRef<Ref, Props>(({ titles, onScroll }, ref) => {
 
-  const dispatch = useDispatch();
-  //@ts-ignore
-  const ingredients:TIngredient[] = useSelector((state) => state.ingredients.ingredients);
+  const dispatch = useAppDispatch();
+
+  const ingredients:TIngredient[] = useAppSelector((state) => state.ingredients.ingredients);
 
   const handleCardClick = (e: SyntheticEvent) => {
     const id = e.currentTarget.id;

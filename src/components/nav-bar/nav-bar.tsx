@@ -6,12 +6,12 @@ import {
   ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { PATHS } from "../../utils/consts";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../../hooks/types";
+import { TUser } from "../../utils/types";
 
 function Navbar() {
   const { ordersList, home, profile } = PATHS;
-  //@ts-ignore
-  const user = useSelector((state) => state.user.user);
+  const user: TUser = useAppSelector((state) => state.user.user);
   const profileLinkText = user && user.name ? user.name : "Личный кабинет";
   const NAVBAR_DATA = [
     {

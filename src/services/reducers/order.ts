@@ -4,7 +4,13 @@ import {
   MAKE_ORDER_FAILED,
 } from "../actions/ingredients";
 
-const initialState = {
+export interface OrderState {
+  order: number | null;
+  orderRequest: boolean;
+  orderFailed: boolean;
+}
+
+const initialState: OrderState = {
   order: null,
   orderRequest: false,
   orderFailed: false,

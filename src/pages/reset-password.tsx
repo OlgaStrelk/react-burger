@@ -1,6 +1,5 @@
 import formStyles from "./base-form.module.css";
 
-import { useSelector } from "react-redux";
 import { useState, useEffect, SyntheticEvent, ChangeEvent } from "react";
 
 import {
@@ -17,10 +16,12 @@ import { resetPasswordTwoFormValue } from "../services/actions/authForms";
 import { resetPasswordStepTwo } from "../services/actions/auth";
 import { useNavigate } from "react-router-dom";
 import { TInput } from "../utils/types";
+import { useAppSelector } from "../hooks/types";
 
 function ResetPasswordPage() {
-  //@ts-ignore
-  const { password, token } = useSelector((state) => state.resetFormTwo.form);
+  const { password, token } = useAppSelector(
+    (state) => state.resetFormTwo.form
+  );
 
   const navigate = useNavigate();
   useEffect(() => {

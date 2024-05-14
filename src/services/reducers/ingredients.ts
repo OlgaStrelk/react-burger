@@ -1,3 +1,4 @@
+import { TIngredient } from "../../utils/types";
 import {
   GET_INGREDIENTS_REQUEST,
   GET_INGREDIENTS_SUCCESS,
@@ -7,7 +8,13 @@ import {
   RESET_INGREDIENT_QUANTITY,
 } from "../actions/ingredients";
 
-const initialState = {
+export interface IngredientsState {
+  ingredients: TIngredient[];
+  ingredientsRequest: boolean;
+  ingredientsFailed: boolean;
+  currentIngredient: null | TIngredient;
+}
+const initialState: IngredientsState = {
   ingredients: [],
   ingredientsRequest: false,
   ingredientsFailed: false,

@@ -4,17 +4,16 @@ import { PATHS } from "../utils/consts";
 import { useForm } from "../hooks/useForm";
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import Redirect from "../components/redirect/redirect";
-import { useSelector } from "react-redux";
 import { resetPasswordStepOne } from "../services/actions/auth";
 import { resetPasswordOneFormValue } from "../services/actions/authForms";
 import { useState, useEffect, ChangeEvent, SyntheticEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { TInput } from "../utils/types";
+import { useAppSelector } from "../hooks/types";
 function ForgotPasswordPage() {
   const [isValid, setIsValid] = useState(false);
   const navigate = useNavigate();
-  //@ts-ignore
-  const { email } = useSelector((state) => state.resetForm.form);
+  const { email } = useAppSelector((state) => state.resetForm.form);
 
   const { handleInput, handleSubmit } = useForm();
 

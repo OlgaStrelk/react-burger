@@ -1,5 +1,4 @@
-import { FunctionComponent, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import { useDrop } from "react-dnd";
 import { SortableIngredient } from "./sortable-ingredient/sortable-ingredient.tsx";
 import {
@@ -16,6 +15,7 @@ import {
 import { Navigate } from "react-router-dom";
 import { PATHS } from "../../utils/consts.ts";
 import { TConstructorIngredient, TIngredient } from "../../utils/types.ts";
+import { useAppDispatch, useAppSelector } from "../../hooks/types.ts";
 
 export interface IBurgerConstructorProps {
   onModalOpen: () => void;
@@ -27,14 +27,12 @@ function BurgerConstructor({ onModalOpen }: IBurgerConstructorProps) {
   const [isButtonActive, setButtonActive] = useState(false);
   const [isNavigated, setNavigated] = useState(false);
 
-  const { ingredients, buns } = useSelector(
-    // @ts-ignore
+  const { ingredients, buns } = useAppSelector(
     (state) => state.burgerConstructor.addedIngredients
   );
-  // @ts-ignore
-  const user = useSelector((state) => state.user.user);
+  const user = useAppSelector((state) => state.user.user);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const validateConstructor = () => {
     if (!buns || !ingredients.length) {

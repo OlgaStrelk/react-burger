@@ -1,7 +1,7 @@
 import { SyntheticEvent } from "react";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "./types";
 export const useForm = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 //@ts-ignore
   const handleInput = (e, reducer) => {
     dispatch(reducer(e.target.name, e.target.value));

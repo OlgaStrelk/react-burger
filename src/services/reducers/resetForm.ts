@@ -6,7 +6,12 @@ import {
   RESET_FORM_ONE_SUBMIT_REQUEST,
 } from "../actions/auth";
 
-const initialState = {
+export interface ResetFormState {
+  form: { email: string };
+  resetPasswordRequest: boolean;
+  resetPasswordFailed: boolean;
+}
+const initialState: ResetFormState = {
   form: {
     email: "",
   },

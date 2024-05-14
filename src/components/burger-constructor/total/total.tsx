@@ -1,14 +1,12 @@
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../../../hooks/types";
 import CurrencyIconPath from "../../../images/cur-icon.svg";
 // import styles from "./total.module.css";
 import { useMemo } from "react";
 
 function Total() {
-  const addedIngredients = useSelector(
-    // @ts-ignore
+  const addedIngredients = useAppSelector(
     (store) => store.burgerConstructor.addedIngredients
   );
-
 
   const countTotal = () =>
     useMemo(() => {
@@ -18,10 +16,11 @@ function Total() {
       } else {
         const total =
           addedIngredients.ingredients.reduce(
-            (accumulator: number, currentValue: { price: number; }) => accumulator + currentValue.price,
+            (accumulator: number, currentValue: { price: number }) =>
+              accumulator + currentValue.price,
             initialValue
           ) +
-          addedIngredients?.buns?.price * 2;
+          addedIngredients.buns?.price * 2;
 
         return total;
       }

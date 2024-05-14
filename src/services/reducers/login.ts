@@ -4,15 +4,21 @@ import {
   LOGIN_SUBMIT_FAILED,
   LOGIN_SUBMIT_REQUEST,
 } from "../actions/auth";
-
-const initialState = {
+export interface LoginState {
+  form: {
+    email: string;
+    password: string;
+  };
+  loginRequest: boolean;
+  loginFailed: boolean;
+}
+const initialState: LoginState = {
   form: {
     email: "",
     password: "",
   },
   loginRequest: false,
   loginFailed: false,
-  error: null,
 };
 //@ts-ignore
 export const loginReducer = (state = initialState, action) => {

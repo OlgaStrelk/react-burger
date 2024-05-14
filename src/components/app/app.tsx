@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 
 import AppHeader from "../app-header/app-header";
@@ -28,8 +27,9 @@ import { OnlyAuth, OnlyUnAuth } from "../protected_route/protected-route";
 import { PATHS } from "../../utils/consts";
 import { checkUserAuth } from "../../services/actions/user";
 import MyAccountPage from "../../pages/my-account";
+import { useAppDispatch } from "../../hooks/types";
 function App() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   let location = useLocation();
   let state = location.state;
   //@ts-ignore
