@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware, compose } from "redux";
+import { legacy_createStore as createStore, applyMiddleware, compose } from "redux";
 import { thunk } from "redux-thunk";
 
 import { rootReducer } from "./reducers/index.ts";
@@ -14,3 +14,8 @@ const enhancer = composeEnhancers(applyMiddleware(thunk));
 const store = createStore(rootReducer, enhancer);
 
 export default store;
+
+export type AppStore = typeof store
+export type AppDispatch = AppStore['dispatch']
+export type RootState = ReturnType<AppStore['getState']>
+

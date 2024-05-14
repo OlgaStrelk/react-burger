@@ -5,7 +5,6 @@ import {
   EmailInput,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch, useSelector } from "react-redux";
 
 import { useForm } from "../hooks/useForm";
 import { ChangeEvent, SyntheticEvent, useEffect } from "react";
@@ -14,26 +13,26 @@ import { editProfile } from "../services/actions/user";
 import { TInput, TUser } from "../utils/types";
 import Preloader from "../components/preloader/preloader";
 import { passwordStub } from "../utils/consts";
+import { useAppDispatch, useAppSelector } from "../hooks/types";
 
 function ProfilePage() {
-  const user: TUser = useSelector(
+  const user: TUser = useAppSelector(
     //@ts-ignore
     (state) => state.user.user
   );
 
-  const { name, email }: TUser = useSelector(
+  const { name, email }: TUser = useAppSelector(
     //@ts-ignore
     (state) => state.profile.form
   );
 
-  const password: string = useSelector(
+  const password: string = useAppSelector(
     //@ts-ignore
     (state) => state.profile.form.password
   );
   //@ts-ignore
-  const isLoading: boolean = useSelector((state) => state.user.userRequest);
-  //@ts-ignore
-  const dispatch = useDispatch();
+  const isLoading: boolean = useAppSelector((state) => state.user.userRequest);
+  const dispatch = useAppDispatch();
 
   const { handleInput, handleSubmit } = useForm();
 

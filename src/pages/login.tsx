@@ -1,6 +1,5 @@
 import formStyles from "./base-form.module.css";
-import { useSelector } from "react-redux";
-import { useState, useEffect, ChangeEvent, FormEventHandler, SyntheticEvent } from "react";
+import { useState, useEffect, ChangeEvent, SyntheticEvent } from "react";
 
 import {
   EmailInput,
@@ -16,13 +15,14 @@ import { useForm } from "../hooks/useForm";
 import { loginFormValue } from "../services/actions/authForms";
 import { login } from "../services/actions/auth";
 import { TInput } from "../utils/types";
+import { useAppSelector } from "../hooks/types";
 
 function LoginPage() {
   const { register, forgotPassword } = PATHS;
   //@ts-ignore
-  const { password, email } = useSelector((state) => state.login.form);
+  const { password, email } = useAppSelector((state) => state.login.form);
   const { handleInput, handleSubmit } = useForm();
-  const [isValid, setIsValid] = useState(false);
+  const [isValid, setIsValid] = useState<boolean>(false);
 
   useEffect(() => {
     if (password && email) {

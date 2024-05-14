@@ -1,5 +1,4 @@
 import styles from "./home.module.css";
-import { useSelector } from "react-redux";
 // import { useModal } from "../hooks/useModal";
 import BurgerConstructor from "../components/burger-constructor/burger-constructor";
 import BurgerIngredients from "../components/burger-ingredients/burger-ingredients";
@@ -14,14 +13,11 @@ import {
 import { modalStyle } from "../utils/consts";
 import { useState } from "react";
 import Preloader from "../components/preloader/preloader";
+import { useAppSelector } from "../hooks/types";
 
 function HomePage() {
-  //@ts-ignore
-  const ingredients = useSelector((state) => state.ingredients.ingredients);
-  const isLoading = useSelector(
-    //@ts-ignore
-
-    (state) => state.ingredients.ingredientsRequest
+  const { ingredients, ingredientsRequest: isLoading } = useAppSelector(
+    (state) => state.ingredients
   );
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
