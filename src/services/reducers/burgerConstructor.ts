@@ -1,4 +1,5 @@
-import { TIngredient } from "../../utils/types";
+import { PayloadAction } from "@reduxjs/toolkit";
+import { TConstructorIngredient, TIngredient } from "../../utils/types";
 import {
   ADD_INGREDIENT,
   SORT_INGREDIENTS,
@@ -14,8 +15,36 @@ const initialState: ConstructorState = {
     ingredients: [],
   },
 };
-//@ts-ignore
-export const constructorReducer = (state = initialState, action) => {
+
+type TAddIngredientAction = {
+  type: typeof ADD_INGREDIENT;
+  payload: TConstructorIngredient;
+};
+
+type TSortIngredientAction = {
+  type: typeof SORT_INGREDIENTS;
+  payload: TIngredient[];
+};
+
+type TDeleteIngredientAction = {
+  type: typeof DELETE_INGREDIENT;
+  payload: string;
+};
+
+type TResetConstructor = {
+  type: typeof RESET_CONSTRUCTOR;
+};
+
+type TBurgerConstructorActions =
+  | TAddIngredientAction
+  | TSortIngredientAction
+  | TDeleteIngredientAction
+  | TResetConstructor;
+
+export const constructorReducer = (
+  state = initialState,
+  action: TBurgerConstructorActions
+) => {
   switch (action.type) {
     case ADD_INGREDIENT: {
       if (action.payload.type === "bun") {

@@ -28,6 +28,7 @@ export const RESET_FORM_TWO_SUBMIT_REQUEST = "RESET_FORM_TWO_SUBMIT_REQUEST";
 export const RESET_FORM_TWO_SUBMIT_SUCCESS = "RESET_FORM_TWO_SUBMIT_SUCCESS";
 export const RESET_FORM_TWO_SUBMIT_FAILED = "RESET_FORM_TWO_SUBMIT_FAILED";
 
+
 //@ts-ignore
 export const register = () => async (dispatch, getState) => {
   dispatch({ type: REGISTER_SUBMIT_REQUEST });
