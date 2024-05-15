@@ -6,15 +6,12 @@ import {
   UPDATE_USER_DATA,
   DELETE_USER,
 } from "../actions/user";
-import { LOGOUT_REQUEST, LOGOUT_FAILED, LOGOUT_SUCCESS } from "../actions/auth";
 import { TUser } from "../../utils/types";
 export interface UserState {
   user: TUser | null;
   isAuthChecked: boolean;
   userRequest: boolean;
   userFailed: boolean;
-  logoutRequest: boolean;
-  logoutFailed: boolean;
 }
 
 const initialState: UserState = {
@@ -22,11 +19,45 @@ const initialState: UserState = {
   isAuthChecked: false,
   userRequest: false,
   userFailed: false,
-  logoutRequest: false,
-  logoutFailed: false,
 };
-//@ts-ignore
-export const userReducer = (state = initialState, action) => {
+
+type TUserRequestAction = {
+  type: typeof GET_USER_REQUEST;
+};
+
+type TUserSuccessAction = {
+  type: typeof GET_USER_SUCCESS;
+  payload: TUser;
+};
+
+type TUserFailedAction = {
+  type: typeof GET_USER_FAILED;
+};
+
+type TDeleteUserAction = {
+  type: typeof DELETE_USER;
+};
+
+type TSetAuthCheckedAction = {
+  type: typeof SET_AUTH_CHECKED;
+  payload: boolean;
+};
+
+type TUpdateUserAction = {
+  type: typeof UPDATE_USER_DATA;
+  payload: { [key in string]: string };
+};
+
+type TUserActions =
+  | TUserRequestAction
+  | TUserSuccessAction
+  | TUserFailedAction
+  | TDeleteUserAction
+  | TSetAuthCheckedAction
+  | TUpdateUserAction;
+
+  
+export const userReducer = (state = initialState, action: TUserActions) => {
   switch (action.type) {
     case GET_USER_REQUEST: {
       return {
@@ -50,28 +81,6 @@ export const userReducer = (state = initialState, action) => {
       };
     }
 
-    case LOGOUT_REQUEST: {
-      return {
-        ...state,
-        logoutRequest: true,
-        logoutFailed: false,
-      };
-    }
-    case LOGOUT_SUCCESS: {
-      return {
-        ...state,
-        user: null,
-        logoutRequest: false,
-      };
-    }
-    case LOGOUT_FAILED: {
-      return {
-        ...state,
-        logoutFailed: true,
-        logoutRequest: false,
-      };
-    }
-
     case DELETE_USER: {
       return {
         ...state,
@@ -84,7 +93,6 @@ export const userReducer = (state = initialState, action) => {
     }
 
     case UPDATE_USER_DATA: {
-      //@ts-ignore
       return { ...state, user: { ...action.payload } };
     }
 

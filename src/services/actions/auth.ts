@@ -1,4 +1,4 @@
-import { updateUser } from "./user";
+import { DELETE_USER, updateUser } from "./user";
 import { optionsUnAuth, optionsWithAuth } from "../../utils/consts";
 import { ENDPOINT } from "../../utils/consts";
 import {
@@ -27,7 +27,6 @@ export const RESET_FORM_ONE_FAILED = "RESET_FORM_ONE_FAILED";
 export const RESET_FORM_TWO_REQUEST = "RESET_FORM_TWO_REQUEST";
 export const RESET_FORM_TWO_SUCCESS = "RESET_FORM_TWO_SUCCESS";
 export const RESET_FORM_TWO_FAILED = "RESET_FORM_TWO_FAILED";
-
 
 //@ts-ignore
 export const register = () => async (dispatch, getState) => {
@@ -114,10 +113,11 @@ export const logout = () => (dispatch) => {
     })
       .then(() => {
         dispatch({ type: LOGOUT_SUCCESS });
+        dispatch({ type: DELETE_USER });
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
         dispatch({ type: CLEAR_PROFILE_FORM });
       })
       .catch((err) => handleError(LOGOUT_FAILED, err, dispatch));
-  } else throw Error('В хранилище нет токена');
+  } else throw Error("В хранилище нет токена");
 };

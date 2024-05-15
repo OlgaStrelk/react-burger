@@ -19,8 +19,35 @@ const initialState: ResetFormTwoState = {
   resetPasswordRequest: false,
   resetPasswordFailed: false,
 };
-//@ts-ignore
-export const resetFormTwoReducer = (state = initialState, action) => {
+
+type TResetFormRequestAction = {
+  type: typeof RESET_FORM_TWO_REQUEST;
+};
+
+type TResetFormSuccessAction = {
+  type: typeof RESET_FORM_TWO_SUCCESS;
+};
+
+type TResetFormFailedAction = {
+  type: typeof RESET_FORM_TWO_FAILED;
+};
+
+type TSetValueAction = {
+  type: typeof RESET_FORM_TWO_SET_VALUE;
+  field: string;
+  value: string;
+};
+
+type TResetFormTwoActions =
+  | TResetFormRequestAction
+  | TResetFormSuccessAction
+  | TResetFormFailedAction
+  | TSetValueAction;
+
+export const resetFormTwoReducer = (
+  state = initialState,
+  action: TResetFormTwoActions
+) => {
   switch (action.type) {
     case RESET_FORM_TWO_SET_VALUE: {
       return {

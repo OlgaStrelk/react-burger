@@ -19,8 +19,35 @@ const initialState: RegisterState = {
   resetPasswordRequest: false,
   resetPasswordFailed: false,
 };
-//@ts-ignore
-export const registerReducer = (state = initialState, action) => {
+
+type TRegisterRequestAction = {
+  type: typeof REGISTER_REQUEST;
+};
+
+type TRegisterSuccessAction = {
+  type: typeof REGISTER_SUCCESS;
+};
+
+type TRegisterFailedAction = {
+  type: typeof REGISTER_FAILED;
+};
+
+type TSetValueAction = {
+  type: typeof REGISTER_SET_VALUE;
+  field: string;
+  value: string;
+};
+
+type TRegisterActions =
+  | TRegisterRequestAction
+  | TRegisterSuccessAction
+  | TRegisterFailedAction
+  | TSetValueAction;
+
+export const registerReducer = (
+  state = initialState,
+  action: TRegisterActions
+) => {
   switch (action.type) {
     case REGISTER_SET_VALUE: {
       return {
