@@ -1,8 +1,8 @@
 import { TUserWithPassword } from "../../utils/types";
 import {
-  REGISTER_SUBMIT_SUCCESS,
-  REGISTER_SUBMIT_FAILED,
-  REGISTER_SUBMIT_REQUEST,
+  REGISTER_SUCCESS,
+  REGISTER_FAILED,
+  REGISTER_REQUEST,
 } from "../actions/auth";
 import { REGISTER_SET_VALUE } from "../actions/authForms";
 export interface RegisterState {
@@ -31,14 +31,14 @@ export const registerReducer = (state = initialState, action) => {
       };
     }
 
-    case REGISTER_SUBMIT_REQUEST: {
+    case REGISTER_REQUEST: {
       return {
         ...state,
         resetPasswordRequest: true,
         resetPasswordFailed: false,
       };
     }
-    case REGISTER_SUBMIT_SUCCESS: {
+    case REGISTER_SUCCESS: {
       return {
         ...state,
         form: {
@@ -47,7 +47,7 @@ export const registerReducer = (state = initialState, action) => {
         resetPasswordRequest: false,
       };
     }
-    case REGISTER_SUBMIT_FAILED: {
+    case REGISTER_FAILED: {
       return {
         ...state,
         resetPasswordRequest: false,

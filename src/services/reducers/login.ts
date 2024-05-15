@@ -1,8 +1,8 @@
 import { LOGIN_SET_VALUE } from "../actions/authForms";
 import {
-  LOGIN_SUBMIT_SUCCESS,
-  LOGIN_SUBMIT_FAILED,
-  LOGIN_SUBMIT_REQUEST,
+  LOGIN_SUCCESS,
+  LOGIN_FAILED,
+  LOGIN_REQUEST,
 } from "../actions/auth";
 export interface LoginState {
   form: {
@@ -20,8 +20,34 @@ const initialState: LoginState = {
   loginRequest: false,
   loginFailed: false,
 };
-//@ts-ignore
-export const loginReducer = (state = initialState, action) => {
+
+type TLoginRequestAction = {
+  type: typeof LOGIN_REQUEST;
+};
+
+type TGetIngredientSuccessAction = {
+  type: typeof GET_INGREDIENTS_SUCCESS;
+  payload: TIngredient[];
+};
+
+type TGetIngredientFailedAction = {
+  type: typeof GET_INGREDIENTS_FAILED;
+  payload: string;
+};
+
+type TSetValueAction = {
+  type: typeof LOGIN_SET_VALUE;
+  field: string;
+  value: string;
+};
+
+type TLoginActions =
+  | TLoginRequestAction
+  | TGetIngredientSuccessAction
+  | TGetIngredientFailedAction
+  |TSetValueAction;
+
+export const loginReducer = (state = initialState, action: TLoginActions) => {
   switch (action.type) {
     case LOGIN_SET_VALUE: {
       return {
@@ -32,14 +58,14 @@ export const loginReducer = (state = initialState, action) => {
       };
     }
 
-    case LOGIN_SUBMIT_REQUEST: {
+    case LOGIN_REQUEST: {
       return {
         ...state,
         loginRequest: true,
         loginFailed: false,
       };
     }
-    case LOGIN_SUBMIT_SUCCESS: {
+    case LOGIN_SUCCESS: {
       return {
         ...state,
         form: {
@@ -48,7 +74,7 @@ export const loginReducer = (state = initialState, action) => {
         loginRequest: false,
       };
     }
-    case LOGIN_SUBMIT_FAILED: {
+    case LOGIN_FAILED: {
       return {
         ...state,
         loginRequest: false,

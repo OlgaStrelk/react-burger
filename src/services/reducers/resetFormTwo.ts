@@ -1,8 +1,8 @@
 import { RESET_FORM_TWO_SET_VALUE } from "../actions/authForms";
 import {
-  RESET_FORM_TWO_SUBMIT_SUCCESS,
-  RESET_FORM_TWO_SUBMIT_FAILED,
-  RESET_FORM_TWO_SUBMIT_REQUEST,
+  RESET_FORM_TWO_SUCCESS,
+  RESET_FORM_TWO_FAILED,
+  RESET_FORM_TWO_REQUEST,
 } from "../actions/auth";
 
 export interface ResetFormTwoState {
@@ -31,14 +31,14 @@ export const resetFormTwoReducer = (state = initialState, action) => {
       };
     }
 
-    case RESET_FORM_TWO_SUBMIT_REQUEST: {
+    case RESET_FORM_TWO_REQUEST: {
       return {
         ...state,
         resetPasswordRequest: true,
         resetPasswordFailed: false,
       };
     }
-    case RESET_FORM_TWO_SUBMIT_SUCCESS: {
+    case RESET_FORM_TWO_SUCCESS: {
       return {
         ...state,
         form: {
@@ -47,7 +47,7 @@ export const resetFormTwoReducer = (state = initialState, action) => {
         resetPasswordRequest: false,
       };
     }
-    case RESET_FORM_TWO_SUBMIT_FAILED: {
+    case RESET_FORM_TWO_FAILED: {
       return {
         ...state,
         resetPasswordRequest: false,

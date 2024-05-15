@@ -5,9 +5,9 @@ import {
   EDIT_PROFILE_SET_VALUE,
 } from "../actions/authForms";
 import {
-  EDIT_PROFILE_SUBMIT_SUCCESS,
-  EDIT_PROFILE_SUBMIT_FAILED,
-  EDIT_PROFILE_SUBMIT_REQUEST,
+  EDIT_PROFILE_SUCCESS,
+  EDIT_PROFILE_FAILED,
+  EDIT_PROFILE_REQUEST,
 } from "../actions/user";
 
 export interface ProfileState {
@@ -42,20 +42,20 @@ export const editProfileFormReducer = (state = initialState, action) => {
       };
     }
 
-    case EDIT_PROFILE_SUBMIT_REQUEST: {
+    case EDIT_PROFILE_REQUEST: {
       return {
         ...state,
         editProfileRequest: true,
         editProfileFailed: false,
       };
     }
-    case EDIT_PROFILE_SUBMIT_SUCCESS: {
+    case EDIT_PROFILE_SUCCESS: {
       return {
         ...state,
         editProfileRequest: false,
       };
     }
-    case EDIT_PROFILE_SUBMIT_FAILED: {
+    case EDIT_PROFILE_FAILED: {
       return {
         ...state,
         editProfileRequest: false,
