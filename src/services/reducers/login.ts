@@ -1,9 +1,5 @@
 import { LOGIN_SET_VALUE } from "../actions/authForms";
-import {
-  LOGIN_SUCCESS,
-  LOGIN_FAILED,
-  LOGIN_REQUEST,
-} from "../actions/auth";
+import { LOGIN_SUCCESS, LOGIN_FAILED, LOGIN_REQUEST } from "../actions/auth";
 export interface LoginState {
   form: {
     email: string;
@@ -25,14 +21,12 @@ type TLoginRequestAction = {
   type: typeof LOGIN_REQUEST;
 };
 
-type TGetIngredientSuccessAction = {
-  type: typeof GET_INGREDIENTS_SUCCESS;
-  payload: TIngredient[];
+type TLoginSuccessAction = {
+  type: typeof LOGIN_SUCCESS;
 };
 
-type TGetIngredientFailedAction = {
-  type: typeof GET_INGREDIENTS_FAILED;
-  payload: string;
+type TLoginFailedAction = {
+  type: typeof LOGIN_FAILED;
 };
 
 type TSetValueAction = {
@@ -43,9 +37,9 @@ type TSetValueAction = {
 
 type TLoginActions =
   | TLoginRequestAction
-  | TGetIngredientSuccessAction
-  | TGetIngredientFailedAction
-  |TSetValueAction;
+  | TLoginSuccessAction
+  | TLoginFailedAction
+  | TSetValueAction;
 
 export const loginReducer = (state = initialState, action: TLoginActions) => {
   switch (action.type) {

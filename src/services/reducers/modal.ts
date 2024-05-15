@@ -10,8 +10,19 @@ export interface ModalState {
 const initialState: ModalState = {
   currentIngredient: null,
 };
-//@ts-ignore
-export const modalReducer = (state = initialState, action) => {
+
+type TGetIngredientAction = {
+  type: typeof GET_MODAL_INGREDIENT;
+  payload: TIngredient;
+};
+
+type TResetIngredientAction = {
+  type: typeof RESET_MODAL_INGREDIENT;
+};
+
+type TModalActions = TGetIngredientAction | TResetIngredientAction;
+
+export const modalReducer = (state = initialState, action: TModalActions) => {
   switch (action.type) {
     case GET_MODAL_INGREDIENT: {
       return {
