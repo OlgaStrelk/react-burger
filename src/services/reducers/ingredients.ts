@@ -41,7 +41,7 @@ type TIncreaseQuantityAction = {
 };
 type TDecreaseQuantityAction = {
   type: typeof DECREASE_INGREDIENT_QUANTITY;
-  payload: TIngredient;
+  payload: string;
 };
 type TResetQuantityAction = {
   type: typeof RESET_INGREDIENTS_QUANTITY;
@@ -70,7 +70,7 @@ export const ingredientsReducer = (
     case GET_INGREDIENTS_SUCCESS: {
       return {
         ...state,
-        //@ts-ignore
+
         ingredients: action.payload.map((item) => {
           return { ...item, quantity: 0 };
         }),
@@ -90,20 +90,13 @@ export const ingredientsReducer = (
         ...state,
         ingredients: [...state.ingredients].map((item) =>
           action.payload.type === "bun" &&
-          //@ts-ignore
           item.type === "bun" &&
-          //@ts-ignore
           action.payload._id !== item._id
-            ? //@ts-ignore
-              { ...item, quantity: 0 }
-            : //@ts-ignore
-            action.payload.type === "bun" && action.payload._id === item._id
-            ? //@ts-ignore
-              { ...item, quantity: 2 }
-            : //@ts-ignore
-            action.payload._id === item._id
-            ? //@ts-ignore
-              { ...item, quantity: ++item.quantity }
+            ? { ...item, quantity: 0 }
+            : action.payload.type === "bun" && action.payload._id === item._id
+            ? { ...item, quantity: 2 }
+            : action.payload._id === item._id
+            ? { ...item, quantity: ++item.quantity }
             : item
         ),
       };
@@ -113,10 +106,8 @@ export const ingredientsReducer = (
       return {
         ...state,
         ingredients: [...state.ingredients].map((item) =>
-          //@ts-ignore
           action.payload === item._id
-            ? //@ts-ignore
-              { ...item, quantity: --item.quantity }
+            ? { ...item, quantity: --item.quantity }
             : item
         ),
       };
