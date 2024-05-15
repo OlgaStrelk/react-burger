@@ -45,7 +45,7 @@ type TSetAuthCheckedAction = {
 
 type TUpdateUserAction = {
   type: typeof UPDATE_USER_DATA;
-  payload: { [key in string]: string };
+  payload: TUser;
 };
 
 type TUserActions =
@@ -56,7 +56,7 @@ type TUserActions =
   | TSetAuthCheckedAction
   | TUpdateUserAction;
 
-  
+
 export const userReducer = (state = initialState, action: TUserActions) => {
   switch (action.type) {
     case GET_USER_REQUEST: {

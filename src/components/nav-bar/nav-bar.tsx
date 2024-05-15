@@ -7,11 +7,10 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { PATHS } from "../../utils/consts";
 import { useAppSelector } from "../../hooks/types";
-import { TUser } from "../../utils/types";
 
 function Navbar() {
   const { ordersList, home, profile } = PATHS;
-  const user: TUser = useAppSelector((state) => state.user.user);
+  const user = useAppSelector((state) => state.user.user);
   const profileLinkText = user && user.name ? user.name : "Личный кабинет";
   const NAVBAR_DATA = [
     {
