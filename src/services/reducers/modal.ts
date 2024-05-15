@@ -11,16 +11,16 @@ const initialState: ModalState = {
   currentIngredient: null,
 };
 
-type TGetIngredientAction = {
+type TGetModalIngredientAction = {
   type: typeof GET_MODAL_INGREDIENT;
   payload: string;
 };
 
-type TResetIngredientAction = {
+type TResetModalIngredientAction = {
   type: typeof RESET_MODAL_INGREDIENT;
 };
 
-type TModalActions = TGetIngredientAction | TResetIngredientAction;
+type TModalActions = TGetModalIngredientAction | TResetModalIngredientAction;
 
 export const modalReducer = (state = initialState, action: TModalActions) => {
   switch (action.type) {

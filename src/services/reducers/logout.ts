@@ -26,7 +26,7 @@ type TLogoutActions =
   | TLogoutSuccessAction
   | TLogoutFailedAction;
 
-export const userReducer = (state = initialState, action: TLogoutActions) => {
+export const logoutReducer = (state = initialState, action: TLogoutActions) => {
   switch (action.type) {
     case LOGOUT_REQUEST: {
       return {

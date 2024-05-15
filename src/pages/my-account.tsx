@@ -9,7 +9,6 @@ import { useAppDispatch } from "../hooks/types";
 function MyAccountPage() {
   const dispatch = useAppDispatch();
   const signout = () => {
-    //@ts-ignore
     dispatch(logout());
   };
   const NAVLINKS_DATA = [
