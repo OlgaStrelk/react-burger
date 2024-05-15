@@ -1,4 +1,4 @@
-import { TIngredient } from "../../utils/types";
+import { TConstructorIngredient, TIngredient } from "../../utils/types";
 import {
   GET_INGREDIENTS_REQUEST,
   GET_INGREDIENTS_SUCCESS,
@@ -37,7 +37,7 @@ type TGetIngredientFailedAction = {
 
 type TIncreaseQuantityAction = {
   type: typeof INCREASE_INGREDIENT_QUANTITY;
-  payload: TIngredient;
+  payload: TConstructorIngredient;
 };
 type TDecreaseQuantityAction = {
   type: typeof DECREASE_INGREDIENT_QUANTITY;
