@@ -15,8 +15,26 @@ const initialState: OrderState = {
   orderRequest: false,
   orderFailed: false,
 };
-//@ts-ignore
-export const orderReducer = (state = initialState, action) => {
+
+type TOrderRequestAction = {
+  type: typeof MAKE_ORDER_REQUEST;
+};
+
+type TOrderSuccessAction = {
+  type: typeof MAKE_ORDER_SUCCESS;
+  payload: { number: number };
+};
+
+type TOrderFailedAction = {
+  type: typeof MAKE_ORDER_FAILED;
+};
+
+type TOrderActions =
+  | TOrderRequestAction
+  | TOrderSuccessAction
+  | TOrderFailedAction;
+
+export const orderReducer = (state = initialState, action: TOrderActions) => {
   switch (action.type) {
     case MAKE_ORDER_REQUEST: {
       return {
