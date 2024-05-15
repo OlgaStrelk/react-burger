@@ -15,7 +15,7 @@ const IngredientsBlock = forwardRef<Ref, Props>(({ titles, onScroll }, ref) => {
 
   const dispatch = useAppDispatch();
 
-  const ingredients:TIngredient[] = useAppSelector((state) => state.ingredients.ingredients);
+  const ingredients = useAppSelector((state) => state.ingredients.ingredients);
 
   const handleCardClick = (e: SyntheticEvent) => {
     const id = e.currentTarget.id;

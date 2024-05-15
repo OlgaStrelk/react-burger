@@ -19,7 +19,6 @@ import { useAppSelector } from "../hooks/types";
 
 function LoginPage() {
   const { register, forgotPassword } = PATHS;
-  //@ts-ignore
   const { password, email } = useAppSelector((state) => state.login.form);
   const { handleInput, handleSubmit } = useForm();
   const [isValid, setIsValid] = useState<boolean>(false);

@@ -10,7 +10,7 @@ function IngredientDetails({ style }: IngredientDetailsProps) {
   const [ingredientData, setIngredientData] = useState<TIngredient | null>(
     null
   );
-  const ingredients = useAppSelector((store) => store.ingredients?.ingredients);
+  const ingredients = useAppSelector((store) => store.ingredients.ingredients);
 
   const { id } = useParams();
 

@@ -13,7 +13,7 @@ const initialState: ModalState = {
 
 type TGetIngredientAction = {
   type: typeof GET_MODAL_INGREDIENT;
-  payload: TIngredient;
+  payload: string;
 };
 
 type TResetIngredientAction = {
