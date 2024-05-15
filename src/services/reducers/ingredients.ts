@@ -5,7 +5,7 @@ import {
   GET_INGREDIENTS_FAILED,
   INCREASE_INGREDIENT_QUANTITY,
   DECREASE_INGREDIENT_QUANTITY,
-  RESET_INGREDIENT_QUANTITY,
+  RESET_INGREDIENTS_QUANTITY,
 } from "../actions/ingredients";
 
 export interface IngredientsState {
@@ -20,8 +20,45 @@ const initialState: IngredientsState = {
   ingredientsFailed: false,
   currentIngredient: null,
 };
-//@ts-ignore
-export const ingredientsReducer = (state = initialState, action) => {
+
+type TGetIngredientRequestAction = {
+  type: typeof GET_INGREDIENTS_REQUEST;
+};
+
+type TGetIngredientSuccessAction = {
+  type: typeof GET_INGREDIENTS_SUCCESS;
+  payload: TIngredient[];
+};
+
+type TGetIngredientFailedAction = {
+  type: typeof GET_INGREDIENTS_FAILED;
+  payload: string;
+};
+
+type TIncreaseQuantityAction = {
+  type: typeof INCREASE_INGREDIENT_QUANTITY;
+  payload: TIngredient;
+};
+type TDecreaseQuantityAction = {
+  type: typeof DECREASE_INGREDIENT_QUANTITY;
+  payload: TIngredient;
+};
+type TResetQuantityAction = {
+  type: typeof RESET_INGREDIENTS_QUANTITY;
+};
+
+type TIngredientsActions =
+  | TGetIngredientRequestAction
+  | TGetIngredientSuccessAction
+  | TGetIngredientFailedAction
+  | TIncreaseQuantityAction
+  | TDecreaseQuantityAction
+  | TResetQuantityAction;
+
+export const ingredientsReducer = (
+  state = initialState,
+  action: TIngredientsActions
+) => {
   switch (action.type) {
     case GET_INGREDIENTS_REQUEST: {
       return {
@@ -85,11 +122,10 @@ export const ingredientsReducer = (state = initialState, action) => {
       };
     }
 
-    case RESET_INGREDIENT_QUANTITY: {
+    case RESET_INGREDIENTS_QUANTITY: {
       return {
         ...state,
         ingredients: [...state.ingredients].map((item) => {
-          //@ts-ignore
           return { ...item, quantity: 0 };
         }),
       };
