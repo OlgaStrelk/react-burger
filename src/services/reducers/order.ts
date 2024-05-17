@@ -44,9 +44,10 @@ export const orderReducer = (state = initialState, action: TOrderActions) => {
       };
     }
     case MAKE_ORDER_SUCCESS: {
+      const orderNumber = action.payload;
       return {
         ...state,
-        order: action.payload,
+        order: orderNumber,
         orderRequest: false,
       };
     }
