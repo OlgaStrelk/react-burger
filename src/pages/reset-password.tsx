@@ -16,10 +16,10 @@ import { resetPasswordTwoFormValue } from "../services/actions/authForms";
 import { resetPasswordStepTwo } from "../services/actions/auth";
 import { useNavigate } from "react-router-dom";
 import { TInput } from "../utils/types";
-import { useAppSelector } from "../hooks/types";
+import { useSelector } from "../hooks/types";
 
 function ResetPasswordPage() {
-  const { password, token } = useAppSelector(
+  const { password, token } = useSelector(
     (state) => state.resetFormTwo.form
   );
 

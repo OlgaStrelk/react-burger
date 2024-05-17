@@ -9,11 +9,11 @@ import { resetPasswordOneFormValue } from "../services/actions/authForms";
 import { useState, useEffect, ChangeEvent, SyntheticEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { TInput } from "../utils/types";
-import { useAppSelector } from "../hooks/types";
+import { useSelector } from "../hooks/types";
 function ForgotPasswordPage() {
   const [isValid, setIsValid] = useState(false);
   const navigate = useNavigate();
-  const { email } = useAppSelector((state) => state.resetForm.form);
+  const { email } = useSelector((state) => state.resetForm.form);
 
   const { handleInput, handleSubmit } = useForm();
 

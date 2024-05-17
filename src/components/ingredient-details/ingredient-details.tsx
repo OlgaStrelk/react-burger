@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "./ingredient-details.module.css";
 import { useParams } from "react-router-dom";
 import { TIngredient } from "../../utils/types";
-import { useAppSelector } from "../../hooks/types";
+import { useSelector } from "../../hooks/types";
 interface IngredientDetailsProps {
   style?: string;
 }
@@ -10,7 +10,7 @@ function IngredientDetails({ style }: IngredientDetailsProps) {
   const [ingredientData, setIngredientData] = useState<TIngredient | null>(
     null
   );
-  const ingredients = useAppSelector((store) => store.ingredients.ingredients);
+  const ingredients = useSelector((store) => store.ingredients.ingredients);
 
   const { id } = useParams();
 

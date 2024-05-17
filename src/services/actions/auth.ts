@@ -28,7 +28,6 @@ export const RESET_FORM_TWO_REQUEST = "RESET_FORM_TWO_REQUEST";
 export const RESET_FORM_TWO_SUCCESS = "RESET_FORM_TWO_SUCCESS";
 export const RESET_FORM_TWO_FAILED = "RESET_FORM_TWO_FAILED";
 
-//@ts-ignore
 export const register = () => async (dispatch, getState) => {
   dispatch({ type: REGISTER_REQUEST });
   const data = await request<TAuthorizationResonse>(ENDPOINT.register, {
@@ -43,7 +42,6 @@ export const register = () => async (dispatch, getState) => {
     .catch((err) => handleError(REGISTER_FAILED, err, dispatch));
 
   if (data && data.success) {
-    //@ts-ignore
     dispatch(updateUser(data.user));
     localStorage.setItem("accessToken", data.accessToken);
     localStorage.setItem("refreshToken", data.refreshToken);
@@ -52,7 +50,6 @@ export const register = () => async (dispatch, getState) => {
 
 export const login =
   () =>
-  //@ts-ignore
   async (dispatch, getState): void => {
     dispatch({ type: LOGIN_REQUEST });
     const data = await request<TAuthorizationResonse>(ENDPOINT.login, {

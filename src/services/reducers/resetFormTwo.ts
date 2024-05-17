@@ -38,7 +38,7 @@ type TSetValueAction = {
   value: string;
 };
 
-type TResetFormTwoActions =
+export type TResetFormTwoActions =
   | TResetFormRequestAction
   | TResetFormSuccessAction
   | TResetFormFailedAction

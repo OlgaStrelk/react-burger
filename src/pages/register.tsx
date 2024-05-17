@@ -16,10 +16,10 @@ import { useForm } from "../hooks/useForm";
 import { registerFormValue } from "../services/actions/authForms";
 import { register } from "../services/actions/auth";
 import { TInput } from "../utils/types";
-import { useAppSelector } from "../hooks/types";
+import { useSelector } from "../hooks/types";
 
 function Register() {
-  const { name, password, email } = useAppSelector(
+  const { name, password, email } = useSelector(
     (state) => state.register.form
   );
 

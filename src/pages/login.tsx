@@ -15,11 +15,11 @@ import { useForm } from "../hooks/useForm";
 import { loginFormValue } from "../services/actions/authForms";
 import { login } from "../services/actions/auth";
 import { TInput } from "../utils/types";
-import { useAppSelector } from "../hooks/types";
+import { useSelector } from "../hooks/types";
 
 function LoginPage() {
   const { register, forgotPassword } = PATHS;
-  const { password, email } = useAppSelector((state) => state.login.form);
+  const { password, email } = useSelector((state) => state.login.form);
   const { handleInput, handleSubmit } = useForm();
   const [isValid, setIsValid] = useState<boolean>(false);
 

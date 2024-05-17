@@ -38,7 +38,7 @@ type TSetValueAction = {
   value: string;
 };
 
-type TRegisterActions =
+export type TRegisterActions =
   | TRegisterRequestAction
   | TRegisterSuccessAction
   | TRegisterFailedAction

@@ -27,16 +27,14 @@ import { OnlyAuth, OnlyUnAuth } from "../protected_route/protected-route";
 import { PATHS } from "../../utils/consts";
 import { checkUserAuth } from "../../services/actions/user";
 import MyAccountPage from "../../pages/my-account";
-import { useAppDispatch } from "../../hooks/types";
+import { useDispatch } from "../../hooks/types";
 function App() {
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
   let location = useLocation();
   let state = location.state;
-  //@ts-ignore
   useEffect(() => dispatch(fetchIngredients()), [dispatch]);
 
   useEffect(() => {
-    //@ts-ignore
     dispatch(checkUserAuth());
   }, [dispatch]);
   const {

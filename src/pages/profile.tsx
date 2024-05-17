@@ -13,10 +13,10 @@ import { editProfile } from "../services/actions/user";
 import { TInput } from "../utils/types";
 import Preloader from "../components/preloader/preloader";
 import { passwordStub } from "../utils/consts";
-import { useAppDispatch, useAppSelector } from "../hooks/types";
+import { useDispatch, useSelector } from "../hooks/types";
 
 function ProfilePage() {
-  const { user, userRequest: isLoading } = useAppSelector(
+  const { user, userRequest: isLoading } = useSelector(
     (state) => state.user
   );
 
@@ -24,9 +24,9 @@ function ProfilePage() {
     name: formName,
     email: formEmail,
     password: formPassword,
-  } = useAppSelector((state) => state.profile.form);
+  } = useSelector((state) => state.profile.form);
 
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
 
   const { handleInput, handleSubmit } = useForm();
 
@@ -35,7 +35,6 @@ function ProfilePage() {
   }, []);
 
   const onPasswordFocus = () => {
-    //@ts-ignore
     dispatch(editProfileFormValue("password", null));
   };
 

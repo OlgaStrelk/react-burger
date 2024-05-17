@@ -35,7 +35,7 @@ type TSetValueAction = {
   value: string;
 };
 
-type TLoginActions =
+export type TLoginActions =
   | TLoginRequestAction
   | TLoginSuccessAction
   | TLoginFailedAction

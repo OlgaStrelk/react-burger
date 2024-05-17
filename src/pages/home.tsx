@@ -13,10 +13,10 @@ import {
 import { modalStyle } from "../utils/consts";
 import { useState } from "react";
 import Preloader from "../components/preloader/preloader";
-import { useAppSelector } from "../hooks/types";
+import { useSelector } from "../hooks/types";
 
 function HomePage() {
-  const { ingredients, ingredientsRequest: isLoading } = useAppSelector(
+  const { ingredients, ingredientsRequest: isLoading } = useSelector(
     (state) => state.ingredients
   );
 

@@ -47,7 +47,7 @@ type TResetQuantityAction = {
   type: typeof RESET_INGREDIENTS_QUANTITY;
 };
 
-type TIngredientsActions =
+export type TIngredientsActions =
   | TGetIngredientRequestAction
   | TGetIngredientSuccessAction
   | TGetIngredientFailedAction
@@ -68,10 +68,11 @@ export const ingredientsReducer = (
       };
     }
     case GET_INGREDIENTS_SUCCESS: {
+      let ingredients = action.payload;
       return {
         ...state,
 
-        ingredients: action.payload.map((item) => {
+        ingredients: ingredients.map((item) => {
           return { ...item, quantity: 0 };
         }),
         ingredientsRequest: false,
@@ -86,16 +87,17 @@ export const ingredientsReducer = (
     }
 
     case INCREASE_INGREDIENT_QUANTITY: {
+      let ingredient = action.payload;
       return {
         ...state,
         ingredients: [...state.ingredients].map((item) =>
-          action.payload.type === "bun" &&
+          ingredient.type === "bun" &&
           item.type === "bun" &&
-          action.payload._id !== item._id
+          ingredient._id !== item._id
             ? { ...item, quantity: 0 }
-            : action.payload.type === "bun" && action.payload._id === item._id
+            : ingredient.type === "bun" && ingredient._id === item._id
             ? { ...item, quantity: 2 }
-            : action.payload._id === item._id
+            : ingredient._id === item._id
             ? { ...item, quantity: ++item.quantity }
             : item
         ),
@@ -103,10 +105,12 @@ export const ingredientsReducer = (
     }
 
     case DECREASE_INGREDIENT_QUANTITY: {
+      let ingredient = action.payload;
+
       return {
         ...state,
         ingredients: [...state.ingredients].map((item) =>
-          action.payload === item._id
+          ingredient === item._id
             ? { ...item, quantity: --item.quantity }
             : item
         ),

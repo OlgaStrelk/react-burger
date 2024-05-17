@@ -13,7 +13,7 @@ import {
   deleteIngredient,
 } from "../../../services/actions/ingredients";
 import { TConstructorIngredient } from "../../../utils/types";
-import { useAppDispatch, useAppSelector } from "../../../hooks/types";
+import { useDispatch, useSelector } from "../../../hooks/types";
 
 export interface ISortableIngredientProps {
   data: TConstructorIngredient;
@@ -30,8 +30,8 @@ export const SortableIngredient = ({
   data,
   index,
 }: ISortableIngredientProps) => {
-  const dispatch = useAppDispatch();
-  const ingredients = useAppSelector(
+  const dispatch = useDispatch();
+  const ingredients = useSelector(
     (store) => store.burgerConstructor.addedIngredients.ingredients
   );
 

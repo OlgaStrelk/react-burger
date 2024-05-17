@@ -35,7 +35,7 @@ type TResetConstructor = {
   type: typeof RESET_CONSTRUCTOR;
 };
 
-type TBurgerConstructorActions =
+export type TBurgerConstructorActions =
   | TAddIngredientAction
   | TSortIngredientAction
   | TDeleteIngredientAction

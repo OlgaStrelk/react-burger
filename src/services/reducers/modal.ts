@@ -20,7 +20,7 @@ type TResetModalIngredientAction = {
   type: typeof RESET_MODAL_INGREDIENT;
 };
 
-type TModalActions = TGetModalIngredientAction | TResetModalIngredientAction;
+export type TModalActions = TGetModalIngredientAction | TResetModalIngredientAction;
 
 export const modalReducer = (state = initialState, action: TModalActions) => {
   switch (action.type) {

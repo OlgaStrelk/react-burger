@@ -47,7 +47,7 @@ type TEditProfileFailedAction = {
   type: typeof EDIT_PROFILE_FAILED;
 };
 
-type TEditProfileActions =
+export type TEditProfileActions =
   | TEditProfileRequestAction
   | TEditProfileSuccessAction
   | TEditProfileFailedAction

@@ -1,10 +1,21 @@
-import { TypedUseSelectorHook, useDispatch, useSelector, useStore } from 'react-redux'
-import type { AppDispatch, AppStore, RootState } from '../services/store'
+import type {} from "redux-thunk/extend-redux";
+import {
+  TypedUseSelectorHook,
+  useDispatch as dispatchHook,
+  useSelector as selectorHook,
+} from "react-redux";
+import type { AppActions, RootState } from "../services/store";
+import { ThunkAction } from "redux-thunk";
 
-// Use throughout your app instead of plain `useDispatch` and `useSelector`
-export const useAppDispatch = useDispatch.withTypes<AppDispatch>()
-// export const useAppSelector = useSelector.withTypes<RootState>()
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  AppActions
+>;
+export type AppDispatch<TReturnType = void> = (
+  action: AppActions | AppThunk<TReturnType>
+) => TReturnType;
 
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
-
-// export const useAppStore = useStore.withTypes<AppStore>()
+export const useDispatch: () => AppDispatch = dispatchHook;
+export const useSelector: TypedUseSelectorHook<RootState> = selectorHook;

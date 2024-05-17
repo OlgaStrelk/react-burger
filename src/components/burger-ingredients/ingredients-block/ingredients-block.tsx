@@ -4,7 +4,7 @@ import { GET_MODAL_INGREDIENT } from "../../../services/actions/ingredients";
 
 import IngredientCard from "../ingredient-card/ingredient-card";
 import { TIngredient, TTitles } from "../../../utils/types";
-import { useAppDispatch, useAppSelector } from "../../../hooks/types";
+import { useDispatch, useSelector } from "../../../hooks/types";
 interface Props {
   titles: TTitles[];
   onScroll: (arg0: SyntheticEvent) => void;
@@ -13,9 +13,9 @@ export type Ref = HTMLUListElement;
 
 const IngredientsBlock = forwardRef<Ref, Props>(({ titles, onScroll }, ref) => {
 
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
 
-  const ingredients = useAppSelector((state) => state.ingredients.ingredients);
+  const ingredients = useSelector((state) => state.ingredients.ingredients);
 
   const handleCardClick = (e: SyntheticEvent) => {
     const id = e.currentTarget.id;

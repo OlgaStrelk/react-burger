@@ -1,10 +1,10 @@
 import CheckMarkIcon from "../../images/done.svg";
 import styles from "./order-details.module.css";
 import Preloader from "../preloader/preloader";
-import { useAppSelector } from "../../hooks/types";
+import { useSelector } from "../../hooks/types";
 
 function OrderDetails() {
-  const { orderRequest: isLoading, order: orderNumber } = useAppSelector(
+  const { orderRequest: isLoading, order: orderNumber } = useSelector(
     (store) => store.order
   );
   return isLoading ? (

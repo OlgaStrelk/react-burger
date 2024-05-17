@@ -29,7 +29,7 @@ type TOrderFailedAction = {
   type: typeof MAKE_ORDER_FAILED;
 };
 
-type TOrderActions =
+export type TOrderActions =
   | TOrderRequestAction
   | TOrderSuccessAction
   | TOrderFailedAction;

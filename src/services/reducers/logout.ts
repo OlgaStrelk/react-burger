@@ -21,7 +21,7 @@ type TLogoutFailedAction = {
   type: typeof LOGOUT_FAILED;
 };
 
-type TLogoutActions =
+export type TLogoutActions =
   | TLogoutRequestAction
   | TLogoutSuccessAction
   | TLogoutFailedAction;

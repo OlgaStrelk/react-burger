@@ -15,7 +15,7 @@ import {
 import { Navigate } from "react-router-dom";
 import { PATHS } from "../../utils/consts.ts";
 import { TConstructorIngredient, TIngredient } from "../../utils/types.ts";
-import { useAppDispatch, useAppSelector } from "../../hooks/types.ts";
+import { useDispatch, useSelector } from "../../hooks/types.ts";
 
 export interface IBurgerConstructorProps {
   onModalOpen: () => void;
@@ -27,12 +27,12 @@ function BurgerConstructor({ onModalOpen }: IBurgerConstructorProps) {
   const [isButtonActive, setButtonActive] = useState(false);
   const [isNavigated, setNavigated] = useState(false);
 
-  const { ingredients, buns } = useAppSelector(
+  const { ingredients, buns } = useSelector(
     (state) => state.burgerConstructor.addedIngredients
   );
-  const user = useAppSelector((state) => state.user.user);
+  const user = useSelector((state) => state.user.user);
 
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
 
   const validateConstructor = () => {
     if (!buns || !ingredients.length) {
@@ -45,14 +45,14 @@ function BurgerConstructor({ onModalOpen }: IBurgerConstructorProps) {
 
   useEffect(() => validateConstructor(), [ingredients, buns]);
 
-  const onDropHandler = (ingredient: TIngredient) => {
+  const onDropHandler = (ingredient: TConstructorIngredient) => {
     dispatch({ type: INCREASE_INGREDIENT_QUANTITY, payload: ingredient });
     dispatch(addIngredient(ingredient));
   };
 
   const [, dropRef] = useDrop({
     accept: "ingredients",
-    drop(item: TIngredient) {
+    drop(item: TConstructorIngredient) {
       onDropHandler(item);
     },
   });
@@ -71,7 +71,6 @@ function BurgerConstructor({ onModalOpen }: IBurgerConstructorProps) {
     let data = orderList();
     if (user && data) {
       onModalOpen();
-      //@ts-ignore
       dispatch(makeOrder(data));
     } else {
       setNavigated(true);

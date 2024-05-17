@@ -1,10 +1,10 @@
-import { useAppSelector } from "../../../hooks/types";
+import { useSelector } from "../../../hooks/types";
 import CurrencyIconPath from "../../../images/cur-icon.svg";
 // import styles from "./total.module.css";
 import { useMemo } from "react";
 
 function Total() {
-  const addedIngredients = useAppSelector(
+  const addedIngredients = useSelector(
     (store) => store.burgerConstructor.addedIngredients
   );
 

@@ -48,7 +48,7 @@ type TUpdateUserAction = {
   payload: TUser;
 };
 
-type TUserActions =
+export type TUserActions =
   | TUserRequestAction
   | TUserSuccessAction
   | TUserFailedAction

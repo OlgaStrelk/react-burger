@@ -1,7 +1,22 @@
-import { legacy_createStore as createStore, applyMiddleware, compose } from "redux";
+import {
+  legacy_createStore as createStore,
+  applyMiddleware,
+  compose,
+} from "redux";
 import { thunk } from "redux-thunk";
 
 import { rootReducer } from "./reducers/index.ts";
+import { TBurgerConstructorActions } from "./reducers/burgerConstructor.ts";
+import { TIngredientsActions } from "./reducers/ingredients.ts";
+import { TLoginActions } from "./reducers/login.ts";
+import { TLogoutActions } from "./reducers/logout.ts";
+import { TModalActions } from "./reducers/modal.ts";
+import { TOrderActions } from "./reducers/order.ts";
+import { TEditProfileActions } from "./reducers/profileForm.ts";
+import { TRegisterActions } from "./reducers/register.ts";
+import { TResetFormActions } from "./reducers/resetForm.ts";
+import { TResetFormTwoActions } from "./reducers/resetFormTwo.ts";
+import { TUserActions } from "./reducers/user.ts";
 
 const composeEnhancers =
   //@ts-ignore
@@ -15,7 +30,21 @@ const store = createStore(rootReducer, enhancer);
 
 export default store;
 
-export type AppStore = typeof store
-export type AppDispatch = AppStore['dispatch']
-export type RootState = ReturnType<AppStore['getState']>
+export type AppStore = typeof store;
+export type RootState = ReturnType<AppStore["getState"]>;
+export type AppActions =
+  | TBurgerConstructorActions
+  | TIngredientsActions
+  | TLoginActions
+  | TLogoutActions
+  | TModalActions
+  | TOrderActions
+  | TEditProfileActions
+  | TRegisterActions
+  | TResetFormActions
+  | TResetFormTwoActions
+  | TUserActions;
+
+
+
 
