@@ -75,6 +75,7 @@ export const editProfileFormReducer = (
     }
 
     case EDIT_PROFILE_REQUEST: {
+      console.log('request')
       return {
         ...state,
         editProfileRequest: true,
@@ -82,12 +83,14 @@ export const editProfileFormReducer = (
       };
     }
     case EDIT_PROFILE_SUCCESS: {
+      console.log('success')
       return {
         ...state,
         editProfileRequest: false,
       };
     }
     case EDIT_PROFILE_FAILED: {
+      console.log('failed')
       return {
         ...state,
         editProfileRequest: false,

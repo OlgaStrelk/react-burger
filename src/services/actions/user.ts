@@ -33,8 +33,7 @@ export const getUser = (user: TUser) => ({
   payload: user,
 });
 
-//@ts-ignore
-export const fetchUser = () => async (dispatch) => {
+export const fetchUser = () => async (dispatch: any) => {
   dispatch({ type: GET_USER_REQUEST });
 
   const data = await (<Promise<IUserSuccessResponse>>fetchWithRefresh(
@@ -59,8 +58,7 @@ export const fetchUser = () => async (dispatch) => {
 };
 
 export const checkUserAuth = () => {
-  //@ts-ignore
-  return (dispatch) => {
+  return (dispatch: any) => {
     if (localStorage.getItem("accessToken")) {
       dispatch(fetchUser())
         .catch((err: Error) => {
@@ -74,8 +72,8 @@ export const checkUserAuth = () => {
     }
   };
 };
-//@ts-ignore
-export const editProfile = () => async (dispatch, getState) => {
+
+export const editProfile = () => async (dispatch: any, getState: any) => {
   dispatch({ type: EDIT_PROFILE_REQUEST });
   let form = getState().profile.form;
   const { name, email, password }: TUserWithPassword = form;

@@ -28,7 +28,7 @@ export const RESET_FORM_TWO_REQUEST = "RESET_FORM_TWO_REQUEST";
 export const RESET_FORM_TWO_SUCCESS = "RESET_FORM_TWO_SUCCESS";
 export const RESET_FORM_TWO_FAILED = "RESET_FORM_TWO_FAILED";
 
-export const register = () => async (dispatch, getState) => {
+export const register = () => async (dispatch: any, getState: any) => {
   dispatch({ type: REGISTER_REQUEST });
   const data = await request<TAuthorizationResonse>(ENDPOINT.register, {
     ...optionsUnAuth,
@@ -48,32 +48,27 @@ export const register = () => async (dispatch, getState) => {
   }
 };
 
-export const login =
-  () =>
-  async (dispatch, getState): void => {
-    dispatch({ type: LOGIN_REQUEST });
-    const data = await request<TAuthorizationResonse>(ENDPOINT.login, {
-      ...optionsUnAuth,
-      method: "POST",
-      body: JSON.stringify(getState().login.form),
+export const login = () => async (dispatch: any, getState: any) => {
+  dispatch({ type: LOGIN_REQUEST });
+  const data = await request<TAuthorizationResonse>(ENDPOINT.login, {
+    ...optionsUnAuth,
+    method: "POST",
+    body: JSON.stringify(getState().login.form),
+  })
+    .then((data) => {
+      dispatch({ type: LOGIN_SUCCESS });
+      return data;
     })
-      .then((data) => {
-        dispatch({ type: LOGIN_SUCCESS });
-        return data;
-      })
-      .catch((err) => handleError(LOGIN_FAILED, err, dispatch));
-    if (data && data.success) {
-      //@ts-ignore
+    .catch((err) => handleError(LOGIN_FAILED, err, dispatch));
+  if (data && data.success) {
+    const value = getState().login.form.password;
+    dispatch(updateUser({ ...data.user, password: value }));
+    localStorage.setItem("accessToken", data.accessToken);
+    localStorage.setItem("refreshToken", data.refreshToken);
+  }
+};
 
-      const value = getState().login.form.password;
-      dispatch(updateUser({ ...data.user, password: value }));
-      localStorage.setItem("accessToken", data.accessToken);
-      localStorage.setItem("refreshToken", data.refreshToken);
-    }
-  };
-
-//@ts-ignore
-export const resetPasswordStepOne = () => (dispatch, getState) => {
+export const resetPasswordStepOne = () => (dispatch: any, getState: any) => {
   dispatch({ type: RESET_FORM_ONE_REQUEST });
   request(ENDPOINT.resetPasswordStepOne, {
     ...optionsUnAuth,
@@ -85,8 +80,8 @@ export const resetPasswordStepOne = () => (dispatch, getState) => {
     })
     .catch((err) => handleError(RESET_FORM_ONE_FAILED, err, dispatch));
 };
-//@ts-ignore
-export const resetPasswordStepTwo = () => (dispatch, getState) => {
+
+export const resetPasswordStepTwo = () => (dispatch: any, getState: any) => {
   dispatch({ type: RESET_FORM_TWO_REQUEST });
   request<IResetPasswordResponse>(ENDPOINT.resetPasswordStepTwo, {
     ...optionsUnAuth,
@@ -99,8 +94,7 @@ export const resetPasswordStepTwo = () => (dispatch, getState) => {
     .catch((err) => handleError(RESET_FORM_TWO_FAILED, err, dispatch));
 };
 
-//@ts-ignore
-export const logout = () => (dispatch) => {
+export const logout = () => (dispatch: any) => {
   dispatch({ type: LOGOUT_REQUEST });
   if (localStorage.getItem("accessToken")) {
     request<IResetPasswordResponse>(ENDPOINT.logout, {

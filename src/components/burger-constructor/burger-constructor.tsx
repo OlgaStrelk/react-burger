@@ -14,7 +14,7 @@ import {
 } from "../../services/actions/ingredients.ts";
 import { Navigate } from "react-router-dom";
 import { PATHS } from "../../utils/consts.ts";
-import { TConstructorIngredient, TIngredient } from "../../utils/types.ts";
+import { TConstructorIngredient } from "../../utils/types.ts";
 import { useDispatch, useSelector } from "../../hooks/types.ts";
 
 export interface IBurgerConstructorProps {

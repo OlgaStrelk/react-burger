@@ -56,7 +56,6 @@ export type TUserActions =
   | TSetAuthCheckedAction
   | TUpdateUserAction;
 
-
 export const userReducer = (state = initialState, action: TUserActions) => {
   switch (action.type) {
     case GET_USER_REQUEST: {
@@ -67,6 +66,7 @@ export const userReducer = (state = initialState, action: TUserActions) => {
       };
     }
     case GET_USER_SUCCESS: {
+      console.log('getUserSuc',action.payload);
       return {
         ...state,
         user: { ...action.payload },
@@ -93,6 +93,7 @@ export const userReducer = (state = initialState, action: TUserActions) => {
     }
 
     case UPDATE_USER_DATA: {
+      console.log('update_user_data',action.payload);
       return { ...state, user: { ...action.payload } };
     }
 

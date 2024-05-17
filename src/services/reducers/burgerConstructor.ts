@@ -1,5 +1,4 @@
-import { PayloadAction } from "@reduxjs/toolkit";
-import { TConstructorIngredient, TIngredient } from "../../utils/types";
+import { TConstructorIngredient } from "../../utils/types";
 import {
   ADD_INGREDIENT,
   SORT_INGREDIENTS,
@@ -26,7 +25,7 @@ type TAddIngredientAction = {
 
 type TSortIngredientAction = {
   type: typeof SORT_INGREDIENTS;
-  payload: TIngredient[];
+  payload: TConstructorIngredient[];
 };
 
 type TDeleteIngredientAction = {
