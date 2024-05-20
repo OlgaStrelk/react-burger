@@ -8,17 +8,15 @@ import {
 
 import { useForm } from "../hooks/useForm";
 import { ChangeEvent, SyntheticEvent, useEffect } from "react";
-import { editProfileFormValue } from "../services/actions/authForms";
 import { editProfile } from "../services/actions/user";
 import { TInput } from "../utils/types";
 import Preloader from "../components/preloader/preloader";
 import { passwordStub } from "../utils/consts";
 import { useDispatch, useSelector } from "../hooks/types";
+import { editProfileFormValue } from "../services/actions/profile-form";
 
 function ProfilePage() {
-  const { user, userRequest: isLoading } = useSelector(
-    (state) => state.user
-  );
+  const { user, userRequest: isLoading } = useSelector((state) => state.user);
 
   const {
     name: formName,
@@ -35,15 +33,11 @@ function ProfilePage() {
   }, []);
 
   const onPasswordFocus = () => {
-    dispatch(editProfileFormValue("password", null));
+    dispatch(editProfileFormValue("password", ""));
   };
 
   const onPasswordBlur = () => {
-    if (
-      formPassword === "" ||
-      formPassword === null ||
-      formPassword.length < 8
-    ) {
+    if (formPassword === "" || formPassword.length < 8) {
       dispatch(editProfileFormValue("password", passwordStub));
     }
   };
@@ -57,8 +51,8 @@ function ProfilePage() {
   };
 
   const putInitialtValues = () => {
-    dispatch(editProfileFormValue("name", user.name));
-    dispatch(editProfileFormValue("email", user.email));
+    dispatch(editProfileFormValue("name", user?.name || ""));
+    dispatch(editProfileFormValue("email", user?.email || ""));
   };
 
   const resetForm = () => {

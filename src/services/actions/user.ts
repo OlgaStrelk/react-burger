@@ -1,7 +1,8 @@
 import { ENDPOINT, passwordStub } from "../../utils/consts";
-import { fetchWithRefresh, handleError } from "../../utils/api";
+import { fetchWithRefresh, handleError, request } from "../../utils/api";
 import { optionsWithAuth } from "../../utils/consts";
 import {
+  IResetPasswordResponse,
   IUserSuccessResponse,
   TUser,
   TUserWithPassword,
@@ -17,6 +18,12 @@ import {
   EDIT_PROFILE_FAILED,
   EDIT_PROFILE_SUCCESS,
 } from "../constants/user";
+import {
+  LOGOUT_REQUEST,
+  LOGOUT_SUCCESS,
+  LOGOUT_FAILED,
+} from "../constants/auth";
+import { CLEAR_PROFILE_FORM } from "../constants/auth-forms";
 
 type TUserRequestAction = {
   type: typeof GET_USER_REQUEST;
@@ -130,4 +137,23 @@ export const editProfile = () => async (dispatch: any, getState: any) => {
 
     dispatch(updateUser(data.user));
   }
+};
+
+export const logout = () => (dispatch: any) => {
+  dispatch({ type: LOGOUT_REQUEST });
+  if (localStorage.getItem("accessToken")) {
+    request<IResetPasswordResponse>(ENDPOINT.logout, {
+      ...optionsWithAuth,
+      method: "POST",
+      body: JSON.stringify({ token: localStorage.getItem("refreshToken") }),
+    })
+      .then(() => {
+        dispatch({ type: LOGOUT_SUCCESS });
+        dispatch({ type: DELETE_USER });
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+        dispatch({ type: CLEAR_PROFILE_FORM });
+      })
+      .catch((err) => handleError(LOGOUT_FAILED, err, dispatch));
+  } else throw Error("В хранилище нет токена");
 };

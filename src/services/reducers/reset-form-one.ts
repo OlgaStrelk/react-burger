@@ -1,3 +1,4 @@
+import { TResetFormActions } from "../actions/reset-form-one";
 import { RESET_PASSWORD_FORM_ONE_REQUEST, RESET_PASSWORD_FORM_ONE_SUCCESS, RESET_PASSWORD_FORM_ONE_FAILED } from "../constants/auth";
 import { RESET_PASSWORD_FORM_ONE_SET_VALUE } from "../constants/auth-forms";
 
@@ -14,29 +15,6 @@ const initialState: ResetFormState = {
   resetPasswordRequest: false,
   resetPasswordFailed: false,
 };
-type TResetFormRequestAction = {
-  type: typeof RESET_PASSWORD_FORM_ONE_REQUEST;
-};
-
-type TResetFormSuccessAction = {
-  type: typeof RESET_PASSWORD_FORM_ONE_SUCCESS;
-};
-
-type TResetFormFailedAction = {
-  type: typeof RESET_PASSWORD_FORM_ONE_FAILED;
-};
-
-type TSetValueAction = {
-  type: typeof RESET_PASSWORD_FORM_ONE_SET_VALUE;
-  field: string;
-  value: string;
-};
-
-export type TResetFormActions =
-  | TResetFormRequestAction
-  | TResetFormSuccessAction
-  | TResetFormFailedAction
-  | TSetValueAction;
   
 export const resetFormReducer = (
   state = initialState,

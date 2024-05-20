@@ -12,16 +12,16 @@ import Redirect from "../components/redirect/redirect";
 
 import { PATHS } from "../utils/consts";
 import { useForm } from "../hooks/useForm";
-import { resetPasswordTwoFormValue } from "../services/actions/authForms";
-import { resetPasswordStepTwo } from "../services/actions/auth";
 import { useNavigate } from "react-router-dom";
 import { TInput } from "../utils/types";
 import { useSelector } from "../hooks/types";
+import {
+  resetPasswordTwoFormValue,
+  resetPasswordStepTwo,
+} from "../services/actions/reset-form-two";
 
 function ResetPasswordPage() {
-  const { password, token } = useSelector(
-    (state) => state.resetFormTwo.form
-  );
+  const { password, token } = useSelector((state) => state.resetFormTwo.form);
 
   const navigate = useNavigate();
   useEffect(() => {

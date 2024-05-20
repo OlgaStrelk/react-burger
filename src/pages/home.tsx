@@ -6,14 +6,11 @@ import Modal from "../components/modal/modal";
 import OrderDetails from "../components/order-details/order-details";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import {
-  RESET_CONSTRUCTOR,
-  RESET_INGREDIENTS_QUANTITY,
-} from "../services/actions/ingredients";
 import { modalStyle } from "../utils/consts";
 import { useState } from "react";
 import Preloader from "../components/preloader/preloader";
 import { useSelector } from "../hooks/types";
+import { RESET_CONSTRUCTOR, RESET_INGREDIENTS_QUANTITY } from "../services/constants/ingredients";
 
 function HomePage() {
   const { ingredients, ingredientsRequest: isLoading } = useSelector(

@@ -33,6 +33,12 @@ export type TRegisterActions =
   | TRegisterFailedAction
   | TSetValueAction;
 
+export const registerFormValue = (field: string, value: string) => ({
+  type: REGISTER_SET_VALUE,
+  field,
+  value,
+});
+
 export const register = () => async (dispatch: any, getState: any) => {
   dispatch({ type: REGISTER_REQUEST });
   const data = await request<TAuthorizationResonse>(ENDPOINT.register, {

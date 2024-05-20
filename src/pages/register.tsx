@@ -13,15 +13,13 @@ import Redirect from "../components/redirect/redirect";
 
 import { PATHS } from "../utils/consts";
 import { useForm } from "../hooks/useForm";
-import { registerFormValue } from "../services/actions/authForms";
-import { register } from "../services/actions/auth";
+
 import { TInput } from "../utils/types";
 import { useSelector } from "../hooks/types";
+import { register, registerFormValue } from "../services/actions/register";
 
 function Register() {
-  const { name, password, email } = useSelector(
-    (state) => state.register.form
-  );
+  const { name, password, email } = useSelector((state) => state.register.form);
 
   const { handleInput, handleSubmit } = useForm();
   const [isValid, setIsValid] = useState(false);

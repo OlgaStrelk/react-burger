@@ -4,12 +4,11 @@ import { PATHS } from "../utils/consts";
 import { useForm } from "../hooks/useForm";
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import Redirect from "../components/redirect/redirect";
-import { resetPasswordOneFormValue } from "../services/actions/authForms";
 import { useState, useEffect, ChangeEvent, SyntheticEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { TInput } from "../utils/types";
 import { useSelector } from "../hooks/types";
-import { resetPasswordStepOne } from "../services/actions/reset-form-one";
+import { resetPasswordOneFormValue, resetPasswordStepOne } from "../services/actions/reset-form-one";
 function ForgotPasswordPage() {
   const [isValid, setIsValid] = useState(false);
   const navigate = useNavigate();

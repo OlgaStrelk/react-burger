@@ -7,11 +7,35 @@ import {
 } from "../constants/auth";
 import { RESET_PASSWORD_FORM_ONE_SET_VALUE } from "../constants/auth-forms";
 
+type TResetFormRequestAction = {
+  type: typeof RESET_PASSWORD_FORM_ONE_REQUEST;
+};
+
+type TResetFormSuccessAction = {
+  type: typeof RESET_PASSWORD_FORM_ONE_SUCCESS;
+};
+
+type TResetFormFailedAction = {
+  type: typeof RESET_PASSWORD_FORM_ONE_FAILED;
+};
+
+type TSetValueAction = {
+  type: typeof RESET_PASSWORD_FORM_ONE_SET_VALUE;
+  field: string;
+  value: string;
+};
+
+export type TResetFormActions =
+  | TResetFormRequestAction
+  | TResetFormSuccessAction
+  | TResetFormFailedAction
+  | TSetValueAction;
+
 export const resetPasswordOneFormValue = (field: string, value: string) => ({
-    type: RESET_PASSWORD_FORM_ONE_SET_VALUE,
-    field,
-    value,
-  });
+  type: RESET_PASSWORD_FORM_ONE_SET_VALUE,
+  field,
+  value,
+});
 
 export const resetPasswordStepOne = () => (dispatch: any, getState: any) => {
   dispatch({ type: RESET_PASSWORD_FORM_ONE_REQUEST });

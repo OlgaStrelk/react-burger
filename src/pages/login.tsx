@@ -12,10 +12,10 @@ import Redirect from "../components/redirect/redirect";
 
 import { PATHS } from "../utils/consts";
 import { useForm } from "../hooks/useForm";
-import { loginFormValue } from "../services/actions/authForms";
-import { login } from "../services/actions/auth";
+
 import { TInput } from "../utils/types";
 import { useSelector } from "../hooks/types";
+import { loginFormValue, login } from "../services/actions/login";
 
 function LoginPage() {
   const { register, forgotPassword } = PATHS;

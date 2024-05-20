@@ -6,6 +6,17 @@ import {
 import { thunk } from "redux-thunk";
 
 import { rootReducer } from "./reducers/index.ts";
+import { TBurgerConstructorActions } from "./actions/constructor-ingredients.ts";
+import { TIngredientsActions } from "./actions/ingredients.ts";
+import { TLoginActions } from "./actions/login.ts";
+import { TModalActions } from "./actions/modal.ts";
+import { TOrderActions } from "./actions/order.ts";
+import { TEditProfileActions } from "./actions/profile-form.ts";
+import { TRegisterActions } from "./actions/register.ts";
+import { TResetFormTwoActions } from "./actions/reset-form-two.ts";
+import { TUserActions } from "./actions/user.ts";
+import { TLogoutActions } from "./reducers/logout.ts";
+import { TResetFormActions } from "./reducers/reset-form-one.ts";
 
 const composeEnhancers =
   //@ts-ignore
