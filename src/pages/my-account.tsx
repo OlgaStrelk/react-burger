@@ -4,7 +4,7 @@ import { Link, NavLink, Outlet } from "react-router-dom";
 
 import { PATHS } from "../utils/consts";
 import { useDispatch } from "../hooks/types";
-import { logout } from "../services/actions/user";
+import { logout } from "../services/actions/logout";
 
 function MyAccountPage() {
   const dispatch = useDispatch();

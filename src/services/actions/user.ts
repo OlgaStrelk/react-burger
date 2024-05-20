@@ -138,22 +138,3 @@ export const editProfile = () => async (dispatch: any, getState: any) => {
     dispatch(updateUser(data.user));
   }
 };
-
-export const logout = () => (dispatch: any) => {
-  dispatch({ type: LOGOUT_REQUEST });
-  if (localStorage.getItem("accessToken")) {
-    request<IResetPasswordResponse>(ENDPOINT.logout, {
-      ...optionsWithAuth,
-      method: "POST",
-      body: JSON.stringify({ token: localStorage.getItem("refreshToken") }),
-    })
-      .then(() => {
-        dispatch({ type: LOGOUT_SUCCESS });
-        dispatch({ type: DELETE_USER });
-        localStorage.removeItem("accessToken");
-        localStorage.removeItem("refreshToken");
-        dispatch({ type: CLEAR_PROFILE_FORM });
-      })
-      .catch((err) => handleError(LOGOUT_FAILED, err, dispatch));
-  } else throw Error("В хранилище нет токена");
-};

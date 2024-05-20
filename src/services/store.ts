@@ -15,8 +15,8 @@ import { TEditProfileActions } from "./actions/profile-form.ts";
 import { TRegisterActions } from "./actions/register.ts";
 import { TResetFormTwoActions } from "./actions/reset-form-two.ts";
 import { TUserActions } from "./actions/user.ts";
-import { TLogoutActions } from "./reducers/logout.ts";
-import { TResetFormActions } from "./reducers/reset-form-one.ts";
+import { TResetFormActions } from "./actions/reset-form-one.ts";
+import { TLogoutActions } from "./actions/logout.ts";
 
 const composeEnhancers =
   //@ts-ignore

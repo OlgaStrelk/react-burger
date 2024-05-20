@@ -1,4 +1,9 @@
-import { LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_FAILED } from "../constants/auth";
+import { TLogoutActions } from "../actions/logout";
+import {
+  LOGOUT_REQUEST,
+  LOGOUT_SUCCESS,
+  LOGOUT_FAILED,
+} from "../constants/auth";
 
 export interface UserState {
   logoutRequest: boolean;
@@ -9,23 +14,6 @@ const initialState: { logoutRequest: boolean; logoutFailed: boolean } = {
   logoutRequest: false,
   logoutFailed: false,
 };
-
-type TLogoutRequestAction = {
-  type: typeof LOGOUT_REQUEST;
-};
-
-type TLogoutSuccessAction = {
-  type: typeof LOGOUT_SUCCESS;
-};
-
-type TLogoutFailedAction = {
-  type: typeof LOGOUT_FAILED;
-};
-
-export type TLogoutActions =
-  | TLogoutRequestAction
-  | TLogoutSuccessAction
-  | TLogoutFailedAction;
 
 export const logoutReducer = (state = initialState, action: TLogoutActions) => {
   switch (action.type) {
