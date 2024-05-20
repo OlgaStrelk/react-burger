@@ -1,10 +1,11 @@
 import { TUserWithPassword } from "../../utils/types";
 import {
-  REGISTER_SUCCESS,
   REGISTER_FAILED,
   REGISTER_REQUEST,
-} from "../actions/auth";
-import { REGISTER_SET_VALUE } from "../actions/auth-forms";
+  REGISTER_SUCCESS,
+} from "../constants/auth";
+import { REGISTER_SET_VALUE } from "../constants/auth-forms";
+
 export interface RegisterState {
   form: TUserWithPassword;
   resetPasswordRequest: boolean;

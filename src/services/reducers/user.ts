@@ -1,12 +1,6 @@
-import {
-  GET_USER_REQUEST,
-  GET_USER_SUCCESS,
-  GET_USER_FAILED,
-  SET_AUTH_CHECKED,
-  UPDATE_USER_DATA,
-  DELETE_USER,
-} from "../actions/user";
 import { TUser } from "../../utils/types";
+import { GET_USER_REQUEST, GET_USER_SUCCESS, GET_USER_FAILED, DELETE_USER, SET_AUTH_CHECKED, UPDATE_USER_DATA } from "../constants/user";
+
 export interface UserState {
   user: TUser | null;
   isAuthChecked: boolean;
