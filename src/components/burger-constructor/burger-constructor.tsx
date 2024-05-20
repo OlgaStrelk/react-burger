@@ -10,7 +10,6 @@ import Total from "./total/total.tsx";
 
 import { useDispatch, useSelector } from "../../hooks/types.ts";
 import { Navigate } from "react-router-dom";
-import { makeOrder } from "../../services/actions/ingredients.ts";
 import { PATHS } from "../../utils/consts.ts";
 import { TConstructorIngredient } from "../../utils/types.ts";
 
@@ -159,3 +158,7 @@ function BurgerConstructor({ onModalOpen }: IBurgerConstructorProps) {
 }
 
 export default BurgerConstructor;
+function makeOrder(data: { ingredients: string[]; }): any {
+  throw new Error("Function not implemented.");
+}
+

@@ -1,4 +1,4 @@
-import { TConstructorIngredient, TIngredient } from "../../utils/types";
+import { TIngredient } from "../../utils/types";
 import { TIngredientsActions } from "../actions/ingredients";
 import {
   DECREASE_INGREDIENT_QUANTITY,

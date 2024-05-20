@@ -1,4 +1,5 @@
-import { MAKE_ORDER_FAILED, MAKE_ORDER_REQUEST, MAKE_ORDER_SUCCESS } from "../constants/ingredients";
+import { TOrderActions } from "../actions/order";
+import { MAKE_ORDER_REQUEST, MAKE_ORDER_SUCCESS, MAKE_ORDER_FAILED } from "../constants/order";
 
 export interface OrderState {
   order: number | null;
@@ -11,24 +12,6 @@ const initialState: OrderState = {
   orderRequest: false,
   orderFailed: false,
 };
-
-type TOrderRequestAction = {
-  type: typeof MAKE_ORDER_REQUEST;
-};
-
-type TOrderSuccessAction = {
-  type: typeof MAKE_ORDER_SUCCESS;
-  payload: { number: number };
-};
-
-type TOrderFailedAction = {
-  type: typeof MAKE_ORDER_FAILED;
-};
-
-export type TOrderActions =
-  | TOrderRequestAction
-  | TOrderSuccessAction
-  | TOrderFailedAction;
 
 export const orderReducer = (state = initialState, action: TOrderActions) => {
   switch (action.type) {
