@@ -1,8 +1,4 @@
-import {
-  MAKE_ORDER_REQUEST,
-  MAKE_ORDER_SUCCESS,
-  MAKE_ORDER_FAILED,
-} from "../actions/ingredients";
+import { MAKE_ORDER_FAILED, MAKE_ORDER_REQUEST, MAKE_ORDER_SUCCESS } from "../constants/ingredients";
 
 export interface OrderState {
   order: number | null;
