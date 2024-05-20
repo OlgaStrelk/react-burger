@@ -28,25 +28,11 @@ type TGetIngredientFailedAction = {
   payload: string;
 };
 
-type TIncreaseQuantityAction = {
-  type: typeof INCREASE_INGREDIENT_QUANTITY;
-  payload: TConstructorIngredient;
-};
-type TDecreaseQuantityAction = {
-  type: typeof DECREASE_INGREDIENT_QUANTITY;
-  payload: string;
-};
-type TResetQuantityAction = {
-  type: typeof RESET_INGREDIENTS_QUANTITY;
-};
 
 export type TIngredientsActions =
   | TGetIngredientRequestAction
   | TGetIngredientSuccessAction
   | TGetIngredientFailedAction
-  | TIncreaseQuantityAction
-  | TDecreaseQuantityAction
-  | TResetQuantityAction;
 
 
 //@ts-ignore
