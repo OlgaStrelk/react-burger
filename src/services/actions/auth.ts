@@ -1,12 +1,23 @@
-import { DELETE_USER, updateUser } from "./user";
-import { optionsUnAuth, optionsWithAuth } from "../../utils/consts";
-import { ENDPOINT } from "../../utils/consts";
+import { request, handleError } from "../../utils/api";
+import { ENDPOINT, optionsUnAuth, optionsWithAuth } from "../../utils/consts";
 import {
-  IResetPasswordResponse,
   TAuthorizationResonse,
+  IResetPasswordResponse,
 } from "../../utils/types";
-import { CLEAR_PROFILE_FORM } from "./authForms";
-import { handleError, request } from "../../utils/api";
+import {
+  REGISTER_REQUEST,
+  REGISTER_SUCCESS,
+  REGISTER_FAILED,
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGIN_FAILED,
+  LOGOUT_REQUEST,
+  LOGOUT_SUCCESS,
+  LOGOUT_FAILED,
+} from "../constants/auth";
+import { CLEAR_PROFILE_FORM } from "../constants/auth-forms";
+import { DELETE_USER } from "../constants/user";
+import { updateUser } from "./user";
 
 export const RESET_PASSWORD_FORM_ONE_REQUEST: "RESET_PASSWORD_FORM_ONE_REQUEST" =
   "RESET_PASSWORD_FORM_ONE_REQUEST";
