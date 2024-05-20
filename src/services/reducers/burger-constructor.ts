@@ -1,10 +1,12 @@
 import { TConstructorIngredient } from "../../utils/types";
+import { TBurgerConstructorActions } from "../actions/constructor-ingredients";
 import {
   ADD_INGREDIENT,
   SORT_INGREDIENTS,
   DELETE_INGREDIENT,
   RESET_CONSTRUCTOR,
 } from "../constants/ingredients";
+
 export interface ConstructorState {
   addedIngredients: {
     buns: TConstructorIngredient | null;
@@ -17,31 +19,6 @@ const initialState: ConstructorState = {
     ingredients: [],
   },
 };
-
-type TAddIngredientAction = {
-  type: typeof ADD_INGREDIENT;
-  payload: TConstructorIngredient;
-};
-
-type TSortIngredientAction = {
-  type: typeof SORT_INGREDIENTS;
-  payload: TConstructorIngredient[];
-};
-
-type TDeleteIngredientAction = {
-  type: typeof DELETE_INGREDIENT;
-  payload: string;
-};
-
-type TResetConstructor = {
-  type: typeof RESET_CONSTRUCTOR;
-};
-
-export type TBurgerConstructorActions =
-  | TAddIngredientAction
-  | TSortIngredientAction
-  | TDeleteIngredientAction
-  | TResetConstructor;
 
 export const constructorReducer = (
   state = initialState,

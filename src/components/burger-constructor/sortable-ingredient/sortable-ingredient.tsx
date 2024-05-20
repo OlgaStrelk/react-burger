@@ -8,14 +8,9 @@ import {
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-
-import {
-  deleteIngredient,
-  decreaseQuantity,
-} from "../../../services/actions/ingredients";
-import { sortIngredients } from "../../../services/actions/ingredients";
 import { TConstructorIngredient } from "../../../utils/types";
 import { useDispatch, useSelector } from "../../../hooks/types";
+import { sortIngredients, deleteIngredient, decreaseQuantity } from "../../../services/actions/constructor-ingredients";
 
 export interface ISortableIngredientProps {
   data: TConstructorIngredient;

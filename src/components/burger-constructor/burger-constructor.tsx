@@ -7,15 +7,12 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./burger-constructor.module.css";
 import Total from "./total/total.tsx";
-import {
-  makeOrder,
-  addIngredient,
-  increaseQuantity,
-} from "../../services/actions/ingredients.ts";
+
+import { useDispatch, useSelector } from "../../hooks/types.ts";
 import { Navigate } from "react-router-dom";
+import { makeOrder } from "../../services/actions/ingredients.ts";
 import { PATHS } from "../../utils/consts.ts";
 import { TConstructorIngredient } from "../../utils/types.ts";
-import { useDispatch, useSelector } from "../../hooks/types.ts";
 
 export interface IBurgerConstructorProps {
   onModalOpen: () => void;
