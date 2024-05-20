@@ -1,5 +1,6 @@
-import { LOGIN_SET_VALUE } from "../actions/authForms";
-import { LOGIN_SUCCESS, LOGIN_FAILED, LOGIN_REQUEST } from "../actions/auth";
+import { LOGIN_FAILED, LOGIN_REQUEST, LOGIN_SUCCESS } from "../constants/auth";
+import { LOGIN_SET_VALUE } from "../constants/auth-forms";
+
 export interface LoginState {
   form: {
     email: string;
