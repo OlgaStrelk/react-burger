@@ -8,7 +8,7 @@ import {
 
 import { useForm } from "../hooks/useForm";
 import { ChangeEvent, SyntheticEvent, useEffect } from "react";
-import { editProfileFormValue } from "../services/actions/auth-forms";
+import { editProfileFormValue } from "../services/actions/authForms";
 import { editProfile } from "../services/actions/user";
 import { TInput } from "../utils/types";
 import Preloader from "../components/preloader/preloader";

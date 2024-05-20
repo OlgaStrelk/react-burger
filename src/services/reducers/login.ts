@@ -1,3 +1,4 @@
+import { TLoginActions } from "../actions/login";
 import { LOGIN_FAILED, LOGIN_REQUEST, LOGIN_SUCCESS } from "../constants/auth";
 import { LOGIN_SET_VALUE } from "../constants/auth-forms";
 
@@ -17,30 +18,6 @@ const initialState: LoginState = {
   loginRequest: false,
   loginFailed: false,
 };
-
-type TLoginRequestAction = {
-  type: typeof LOGIN_REQUEST;
-};
-
-type TLoginSuccessAction = {
-  type: typeof LOGIN_SUCCESS;
-};
-
-type TLoginFailedAction = {
-  type: typeof LOGIN_FAILED;
-};
-
-type TSetValueAction = {
-  type: typeof LOGIN_SET_VALUE;
-  field: string;
-  value: string;
-};
-
-export type TLoginActions =
-  | TLoginRequestAction
-  | TLoginSuccessAction
-  | TLoginFailedAction
-  | TSetValueAction;
 
 export const loginReducer = (state = initialState, action: TLoginActions) => {
   switch (action.type) {

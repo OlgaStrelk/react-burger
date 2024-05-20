@@ -1,10 +1,6 @@
-import { RESET_PASSWORD_FORM_ONE_SET_VALUE } from "../actions/auth-forms";
+import { RESET_PASSWORD_FORM_ONE_REQUEST, RESET_PASSWORD_FORM_ONE_SUCCESS, RESET_PASSWORD_FORM_ONE_FAILED } from "../constants/auth";
+import { RESET_PASSWORD_FORM_ONE_SET_VALUE } from "../constants/auth-forms";
 
-import {
-  RESET_PASSWORD_FORM_ONE_SUCCESS,
-  RESET_PASSWORD_FORM_ONE_FAILED,
-  RESET_PASSWORD_FORM_ONE_REQUEST,
-} from "../actions/auth";
 
 export interface ResetFormState {
   form: { email: string };

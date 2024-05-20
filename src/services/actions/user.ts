@@ -18,6 +18,41 @@ import {
   EDIT_PROFILE_SUCCESS,
 } from "../constants/user";
 
+type TUserRequestAction = {
+  type: typeof GET_USER_REQUEST;
+};
+
+type TUserSuccessAction = {
+  type: typeof GET_USER_SUCCESS;
+  payload: TUser;
+};
+
+type TUserFailedAction = {
+  type: typeof GET_USER_FAILED;
+};
+
+type TDeleteUserAction = {
+  type: typeof DELETE_USER;
+};
+
+type TSetAuthCheckedAction = {
+  type: typeof SET_AUTH_CHECKED;
+  payload: boolean;
+};
+
+type TUpdateUserAction = {
+  type: typeof UPDATE_USER_DATA;
+  payload: TUser;
+};
+
+export type TUserActions =
+  | TUserRequestAction
+  | TUserSuccessAction
+  | TUserFailedAction
+  | TDeleteUserAction
+  | TSetAuthCheckedAction
+  | TUpdateUserAction;
+
 export const updateUser = (user: { [key in string]: string }) => ({
   type: UPDATE_USER_DATA,
   payload: user,

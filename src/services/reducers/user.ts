@@ -1,4 +1,5 @@
 import { TUser } from "../../utils/types";
+import { TUserActions } from "../actions/user";
 import { GET_USER_REQUEST, GET_USER_SUCCESS, GET_USER_FAILED, DELETE_USER, SET_AUTH_CHECKED, UPDATE_USER_DATA } from "../constants/user";
 
 export interface UserState {
@@ -14,41 +15,6 @@ const initialState: UserState = {
   userRequest: false,
   userFailed: false,
 };
-
-type TUserRequestAction = {
-  type: typeof GET_USER_REQUEST;
-};
-
-type TUserSuccessAction = {
-  type: typeof GET_USER_SUCCESS;
-  payload: TUser;
-};
-
-type TUserFailedAction = {
-  type: typeof GET_USER_FAILED;
-};
-
-type TDeleteUserAction = {
-  type: typeof DELETE_USER;
-};
-
-type TSetAuthCheckedAction = {
-  type: typeof SET_AUTH_CHECKED;
-  payload: boolean;
-};
-
-type TUpdateUserAction = {
-  type: typeof UPDATE_USER_DATA;
-  payload: TUser;
-};
-
-export type TUserActions =
-  | TUserRequestAction
-  | TUserSuccessAction
-  | TUserFailedAction
-  | TDeleteUserAction
-  | TSetAuthCheckedAction
-  | TUpdateUserAction;
 
 export const userReducer = (state = initialState, action: TUserActions) => {
   switch (action.type) {

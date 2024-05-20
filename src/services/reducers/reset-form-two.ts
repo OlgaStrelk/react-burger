@@ -1,9 +1,7 @@
-import { RESET_PASSWORD_FORM_TWO_SET_VALUE } from "../actions/auth-forms";
-import {
-  RESET_PASSWORD_FORM_TWO_SUCCESS,
-  RESET_PASSWORD_FORM_TWO_FAILED,
-  RESET_PASSWORD_FORM_TWO_REQUEST,
-} from "../actions/auth";
+
+import { TResetFormTwoActions } from "../actions/reset-form-two";
+import { RESET_PASSWORD_FORM_TWO_REQUEST, RESET_PASSWORD_FORM_TWO_SUCCESS, RESET_PASSWORD_FORM_TWO_FAILED } from "../constants/auth";
+import { RESET_PASSWORD_FORM_TWO_SET_VALUE } from "../constants/auth-forms";
 
 export interface ResetFormTwoState {
   form: { password: string; token: string };
@@ -19,30 +17,6 @@ const initialState: ResetFormTwoState = {
   resetPasswordRequest: false,
   resetPasswordFailed: false,
 };
-
-type TResetFormRequestAction = {
-  type: typeof RESET_PASSWORD_FORM_TWO_REQUEST;
-};
-
-type TResetFormSuccessAction = {
-  type: typeof RESET_PASSWORD_FORM_TWO_SUCCESS;
-};
-
-type TResetFormFailedAction = {
-  type: typeof RESET_PASSWORD_FORM_TWO_FAILED;
-};
-
-type TSetValueAction = {
-  type: typeof RESET_PASSWORD_FORM_TWO_SET_VALUE;
-  field: string;
-  value: string;
-};
-
-export type TResetFormTwoActions =
-  | TResetFormRequestAction
-  | TResetFormSuccessAction
-  | TResetFormFailedAction
-  | TSetValueAction;
 
 export const resetFormTwoReducer = (
   state = initialState,

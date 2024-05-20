@@ -12,7 +12,7 @@ import Redirect from "../components/redirect/redirect";
 
 import { PATHS } from "../utils/consts";
 import { useForm } from "../hooks/useForm";
-import { resetPasswordTwoFormValue } from "../services/actions/auth-forms";
+import { resetPasswordTwoFormValue } from "../services/actions/authForms";
 import { resetPasswordStepTwo } from "../services/actions/auth";
 import { useNavigate } from "react-router-dom";
 import { TInput } from "../utils/types";
