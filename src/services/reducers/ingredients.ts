@@ -1,12 +1,12 @@
 import { TConstructorIngredient, TIngredient } from "../../utils/types";
 import {
+  DECREASE_INGREDIENT_QUANTITY,
+  GET_INGREDIENTS_FAILED,
   GET_INGREDIENTS_REQUEST,
   GET_INGREDIENTS_SUCCESS,
-  GET_INGREDIENTS_FAILED,
   INCREASE_INGREDIENT_QUANTITY,
-  DECREASE_INGREDIENT_QUANTITY,
   RESET_INGREDIENTS_QUANTITY,
-} from "../actions/ingredients";
+} from "../constants/ingredients";
 
 export interface IngredientsState {
   ingredients: TIngredient[];
