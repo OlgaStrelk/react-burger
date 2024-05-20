@@ -1,9 +1,9 @@
-import { RESET_FORM_ONE_SET_VALUE } from "../actions/authForms";
+import { RESET_PASSWORD_FORM_ONE_SET_VALUE } from "../actions/authForms";
 
 import {
-  RESET_FORM_ONE_SUCCESS,
-  RESET_FORM_ONE_FAILED,
-  RESET_FORM_ONE_REQUEST,
+  RESET_PASSWORD_FORM_ONE_SUCCESS,
+  RESET_PASSWORD_FORM_ONE_FAILED,
+  RESET_PASSWORD_FORM_ONE_REQUEST,
 } from "../actions/auth";
 
 export interface ResetFormState {
@@ -19,19 +19,19 @@ const initialState: ResetFormState = {
   resetPasswordFailed: false,
 };
 type TResetFormRequestAction = {
-  type: typeof RESET_FORM_ONE_REQUEST;
+  type: typeof RESET_PASSWORD_FORM_ONE_REQUEST;
 };
 
 type TResetFormSuccessAction = {
-  type: typeof RESET_FORM_ONE_SUCCESS;
+  type: typeof RESET_PASSWORD_FORM_ONE_SUCCESS;
 };
 
 type TResetFormFailedAction = {
-  type: typeof RESET_FORM_ONE_FAILED;
+  type: typeof RESET_PASSWORD_FORM_ONE_FAILED;
 };
 
 type TSetValueAction = {
-  type: typeof RESET_FORM_ONE_SET_VALUE;
+  type: typeof RESET_PASSWORD_FORM_ONE_SET_VALUE;
   field: string;
   value: string;
 };
@@ -47,7 +47,7 @@ export const resetFormReducer = (
   action: TResetFormActions
 ) => {
   switch (action.type) {
-    case RESET_FORM_ONE_SET_VALUE: {
+    case RESET_PASSWORD_FORM_ONE_SET_VALUE: {
       return {
         form: {
           ...state.form,
@@ -56,14 +56,14 @@ export const resetFormReducer = (
       };
     }
 
-    case RESET_FORM_ONE_REQUEST: {
+    case RESET_PASSWORD_FORM_ONE_REQUEST: {
       return {
         ...state,
         resetPasswordRequest: true,
         resetPasswordFailed: false,
       };
     }
-    case RESET_FORM_ONE_SUCCESS: {
+    case RESET_PASSWORD_FORM_ONE_SUCCESS: {
       return {
         ...state,
         form: {
@@ -72,7 +72,7 @@ export const resetFormReducer = (
         resetPasswordRequest: false,
       };
     }
-    case RESET_FORM_ONE_FAILED: {
+    case RESET_PASSWORD_FORM_ONE_FAILED: {
       return {
         ...state,
         resetPasswordRequest: false,

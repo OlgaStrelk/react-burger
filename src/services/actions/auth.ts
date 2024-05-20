@@ -20,19 +20,19 @@ export const LOGOUT_REQUEST: "LOGOUT_REQUEST" = "LOGOUT_REQUEST";
 export const LOGOUT_FAILED: "LOGOUT_FAILED" = "LOGOUT_FAILED";
 export const LOGOUT_SUCCESS: "LOGOUT_SUCCESS" = "LOGOUT_SUCCESS";
 
-export const RESET_FORM_ONE_REQUEST: "RESET_FORM_ONE_REQUEST" =
-  "RESET_FORM_ONE_REQUEST";
-export const RESET_FORM_ONE_SUCCESS: "RESET_FORM_ONE_SUCCESS" =
-  "RESET_FORM_ONE_SUCCESS";
-export const RESET_FORM_ONE_FAILED: "RESET_FORM_ONE_FAILED" =
-  "RESET_FORM_ONE_FAILED";
+export const RESET_PASSWORD_FORM_ONE_REQUEST: "RESET_PASSWORD_FORM_ONE_REQUEST" =
+  "RESET_PASSWORD_FORM_ONE_REQUEST";
+export const RESET_PASSWORD_FORM_ONE_SUCCESS: "RESET_PASSWORD_FORM_ONE_SUCCESS" =
+  "RESET_PASSWORD_FORM_ONE_SUCCESS";
+export const RESET_PASSWORD_FORM_ONE_FAILED: "RESET_PASSWORD_FORM_ONE_FAILED" =
+  "RESET_PASSWORD_FORM_ONE_FAILED";
 
-export const RESET_FORM_TWO_REQUEST: "RESET_FORM_TWO_REQUEST" =
-  "RESET_FORM_TWO_REQUEST";
-export const RESET_FORM_TWO_SUCCESS: "RESET_FORM_TWO_SUCCESS" =
-  "RESET_FORM_TWO_SUCCESS";
-export const RESET_FORM_TWO_FAILED: "RESET_FORM_TWO_FAILED" =
-  "RESET_FORM_TWO_FAILED";
+export const RESET_PASSWORD_FORM_TWO_REQUEST: "RESET_PASSWORD_FORM_TWO_REQUEST" =
+  "RESET_PASSWORD_FORM_TWO_REQUEST";
+export const RESET_PASSWORD_FORM_TWO_SUCCESS: "RESET_PASSWORD_FORM_TWO_SUCCESS" =
+  "RESET_PASSWORD_FORM_TWO_SUCCESS";
+export const RESET_PASSWORD_FORM_TWO_FAILED: "RESET_PASSWORD_FORM_TWO_FAILED" =
+  "RESET_PASSWORD_FORM_TWO_FAILED";
 
 export const register = () => async (dispatch: any, getState: any) => {
   dispatch({ type: REGISTER_REQUEST });
@@ -75,29 +75,29 @@ export const login = () => async (dispatch: any, getState: any) => {
 };
 
 export const resetPasswordStepOne = () => (dispatch: any, getState: any) => {
-  dispatch({ type: RESET_FORM_ONE_REQUEST });
+  dispatch({ type: RESET_PASSWORD_FORM_ONE_REQUEST });
   request(ENDPOINT.resetPasswordStepOne, {
     ...optionsUnAuth,
     method: "POST",
     body: JSON.stringify(getState().resetForm.form),
   })
     .then(() => {
-      dispatch({ type: RESET_FORM_ONE_SUCCESS });
+      dispatch({ type: RESET_PASSWORD_FORM_ONE_SUCCESS });
     })
-    .catch((err) => handleError(RESET_FORM_ONE_FAILED, err, dispatch));
+    .catch((err) => handleError(RESET_PASSWORD_FORM_ONE_FAILED, err, dispatch));
 };
 
 export const resetPasswordStepTwo = () => (dispatch: any, getState: any) => {
-  dispatch({ type: RESET_FORM_TWO_REQUEST });
+  dispatch({ type: RESET_PASSWORD_FORM_TWO_REQUEST });
   request<IResetPasswordResponse>(ENDPOINT.resetPasswordStepTwo, {
     ...optionsUnAuth,
     method: "POST",
     body: JSON.stringify(getState().resetFormTwo.form),
   })
     .then(() => {
-      dispatch({ type: RESET_FORM_TWO_SUCCESS });
+      dispatch({ type: RESET_PASSWORD_FORM_TWO_SUCCESS });
     })
-    .catch((err) => handleError(RESET_FORM_TWO_FAILED, err, dispatch));
+    .catch((err) => handleError(RESET_PASSWORD_FORM_TWO_FAILED, err, dispatch));
 };
 
 export const logout = () => (dispatch: any) => {
