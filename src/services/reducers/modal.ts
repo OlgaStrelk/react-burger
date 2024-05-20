@@ -1,8 +1,8 @@
 import { TIngredient } from "../../utils/types";
 import {
-  RESET_MODAL_INGREDIENT,
   GET_MODAL_INGREDIENT,
-} from "../actions/ingredients";
+  RESET_MODAL_INGREDIENT,
+} from "../constants/ingredients";
 
 export interface ModalState {
   currentIngredient: TIngredient | null;
