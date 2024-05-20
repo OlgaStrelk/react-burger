@@ -1,4 +1,5 @@
-import { LOGOUT_REQUEST, LOGOUT_FAILED, LOGOUT_SUCCESS } from "../actions/auth";
+import { LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_FAILED } from "../constants/auth";
+
 export interface UserState {
   logoutRequest: boolean;
   logoutFailed: boolean;
