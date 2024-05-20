@@ -1,4 +1,5 @@
 import { TConstructorIngredient, TIngredient } from "../../utils/types";
+import { TIngredientsActions } from "../actions/ingredients";
 import {
   DECREASE_INGREDIENT_QUANTITY,
   GET_INGREDIENTS_FAILED,
@@ -20,40 +21,6 @@ const initialState: IngredientsState = {
   ingredientsFailed: false,
   currentIngredient: null,
 };
-
-type TGetIngredientRequestAction = {
-  type: typeof GET_INGREDIENTS_REQUEST;
-};
-
-type TGetIngredientSuccessAction = {
-  type: typeof GET_INGREDIENTS_SUCCESS;
-  payload: TIngredient[];
-};
-
-type TGetIngredientFailedAction = {
-  type: typeof GET_INGREDIENTS_FAILED;
-  payload: string;
-};
-
-type TIncreaseQuantityAction = {
-  type: typeof INCREASE_INGREDIENT_QUANTITY;
-  payload: TConstructorIngredient;
-};
-type TDecreaseQuantityAction = {
-  type: typeof DECREASE_INGREDIENT_QUANTITY;
-  payload: string;
-};
-type TResetQuantityAction = {
-  type: typeof RESET_INGREDIENTS_QUANTITY;
-};
-
-export type TIngredientsActions =
-  | TGetIngredientRequestAction
-  | TGetIngredientSuccessAction
-  | TGetIngredientFailedAction
-  | TIncreaseQuantityAction
-  | TDecreaseQuantityAction
-  | TResetQuantityAction;
 
 export const ingredientsReducer = (
   state = initialState,
