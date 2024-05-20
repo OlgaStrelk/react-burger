@@ -1,4 +1,5 @@
 import { TIngredient } from "../../utils/types";
+import { TModalActions } from "../actions/modal";
 import {
   GET_MODAL_INGREDIENT,
   RESET_MODAL_INGREDIENT,
@@ -7,26 +8,10 @@ import {
 export interface ModalState {
   currentIngredient: TIngredient | null;
 }
+
 const initialState: ModalState = {
   currentIngredient: null,
 };
-
-type TGetModalIngredientAction = {
-  type: typeof GET_MODAL_INGREDIENT;
-  payload: string;
-};
-
-type TResetModalIngredientAction = {
-  type: typeof RESET_MODAL_INGREDIENT;
-};
-
-export const getModalIngredient = (id: string) => {
-  return { type: GET_MODAL_INGREDIENT, payload: id };
-};
-
-export type TModalActions =
-  | TGetModalIngredientAction
-  | TResetModalIngredientAction;
 
 export const modalReducer = (state = initialState, action: TModalActions) => {
   switch (action.type) {
@@ -49,3 +34,4 @@ export const modalReducer = (state = initialState, action: TModalActions) => {
     }
   }
 };
+

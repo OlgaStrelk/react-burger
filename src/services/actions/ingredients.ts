@@ -21,7 +21,6 @@ import {
   SORT_INGREDIENTS,
   INCREASE_INGREDIENT_QUANTITY,
 } from "../constants/ingredients";
-import ingredient from "../../pages/ingredient";
 
 export const sortIngredients = (newIngredients: TConstructorIngredient[]) => {
   return { type: SORT_INGREDIENTS, payload: newIngredients };
@@ -40,6 +39,7 @@ export const deleteIngredient = (id: string) => {
 export const decreaseQuantity = (id: string) => {
   return { type: DECREASE_INGREDIENT_QUANTITY, payload: id };
 };
+
 //@ts-ignore
 export const fetchIngredients = () => (dispatch) => {
   dispatch({ type: GET_INGREDIENTS_REQUEST });
