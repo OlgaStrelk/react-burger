@@ -1,14 +1,14 @@
 import { combineReducers } from "redux";
 import { ingredientsReducer } from "./ingredients.ts";
-import { constructorReducer } from "./burgerConstructor.ts";
+import { constructorReducer } from "./burger-constructor.ts";
 import { orderReducer } from "./order.ts";
 import { modalReducer } from "./modal.ts";
-import { resetFormReducer } from "./resetForm.ts";
-import { resetFormTwoReducer } from "./resetFormTwo.ts";
+import { resetFormReducer } from "./reset-form.ts";
+import { resetFormTwoReducer } from "./reset-form-two.ts";
 import { registerReducer } from "./register.ts";
 import { loginReducer } from "./login.ts";
 import { userReducer } from "./user.ts";
-import { editProfileFormReducer } from "./profileForm.ts";
+import { editProfileFormReducer } from "./profile-form.ts";
 import { logoutReducer } from "./logout.ts";
 
 export const rootReducer = combineReducers({

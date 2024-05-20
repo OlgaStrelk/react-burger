@@ -3,12 +3,12 @@ import { TUserWithPassword } from "../../utils/types";
 import {
   CLEAR_PROFILE_FORM,
   EDIT_PROFILE_SET_VALUE,
-} from "../actions/authForms";
+} from "../constants/auth-forms";
 import {
+  EDIT_PROFILE_REQUEST,
   EDIT_PROFILE_SUCCESS,
   EDIT_PROFILE_FAILED,
-  EDIT_PROFILE_REQUEST,
-} from "../actions/user";
+} from "../constants/user";
 
 export interface ProfileState {
   form: TUserWithPassword;
@@ -75,7 +75,7 @@ export const editProfileFormReducer = (
     }
 
     case EDIT_PROFILE_REQUEST: {
-      console.log('request')
+      console.log("request");
       return {
         ...state,
         editProfileRequest: true,
@@ -83,14 +83,14 @@ export const editProfileFormReducer = (
       };
     }
     case EDIT_PROFILE_SUCCESS: {
-      console.log('success')
+      console.log("success");
       return {
         ...state,
         editProfileRequest: false,
       };
     }
     case EDIT_PROFILE_FAILED: {
-      console.log('failed')
+      console.log("failed");
       return {
         ...state,
         editProfileRequest: false,
