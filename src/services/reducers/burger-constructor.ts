@@ -4,7 +4,7 @@ import {
   SORT_INGREDIENTS,
   DELETE_INGREDIENT,
   RESET_CONSTRUCTOR,
-} from "../actions/ingredients";
+} from "../constants/ingredients";
 export interface ConstructorState {
   addedIngredients: {
     buns: TConstructorIngredient | null;

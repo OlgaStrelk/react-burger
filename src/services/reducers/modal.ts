@@ -20,6 +20,10 @@ type TResetModalIngredientAction = {
   type: typeof RESET_MODAL_INGREDIENT;
 };
 
+export const getModalIngredient = (id: string) => {
+  return { type: GET_MODAL_INGREDIENT, payload: id };
+};
+
 export type TModalActions =
   | TGetModalIngredientAction
   | TResetModalIngredientAction;

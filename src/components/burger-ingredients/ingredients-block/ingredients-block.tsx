@@ -1,6 +1,5 @@
 import styles from "./ingredients-block.module.css";
 import { Fragment, memo, useMemo, forwardRef, SyntheticEvent } from "react";
-import { GET_MODAL_INGREDIENT } from "../../../services/actions/ingredients";
 
 import IngredientCard from "../ingredient-card/ingredient-card";
 import { TIngredient, TTitles } from "../../../utils/types";
@@ -19,7 +18,8 @@ const IngredientsBlock = forwardRef<Ref, Props>(({ titles, onScroll }, ref) => {
 
   const handleCardClick = (e: SyntheticEvent) => {
     const id = e.currentTarget.id;
-    dispatch({ type: GET_MODAL_INGREDIENT, payload: id });
+    //@ts-ignore
+    dispatch(getModalIngredient(id));
   };
 
   const filterIngredients = (blockTitle: TTitles) =>

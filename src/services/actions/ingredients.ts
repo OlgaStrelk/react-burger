@@ -3,6 +3,7 @@ import { v4 as uuid } from "uuid";
 import {
   IIngredientsResponse,
   IOrderResponse,
+  TConstructorIngredient,
   TIngredient,
   TOrderRequest,
 } from "../../utils/types";
@@ -17,7 +18,18 @@ import {
   MAKE_ORDER_REQUEST,
   MAKE_ORDER_SUCCESS,
   MAKE_ORDER_FAILED,
+  SORT_INGREDIENTS,
+  INCREASE_INGREDIENT_QUANTITY,
 } from "../constants/ingredients";
+import ingredient from "../../pages/ingredient";
+
+export const sortIngredients = (newIngredients: TConstructorIngredient[]) => {
+  return { type: SORT_INGREDIENTS, payload: newIngredients };
+};
+
+export const increaseQuantity = (ingredient: TConstructorIngredient) => {
+  return { type: INCREASE_INGREDIENT_QUANTITY, payload: ingredient };
+};
 
 export const addIngredient = (ingredient: TIngredient) => {
   return { type: ADD_INGREDIENT, payload: { ...ingredient, id: uuid() } };

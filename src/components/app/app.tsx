@@ -3,7 +3,6 @@ import { useEffect } from "react";
 
 import AppHeader from "../app-header/app-header";
 import {
-  RESET_MODAL_INGREDIENT,
   fetchIngredients,
 } from "../../services/actions/ingredients";
 import {
@@ -28,6 +27,7 @@ import { PATHS } from "../../utils/consts";
 import { checkUserAuth } from "../../services/actions/user";
 import MyAccountPage from "../../pages/my-account";
 import { useDispatch } from "../../hooks/types";
+import { RESET_MODAL_INGREDIENT } from "../../services/constants/ingredients";
 function App() {
   const dispatch = useDispatch();
   let location = useLocation();

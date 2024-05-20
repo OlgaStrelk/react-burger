@@ -1,17 +1,19 @@
 import type { Identifier, XYCoord } from "dnd-core";
-
 import { useDrag, useDrop } from "react-dnd";
 import { useRef } from "react";
+
 import styles from "./sortable-ingredient.module.css";
+
 import {
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+
 import {
-  decreaseQuantity,
-  SORT_INGREDIENTS,
   deleteIngredient,
+  decreaseQuantity,
 } from "../../../services/actions/ingredients";
+import { sortIngredients } from "../../../services/actions/ingredients";
 import { TConstructorIngredient } from "../../../utils/types";
 import { useDispatch, useSelector } from "../../../hooks/types";
 
@@ -40,7 +42,8 @@ export const SortableIngredient = ({
     const newIngredients = [...ingredients];
     newIngredients.splice(dragIndex, 1);
     newIngredients.splice(hoverIndex, 0, dragCard);
-    dispatch({ type: SORT_INGREDIENTS, payload: newIngredients });
+    //@ts-ignore
+    dispatch(sortIngredients());
   };
 
   const [{ handlerId }, drop] = useDrop<
@@ -96,7 +99,9 @@ export const SortableIngredient = ({
   drag(drop(ref));
 
   const onDelete = () => {
+    //@ts-ignore
     dispatch(deleteIngredient(data.id));
+    //@ts-ignore
     dispatch(decreaseQuantity(data._id));
   };
 

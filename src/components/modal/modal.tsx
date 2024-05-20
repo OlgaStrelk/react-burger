@@ -35,6 +35,7 @@ function Modal({
 
   const updateData = (action: string | string[]) => {
     [...action].forEach((element) => {
+      //@ts-ignore
       dispatch({ type: element });
     });
   };

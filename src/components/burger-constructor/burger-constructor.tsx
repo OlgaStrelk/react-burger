@@ -10,7 +10,7 @@ import Total from "./total/total.tsx";
 import {
   makeOrder,
   addIngredient,
-  INCREASE_INGREDIENT_QUANTITY,
+  increaseQuantity,
 } from "../../services/actions/ingredients.ts";
 import { Navigate } from "react-router-dom";
 import { PATHS } from "../../utils/consts.ts";
@@ -46,7 +46,9 @@ function BurgerConstructor({ onModalOpen }: IBurgerConstructorProps) {
   useEffect(() => validateConstructor(), [ingredients, buns]);
 
   const onDropHandler = (ingredient: TConstructorIngredient) => {
-    dispatch({ type: INCREASE_INGREDIENT_QUANTITY, payload: ingredient });
+    //@ts-ignore
+    dispatch(increaseQuantity(ingredient));
+    //@ts-ignore
     dispatch(addIngredient(ingredient));
   };
 
