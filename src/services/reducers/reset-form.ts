@@ -1,4 +1,4 @@
-import { RESET_PASSWORD_FORM_ONE_SET_VALUE } from "../actions/authForms";
+import { RESET_PASSWORD_FORM_ONE_SET_VALUE } from "../actions/auth-forms";
 
 import {
   RESET_PASSWORD_FORM_ONE_SUCCESS,

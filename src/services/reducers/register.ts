@@ -4,7 +4,7 @@ import {
   REGISTER_FAILED,
   REGISTER_REQUEST,
 } from "../actions/auth";
-import { REGISTER_SET_VALUE } from "../actions/authForms";
+import { REGISTER_SET_VALUE } from "../actions/auth-forms";
 export interface RegisterState {
   form: TUserWithPassword;
   resetPasswordRequest: boolean;

@@ -13,7 +13,7 @@ import Redirect from "../components/redirect/redirect";
 
 import { PATHS } from "../utils/consts";
 import { useForm } from "../hooks/useForm";
-import { registerFormValue } from "../services/actions/authForms";
+import { registerFormValue } from "../services/actions/auth-forms";
 import { register } from "../services/actions/auth";
 import { TInput } from "../utils/types";
 import { useSelector } from "../hooks/types";
