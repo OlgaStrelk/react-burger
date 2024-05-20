@@ -1,4 +1,5 @@
 import { TUserWithPassword } from "../../utils/types";
+import { TRegisterActions } from "../actions/register";
 import {
   REGISTER_FAILED,
   REGISTER_REQUEST,
@@ -20,30 +21,6 @@ const initialState: RegisterState = {
   resetPasswordRequest: false,
   resetPasswordFailed: false,
 };
-
-type TRegisterRequestAction = {
-  type: typeof REGISTER_REQUEST;
-};
-
-type TRegisterSuccessAction = {
-  type: typeof REGISTER_SUCCESS;
-};
-
-type TRegisterFailedAction = {
-  type: typeof REGISTER_FAILED;
-};
-
-type TSetValueAction = {
-  type: typeof REGISTER_SET_VALUE;
-  field: string;
-  value: string;
-};
-
-export type TRegisterActions =
-  | TRegisterRequestAction
-  | TRegisterSuccessAction
-  | TRegisterFailedAction
-  | TSetValueAction;
 
 export const registerReducer = (
   state = initialState,

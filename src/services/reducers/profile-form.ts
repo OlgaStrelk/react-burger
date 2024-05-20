@@ -1,5 +1,6 @@
 import { passwordStub } from "../../utils/consts";
 import { TUserWithPassword } from "../../utils/types";
+import { TEditProfileActions } from "../actions/profile-form";
 import {
   CLEAR_PROFILE_FORM,
   EDIT_PROFILE_SET_VALUE,
@@ -24,35 +25,6 @@ const initialState: ProfileState = {
   editProfileRequest: false,
   editProfileFailed: false,
 };
-
-type TEditProfileRequestAction = {
-  type: typeof EDIT_PROFILE_REQUEST;
-};
-
-type TEditProfileSuccessAction = {
-  type: typeof EDIT_PROFILE_SUCCESS;
-};
-
-type TClearProfileFormAction = {
-  type: typeof CLEAR_PROFILE_FORM;
-};
-
-type TSetValueAction = {
-  type: typeof EDIT_PROFILE_SET_VALUE;
-  field: string;
-  value: string;
-};
-
-type TEditProfileFailedAction = {
-  type: typeof EDIT_PROFILE_FAILED;
-};
-
-export type TEditProfileActions =
-  | TEditProfileRequestAction
-  | TEditProfileSuccessAction
-  | TEditProfileFailedAction
-  | TSetValueAction
-  | TClearProfileFormAction;
 
 export const editProfileFormReducer = (
   state = initialState,
