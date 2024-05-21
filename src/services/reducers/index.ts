@@ -2,7 +2,6 @@ import { combineReducers } from "redux";
 import { ingredientsReducer } from "./ingredients.ts";
 import { constructorReducer } from "./burger-constructor.ts";
 import { orderReducer } from "./order.ts";
-import { modalReducer } from "./modal.ts";
 import { resetFormReducer } from "./reset-form-one.ts";
 import { resetFormTwoReducer } from "./reset-form-two.ts";
 import { registerReducer } from "./register.ts";
@@ -15,7 +14,6 @@ export const rootReducer = combineReducers({
   ingredients: ingredientsReducer,
   burgerConstructor: constructorReducer,
   order: orderReducer,
-  modal: modalReducer,
   resetForm: resetFormReducer,
   resetFormTwo: resetFormTwoReducer,
   register: registerReducer,

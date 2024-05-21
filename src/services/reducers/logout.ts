@@ -5,7 +5,7 @@ import {
   LOGOUT_FAILED,
 } from "../constants/auth";
 
-export interface UserState {
+export interface LogoutState {
   logoutRequest: boolean;
   logoutFailed: boolean;
 }
@@ -18,7 +18,7 @@ const initialState: { logoutRequest: boolean; logoutFailed: boolean } = {
 export const logoutReducer = (
   state = initialState,
   action: TLogoutActions
-): UserState => {
+): LogoutState => {
   switch (action.type) {
     case LOGOUT_REQUEST: {
       return {
