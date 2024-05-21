@@ -3,7 +3,7 @@ import { ingredientsReducer } from "./ingredients.ts";
 import { constructorReducer } from "./burger-constructor.ts";
 import { orderReducer } from "./order.ts";
 import { modalReducer } from "./modal.ts";
-import { resetFormReducer } from "./reset-form.ts";
+import { resetFormReducer } from "./reset-form-one.ts";
 import { resetFormTwoReducer } from "./reset-form-two.ts";
 import { registerReducer } from "./register.ts";
 import { loginReducer } from "./login.ts";
