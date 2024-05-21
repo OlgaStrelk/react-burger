@@ -3,8 +3,7 @@ import { Fragment, memo, useMemo, forwardRef, SyntheticEvent } from "react";
 
 import IngredientCard from "../ingredient-card/ingredient-card";
 import { TIngredient, TTitles } from "../../../utils/types";
-import { getModalIngredient } from "../../../services/actions/modal";
-import { useDispatch, useSelector } from "../../../hooks/types";
+import { useSelector } from "../../../hooks/types";
 interface Props {
   titles: TTitles[];
   onScroll: (arg0: SyntheticEvent) => void;
@@ -13,15 +12,8 @@ export type Ref = HTMLUListElement;
 
 const IngredientsBlock = forwardRef<Ref, Props>(({ titles, onScroll }, ref) => {
 
-  const dispatch = useDispatch();
-
   const ingredients = useSelector((state) => state.ingredients.ingredients);
 
-  const handleCardClick = (e: SyntheticEvent) => {
-    const id = e.currentTarget.id;
-    //@ts-ignore
-    dispatch(getModalIngredient(id));
-  };
 
   const filterIngredients = (blockTitle: TTitles) =>
     useMemo(() => {
@@ -34,7 +26,7 @@ const IngredientsBlock = forwardRef<Ref, Props>(({ titles, onScroll }, ref) => {
   const renderFilteredIngredientsMarkup = (blockTitle: TTitles) => {
     const newArray = filterIngredients(blockTitle);
     return newArray.map((item: TIngredient) => (
-      <li key={item._id} id={item._id} onClick={handleCardClick}>
+      <li key={item._id} id={item._id}>
         <IngredientCard cardData={item} />
       </li>
     ));

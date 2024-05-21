@@ -1,7 +1,5 @@
-import { useEffect, useState } from "react";
 import styles from "./ingredient-details.module.css";
 import { useParams } from "react-router-dom";
-import { TIngredient } from "../../utils/types";
 import { useSelector } from "../../hooks/types";
 interface IngredientDetailsProps {
   style?: string;
