@@ -7,26 +7,12 @@ interface IngredientDetailsProps {
   style?: string;
 }
 function IngredientDetails({ style }: IngredientDetailsProps) {
-  const [ingredientData, setIngredientData] = useState<TIngredient | null>(
-    null
-  );
   const ingredients = useSelector((store) => store.ingredients.ingredients);
-
   const { id } = useParams();
 
-  const getData = (id: string) => {
-    const currentIngredient = ingredients.find((item: { _id: string }) => {
-      return id === item._id;
-    });
-    if (currentIngredient) {
-      setIngredientData(currentIngredient);
-    } else return null;
-  };
-  useEffect(() => {
-    if (ingredients && typeof id === "string") {
-      getData(id);
-    }
-  }, [ingredients, id]);
+  const ingredientData = ingredients.find((item: { _id: string }) => {
+    return id === item._id;
+  });
 
   const LIST_DATA = [
     { id: 1, title: "Калории,ккал", data: ingredientData?.calories },

@@ -3,6 +3,7 @@ import { Fragment, memo, useMemo, forwardRef, SyntheticEvent } from "react";
 
 import IngredientCard from "../ingredient-card/ingredient-card";
 import { TIngredient, TTitles } from "../../../utils/types";
+import { getModalIngredient } from "../../../services/actions/modal";
 import { useDispatch, useSelector } from "../../../hooks/types";
 interface Props {
   titles: TTitles[];

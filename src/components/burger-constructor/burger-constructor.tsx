@@ -12,6 +12,10 @@ import { useDispatch, useSelector } from "../../hooks/types.ts";
 import { Navigate } from "react-router-dom";
 import { PATHS } from "../../utils/consts.ts";
 import { TConstructorIngredient } from "../../utils/types.ts";
+import { increaseQuantity } from "../../services/actions/ingredients.ts";
+import { addIngredient } from "../../services/actions/constructor-ingredients.ts";
+import { makeOrder } from "../../services/actions/modal.ts";
+
 
 export interface IBurgerConstructorProps {
   onModalOpen: () => void;
@@ -42,9 +46,7 @@ function BurgerConstructor({ onModalOpen }: IBurgerConstructorProps) {
   useEffect(() => validateConstructor(), [ingredients, buns]);
 
   const onDropHandler = (ingredient: TConstructorIngredient) => {
-    //@ts-ignore
     dispatch(increaseQuantity(ingredient));
-    //@ts-ignore
     dispatch(addIngredient(ingredient));
   };
 
@@ -158,7 +160,4 @@ function BurgerConstructor({ onModalOpen }: IBurgerConstructorProps) {
 }
 
 export default BurgerConstructor;
-function makeOrder(data: { ingredients: string[]; }): any {
-  throw new Error("Function not implemented.");
-}
 

@@ -13,13 +13,13 @@ export interface IngredientsState {
   ingredients: TIngredient[];
   ingredientsRequest: boolean;
   ingredientsFailed: boolean;
-  currentIngredient: null | TIngredient;
+  // currentIngredient: null | TIngredient;
 }
 const initialState: IngredientsState = {
   ingredients: [],
   ingredientsRequest: false,
   ingredientsFailed: false,
-  currentIngredient: null,
+  // currentIngredient: null,
 };
 
 export const ingredientsReducer = (

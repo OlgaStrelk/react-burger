@@ -1,4 +1,3 @@
-import { TIngredient } from "../../utils/types";
 import { TModalActions } from "../actions/modal";
 import {
   GET_MODAL_INGREDIENT,
@@ -6,20 +5,23 @@ import {
 } from "../constants/ingredients";
 
 export interface ModalState {
-  currentIngredient: TIngredient | null;
+  currentIngredient: string | null;
 }
 
 const initialState: ModalState = {
   currentIngredient: null,
 };
 
-export const modalReducer = (state = initialState, action: TModalActions) => {
+export const modalReducer = (
+  state = initialState,
+  action: TModalActions
+): ModalState => {
   switch (action.type) {
     case GET_MODAL_INGREDIENT: {
-      const ingredient = action.payload;
+      const id = action.payload;
       return {
         ...state,
-        currentIngredient: ingredient,
+        currentIngredient: id,
       };
     }
 
@@ -34,4 +36,3 @@ export const modalReducer = (state = initialState, action: TModalActions) => {
     }
   }
 };
-
