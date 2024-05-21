@@ -29,10 +29,11 @@ const initialState: ProfileState = {
 export const editProfileFormReducer = (
   state = initialState,
   action: TEditProfileActions
-) => {
+): ProfileState => {
   switch (action.type) {
     case EDIT_PROFILE_SET_VALUE: {
       return {
+        ...state,
         form: {
           ...state.form,
           [action.field]: action.value,
@@ -42,12 +43,12 @@ export const editProfileFormReducer = (
 
     case CLEAR_PROFILE_FORM: {
       return {
+        ...state,
         form: initialState.form,
       };
     }
 
     case EDIT_PROFILE_REQUEST: {
-      console.log("request");
       return {
         ...state,
         editProfileRequest: true,
@@ -55,7 +56,6 @@ export const editProfileFormReducer = (
       };
     }
     case EDIT_PROFILE_SUCCESS: {
-      console.log("success");
       return {
         ...state,
         editProfileRequest: false,

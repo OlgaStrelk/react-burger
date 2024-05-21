@@ -10,8 +10,11 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { TConstructorIngredient } from "../../../utils/types";
 import { useDispatch, useSelector } from "../../../hooks/types";
-import { sortIngredients, deleteIngredient, decreaseQuantity } from "../../../services/actions/constructor-ingredients";
-
+import {
+  sortIngredients,
+  deleteIngredient,
+} from "../../../services/actions/constructor-ingredients";
+import { decreaseQuantity } from "../../../services/actions/ingredients";
 export interface ISortableIngredientProps {
   data: TConstructorIngredient;
   index: number;

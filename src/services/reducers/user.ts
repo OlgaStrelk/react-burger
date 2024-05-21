@@ -1,6 +1,13 @@
 import { TUser } from "../../utils/types";
 import { TUserActions } from "../actions/user";
-import { GET_USER_REQUEST, GET_USER_SUCCESS, GET_USER_FAILED, DELETE_USER, SET_AUTH_CHECKED, UPDATE_USER_DATA } from "../constants/user";
+import {
+  GET_USER_REQUEST,
+  GET_USER_SUCCESS,
+  GET_USER_FAILED,
+  DELETE_USER,
+  SET_AUTH_CHECKED,
+  UPDATE_USER_DATA,
+} from "../constants/user";
 
 export interface UserState {
   user: TUser | null;
@@ -16,7 +23,10 @@ const initialState: UserState = {
   userFailed: false,
 };
 
-export const userReducer = (state = initialState, action: TUserActions) => {
+export const userReducer = (
+  state = initialState,
+  action: TUserActions
+): UserState => {
   switch (action.type) {
     case GET_USER_REQUEST: {
       return {
@@ -26,7 +36,7 @@ export const userReducer = (state = initialState, action: TUserActions) => {
       };
     }
     case GET_USER_SUCCESS: {
-      console.log('getUserSuc',action.payload);
+      console.log("getUserSuc", action.payload);
       return {
         ...state,
         user: { ...action.payload },
@@ -53,7 +63,7 @@ export const userReducer = (state = initialState, action: TUserActions) => {
     }
 
     case UPDATE_USER_DATA: {
-      console.log('update_user_data',action.payload);
+      console.log("update_user_data", action.payload);
       return { ...state, user: { ...action.payload } };
     }
 

@@ -1,8 +1,12 @@
 import { TOrderActions } from "../actions/order";
-import { MAKE_ORDER_REQUEST, MAKE_ORDER_SUCCESS, MAKE_ORDER_FAILED } from "../constants/order";
+import {
+  MAKE_ORDER_REQUEST,
+  MAKE_ORDER_SUCCESS,
+  MAKE_ORDER_FAILED,
+} from "../constants/order";
 
 export interface OrderState {
-  order: number | null;
+  order: { number: number } | null;
   orderRequest: boolean;
   orderFailed: boolean;
 }
@@ -13,7 +17,10 @@ const initialState: OrderState = {
   orderFailed: false,
 };
 
-export const orderReducer = (state = initialState, action: TOrderActions) => {
+export const orderReducer = (
+  state = initialState,
+  action: TOrderActions
+): OrderState => {
   switch (action.type) {
     case MAKE_ORDER_REQUEST: {
       return {

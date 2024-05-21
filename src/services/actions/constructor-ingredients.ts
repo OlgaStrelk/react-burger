@@ -6,9 +6,6 @@ import {
   SORT_INGREDIENTS,
   DELETE_INGREDIENT,
   RESET_CONSTRUCTOR,
-  INCREASE_INGREDIENT_QUANTITY,
-  DECREASE_INGREDIENT_QUANTITY,
-  RESET_INGREDIENTS_QUANTITY,
 } from "../constants/ingredients";
 
 type TAddIngredientAction = {
@@ -30,37 +27,16 @@ type TResetConstructor = {
   type: typeof RESET_CONSTRUCTOR;
 };
 
-type TIncreaseQuantityAction = {
-  type: typeof INCREASE_INGREDIENT_QUANTITY;
-  payload: TConstructorIngredient;
-};
-type TDecreaseQuantityAction = {
-  type: typeof DECREASE_INGREDIENT_QUANTITY;
-  payload: string;
-};
-type TResetQuantityAction = {
-  type: typeof RESET_INGREDIENTS_QUANTITY;
-};
-
 export type TBurgerConstructorActions =
   | TAddIngredientAction
   | TSortIngredientAction
   | TDeleteIngredientAction
-  | TResetConstructor
-  | TIncreaseQuantityAction
-  | TDecreaseQuantityAction
-  | TResetQuantityAction;
+  | TResetConstructor;
 
 export const sortIngredients = (
   newIngredients: TConstructorIngredient[]
 ): TSortIngredientAction => {
   return { type: SORT_INGREDIENTS, payload: newIngredients };
-};
-
-export const increaseQuantity = (
-  ingredient: TConstructorIngredient
-): TIncreaseQuantityAction => {
-  return { type: INCREASE_INGREDIENT_QUANTITY, payload: ingredient };
 };
 
 export const addIngredient = (
@@ -70,7 +46,4 @@ export const addIngredient = (
 };
 export const deleteIngredient = (id: string): TDeleteIngredientAction => {
   return { type: DELETE_INGREDIENT, payload: id };
-};
-export const decreaseQuantity = (id: string): TDecreaseQuantityAction => {
-  return { type: DECREASE_INGREDIENT_QUANTITY, payload: id };
 };

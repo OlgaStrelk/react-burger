@@ -25,10 +25,11 @@ const initialState: RegisterState = {
 export const registerReducer = (
   state = initialState,
   action: TRegisterActions
-) => {
+): RegisterState => {
   switch (action.type) {
     case REGISTER_SET_VALUE: {
       return {
+        ...state,
         form: {
           ...state.form,
           [action.field]: action.value,

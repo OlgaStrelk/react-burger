@@ -1,6 +1,9 @@
-
 import { TResetFormTwoActions } from "../actions/reset-form-two";
-import { RESET_PASSWORD_FORM_TWO_REQUEST, RESET_PASSWORD_FORM_TWO_SUCCESS, RESET_PASSWORD_FORM_TWO_FAILED } from "../constants/auth";
+import {
+  RESET_PASSWORD_FORM_TWO_REQUEST,
+  RESET_PASSWORD_FORM_TWO_SUCCESS,
+  RESET_PASSWORD_FORM_TWO_FAILED,
+} from "../constants/auth";
 import { RESET_PASSWORD_FORM_TWO_SET_VALUE } from "../constants/auth-forms";
 
 export interface ResetFormTwoState {
@@ -21,10 +24,11 @@ const initialState: ResetFormTwoState = {
 export const resetFormTwoReducer = (
   state = initialState,
   action: TResetFormTwoActions
-) => {
+): ResetFormTwoState => {
   switch (action.type) {
     case RESET_PASSWORD_FORM_TWO_SET_VALUE: {
       return {
+        ...state,
         form: {
           ...state.form,
           [action.field]: action.value,
