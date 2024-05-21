@@ -9,8 +9,12 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import { modalStyle } from "../utils/consts";
 import { useState } from "react";
 import Preloader from "../components/preloader/preloader";
-import { useSelector } from "../hooks/types";
-import { RESET_CONSTRUCTOR, RESET_INGREDIENTS_QUANTITY } from "../services/constants/ingredients";
+import { useSelector } from "../services/types/hooks";
+import {
+  RESET_CONSTRUCTOR,
+  RESET_INGREDIENTS_QUANTITY,
+} from "../services/constants/ingredients";
+import { FETCHING_FAILED_ERROR_TEXT } from "../utils/errors";
 
 function HomePage() {
   const { ingredients, ingredientsRequest: isLoading } = useSelector(
@@ -52,10 +56,7 @@ function HomePage() {
         )
       ) : (
         <main className={styles.main_error}>
-          <h2 className={styles.title}>
-            Не&nbsp;удалось загрузить данные. Проверте соединение
-            с&nbsp;интернетом или попробуйте позже
-          </h2>
+          <h2 className={styles.title}>{FETCHING_FAILED_ERROR_TEXT.main}</h2>
         </main>
       )}
     </>

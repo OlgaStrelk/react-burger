@@ -1,5 +1,5 @@
 import { SyntheticEvent } from "react";
-import { useDispatch } from "./types";
+import { useDispatch } from "../services/types/hooks";
 export const useForm = () => {
   const dispatch = useDispatch();
 //@ts-ignore

@@ -1,4 +1,4 @@
-import { useSelector } from "../../../hooks/types";
+import { useSelector } from "../../../services/types/hooks";
 import CurrencyIconPath from "../../../images/cur-icon.svg";
 // import styles from "./total.module.css";
 import { useMemo } from "react";

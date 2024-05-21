@@ -62,7 +62,6 @@ export const editProfileFormReducer = (
       };
     }
     case EDIT_PROFILE_FAILED: {
-      console.log("failed");
       return {
         ...state,
         editProfileRequest: false,

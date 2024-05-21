@@ -15,7 +15,7 @@ import { PATHS } from "../utils/consts";
 import { useForm } from "../hooks/useForm";
 
 import { TInput } from "../utils/types";
-import { useSelector } from "../hooks/types";
+import { useSelector } from "../services/types/hooks";
 import { register, registerFormValue } from "../services/actions/register";
 
 function Register() {

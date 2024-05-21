@@ -1,6 +1,6 @@
+import { useSelector } from "../../services/types/hooks";
 import styles from "./ingredient-details.module.css";
 import { useParams } from "react-router-dom";
-import { useSelector } from "../../hooks/types";
 interface IngredientDetailsProps {
   style?: string;
 }

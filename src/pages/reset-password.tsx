@@ -14,7 +14,7 @@ import { PATHS } from "../utils/consts";
 import { useForm } from "../hooks/useForm";
 import { useNavigate } from "react-router-dom";
 import { TInput } from "../utils/types";
-import { useSelector } from "../hooks/types";
+import { useSelector } from "../services/types/hooks";
 import {
   resetPasswordTwoFormValue,
   resetPasswordStepTwo,

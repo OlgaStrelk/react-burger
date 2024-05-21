@@ -8,13 +8,13 @@ import {
 import styles from "./burger-constructor.module.css";
 import Total from "./total/total.tsx";
 
-import { useDispatch, useSelector } from "../../hooks/types.ts";
 import { Navigate } from "react-router-dom";
 import { PATHS } from "../../utils/consts.ts";
 import { TConstructorIngredient } from "../../utils/types.ts";
 import { increaseQuantity } from "../../services/actions/ingredients.ts";
 import { addIngredient } from "../../services/actions/constructor-ingredients.ts";
 import { makeOrder } from "../../services/actions/order.ts";
+import { useDispatch, useSelector } from "../../services/types/hooks.ts";
 
 
 export interface IBurgerConstructorProps {

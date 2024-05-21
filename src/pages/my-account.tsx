@@ -3,8 +3,8 @@ import styles from "./my-account.module.css";
 import { Link, NavLink, Outlet } from "react-router-dom";
 
 import { PATHS } from "../utils/consts";
-import { useDispatch } from "../hooks/types";
 import { logout } from "../services/actions/logout";
+import { useDispatch } from "../services/types/hooks";
 
 function MyAccountPage() {
   const dispatch = useDispatch();

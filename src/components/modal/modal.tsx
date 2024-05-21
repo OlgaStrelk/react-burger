@@ -4,14 +4,14 @@ import styles from "./modal.module.css";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import ReactDOM from "react-dom";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "../../hooks/types";
+import { useDispatch } from "../../services/types/hooks";
 
 const modalRoot = document.getElementById("react-modals");
 type PropsWithChildren<P = unknown> = P & { children: ReactNode };
 
 interface IModal {
   onClose?: () => void;
-  action: string | string[];
+  action?: string | string[];
   path?: string;
   customStyle?: string;
 }
@@ -44,7 +44,9 @@ function Modal({
     if (path) {
       navigate(path);
     } else if (onClose) onClose();
-    updateData(action);
+    else if (action) {
+      updateData(action);
+    }
   };
 
   const handleEscClose = (e: KeyboardEvent) => {

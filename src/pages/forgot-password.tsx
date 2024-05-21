@@ -7,7 +7,7 @@ import Redirect from "../components/redirect/redirect";
 import { useState, useEffect, ChangeEvent, SyntheticEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { TInput } from "../utils/types";
-import { useSelector } from "../hooks/types";
+import { useSelector } from "../services/types/hooks";
 import { resetPasswordOneFormValue, resetPasswordStepOne } from "../services/actions/reset-form-one";
 function ForgotPasswordPage() {
   const [isValid, setIsValid] = useState(false);

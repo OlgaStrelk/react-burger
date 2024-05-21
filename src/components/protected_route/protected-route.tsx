@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { PATHS } from "../../utils/consts";
-import { useSelector } from "../../hooks/types";
+import { useSelector } from "../../services/types/hooks";
 
 interface IProtectedRoute {
   onlyUnAuth?: boolean;

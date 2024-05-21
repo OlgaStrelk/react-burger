@@ -12,8 +12,9 @@ import { editProfile } from "../services/actions/user";
 import { TInput } from "../utils/types";
 import Preloader from "../components/preloader/preloader";
 import { passwordStub } from "../utils/consts";
-import { useDispatch, useSelector } from "../hooks/types";
+import { useDispatch, useSelector } from "../services/types/hooks";
 import { editProfileFormValue } from "../services/actions/profile-form";
+import { FETCHING_FAILED_ERROR_TEXT } from "../utils/errors";
 
 function ProfilePage() {
   const { user, userRequest: isLoading } = useSelector((state) => state.user);
@@ -158,10 +159,7 @@ function ProfilePage() {
         </>
       ) : (
         <main className={styles.main_error}>
-          <h2 className={styles.title}>
-            Не&nbsp;удалось загрузить данные. Проверте соединение
-            с&nbsp;интернетом или попробуйте позже
-          </h2>
+          <h2 className={styles.title}>{FETCHING_FAILED_ERROR_TEXT.main}</h2>
         </main>
       )}
     </>

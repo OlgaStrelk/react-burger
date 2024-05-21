@@ -36,7 +36,6 @@ export const userReducer = (
       };
     }
     case GET_USER_SUCCESS: {
-      console.log("getUserSuc", action.payload);
       return {
         ...state,
         user: { ...action.payload },
@@ -63,7 +62,6 @@ export const userReducer = (
     }
 
     case UPDATE_USER_DATA: {
-      console.log("update_user_data", action.payload);
       return { ...state, user: { ...action.payload } };
     }
 

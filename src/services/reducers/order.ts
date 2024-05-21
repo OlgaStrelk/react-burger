@@ -6,7 +6,7 @@ import {
 } from "../constants/order";
 
 export interface OrderState {
-  order: { number: number } | null;
+  order: number | null;
   orderRequest: boolean;
   orderFailed: boolean;
 }

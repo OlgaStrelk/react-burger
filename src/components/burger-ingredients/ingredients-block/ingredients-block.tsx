@@ -3,7 +3,7 @@ import { Fragment, memo, useMemo, forwardRef, SyntheticEvent } from "react";
 
 import IngredientCard from "../ingredient-card/ingredient-card";
 import { TIngredient, TTitles } from "../../../utils/types";
-import { useSelector } from "../../../hooks/types";
+import { useSelector } from "../../../services/types/hooks";
 interface Props {
   titles: TTitles[];
   onScroll: (arg0: SyntheticEvent) => void;

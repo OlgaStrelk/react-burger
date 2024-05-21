@@ -1,28 +1,30 @@
 import { request, handleError } from "../../utils/api";
 import { ENDPOINT, optionsWithAuth } from "../../utils/consts";
 import { TOrderRequest, IOrderResponse } from "../../utils/types";
-import { MAKE_ORDER_FAILED, MAKE_ORDER_REQUEST, MAKE_ORDER_SUCCESS } from "../constants/order";
+import {
+  MAKE_ORDER_FAILED,
+  MAKE_ORDER_REQUEST,
+  MAKE_ORDER_SUCCESS,
+} from "../constants/order";
 
 type TOrderRequestAction = {
-    type: typeof MAKE_ORDER_REQUEST;
-  };
-  
-  type TOrderSuccessAction = {
-    type: typeof MAKE_ORDER_SUCCESS;
-    payload: { number: number };
-  };
-  
-  type TOrderFailedAction = {
-    type: typeof MAKE_ORDER_FAILED;
-  };
-  
-  export type TOrderActions =
-    | TOrderRequestAction
-    | TOrderSuccessAction
-    | TOrderFailedAction;
+  type: typeof MAKE_ORDER_REQUEST;
+};
 
+type TOrderSuccessAction = {
+  type: typeof MAKE_ORDER_SUCCESS;
+  payload: number;
+};
 
-  
+type TOrderFailedAction = {
+  type: typeof MAKE_ORDER_FAILED;
+};
+
+export type TOrderActions =
+  | TOrderRequestAction
+  | TOrderSuccessAction
+  | TOrderFailedAction;
+
 export const makeOrder = (data: TOrderRequest) => (dispatch: any) => {
   dispatch({ type: MAKE_ORDER_REQUEST });
   request<IOrderResponse>(ENDPOINT.orders, {

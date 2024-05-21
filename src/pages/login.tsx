@@ -14,7 +14,7 @@ import { PATHS } from "../utils/consts";
 import { useForm } from "../hooks/useForm";
 
 import { TInput } from "../utils/types";
-import { useSelector } from "../hooks/types";
+import { useSelector } from "../services/types/hooks";
 import { loginFormValue, login } from "../services/actions/login";
 
 function LoginPage() {

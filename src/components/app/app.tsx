@@ -26,8 +26,7 @@ import { OnlyAuth, OnlyUnAuth } from "../protected_route/protected-route";
 import { PATHS } from "../../utils/consts";
 import { checkUserAuth } from "../../services/actions/user";
 import MyAccountPage from "../../pages/my-account";
-import { useDispatch } from "../../hooks/types";
-import { RESET_MODAL_INGREDIENT } from "../../services/constants/ingredients";
+import { useDispatch } from "../../services/types/hooks";
 function App() {
   const dispatch = useDispatch();
   let location = useLocation();
@@ -103,7 +102,6 @@ function App() {
             element={
               <Modal
                 customStyle={modalStyle.ingredient}
-                action={RESET_MODAL_INGREDIENT}
                 path={home}
               >
                 <IngredientDetails />
