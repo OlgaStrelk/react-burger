@@ -13,6 +13,7 @@ import {
   INCREASE_INGREDIENT_QUANTITY,
   RESET_INGREDIENTS_QUANTITY,
 } from "../constants/ingredients";
+import { AppDispatch, AppThunk } from "../types";
 
 type TGetIngredientRequestAction = {
   type: typeof GET_INGREDIENTS_REQUEST;
@@ -47,8 +48,16 @@ export type TIngredientsActions =
   | TDecreaseQuantityAction
   | TResetQuantityAction;
 
-//@ts-ignore
-export const fetchIngredients = () => (dispatch) => {
+export const increaseQuantity = (
+  ingredient: TConstructorIngredient
+): TIncreaseQuantityAction => {
+  return { type: INCREASE_INGREDIENT_QUANTITY, payload: ingredient };
+};
+export const decreaseQuantity = (id: string): TDecreaseQuantityAction => {
+  return { type: DECREASE_INGREDIENT_QUANTITY, payload: id };
+};
+
+export const fetchIngredients:AppThunk = () => (dispatch: AppDispatch) => {
   dispatch({ type: GET_INGREDIENTS_REQUEST });
   request<IIngredientsResponse>(ENDPOINT.ingredients, {
     ...optionsUnAuth,
@@ -58,13 +67,4 @@ export const fetchIngredients = () => (dispatch) => {
       dispatch({ type: GET_INGREDIENTS_SUCCESS, payload: res.data });
     })
     .catch((err) => handleError(GET_INGREDIENTS_FAILED, err, dispatch));
-};
-
-export const increaseQuantity = (
-  ingredient: TConstructorIngredient
-): TIncreaseQuantityAction => {
-  return { type: INCREASE_INGREDIENT_QUANTITY, payload: ingredient };
-};
-export const decreaseQuantity = (id: string): TDecreaseQuantityAction => {
-  return { type: DECREASE_INGREDIENT_QUANTITY, payload: id };
 };
