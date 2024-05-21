@@ -23,7 +23,7 @@ const initialState: ConstructorState = {
 export const constructorReducer = (
   state = initialState,
   action: TBurgerConstructorActions
-) => {
+): ConstructorState => {
   switch (action.type) {
     case ADD_INGREDIENT: {
       const ingredient = action.payload;

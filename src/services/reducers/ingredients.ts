@@ -13,19 +13,17 @@ export interface IngredientsState {
   ingredients: TIngredient[];
   ingredientsRequest: boolean;
   ingredientsFailed: boolean;
-  // currentIngredient: null | TIngredient;
 }
 const initialState: IngredientsState = {
   ingredients: [],
   ingredientsRequest: false,
   ingredientsFailed: false,
-  // currentIngredient: null,
 };
 
 export const ingredientsReducer = (
   state = initialState,
   action: TIngredientsActions
-) => {
+): IngredientsState => {
   switch (action.type) {
     case GET_INGREDIENTS_REQUEST: {
       return {
