@@ -14,7 +14,7 @@ import { PATHS } from "../../utils/consts.ts";
 import { TConstructorIngredient } from "../../utils/types.ts";
 import { increaseQuantity } from "../../services/actions/ingredients.ts";
 import { addIngredient } from "../../services/actions/constructor-ingredients.ts";
-import { makeOrder } from "../../services/actions/modal.ts";
+import { makeOrder } from "../../services/actions/order.ts";
 
 
 export interface IBurgerConstructorProps {
