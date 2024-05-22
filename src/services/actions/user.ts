@@ -1,8 +1,7 @@
 import { ENDPOINT, passwordStub } from "../../utils/consts";
-import { fetchWithRefresh, handleError, request } from "../../utils/api";
+import { fetchWithRefresh, handleError } from "../../utils/api";
 import { optionsWithAuth } from "../../utils/consts";
 import {
-  IResetPasswordResponse,
   IUserSuccessResponse,
   TUser,
   TUserWithPassword,
@@ -18,12 +17,7 @@ import {
   EDIT_PROFILE_FAILED,
   EDIT_PROFILE_SUCCESS,
 } from "../constants/user";
-import {
-  LOGOUT_REQUEST,
-  LOGOUT_SUCCESS,
-  LOGOUT_FAILED,
-} from "../constants/auth";
-import { CLEAR_PROFILE_FORM } from "../constants/auth-forms";
+import { AppDispatch } from "../types";
 
 type TUserRequestAction = {
   type: typeof GET_USER_REQUEST;
@@ -60,22 +54,22 @@ export type TUserActions =
   | TSetAuthCheckedAction
   | TUpdateUserAction;
 
-export const updateUser = (user: { [key in string]: string }) => ({
+export const updateUser = (user: TUser):TUpdateUserAction => ({
   type: UPDATE_USER_DATA,
   payload: user,
 });
 
-export const setAuthChecked = (isChecked: boolean) => ({
+export const setAuthChecked = (isChecked: boolean):TSetAuthCheckedAction => ({
   type: SET_AUTH_CHECKED,
   payload: isChecked,
 });
 
-export const getUser = (user: TUser) => ({
+export const receiveUser = (user: TUser):TUserSuccessAction => ({
   type: GET_USER_SUCCESS,
   payload: user,
 });
 
-export const fetchUser = () => async (dispatch: any) => {
+export const fetchUser = () => async (dispatch: AppDispatch) => {
   dispatch({ type: GET_USER_REQUEST });
 
   const data = await (<Promise<IUserSuccessResponse>>fetchWithRefresh(
@@ -95,12 +89,12 @@ export const fetchUser = () => async (dispatch: any) => {
     }));
 
   if (data && data.success) {
-    dispatch(getUser(data.user));
+    dispatch(receiveUser(data.user));
   }
 };
 
 export const checkUserAuth = () => {
-  return (dispatch: any) => {
+  return (dispatch: AppDispatch) => {
     if (localStorage.getItem("accessToken")) {
       dispatch(fetchUser())
         .catch((err: Error) => {
@@ -115,26 +109,27 @@ export const checkUserAuth = () => {
   };
 };
 
-export const editProfile = () => async (dispatch: any, getState: any) => {
-  dispatch({ type: EDIT_PROFILE_REQUEST });
-  let form = getState().profile.form;
-  const { name, email, password }: TUserWithPassword = form;
-  let requestData: TUserWithPassword | TUser =
-    password === passwordStub ? { name, email } : { name, email, password };
-  let data = await (<Promise<IUserSuccessResponse>>fetchWithRefresh(
-    ENDPOINT.user,
-    {
-      ...optionsWithAuth,
-      method: "PATCH",
-      body: JSON.stringify(requestData),
+export const editProfile =
+  () => async (dispatch: AppDispatch, getState: any) => {
+    dispatch({ type: EDIT_PROFILE_REQUEST });
+    let form = getState().profile.form;
+    const { name, email, password }: TUserWithPassword = form;
+    let requestData: TUserWithPassword | TUser =
+      password === passwordStub ? { name, email } : { name, email, password };
+    let data = await (<Promise<IUserSuccessResponse>>fetchWithRefresh(
+      ENDPOINT.user,
+      {
+        ...optionsWithAuth,
+        method: "PATCH",
+        body: JSON.stringify(requestData),
+      }
+    )
+      .then((data) => data)
+      .catch((err) => handleError(EDIT_PROFILE_FAILED, err, dispatch)));
+
+    if (data && data.success) {
+      dispatch({ type: EDIT_PROFILE_SUCCESS });
+
+      dispatch(updateUser(data.user));
     }
-  )
-    .then((data) => data)
-    .catch((err) => handleError(EDIT_PROFILE_FAILED, err, dispatch)));
-
-  if (data && data.success) {
-    dispatch({ type: EDIT_PROFILE_SUCCESS });
-
-    dispatch(updateUser(data.user));
-  }
-};
+  };

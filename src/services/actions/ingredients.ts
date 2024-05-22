@@ -57,14 +57,20 @@ export const decreaseQuantity = (id: string): TDecreaseQuantityAction => {
   return { type: DECREASE_INGREDIENT_QUANTITY, payload: id };
 };
 
-export const fetchIngredients:AppThunk = () => (dispatch: AppDispatch) => {
+export const receiveIngredients = (
+  ingredients: TIngredient[]
+): TGetIngredientSuccessAction => {
+  return { type: GET_INGREDIENTS_SUCCESS, payload: ingredients };
+};
+
+export const fetchIngredients: AppThunk = () => (dispatch: AppDispatch) => {
   dispatch({ type: GET_INGREDIENTS_REQUEST });
   request<IIngredientsResponse>(ENDPOINT.ingredients, {
     ...optionsUnAuth,
     method: "GET",
   })
     .then((res) => {
-      dispatch({ type: GET_INGREDIENTS_SUCCESS, payload: res.data });
+      dispatch(receiveIngredients(res.data));
     })
     .catch((err) => handleError(GET_INGREDIENTS_FAILED, err, dispatch));
 };

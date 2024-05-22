@@ -7,6 +7,7 @@ import {
   REGISTER_FAILED,
 } from "../constants/auth";
 import { REGISTER_SET_VALUE } from "../constants/auth-forms";
+import { AppDispatch, AppThunk } from "../types";
 import { updateUser } from "./user";
 
 type TRegisterRequestAction = {
@@ -39,7 +40,7 @@ export const registerFormValue = (field: string, value: string) => ({
   value,
 });
 
-export const register = () => async (dispatch: any, getState: any) => {
+export const register:AppThunk = () => async (dispatch: AppDispatch, getState: any) => {
   dispatch({ type: REGISTER_REQUEST });
   const data = await request<TAuthorizationResonse>(ENDPOINT.register, {
     ...optionsUnAuth,

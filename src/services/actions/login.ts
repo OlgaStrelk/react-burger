@@ -3,6 +3,7 @@ import { ENDPOINT, optionsUnAuth } from "../../utils/consts";
 import { TAuthorizationResonse } from "../../utils/types";
 import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILED } from "../constants/auth";
 import { LOGIN_SET_VALUE } from "../constants/auth-forms";
+import { AppDispatch, AppThunk } from "../types";
 import { updateUser } from "./user";
 
 type TLoginRequestAction = {
@@ -36,7 +37,7 @@ export const loginFormValue = (field: string, value: string) => ({
   value,
 });
 
-export const login = () => async (dispatch: any, getState: any) => {
+export const login:AppThunk = () => async (dispatch: AppDispatch, getState: any) => {
   dispatch({ type: LOGIN_REQUEST });
   const data = await request<TAuthorizationResonse>(ENDPOINT.login, {
     ...optionsUnAuth,
@@ -49,8 +50,7 @@ export const login = () => async (dispatch: any, getState: any) => {
     })
     .catch((err) => handleError(LOGIN_FAILED, err, dispatch));
   if (data && data.success) {
-    const value = getState().login.form.password;
-    dispatch(updateUser({ ...data.user, password: value }));
+    dispatch(updateUser(data.user));
     localStorage.setItem("accessToken", data.accessToken);
     localStorage.setItem("refreshToken", data.refreshToken);
   }

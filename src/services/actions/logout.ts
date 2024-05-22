@@ -4,6 +4,7 @@ import { IResetPasswordResponse } from "../../utils/types";
 import { LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_FAILED } from "../constants/auth";
 import { CLEAR_PROFILE_FORM } from "../constants/auth-forms";
 import { DELETE_USER } from "../constants/user";
+import { AppDispatch, AppThunk } from "../types";
 
 type TLogoutRequestAction = {
   type: typeof LOGOUT_REQUEST;
@@ -22,7 +23,7 @@ export type TLogoutActions =
   | TLogoutSuccessAction
   | TLogoutFailedAction;
 
-export const logout = () => (dispatch: any) => {
+export const logout:AppThunk = () => (dispatch: AppDispatch) => {
   dispatch({ type: LOGOUT_REQUEST });
   if (localStorage.getItem("accessToken")) {
     request<IResetPasswordResponse>(ENDPOINT.logout, {
