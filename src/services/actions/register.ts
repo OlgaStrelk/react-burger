@@ -1,14 +1,12 @@
 import { request, handleError } from "../../utils/api";
 import { ENDPOINT, optionsUnAuth } from "../../utils/consts";
 import { TAuthorizationResonse } from "../../utils/types";
-import {
-  REGISTER_REQUEST,
-  REGISTER_SUCCESS,
-  REGISTER_FAILED,
-} from "../constants/auth";
+import { REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAILED } from "../constants/auth";
 import { REGISTER_SET_VALUE } from "../constants/auth-forms";
-import { AppDispatch, AppThunk } from "../types";
+import { AppThunk, AppDispatch } from "../types";
 import { updateUser } from "./user";
+
+
 
 type TRegisterRequestAction = {
   type: typeof REGISTER_REQUEST;
