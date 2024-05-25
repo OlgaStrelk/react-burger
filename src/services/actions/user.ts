@@ -54,17 +54,17 @@ export type TUserActions =
   | TSetAuthCheckedAction
   | TUpdateUserAction;
 
-export const updateUser = (user: TUser):TUpdateUserAction => ({
+export const updateUser = (user: TUser): TUpdateUserAction => ({
   type: UPDATE_USER_DATA,
   payload: user,
 });
 
-export const setAuthChecked = (isChecked: boolean):TSetAuthCheckedAction => ({
+export const setAuthChecked = (isChecked: boolean): TSetAuthCheckedAction => ({
   type: SET_AUTH_CHECKED,
   payload: isChecked,
 });
 
-export const receiveUser = (user: TUser):TUserSuccessAction => ({
+export const receiveUser = (user: TUser): TUserSuccessAction => ({
   type: GET_USER_SUCCESS,
   payload: user,
 });
@@ -72,37 +72,42 @@ export const receiveUser = (user: TUser):TUserSuccessAction => ({
 export const fetchUser = () => async (dispatch: AppDispatch) => {
   dispatch({ type: GET_USER_REQUEST });
 
-  const data = await (<Promise<IUserSuccessResponse>>fetchWithRefresh(
-    ENDPOINT.user,
-    {
-      ...optionsWithAuth,
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: localStorage.getItem("accessToken") as string,
-      },
-    }
-  )
-    .then((data) => data)
+  await fetchWithRefresh<IUserSuccessResponse>(ENDPOINT.user, {
+    ...optionsWithAuth,
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: localStorage.getItem("accessToken") as string,
+    },
+  })
+    .then((data) => {
+      console.log("получаем дату, там юзер?",data);
+      if (data && data.success) {
+        console.log("получаем юзера");
+        dispatch(receiveUser(data.user));
+      }
+    
+    })
     .catch((err) => {
       handleError(GET_USER_FAILED, err, dispatch);
-    }));
-
-  if (data && data.success) {
-    dispatch(receiveUser(data.user));
-  }
+    });
 };
 
 export const checkUserAuth = () => {
   return (dispatch: AppDispatch) => {
+    console.log('checkUserAuth')
+    console.log('checkToken', localStorage.getItem("accessToken"))
     if (localStorage.getItem("accessToken")) {
-      dispatch(fetchUser())
-        .catch((err: Error) => {
-          handleError(DELETE_USER, err, dispatch);
-          localStorage.removeItem("accessToken");
-          localStorage.removeItem("refreshToken");
-        })
-        .finally(() => dispatch(setAuthChecked(true)));
+      try {
+        dispatch(fetchUser());
+        console.log("checkUserAuth");
+      } catch (err) {console.log(Boolean(err instanceof Error))
+        handleError(DELETE_USER, err, dispatch);
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+      } finally {
+        dispatch(setAuthChecked(true));
+      }
     } else {
       dispatch(setAuthChecked(true));
     }
@@ -116,20 +121,17 @@ export const editProfile =
     const { name, email, password }: TUserWithPassword = form;
     let requestData: TUserWithPassword | TUser =
       password === passwordStub ? { name, email } : { name, email, password };
-    let data = await (<Promise<IUserSuccessResponse>>fetchWithRefresh(
-      ENDPOINT.user,
-      {
-        ...optionsWithAuth,
-        method: "PATCH",
-        body: JSON.stringify(requestData),
-      }
-    )
-      .then((data) => data)
-      .catch((err) => handleError(EDIT_PROFILE_FAILED, err, dispatch)));
+    await fetchWithRefresh<IUserSuccessResponse>(ENDPOINT.user, {
+      ...optionsWithAuth,
+      method: "PATCH",
+      body: JSON.stringify(requestData),
+    })
+      .then((data) => {
+        if (data && data.success) {
+          dispatch({ type: EDIT_PROFILE_SUCCESS });
 
-    if (data && data.success) {
-      dispatch({ type: EDIT_PROFILE_SUCCESS });
-
-      dispatch(updateUser(data.user));
-    }
+          dispatch(updateUser(data.user));
+        }
+      })
+      .catch((err) => handleError(EDIT_PROFILE_FAILED, err, dispatch));
   };

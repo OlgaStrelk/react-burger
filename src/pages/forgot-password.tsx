@@ -30,7 +30,7 @@ function ForgotPasswordPage() {
 
   const onSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
     handleSubmit(e, resetPasswordStepOne, isValid);
-    localStorage.setItem("emailsSent", "true");
+    localStorage.setItem("emailSent", "true");
     navigate(PATHS.resetPassword, { replace: true });
   };
 

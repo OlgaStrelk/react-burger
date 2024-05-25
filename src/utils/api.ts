@@ -1,4 +1,4 @@
-import { API_URL, optionsWithAuth } from "./consts";
+import { API_URL, ENDPOINT, optionsWithAuth } from "./consts";
 import {
   ITokenResponse,
   TAuthOptions,
@@ -27,43 +27,51 @@ export const checkResponse = <T>(res: CustomResponse): T => {
 };
 
 export const refreshToken = () => {
-  return fetch(`${API_URL}auth/token`, {
+  return request<ITokenResponse>(ENDPOINT.refreshToken, {
+    ...optionsWithAuth,
     method: "POST",
-    headers: {
-      "Content-Type": "application/json;charset=utf-8",
-    },
     body: JSON.stringify({
       token: localStorage.getItem("refreshToken"),
     }),
-  })
-    .then(checkResponse<ITokenResponse>)
-    .then((refreshData) => {
-      if (!refreshData.success) {
-        return Promise.reject(refreshData);
-      }
-      localStorage.setItem("refreshToken", refreshData.refreshToken);
-      localStorage.setItem("accessToken", refreshData.accessToken);
-      return refreshData as ITokenResponse;
-    });
+  }).then((refreshData) => {
+    if (!refreshData.success) {
+      console.log('что-то пошло не так с refreshToken', refreshData)
+      return Promise.reject(refreshData);
+    }
+    localStorage.setItem("refreshToken", refreshData.refreshToken);
+    localStorage.setItem("accessToken", refreshData.accessToken);
+    return refreshData;
+  });
 };
 
 export const fetchWithRefresh = async <U>(
   url: string,
   options: TRequestOptions<TAuthOptions>
-) => {
+): Promise<U | undefined> => {
   try {
-    const res = await fetch(`${API_URL}${url}`, {
+    console.log('fetchWithRefresh')
+    // localStorage.setItem("accessToken", 'n');
+
+    return await request<U>(url, {
       ...optionsWithAuth,
       ...options,
     });
-    return await (<U>checkResponse(res));
   } catch (err) {
-    if (err instanceof Error) {
-      if (err.message === "jwt expired") {
+    console.log('long was waiting',err)
+    if (err) {
+      console.log(typeof err)
+
+      if (err.message  === "jwt expired") {
+        console.log('tut')
+
         const refreshData = await refreshToken();
-        options.headers.Authorization = refreshData.accessToken;
-        const res = await fetch(`${API_URL}${url}`, optionsWithAuth);
-        return await checkResponse(res);
+        console.log('refreshData',refreshData)
+
+        optionsWithAuth.headers.Authorization = refreshData.accessToken;
+        await request<U>(url, {
+          ...optionsWithAuth,
+          method: "GET",
+        });
       } else {
         console.log(err);
       }

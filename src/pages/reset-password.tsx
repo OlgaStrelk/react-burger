@@ -25,7 +25,7 @@ function ResetPasswordPage() {
 
   const navigate = useNavigate();
   useEffect(() => {
-    if (!localStorage.getItem("emailsSent")) {
+    if (!localStorage.getItem("emailSent")) {
       navigate(PATHS.forgotPassword);
     }
   }, []);
