@@ -46,28 +46,29 @@ export const refreshToken = () => {
 export const fetchWithRefresh = async <U>(
   url: string,
   options: TRequestOptions<TAuthOptions>
-): Promise<U | undefined> => {
+): Promise<U> => {
   try {
     return await request<U>(url, {
       ...optionsWithAuth,
       ...options,
     });
   } catch (err) {
-    if (err) {
-      if (err.message === "jwt expired") {
-        const refreshData = await refreshToken();
-
-        optionsWithAuth.headers.Authorization = refreshData.accessToken;
-
-        return await request<U>(url, {
-          ...optionsWithAuth,
-          method: "GET",
-        });
-      } else {
-        console.log(err);
+    if (err.message === "jwt expired") {
+      const refreshData = await refreshToken();
+      if (!refreshData.success) {
+        return Promise.reject(refreshData);
       }
-      return Promise.reject(err);
+      localStorage.setItem("refreshToken", refreshData.refreshToken);
+      localStorage.setItem("accessToken", refreshData.accessToken);
+      optionsWithAuth.headers.Authorization = refreshData.accessToken;
+      return await request<U>(url, {
+        ...optionsWithAuth,
+        method: "GET",
+      });
+    } else {
+      console.log(err);
     }
+    return Promise.reject(err);
   }
 };
 

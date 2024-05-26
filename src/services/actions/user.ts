@@ -94,7 +94,7 @@ export const checkUserAuth = () => {
   return (dispatch: AppDispatch) => {
     if (localStorage.getItem("accessToken")) {
       try {
-        fetchUser();
+        dispatch(fetchUser());
       } catch (err) {
         handleError(DELETE_USER, err, dispatch);
         localStorage.removeItem("accessToken");
