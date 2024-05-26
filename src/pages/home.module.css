@@ -17,3 +17,7 @@
   composes: text text_type_main-default text_color_inactive from global;
   margin: auto;
 }
+
+.main_preload {
+  margin-top: 30vh;
+}

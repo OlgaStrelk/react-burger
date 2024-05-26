@@ -35,7 +35,6 @@ export const refreshToken = () => {
     }),
   }).then((refreshData) => {
     if (!refreshData.success) {
-      console.log('что-то пошло не так с refreshToken', refreshData)
       return Promise.reject(refreshData);
     }
     localStorage.setItem("refreshToken", refreshData.refreshToken);
@@ -49,26 +48,18 @@ export const fetchWithRefresh = async <U>(
   options: TRequestOptions<TAuthOptions>
 ): Promise<U | undefined> => {
   try {
-    console.log('fetchWithRefresh')
-    // localStorage.setItem("accessToken", 'n');
-
     return await request<U>(url, {
       ...optionsWithAuth,
       ...options,
     });
   } catch (err) {
-    console.log('long was waiting',err)
     if (err) {
-      console.log(typeof err)
-
-      if (err.message  === "jwt expired") {
-        console.log('tut')
-
+      if (err.message === "jwt expired") {
         const refreshData = await refreshToken();
-        console.log('refreshData',refreshData)
 
         optionsWithAuth.headers.Authorization = refreshData.accessToken;
-        await request<U>(url, {
+
+        return await request<U>(url, {
           ...optionsWithAuth,
           method: "GET",
         });

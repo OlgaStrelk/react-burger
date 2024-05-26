@@ -81,12 +81,9 @@ export const fetchUser = () => async (dispatch: AppDispatch) => {
     },
   })
     .then((data) => {
-      console.log("получаем дату, там юзер?",data);
       if (data && data.success) {
-        console.log("получаем юзера");
         dispatch(receiveUser(data.user));
       }
-    
     })
     .catch((err) => {
       handleError(GET_USER_FAILED, err, dispatch);
@@ -95,13 +92,10 @@ export const fetchUser = () => async (dispatch: AppDispatch) => {
 
 export const checkUserAuth = () => {
   return (dispatch: AppDispatch) => {
-    console.log('checkUserAuth')
-    console.log('checkToken', localStorage.getItem("accessToken"))
     if (localStorage.getItem("accessToken")) {
       try {
-        dispatch(fetchUser());
-        console.log("checkUserAuth");
-      } catch (err) {console.log(Boolean(err instanceof Error))
+        fetchUser();
+      } catch (err) {
         handleError(DELETE_USER, err, dispatch);
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
@@ -117,7 +111,7 @@ export const checkUserAuth = () => {
 export const editProfile =
   () => async (dispatch: AppDispatch, getState: any) => {
     dispatch({ type: EDIT_PROFILE_REQUEST });
-    let form = getState().profile.form;
+    let form:TUserWithPassword = getState().profile.form;
     const { name, email, password }: TUserWithPassword = form;
     let requestData: TUserWithPassword | TUser =
       password === passwordStub ? { name, email } : { name, email, password };

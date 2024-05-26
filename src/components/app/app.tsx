@@ -2,9 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 
 import AppHeader from "../app-header/app-header";
-import {
-  fetchIngredients,
-} from "../../services/actions/ingredients";
+import { fetchIngredients } from "../../services/actions/ingredients";
 import {
   HomePage,
   LoginPage,
@@ -31,9 +29,8 @@ function App() {
   const dispatch = useDispatch();
   let location = useLocation();
   let state = location.state;
-  useEffect(() => dispatch(fetchIngredients()), [dispatch]);
-
   useEffect(() => {
+    dispatch(fetchIngredients());
     dispatch(checkUserAuth());
   }, [dispatch]);
   const {
@@ -100,10 +97,7 @@ function App() {
           <Route
             path={ingredient}
             element={
-              <Modal
-                customStyle={modalStyle.ingredient}
-                path={home}
-              >
+              <Modal customStyle={modalStyle.ingredient} path={home}>
                 <IngredientDetails />
               </Modal>
             }
