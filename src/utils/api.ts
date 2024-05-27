@@ -39,7 +39,6 @@ export const refreshToken = () => {
     }
     localStorage.setItem("refreshToken", refreshData.refreshToken);
     localStorage.setItem("accessToken", refreshData.accessToken);
-    return refreshData;
   });
 };
 
@@ -54,13 +53,7 @@ export const fetchWithRefresh = async <U>(
     });
   } catch (err) {
     if (err.message === "jwt expired") {
-      const refreshData = await refreshToken();
-      if (!refreshData.success) {
-        return Promise.reject(refreshData);
-      }
-      localStorage.setItem("refreshToken", refreshData.refreshToken);
-      localStorage.setItem("accessToken", refreshData.accessToken);
-      optionsWithAuth.headers.Authorization = refreshData.accessToken;
+      await refreshToken();
       return await request<U>(url, {
         ...optionsWithAuth,
         method: "GET",
