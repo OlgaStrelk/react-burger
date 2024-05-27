@@ -41,7 +41,6 @@ function BurgerIngredients() {
 
   return (
     <section>
-      <h2 className={styles.title}>Соберите бургер</h2>
       <Tabbar
         data={BLOCK_TITLES}
         currentTab={currentTab}

@@ -1,15 +1,15 @@
 import CardOrder from "../components/card-order/card-order";
-import styles from "./base-form.module.css";
+import styles from "./orders-list.module.css";
 
 function OrdersListPage() {
   return (
     <>
-      <h1>ЛЕНТА ЗАКАЗОВ</h1>
+      <h1 className={styles.title}>Лента заказов</h1>
       <main className={styles.main}>
-        <section>
+        <section className={styles.section}>
           <CardOrder />
         </section>
-        <section></section>
+        <section className={styles.section}></section>
       </main>
     </>
   );

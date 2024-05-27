@@ -13,7 +13,8 @@ export const PATHS = {
   ingredient: "/ingredients/:id",
   ordersHistory: "orders",
   order: ":number",
-  ordersList: "orders",
+  ordersList: "feed",
+  
   notFound: "/*",
 };
 

@@ -68,10 +68,9 @@ function App() {
           </Route>
         </Route>
 
-        <Route
-          path={ordersList}
-          element={<OnlyAuth component={<OrdersListPage />} />}
-        />
+        <Route path={ordersList} element={<OrdersListPage />}>
+          <Route path={order} element={<OrderPage />} />
+        </Route>
 
         <Route
           path={login}

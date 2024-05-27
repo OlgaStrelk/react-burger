@@ -129,7 +129,7 @@ function BurgerConstructor({ onModalOpen }: IBurgerConstructorProps) {
   return (
     <>
       {!isNavigated ? (
-        <section className={`${styles.section} mt-25 ml-10`}>
+        <section className={styles.section}>
           <div className="ml-8" ref={dropRef}>
             {renderBunMarkup(" mb-2 pr-1", "top", "(верх)")}
             <ul

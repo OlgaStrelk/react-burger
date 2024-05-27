@@ -31,14 +31,17 @@ function HomePage() {
         </main>
       ) : ingredients.length == 0 ? (
         <main className={styles.main_error}>
-          <h2 className={styles.title}>{FETCHING_FAILED_ERROR_TEXT.main}</h2>
+          <h2 className={styles.error_text}>{FETCHING_FAILED_ERROR_TEXT.main}</h2>
         </main>
       ) : (
         <>
           <DndProvider backend={HTML5Backend}>
             <main className={styles.main}>
-              <BurgerIngredients />
-              <BurgerConstructor onModalOpen={onOpen} />
+              <h1 className={styles.title}>Соберите бургер</h1>
+              <div className={styles.container}>
+                <BurgerIngredients />
+                <BurgerConstructor onModalOpen={onOpen} />
+              </div>
             </main>
           </DndProvider>
           {isOpen && (

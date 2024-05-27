@@ -1,5 +1,17 @@
 .main {
   max-width: fit-content;
+
+  margin: 100px auto 0;
+  max-width: 480px;
+}
+.section {
+  composes: ml-10 from global;
+  max-height: calc(100vh - 100px);
+  max-width: 600px;
+}
+
+.main {
+  max-width: fit-content;
   max-height: calc(100vh - 98px);
   margin: auto;
 }
