@@ -1,16 +1,46 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useSelector } from "../../services/types/hooks";
 import styles from "./card-order.module.css";
+import { useEffect, useState } from "react";
 
 const CardOrder = () => {
+  const [counter, setCounter] = useState(0);
   const ingredients = useSelector((store) => store.ingredients.ingredients);
   const imagesArrayMarkup = [...ingredients].map((item, index) => {
-    if (index < 6) {
+    // if (index = 0) {console.log('item')}
+
+    if (index == 0) {
+      return (
+        <li key={item._id} className={styles.list_item}>
+          <div className={styles.cover}>
+            <img className={styles.shadowed_icon} src={item.image} />
+          </div>
+          <span className={styles.digit}>{`+${counter}`}</span>
+        </li>
+      );
+    }
+    if (index >= 1 && index < 6) {
       return (
         <li key={item._id} className={styles.list_item}>
           <img className={styles.img} src={item.image} />
         </li>
       );
+      // } else if ((index = 1)) {
+      //   console.log(item);
+      //   return (
+      //     <li key={item._id} className={styles.list_item}>
+      //       <img
+      //         className={`${styles.img} ${styles.large_digits}`}
+      //         src={item.image}
+      //       />
+      //     </li>
+      //   );
+    }
+  });
+
+  useEffect(() => {
+    if (ingredients.length > 6) {
+      setCounter(ingredients.length - 6);
     }
   });
   return (
