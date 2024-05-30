@@ -24,7 +24,8 @@
   padding-inline-start: 0;
   list-style-type: none;
   display: flex;
-}
+  flex-direction: row-reverse;
+  justify-content: flex-end;}
 
 /* .list_item {
   border-radius: 50%;
@@ -33,13 +34,16 @@
   border: 2px solid red
 } */
 .list_item:first-of-type {
-  position: relative;
 }
 .list_item {
   max-height: 64px;
   padding: 2px;
-  background: linear-gradient( #743ad5, #d53a9d);
+  background: linear-gradient(#743ad5, #d53a9d);
   border-radius: 50%;
+
+
+  margin-right: -1.5em;
+  z-index: 1;
 }
 
 .img {
