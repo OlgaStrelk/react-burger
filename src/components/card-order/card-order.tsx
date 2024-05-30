@@ -15,7 +15,7 @@ const CardOrder = () => {
           <div className={styles.cover}>
             <img className={styles.shadowed_icon} src={item.image} />
           </div>
-          <span className={styles.digit}>{`+${counter}`}</span>
+          <span className={styles.rest}>{`+${counter}`}</span>
         </li>
       );
     }
@@ -25,16 +25,6 @@ const CardOrder = () => {
           <img className={styles.img} src={item.image} />
         </li>
       );
-      // } else if ((index = 1)) {
-      //   console.log(item);
-      //   return (
-      //     <li key={item._id} className={styles.list_item}>
-      //       <img
-      //         className={`${styles.img} ${styles.large_digits}`}
-      //         src={item.image}
-      //       />
-      //     </li>
-      //   );
     }
   });
 
@@ -50,9 +40,9 @@ const CardOrder = () => {
         <span className={styles.date}>Сегодня, 16:20 </span>
       </p>
       <h4 className={styles.title}>Death Star Starship Main бургер</h4>
-      <div className={styles.paragraph}>
+      <div className={styles.line}>
         <ul className={styles.icons_list}>{imagesArrayMarkup}</ul>
-        <div>
+        <div className={styles.total}>
           <span className="mr-1 text text_type_digits-default">560</span>
           <CurrencyIcon type="primary" />
         </div>

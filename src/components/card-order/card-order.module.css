@@ -4,11 +4,16 @@
   width: 584px;
   height: 214px;
   border-radius: var(--common-border-radius-s);
+  box-sizing: border-box;
 }
 .paragraph {
   display: flex;
   justify-content: space-between;
   margin-block: 0;
+}
+.line {
+  display: flex;
+  justify-content: space-between;
 }
 .number {
   composes: text text_type_digits-default from global;
@@ -22,6 +27,7 @@
 
 .icons_list {
   padding-inline-start: 0;
+  margin-block: 0;
   list-style-type: none;
   display: flex;
   flex-direction: row-reverse;
@@ -31,7 +37,7 @@
 .list_item {
   max-height: 64px;
   padding: 2px;
-  background: linear-gradient(to right, #801AB2, #4C4CFF);
+  background: linear-gradient(to right, #801ab2, #4c4cff);
   border-radius: 50%;
 
   margin-right: -1.5em;
@@ -52,10 +58,8 @@
 }
 
 .cover {
-  border-radius: 50%;
-  height: 64px;
-  width: 64px;
-  object-fit: cover;
+  border-radius: inherit;
+  max-height: inherit;
   background: var(--background);
 }
 
@@ -64,9 +68,14 @@
   opacity: 0.2;
 }
 
-.digit {
+.rest {
   composes: text text_type_digits-default from global;
   position: absolute;
   top: 24px;
   right: 18px;
+}
+
+.total {
+  display: flex;
+  align-items: center;
 }
