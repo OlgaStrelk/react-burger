@@ -1,6 +1,7 @@
 import CardOrder from "../components/card-order/card-order";
 import styles from "./orders-list.module.css";
 import OrdersPanel from "../components/orders-panel/orders-panel";
+import { Link } from "react-router-dom";
 
 function OrdersListPage() {
   return (
@@ -9,7 +10,8 @@ function OrdersListPage() {
 
       <div className={styles.container}>
         <section className={styles.section}>
-          <CardOrder /> <CardOrder />
+         <Link to=":id"> <CardOrder /></Link>
+          <CardOrder />
           <CardOrder />
           <CardOrder />
           <CardOrder />

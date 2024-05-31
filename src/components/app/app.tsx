@@ -45,6 +45,7 @@ function App() {
     order,
     notFound,
     ordersList,
+    profileOrder,
   } = PATHS;
   return (
     <>
@@ -60,12 +61,7 @@ function App() {
           <Route
             path={ordersHistory}
             element={<OnlyAuth component={<OrdersHistoryPage />} />}
-          >
-            <Route
-              path={order}
-              element={<OnlyAuth component={<OrderPage />} />}
-            />
-          </Route>
+          />
         </Route>
 
         {/* <Route
@@ -84,9 +80,12 @@ function App() {
           </Route>
         </Route> */}
 
-        <Route path={ordersList} element={<OrdersListPage />}>
-          <Route path={order} element={<OrderPage />} />
-        </Route>
+        <Route path={ordersList} element={<OrdersListPage />} />
+        <Route path={order} element={<OrderPage />} />
+        <Route
+          path={profileOrder}
+          element={<OnlyAuth component={<OrderPage />} />}
+        />
 
         <Route
           path={login}

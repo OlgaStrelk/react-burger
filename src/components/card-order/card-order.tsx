@@ -3,12 +3,12 @@ import { useSelector } from "../../services/types/hooks";
 import styles from "./card-order.module.css";
 import { useEffect, useState } from "react";
 
+
 const CardOrder = () => {
+
   const [counter, setCounter] = useState(0);
   const ingredients = useSelector((store) => store.ingredients.ingredients);
   const imagesArrayMarkup = [...ingredients].map((item, index) => {
-    // if (index = 0) {console.log('item')}
-
     if (index == 0) {
       return (
         <li key={item._id} className={styles.list_item}>
@@ -33,8 +33,10 @@ const CardOrder = () => {
       setCounter(ingredients.length - 6);
     }
   });
+
+
   return (
-    <div className={styles.overlay}>
+    <div  className={styles.overlay}>
       <p className={styles.paragraph}>
         <span className={styles.number}>#034535</span>
         <span className={styles.date}>Сегодня, 16:20 </span>

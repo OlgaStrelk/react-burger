@@ -1,5 +1,8 @@
 .overlay {
   composes: pl-6 pr-6 pb-6 pt-6 mb-4 from global;
+  color: var(--text-primary-color);
+  display: block;
+  text-decoration: none;
   background-color: var(--background);
   min-width: 584px;
   height: 214px;

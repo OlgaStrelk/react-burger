@@ -12,9 +12,9 @@ export const PATHS = {
   resetPassword: "/reset-password",
   ingredient: "/ingredients/:id",
   ordersHistory: "orders",
-  order: ":number",
+  profileOrder: "profile/orders/:number",
+  order: "feed/:number",
   ordersList: "feed",
-  
   notFound: "/*",
 };
 
