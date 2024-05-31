@@ -1,0 +1,44 @@
+.section {
+  composes: ml-15 from global;
+  max-height: calc(100vh - 200px);
+  overflow: scroll;
+}
+.number {
+  composes: text text_type_digits-medium from global;
+  color: inherit;
+}
+.title {
+  composes: text text_type_main-medium mt-15 from global;
+  color: var(--text-primary-color);
+}
+
+.title:first-of-type {
+  margin-top: 0;
+}
+
+.sum {
+  composes: text text_type_digits-large from global;
+  text-shadow: 0 4px 32px rgba(51, 51, 255, 0.5);
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  width: 272px;
+}
+
+.ready {
+  composes: list;
+  color: var(--colors-interface-success);
+}
+
+.progress {
+  composes: list;
+}
+
+.flex {
+  composes: mb-15 from global;
+  display: flex;
+  flex-direction: row;
+  gap: 36px;
+}

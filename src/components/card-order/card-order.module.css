@@ -1,5 +1,5 @@
 .overlay {
-  composes: pl-6 pr-6 pb-6 pt-6 from global;
+  composes: pl-6 pr-6 pb-6 pt-6 mb-4 from global;
   background-color: var(--background);
   width: 584px;
   height: 214px;
