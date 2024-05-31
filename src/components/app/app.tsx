@@ -68,6 +68,22 @@ function App() {
           </Route>
         </Route>
 
+        {/* <Route
+          path={profile}
+          element={<OnlyUnAuth component={<MyAccountPage />} />}
+        >
+          <Route path="" element={<OnlyUnAuth component={<ProfilePage />} />} />
+          <Route
+            path={ordersHistory}
+            element={<OnlyUnAuth component={<OrdersHistoryPage />} />}
+          >
+            <Route
+              path={order}
+              element={<OnlyUnAuth component={<OrderPage />} />}
+            />
+          </Route>
+        </Route> */}
+
         <Route path={ordersList} element={<OrdersListPage />}>
           <Route path={order} element={<OrderPage />} />
         </Route>

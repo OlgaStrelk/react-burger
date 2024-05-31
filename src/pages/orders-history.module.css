@@ -1,0 +1,5 @@
+.wrap {
+  grid-area: content;
+  max-height: calc(100vh - 200px);
+  overflow: scroll;
+}
