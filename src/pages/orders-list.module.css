@@ -5,6 +5,7 @@
 }
 
 .section {
+  composes: pr-4 from global;
   max-width: 600px;
   overflow: scroll;
   overflow-x: hidden;

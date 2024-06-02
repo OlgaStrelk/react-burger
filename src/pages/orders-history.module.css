@@ -1,9 +1,21 @@
 .wrap {
   grid-area: content;
   max-height: calc(100vh - 200px);
+}
+
+.list {
+  padding-inline-start: 0;
+  margin-block: 0;
+  list-style: none;
+  max-height: inherit;
+  max-width: 916px;
   overflow: scroll;
+  padding-right: 8px;
+}
+
+.item {
 }
 .link {
-    text-decoration: none;
-    color: var(--text-primary-color)
-  }
+  text-decoration: none;
+  color: var(--text-primary-color);
+}

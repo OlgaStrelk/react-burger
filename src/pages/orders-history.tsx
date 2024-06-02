@@ -5,27 +5,38 @@ import { Link } from "react-router-dom";
 function OrdersHistoryPage() {
   return (
     <div className={styles.wrap}>
-      <Link className={styles.link} to={":id"}>
-        <CardOrder />
-      </Link>
-      <Link className={styles.link} to={":id"}>
-        <CardOrder />
-      </Link>{" "}
-      <Link className={styles.link} to={":id"}>
-        <CardOrder />
-      </Link>{" "}
-      <Link className={styles.link} to={":id"}>
-        <CardOrder />
-      </Link>{" "}
-      <Link className={styles.link} to={":id"}>
-        <CardOrder />
-      </Link>{" "}
-      <Link className={styles.link} to={":id"}>
-        <CardOrder />
-      </Link>{" "}
-      <Link className={styles.link} to={":id"}>
-        <CardOrder />
-      </Link>
+      <ul className={styles.list}>
+        <li className={styles.item}>
+          <Link className={styles.link} to={":id"}>
+            <CardOrder />
+          </Link>
+        </li>
+        <li className={styles.item}>
+          <Link className={styles.link} to={":id"}>
+            <CardOrder />
+          </Link>
+        </li>
+        <li className={styles.item}>
+          <Link className={styles.link} to={":id"}>
+            <CardOrder />
+          </Link>
+        </li>
+        <li className={styles.item}>
+          <Link className={styles.link} to={":id"}>
+            <CardOrder />
+          </Link>
+        </li>
+        <li className={styles.item}>
+          <Link className={styles.link} to={":id"}>
+            <CardOrder />
+          </Link>
+        </li>
+        <li className={styles.item}>
+          <Link className={styles.link} to={":id"}>
+            <CardOrder />
+          </Link>
+        </li>
+      </ul>
     </div>
   );
 }
