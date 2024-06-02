@@ -33,3 +33,8 @@
 .main_preload {
   margin-top: 30vh;
 }
+
+.link {
+  text-decoration: none;
+  color: var(--text-primary-color)
+}

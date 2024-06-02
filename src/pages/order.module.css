@@ -1,0 +1,69 @@
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 120px);
+}
+.container {
+  max-width: 620px;
+  max-height: fit-content;
+  display: flex;
+  flex-direction: column;
+}
+
+.number {
+  composes: text text_type_digits-default mb-10 from global;
+  text-align: center;
+}
+
+.title {
+  composes: text text_type_main-medium mb-3 from global;
+  /* margin-block-: 0; */
+}
+
+.status {
+  composes: text text_type_main-small from global;
+  color: var(--colors-interface-success);
+}
+
+.subtitle {
+  composes: text text_type_main-medium mt-15 from global;
+  /* margin-block: 0; */
+}
+
+.list {
+  composes: mr-6 from global;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  list-style: none;
+  padding: 0;
+}
+
+.ingredient {
+  display: flex;
+  justify-content: space-between;
+}
+
+.img {
+}
+
+.name {
+  composes: text text_type_main-default from global;
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+.price {
+  composes: text text_type_digits-default from global;
+}
+
+.paragraph {
+  margin-block-start: 0;
+  margin-block-end: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.date {
+  composes: text text_type_main-default text_color_inactive mt-10 from global;
+}

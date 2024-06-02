@@ -10,12 +10,13 @@ function OrdersListPage() {
 
       <div className={styles.container}>
         <section className={styles.section}>
-         <Link to=":id"> <CardOrder /></Link>
-          <CardOrder />
-          <CardOrder />
-          <CardOrder />
-          <CardOrder />
-          <CardOrder />
+         <Link className={styles.link}to=":id"> <CardOrder /></Link>
+         <Link className={styles.link}to=":id"> <CardOrder /></Link>
+         <Link className={styles.link}to=":id"> <CardOrder /></Link>
+         <Link className={styles.link}to=":id"> <CardOrder /></Link>
+         <Link className={styles.link}to=":id"> <CardOrder /></Link>
+         <Link className={styles.link}to=":id"> <CardOrder /></Link>
+
         </section>
         <OrdersPanel />
       </div>

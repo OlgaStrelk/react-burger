@@ -3,3 +3,7 @@
   max-height: calc(100vh - 200px);
   overflow: scroll;
 }
+.link {
+    text-decoration: none;
+    color: var(--text-primary-color)
+  }

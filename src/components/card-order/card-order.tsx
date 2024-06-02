@@ -1,11 +1,9 @@
-import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useSelector } from "../../services/types/hooks";
 import styles from "./card-order.module.css";
 import { useEffect, useState } from "react";
-
+import Price from "../price/price";
 
 const CardOrder = () => {
-
   const [counter, setCounter] = useState(0);
   const ingredients = useSelector((store) => store.ingredients.ingredients);
   const imagesArrayMarkup = [...ingredients].map((item, index) => {
@@ -34,9 +32,8 @@ const CardOrder = () => {
     }
   });
 
-
   return (
-    <div  className={styles.overlay}>
+    <div className={styles.overlay}>
       <p className={styles.paragraph}>
         <span className={styles.number}>#034535</span>
         <span className={styles.date}>Сегодня, 16:20 </span>
@@ -44,10 +41,7 @@ const CardOrder = () => {
       <h4 className={styles.title}>Death Star Starship Main бургер</h4>
       <div className={styles.line}>
         <ul className={styles.icons_list}>{imagesArrayMarkup}</ul>
-        <div className={styles.total}>
-          <span className="mr-1 text text_type_digits-default">560</span>
-          <CurrencyIcon type="primary" />
-        </div>
+        <Price number={74382} />
       </div>
     </div>
   );
