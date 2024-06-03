@@ -1,9 +1,8 @@
 import styles from "./home.module.css";
-// import { useModal } from "../hooks/useModal";
 import BurgerConstructor from "../components/burger-constructor/burger-constructor";
 import BurgerIngredients from "../components/burger-ingredients/burger-ingredients";
 import Modal from "../components/modal/modal";
-import OrderDetails from "../components/order-details/order-details";
+import OrderResponse from "../components/order-response/order-response";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { modalStyle } from "../utils/consts";
@@ -50,7 +49,7 @@ function HomePage() {
               action={[RESET_CONSTRUCTOR, RESET_INGREDIENTS_QUANTITY]}
               customStyle={modalStyle.order}
             >
-              <OrderDetails />
+              <OrderResponse />
             </Modal>
           )}
         </>

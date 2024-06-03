@@ -25,6 +25,7 @@ import { PATHS } from "../../utils/consts";
 import { checkUserAuth } from "../../services/actions/user";
 import MyAccountPage from "../../pages/my-account";
 import { useDispatch } from "../../services/types/hooks";
+import OrderDetails from "../order-details/order-details";
 function App() {
   const dispatch = useDispatch();
   let location = useLocation();
@@ -47,6 +48,8 @@ function App() {
     ordersList,
     profileOrder,
   } = PATHS;
+
+  console.log("state?.backgroundLocation", state?.backgroundLocation);
   return (
     <>
       <AppHeader />
@@ -63,22 +66,6 @@ function App() {
             element={<OnlyAuth component={<OrdersHistoryPage />} />}
           />
         </Route>
-
-        {/* <Route
-          path={profile}
-          element={<OnlyUnAuth component={<MyAccountPage />} />}
-        >
-          <Route path="" element={<OnlyUnAuth component={<ProfilePage />} />} />
-          <Route
-            path={ordersHistory}
-            element={<OnlyUnAuth component={<OrdersHistoryPage />} />}
-          >
-            <Route
-              path={order}
-              element={<OnlyUnAuth component={<OrderPage />} />}
-            />
-          </Route>
-        </Route> */}
 
         <Route path={ordersList} element={<OrdersListPage />} />
         <Route path={order} element={<OrderPage />} />
@@ -116,8 +103,29 @@ function App() {
               </Modal>
             }
           />
+
+          <Route
+            path={order}
+            element={
+              <Modal path={ordersHistory}>
+                <OrderDetails />
+              </Modal>
+            }
+          />
         </Routes>
       )}
+      {/* {state?.backgroundLocation.pathname == ordersHistory && (
+        <Routes>
+          <Route
+            path={order}
+            element={
+              <Modal path={ordersHistory}>
+                <OrderDetails />
+              </Modal>
+            }
+          />
+        </Routes>
+      )} */}
     </>
   );
 }

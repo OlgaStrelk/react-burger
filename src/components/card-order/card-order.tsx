@@ -3,7 +3,7 @@ import styles from "./card-order.module.css";
 import { useEffect, useState } from "react";
 import Price from "../price/price";
 
-const CardOrder = () => {
+const OrderCard = () => {
   const [counter, setCounter] = useState(0);
   const ingredients = useSelector((store) => store.ingredients.ingredients);
   const imagesArrayMarkup = [...ingredients].map((item, index) => {
@@ -47,4 +47,4 @@ const CardOrder = () => {
   );
 };
 
-export default CardOrder;
+export default OrderCard;

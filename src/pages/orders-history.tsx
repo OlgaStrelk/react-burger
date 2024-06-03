@@ -1,39 +1,44 @@
 import styles from "./orders-history.module.css";
-import CardOrder from "../components/card-order/card-order";
-import { Link } from "react-router-dom";
+import OrderCard from "../components/card-order/card-order";
+import { Link, useLocation } from "react-router-dom";
 
 function OrdersHistoryPage() {
+  const location = useLocation();
   return (
     <div className={styles.wrap}>
       <ul className={styles.list}>
         <li className={styles.item}>
-          <Link className={styles.link} to={":id"}>
-            <CardOrder />
+          <Link
+            className={styles.link}
+            to={"98769"}
+            state={{ backgroundLocation: location }}
+          >
+            <OrderCard />
           </Link>
         </li>
         <li className={styles.item}>
-          <Link className={styles.link} to={":id"}>
-            <CardOrder />
+          <Link className={styles.link} to={"874289"}>
+            <OrderCard />
           </Link>
         </li>
         <li className={styles.item}>
-          <Link className={styles.link} to={":id"}>
-            <CardOrder />
+          <Link className={styles.link} to={":number"}>
+            <OrderCard />
           </Link>
         </li>
         <li className={styles.item}>
-          <Link className={styles.link} to={":id"}>
-            <CardOrder />
+          <Link className={styles.link} to={":number"}>
+            <OrderCard />
           </Link>
         </li>
         <li className={styles.item}>
-          <Link className={styles.link} to={":id"}>
-            <CardOrder />
+          <Link className={styles.link} to={":number"}>
+            <OrderCard />
           </Link>
         </li>
         <li className={styles.item}>
-          <Link className={styles.link} to={":id"}>
-            <CardOrder />
+          <Link className={styles.link} to={":number"}>
+            <OrderCard />
           </Link>
         </li>
       </ul>
