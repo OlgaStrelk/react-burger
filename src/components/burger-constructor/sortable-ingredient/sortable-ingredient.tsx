@@ -8,7 +8,7 @@ import {
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch, useSelector } from "../../../services/types/hooks";
+import { useAppDispatch, useSelector } from "../../../services/types/hooks";
 import { TConstructorIngredient } from "../../../utils/types";
 export interface ISortableIngredientProps {
   data: TConstructorIngredient;
@@ -25,7 +25,7 @@ export const SortableIngredient = ({
   data,
   index,
 }: ISortableIngredientProps) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const ingredients = useSelector(
     (store) => store.burgerConstructor.addedIngredients.ingredients
   );

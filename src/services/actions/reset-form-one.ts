@@ -6,6 +6,7 @@ import {
   RESET_PASSWORD_FORM_ONE_FAILED,
 } from "../constants/auth";
 import { RESET_PASSWORD_FORM_ONE_SET_VALUE } from "../constants/auth-forms";
+import { AppDispatch } from "../types";
 
 type TResetFormRequestAction = {
   type: typeof RESET_PASSWORD_FORM_ONE_REQUEST;
@@ -37,15 +38,19 @@ export const resetPasswordOneFormValue = (field: string, value: string) => ({
   value,
 });
 
-export const resetPasswordStepOne = () => (dispatch: any, getState: any) => {
-  dispatch({ type: RESET_PASSWORD_FORM_ONE_REQUEST });
-  request(ENDPOINT.resetPasswordStepOne, {
-    ...optionsUnAuth,
-    method: "POST",
-    body: JSON.stringify(getState().resetForm.form),
-  })
-    .then(() => {
-      dispatch({ type: RESET_PASSWORD_FORM_ONE_SUCCESS });
+export const resetPasswordStepOne =
+  () => (dispatch: AppDispatch, getState: any) => {
+    dispatch({ type: RESET_PASSWORD_FORM_ONE_REQUEST });
+    request(ENDPOINT.resetPasswordStepOne, {
+      ...optionsUnAuth,
+      method: "POST",
+      body: JSON.stringify(getState().resetForm.form),
     })
-    .catch((err) => handleError(RESET_PASSWORD_FORM_ONE_FAILED, err, dispatch));
-};
+      .then(() => {
+        dispatch({ type: RESET_PASSWORD_FORM_ONE_SUCCESS });
+      })
+      .catch((err) => {
+        handleError(err);
+        dispatch({ type: RESET_PASSWORD_FORM_ONE_FAILED });
+      });
+  };

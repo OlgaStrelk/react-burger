@@ -14,7 +14,7 @@ import { TConstructorIngredient } from "../../utils/types.ts";
 import { increaseQuantity } from "../../services/actions/ingredients.ts";
 import { addIngredient } from "../../services/actions/constructor-ingredients.ts";
 import { makeOrder } from "../../services/actions/order.ts";
-import { useDispatch, useSelector } from "../../services/types/hooks.ts";
+import { useAppDispatch, useSelector } from "../../services/types/hooks.ts";
 
 
 export interface IBurgerConstructorProps {
@@ -32,7 +32,7 @@ function BurgerConstructor({ onModalOpen }: IBurgerConstructorProps) {
   );
   const user = useSelector((state) => state.user.user);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const validateConstructor = () => {
     if (!buns || !ingredients.length) {

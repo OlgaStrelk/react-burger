@@ -24,10 +24,10 @@ import { OnlyAuth, OnlyUnAuth } from "../protected_route/protected-route";
 import { PATHS } from "../../utils/consts";
 import { checkUserAuth } from "../../services/actions/user";
 import MyAccountPage from "../../pages/my-account";
-import { useDispatch } from "../../services/types/hooks";
 import OrderDetails from "../order-details/order-details";
+import { useAppDispatch } from "../../services/types/hooks";
 function App() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   let location = useLocation();
   let state = location.state;
   useEffect(() => {

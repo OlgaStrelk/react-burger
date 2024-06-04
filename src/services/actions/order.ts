@@ -6,6 +6,7 @@ import {
   MAKE_ORDER_REQUEST,
   MAKE_ORDER_SUCCESS,
 } from "../constants/order";
+import { AppDispatch } from "../types";
 
 type TOrderRequestAction = {
   type: typeof MAKE_ORDER_REQUEST;
@@ -25,7 +26,7 @@ export type TOrderActions =
   | TOrderSuccessAction
   | TOrderFailedAction;
 
-export const makeOrder = (data: TOrderRequest) => (dispatch: any) => {
+export const makeOrder = (data: TOrderRequest) => (dispatch: AppDispatch) => {
   dispatch({ type: MAKE_ORDER_REQUEST });
   request<IOrderResponse>(ENDPOINT.orders, {
     ...optionsWithAuth,
@@ -35,5 +36,8 @@ export const makeOrder = (data: TOrderRequest) => (dispatch: any) => {
     .then((res) =>
       dispatch({ type: MAKE_ORDER_SUCCESS, payload: res.order.number })
     )
-    .catch((err) => handleError(MAKE_ORDER_FAILED, err, dispatch));
+    .catch((err) => {
+      handleError(err);
+      dispatch({ type: MAKE_ORDER_FAILED });
+    });
 };

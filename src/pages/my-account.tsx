@@ -4,10 +4,10 @@ import { Link, NavLink, Outlet } from "react-router-dom";
 
 import { PATHS } from "../utils/consts";
 import { logout } from "../services/actions/logout";
-import { useDispatch } from "../services/types/hooks";
+import { useAppDispatch } from "../services/types/hooks";
 
 function MyAccountPage() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const signout = () => {
     dispatch(logout());
   };

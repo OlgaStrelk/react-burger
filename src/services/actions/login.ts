@@ -30,28 +30,31 @@ export type TLoginActions =
   | TLoginFailedAction
   | TSetValueAction;
 
-
 export const loginFormValue = (field: string, value: string) => ({
   type: LOGIN_SET_VALUE,
   field,
   value,
 });
 
-export const login:AppThunk = () => async (dispatch: AppDispatch, getState: any) => {
-  dispatch({ type: LOGIN_REQUEST });
-  const data = await request<TAuthorizationResonse>(ENDPOINT.login, {
-    ...optionsUnAuth,
-    method: "POST",
-    body: JSON.stringify(getState().login.form),
-  })
-    .then((data) => {
-      dispatch({ type: LOGIN_SUCCESS });
-      return data;
+export const login: AppThunk =
+  () => async (dispatch: AppDispatch, getState: any) => {
+    dispatch({ type: LOGIN_REQUEST });
+    const data = await request<TAuthorizationResonse>(ENDPOINT.login, {
+      ...optionsUnAuth,
+      method: "POST",
+      body: JSON.stringify(getState().login.form),
     })
-    .catch((err) => handleError(LOGIN_FAILED, err, dispatch));
-  if (data && data.success) {
-    dispatch(updateUser(data.user));
-    localStorage.setItem("accessToken", data.accessToken);
-    localStorage.setItem("refreshToken", data.refreshToken);
-  }
-};
+      .then((data) => {
+        dispatch({ type: LOGIN_SUCCESS });
+        return data;
+      })
+      .catch((err) => {
+        handleError(err);
+        dispatch({ type: LOGIN_FAILED });
+      });
+    if (data && data.success) {
+      dispatch(updateUser(data.user));
+      localStorage.setItem("accessToken", data.accessToken);
+      localStorage.setItem("refreshToken", data.refreshToken);
+    }
+  };

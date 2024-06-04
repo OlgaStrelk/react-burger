@@ -12,7 +12,7 @@ import { editProfile } from "../services/actions/user";
 import { TInput } from "../utils/types";
 import Preloader from "../components/preloader/preloader";
 import { passwordStub } from "../utils/consts";
-import { useDispatch, useSelector } from "../services/types/hooks";
+import { useAppDispatch, useSelector } from "../services/types/hooks";
 import { editProfileFormValue } from "../services/actions/profile-form";
 import { FETCHING_FAILED_ERROR_TEXT } from "../utils/errors";
 
@@ -25,7 +25,7 @@ function ProfilePage() {
     password: formPassword,
   } = useSelector((state) => state.profile.form);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const { handleInput, handleSubmit } = useForm();
 

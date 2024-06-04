@@ -26,8 +26,8 @@ type TGetIngredientSuccessAction = {
 
 type TGetIngredientFailedAction = {
   type: typeof GET_INGREDIENTS_FAILED;
-  payload: string;
 };
+
 type TIncreaseQuantityAction = {
   type: typeof INCREASE_INGREDIENT_QUANTITY;
   payload: TConstructorIngredient;
@@ -72,5 +72,8 @@ export const fetchIngredients: AppThunk = () => (dispatch: AppDispatch) => {
     .then((res) => {
       dispatch(receiveIngredients(res.data));
     })
-    .catch((err) => handleError(GET_INGREDIENTS_FAILED, err, dispatch));
+    .catch((err) => {
+      handleError(err);
+      dispatch({ type: GET_INGREDIENTS_FAILED });
+    });
 };

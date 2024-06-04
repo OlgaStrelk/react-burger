@@ -4,7 +4,7 @@ import styles from "./modal.module.css";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import ReactDOM from "react-dom";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "../../services/types/hooks";
+import { useAppDispatch } from "../../services/types/hooks";
 
 const modalRoot = document.getElementById("react-modals");
 type PropsWithChildren<P = unknown> = P & { children: ReactNode };
@@ -24,7 +24,7 @@ function Modal({
   customStyle,
 }: PropsWithChildren<IModal>) {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const overlayRef = useRef<HTMLDivElement>(null);
   const containerClassName = customStyle
     ? `${styles.container} ${customStyle}`

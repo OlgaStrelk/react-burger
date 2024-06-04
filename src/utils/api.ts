@@ -26,6 +26,7 @@ export const checkResponse = <T>(res: CustomResponse): T => {
     : res.json().then((err: any) => Promise.reject(err));
 };
 
+//() => Promise<undefined>
 export const refreshToken = () => {
   return request<ITokenResponse>(ENDPOINT.refreshToken, {
     ...optionsWithAuth,
@@ -59,7 +60,7 @@ export const fetchWithRefresh = async <U>(
         method: "GET",
       });
     } else {
-      console.log(err);
+      handleError(err);
     }
     return Promise.reject(err);
   }
@@ -72,9 +73,8 @@ export const request = <T>(
   return <Promise<T>>fetch(`${API_URL}${url}`, options).then(checkResponse);
 };
 
-export const handleError = (action: string, err: Error, dispatch: any) => {
+export const handleError = (err: Error) => {
   if (err instanceof Error) {
-    dispatch({ type: action });
     console.log(err.message);
   }
 };

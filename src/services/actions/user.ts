@@ -86,7 +86,8 @@ export const fetchUser = () => async (dispatch: AppDispatch) => {
       }
     })
     .catch((err) => {
-      handleError(GET_USER_FAILED, err, dispatch);
+      dispatch({ type: GET_USER_FAILED });
+      handleError(err);
     });
 };
 
@@ -96,7 +97,8 @@ export const checkUserAuth = () => {
       try {
         dispatch(fetchUser());
       } catch (err) {
-        handleError(DELETE_USER, err, dispatch);
+        console.log(err);
+        dispatch({ type: DELETE_USER });
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
       } finally {
@@ -111,7 +113,7 @@ export const checkUserAuth = () => {
 export const editProfile =
   () => async (dispatch: AppDispatch, getState: any) => {
     dispatch({ type: EDIT_PROFILE_REQUEST });
-    let form:TUserWithPassword = getState().profile.form;
+    let form: TUserWithPassword = getState().profile.form;
     const { name, email, password }: TUserWithPassword = form;
     let requestData: TUserWithPassword | TUser =
       password === passwordStub ? { name, email } : { name, email, password };
@@ -127,5 +129,8 @@ export const editProfile =
           dispatch(updateUser(data.user));
         }
       })
-      .catch((err) => handleError(EDIT_PROFILE_FAILED, err, dispatch));
+      .catch((err) => {
+        dispatch({ type: EDIT_PROFILE_FAILED });
+        handleError(err);
+      });
   };
