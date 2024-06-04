@@ -27,7 +27,7 @@ export const socketMiddleware = (wsActions: TwsActionsTypes) => {
         socket = new WebSocket(payload);
       }
       if (socket) {
-        socket.onopen = (event) => {
+        socket.onopen = () => {
           dispatch(onOpen());
         };
 

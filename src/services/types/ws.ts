@@ -2,7 +2,8 @@ export type TWsOrder = {
   ingredients: string[];
   _id: string;
   status: "done";
-  number: 0;
+  name: string;
+  number: number;
   createdAt: string;
   updatedAt: string;
 };
@@ -19,10 +20,4 @@ export enum WebsocketStatus {
   OFFLINE = "OFFLINE",
 }
 
-export enum LiveOrdersActionType {
-  DATA = "data",
-}
-
-export type Data = { type: LiveOrdersActionType.DATA; data: TWsOrdersResonse };
 export type LiveOrdersAction = TWsOrdersResonse;
-

@@ -14,7 +14,7 @@ import {
   NotFoundPage,
   OrderPage,
   OrdersHistoryPage,
-  OrdersListPage,
+  Feed,
 } from "../../pages";
 import { modalStyle } from "../../utils/consts";
 import { useLocation } from "react-router-dom";
@@ -67,7 +67,7 @@ function App() {
           />
         </Route>
 
-        <Route path={ordersList} element={<OrdersListPage />} />
+        <Route path={ordersList} element={<<Feed></Feed> />} />
         <Route path={order} element={<OrderPage />} />
         <Route
           path={profileOrder}

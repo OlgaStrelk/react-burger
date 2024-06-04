@@ -1,5 +1,5 @@
+import OrderCard from "../components/order-card/order-card";
 import styles from "./orders-history.module.css";
-import OrderCard from "../components/card-order/card-order";
 import { Link, useLocation } from "react-router-dom";
 
 function OrdersHistoryPage() {

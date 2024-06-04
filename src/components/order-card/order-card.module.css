@@ -1,0 +1,77 @@
+.overlay {
+    composes: pl-6 pr-6 pb-6 pt-6 mb-4 from global;
+    background-color: var(--background);
+    min-width: 584px;
+    min-height: 214px;
+    border-radius: var(--common-border-radius-s);
+    box-sizing: border-box;
+  }
+  .paragraph {
+    display: flex;
+    justify-content: space-between;
+    margin-block: 0;
+  }
+  .line {
+    display: flex;
+    justify-content: space-between;
+  }
+  .number {
+    composes: text text_type_digits-default from global;
+  }
+  .date {
+    composes: text text_type_main-default text_color_inactive from global;
+  }
+  .title {
+    composes: text text_type_main-medium mt-6 mb-6 from global;
+  }
+  
+  .icons_list {
+    padding-inline-start: 0;
+    margin-block: 0;
+    list-style-type: none;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+  }
+  
+  .list_item {
+    max-height: 64px;
+    padding: 2px;
+    background: linear-gradient(to right, #801ab2, #4c4cff);
+    border-radius: 50%;
+  
+    margin-right: -1.5em;
+    z-index: 1;
+  }
+  
+  .list_item:first-of-type {
+    /* opacity: 0.7; */
+    position: relative;
+  }
+  
+  .img {
+    border-radius: 50%;
+    height: 64px;
+    width: 64px;
+    object-fit: cover;
+    background-color: var(--background);
+  }
+  
+  .cover {
+    border-radius: inherit;
+    max-height: inherit;
+    background: var(--background);
+  }
+  
+  .shadowed_icon {
+    composes: img;
+    opacity: 0.2;
+  }
+  
+  .rest {
+    composes: text text_type_digits-default from global;
+    position: absolute;
+    top: 24px;
+    right: 18px;
+  }
+  
