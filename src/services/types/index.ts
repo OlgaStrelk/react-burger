@@ -1,5 +1,5 @@
-import { Action, ActionCreator, Dispatch } from "redux";
-import { ThunkAction, ThunkDispatch } from "redux-thunk";
+import { Action, ActionCreator } from "redux";
+import { ThunkAction } from "redux-thunk";
 import store from "../store";
 import { TAppActions } from "./actions";
 import { useDispatch } from "react-redux";

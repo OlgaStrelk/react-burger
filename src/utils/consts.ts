@@ -18,6 +18,8 @@ export const PATHS = {
   notFound: "/*",
 };
 
+export const WSURL = "wss://norma.nomoreparties.space/orders/all";
+
 export const ENDPOINT = {
   ingredients: "ingredients",
   resetPasswordStepOne: "password-reset",
