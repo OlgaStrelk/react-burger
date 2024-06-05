@@ -8,21 +8,21 @@ import {
   wsMessage,
 } from "../actions/ws-orders";
 
-export interface LiveOrdersStore {
+export interface FeedStore {
   status: WebsocketStatus;
   error: string;
   orders: TWsOrder[];
   total: number;
   totalToday: number;
 }
-const initialState: LiveOrdersStore = {
+const initialState: FeedStore = {
   status: WebsocketStatus.OFFLINE,
   error: "",
   orders: [],
   total: 0,
   totalToday: 0,
 };
-export const liveOrdersReducer = createReducer(initialState, (builder) => {
+export const FeedReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(wsConnecting, (state) => {
       state.status = WebsocketStatus.CONNECTING;

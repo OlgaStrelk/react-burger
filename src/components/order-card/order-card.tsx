@@ -17,7 +17,7 @@ const OrderCard: FC<IOrderCardProps> = ({ order }) => {
   } = order;
   const ingredients = useSelector((store) => store.ingredients.ingredients);
   const [counter, setCounter] = useState(0);
-
+//   ingredientsId.forEach((item)=>{ingredients.includes(item)})
   const imagesArrayMarkup = [...ingredients].map((item, index) => {
     if (index == 0) {
       return (

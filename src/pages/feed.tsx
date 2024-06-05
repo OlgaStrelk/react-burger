@@ -1,21 +1,23 @@
-import styles from "./orders-list.module.css";
+import styles from "./feed.module.css";
 import OrdersPanel from "../components/orders-panel/orders-panel";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useAppDispatch } from "../services/types";
 import { useSelector } from "../services/types/hooks";
 import { WSURL } from "../utils/consts";
-import { connect } from "../services/actions/ws-orders";
+import { connect, disconnect } from "../services/actions/ws-orders";
 import OrderCard from "../components/order-card/order-card";
 
 function FeedPage() {
   const dispatch = useAppDispatch();
-  const { orders, status } = useSelector((state) => state.wsOrders);
+  const { orders, status } = useSelector((state) => state.wsFeed);
   const connectLiveOrders = () => dispatch(connect(WSURL));
-
+  const disconnectLiveOrders = () => dispatch(disconnect());
   useEffect(() => {
-    console.log(orders, status);
     connectLiveOrders();
+    return () => {
+      disconnectLiveOrders();
+    };
   }, []);
 
   const orderCardsMarkup = orders.map((item) => (

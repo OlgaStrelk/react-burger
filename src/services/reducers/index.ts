@@ -9,7 +9,7 @@ import { loginReducer } from "./login.ts";
 import { userReducer } from "./user.ts";
 import { editProfileFormReducer } from "./profile-form.ts";
 import { logoutReducer } from "./logout.ts";
-import { liveOrdersReducer } from "./ws.ts";
+import { FeedReducer } from "./wsFeed.ts";
 
 export const rootReducer = combineReducers({
   ingredients: ingredientsReducer,
@@ -22,5 +22,5 @@ export const rootReducer = combineReducers({
   user: userReducer,
   profile: editProfileFormReducer,
   logout: logoutReducer,
-  wsOrders: liveOrdersReducer
+  wsFeed: FeedReducer
 });

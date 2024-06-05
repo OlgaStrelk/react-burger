@@ -1,7 +1,9 @@
 import {
   ActionCreatorWithPayload,
   ActionCreatorWithoutPayload,
+  Middleware,
 } from "@reduxjs/toolkit";
+import { RootState } from "../services/types";
 
 export type TwsActionsTypes = {
   wsConnect: ActionCreatorWithPayload<string>;
@@ -13,7 +15,9 @@ export type TwsActionsTypes = {
   onClose: ActionCreatorWithPayload<string>;
 };
 
-export const socketMiddleware = (wsActions: TwsActionsTypes) => {
+export const socketMiddleware = (
+  wsActions: TwsActionsTypes
+) => {
   return (store) => {
     let socket: WebSocket | null = null;
 
@@ -22,7 +26,6 @@ export const socketMiddleware = (wsActions: TwsActionsTypes) => {
       const { type, payload } = action;
       const { wsConnect, onOpen, onClose, onError, onMessage, wsDisconnect } =
         wsActions;
-      //   const { user } = getState().user;
       if (wsConnect.match(action)) {
         socket = new WebSocket(payload);
       }
@@ -39,8 +42,7 @@ export const socketMiddleware = (wsActions: TwsActionsTypes) => {
           const { data } = event;
 
           const parsedData = JSON.parse(data);
-          console.log(parsedData)
-
+          console.log(parsedData);
 
           dispatch(onMessage(parsedData));
         };
