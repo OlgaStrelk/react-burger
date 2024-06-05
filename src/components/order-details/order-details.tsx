@@ -2,6 +2,7 @@ import Price from "../price/price";
 import styles from "./order-details.module.css";
 import { useSelector } from "../../services/types/hooks";
 import Preloader from "../preloader/preloader";
+import { TIngredient } from "../../utils/types";
 function OrderDetails() {
   const order = useSelector((store) => store.order.order);
   const ingredients = useSelector((store) => store.ingredients.ingredients);
@@ -16,8 +17,28 @@ function OrderDetails() {
       return ingredient._id === id;
     });
   });
+  console.log(ingredients);
+  const countedIds = order.ingredients.reduce(
+    (acc: { [id: string]: number }, i) => {
+      if (acc.hasOwnProperty(i)) {
+        acc[i] += 1;
+      } else {
+        acc[i] = 1;
+      }
+      return acc;
+    },
+    {}
+  );
 
-  const ingredientsMarkup = ingredientsArray.map((ingredient) => {
+  let array: TIngredient[] = [];
+  for (let key in countedIds) {
+    let ingredient = ingredients.find((ing) => ing._id === key);
+    if (ingredient) {
+      array.push({ ...ingredient, quantity: countedIds[key] });
+    }
+  }
+
+  const ingredientsMarkup = array.map((ingredient) => {
     if (ingredient) {
       return (
         <li className={styles.ingredient}>
@@ -25,7 +46,7 @@ function OrderDetails() {
             <img className={styles.img} src={ingredient.image} />
             <h3 className={styles.name}>{ingredient.name}</h3>
           </div>
-          <Price number={ingredient.price} />
+          <Price quantity={ingredient.quantity} number={ingredient.price} />
         </li>
       );
     }
