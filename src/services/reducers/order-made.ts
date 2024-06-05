@@ -1,13 +1,12 @@
-import { TOrderResponse } from "../../utils/types";
 import { TOrderActions } from "../actions/order";
 import {
-  GET_ORDER_SUCCESS,
-  GET_ORDER_FAILED,
-  GET_ORDER_REQUEST,
+  MAKE_ORDER_REQUEST,
+  MAKE_ORDER_SUCCESS,
+  MAKE_ORDER_FAILED,
 } from "../constants/order";
 
 export interface OrderState {
-  order: TOrderResponse | null;
+  order: number | null;
   orderRequest: boolean;
   orderFailed: boolean;
 }
@@ -18,27 +17,27 @@ const initialState: OrderState = {
   orderFailed: false,
 };
 
-export const orderReducer = (
+export const orderMadeReducer = (
   state = initialState,
   action: TOrderActions
 ): OrderState => {
   switch (action.type) {
-    case GET_ORDER_REQUEST: {
+    case MAKE_ORDER_REQUEST: {
       return {
         ...state,
         orderRequest: true,
         orderFailed: false,
       };
     }
-    case GET_ORDER_SUCCESS: {
-      const order = action.payload;
+    case MAKE_ORDER_SUCCESS: {
+      const orderNumber = action.payload;
       return {
         ...state,
-        order: order,
+        order: orderNumber,
         orderRequest: false,
       };
     }
-    case GET_ORDER_FAILED: {
+    case MAKE_ORDER_FAILED: {
       return {
         ...state,
         orderFailed: true,

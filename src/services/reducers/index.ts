@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 import { ingredientsReducer } from "./ingredients.ts";
 import { constructorReducer } from "./burger-constructor.ts";
-import { orderReducer } from "./order.ts";
+import { orderMadeReducer } from "./order-made.ts";
 import { resetFormReducer } from "./reset-form-one.ts";
 import { resetFormTwoReducer } from "./reset-form-two.ts";
 import { registerReducer } from "./register.ts";
@@ -10,10 +10,12 @@ import { userReducer } from "./user.ts";
 import { editProfileFormReducer } from "./profile-form.ts";
 import { logoutReducer } from "./logout.ts";
 import { FeedReducer } from "./wsFeed.ts";
+import { orderReducer } from "./order.ts";
 
 export const rootReducer = combineReducers({
   ingredients: ingredientsReducer,
   burgerConstructor: constructorReducer,
+  orderMade: orderMadeReducer,
   order: orderReducer,
   resetForm: resetFormReducer,
   resetFormTwo: resetFormTwoReducer,

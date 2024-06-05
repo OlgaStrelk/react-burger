@@ -6,7 +6,7 @@ import { FETCHING_FAILED_ERROR_TEXT } from "../../utils/errors";
 
 function OrderResponse() {
   const { orderRequest: isLoading, order: orderNumber } = useSelector(
-    (store) => store.order
+    (store) => store.orderMade
   );
 
   return isLoading ? (

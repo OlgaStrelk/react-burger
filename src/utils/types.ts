@@ -87,11 +87,23 @@ export interface IIngredientsResponse extends ISuccessResponse {
   data: TIngredient[];
 }
 
-export interface IOrderResponse extends ISuccessResponse {
+export interface IMakeOrderResponse extends ISuccessResponse {
   name: string;
   order: {
     number: number;
   };
 }
 
-export type TOrderRequest = { ingredients: string[] };
+export type TOrderResponse = {
+  ingredients: string[];
+  owner: string;
+  status: "done" | "" | "";
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+  number: number;
+};
+export interface IGetOrderResponse extends ISuccessResponse {
+  orders: TOrderResponse[];
+}
+export type TMakeOrderRequest = { ingredients: string[] };

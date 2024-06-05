@@ -21,7 +21,7 @@
 }
 
 .subtitle {
-  composes: text text_type_main-medium mt-15 from global;
+  composes: text text_type_main-medium mt-15 mb-6 from global;
   /* margin-block: 0; */
 }
 
@@ -34,15 +34,35 @@
 }
 
 .ingredient {
+  composes: mb-4 from global;
   display: flex;
   justify-content: space-between;
 }
 
 .img {
+  border-radius: 50%;
+  position:absolute;
+  margin-left: 2px;
+  height: 60px;
+  width: 60px;
+  object-fit: cover;
+  background-color: var(--background);
+}
+
+.flexbox::before {
+  content: "";
+  position:relative;
+  background: linear-gradient(to right, #801ab2, #4c4cff);
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+
+
 }
 
 .name {
   composes: text text_type_main-default from global;
+  max-width: 320px;
   margin-block-start: 0;
   margin-block-end: 0;
 }
@@ -62,4 +82,11 @@
 
 .date {
   composes: text text_type_main-default text_color_inactive from global;
+}
+
+.flexbox {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-right: 16px;
 }

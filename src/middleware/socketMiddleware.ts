@@ -3,7 +3,6 @@ import {
   ActionCreatorWithoutPayload,
   Middleware,
 } from "@reduxjs/toolkit";
-import { RootState } from "../services/types";
 
 export type TwsActionsTypes = {
   wsConnect: ActionCreatorWithPayload<string>;
@@ -17,17 +16,16 @@ export type TwsActionsTypes = {
 
 export const socketMiddleware = (
   wsActions: TwsActionsTypes
-) => {
+):Middleware => {
   return (store) => {
     let socket: WebSocket | null = null;
 
     return (next) => (action) => {
-      const { dispatch, getState } = store;
-      const { type, payload } = action;
+      const { dispatch } = store;
       const { wsConnect, onOpen, onClose, onError, onMessage, wsDisconnect } =
         wsActions;
       if (wsConnect.match(action)) {
-        socket = new WebSocket(payload);
+        socket = new WebSocket(action.payload);
       }
       if (socket) {
         socket.onopen = () => {

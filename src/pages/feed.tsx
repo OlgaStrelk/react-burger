@@ -10,7 +10,7 @@ import OrderCard from "../components/order-card/order-card";
 
 function FeedPage() {
   const dispatch = useAppDispatch();
-  const { orders, status } = useSelector((state) => state.wsFeed);
+  const { orders } = useSelector((state) => state.wsFeed);
   const connectLiveOrders = () => dispatch(connect(WSURL));
   const disconnectLiveOrders = () => dispatch(disconnect());
   useEffect(() => {
@@ -21,7 +21,7 @@ function FeedPage() {
   }, []);
 
   const orderCardsMarkup = orders.map((item) => (
-    <Link className={styles.link} to={item._id}>
+    <Link key={item.number} className={styles.link} to={String(item.number)}>
       <OrderCard order={item} />
     </Link>
   ));
