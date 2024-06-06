@@ -6,6 +6,7 @@ import Price from "../price/price";
 import { useSelector } from "../../services/types/hooks";
 import { TIngredient, TWsOrder } from "../../utils/types";
 import { countTotal } from "../../utils/api";
+import { FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
 interface IOrderCardProps {
   order: TWsOrder;
 }
@@ -73,12 +74,13 @@ const OrderCard: FC<IOrderCardProps> = ({ order }) => {
     }
   });
 
-
   return (
     <div className={styles.overlay}>
       <p className={styles.paragraph}>
         <span className={styles.number}>{`#${number}`}</span>
-        <span className={styles.date}>Сегодня, 16:20 </span>
+        <span className={styles.date}>
+          <FormattedDate date={new Date(createdAt)} />{" "}
+        </span>
       </p>
       <h4 className={styles.title}>{name}</h4>
       <p className={styles.subtitle}>{status}</p>

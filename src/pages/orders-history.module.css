@@ -1,16 +1,16 @@
 .wrap {
   grid-area: content;
-  max-height: calc(100vh - 200px);
+  overflow: scroll;
 }
 
 .list {
   padding-inline-start: 0;
   margin-block: 0;
   list-style: none;
-  max-height: inherit;
-  max-width: 916px;
+  height: calc(100vh - 200px);
   overflow: scroll;
-  padding-right: 8px;
+  max-width: 844px;
+  padding-right: 16px;
 }
 
 .link {

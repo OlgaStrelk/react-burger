@@ -18,7 +18,11 @@ export const PATHS = {
   notFound: "/*",
 };
 
-export const WSURL = "wss://norma.nomoreparties.space/orders/all";
+const token = localStorage.getItem("accessToken")?.replace("Bearer ", "");
+
+export const WS_BASE_URL = "wss://norma.nomoreparties.space/orders";
+export const WSURL = `${WS_BASE_URL}/all`;
+export const WSWithToken = `${WS_BASE_URL}?token=${token}`;
 
 export const ENDPOINT = {
   ingredients: "ingredients",

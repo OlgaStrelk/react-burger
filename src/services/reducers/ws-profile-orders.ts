@@ -39,7 +39,7 @@ export const ProfileOrdersReducer = createReducer(initialState, (builder) => {
       state.status = WebsocketStatus.OFFLINE;
     })
     .addCase(wsProfileOrders, (state, action) => {
-      state.orders = action.payload.orders.map((item) => ({
+      state.orders = action.payload.orders?.reverse().map((item) => ({
         ...item,
         status:
           item.status == "done"

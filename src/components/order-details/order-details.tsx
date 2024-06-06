@@ -27,10 +27,10 @@ function OrderDetails() {
     }
   });
 
-   const countTotal = (): number =>
+  const countTotal = (): number =>
     useMemo(() => {
       const initialValue = 0;
-      if (!order.ingredients) {
+      if (order.ingredients.length == 0) {
         return 0;
       } else {
         const total = order.ingredients.reduce(
@@ -40,7 +40,7 @@ function OrderDetails() {
           ) => accumulator + currentValue.price * currentValue.quantity,
           initialValue
         );
-  
+
         return total;
       }
     }, [order.ingredients]);
