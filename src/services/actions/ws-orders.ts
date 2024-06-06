@@ -15,10 +15,10 @@ export const wsClose = createAction<string, "LIVE_ORDERS_WS_CLOSE">(
   "LIVE_ORDERS_WS_CLOSE"
 );
 
-export const wsMessage = createAction<
+export const wsFeed = createAction<
   LiveOrdersAction,
-  "LIVE_ORDERS_WS_MESSAGE"
->("LIVE_ORDERS_WS_MESSAGE");
+  "LIVE_ORDERS_WS_FEED"
+>("LIVE_ORDERS_WS_FEED");
 
 export const wsError = createAction<string, "LIVE_ORDERS_WS_ERROR">(
   "LIVE_ORDERS_WS_ERROR"

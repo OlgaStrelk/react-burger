@@ -1,21 +1,24 @@
-import { TOrderResponse } from "../../utils/types";
+import { TOrder } from "../../utils/types";
 import { TOrderActions } from "../actions/order";
 import {
   GET_ORDER_SUCCESS,
   GET_ORDER_FAILED,
   GET_ORDER_REQUEST,
+  COUNT_TOTAL,
 } from "../constants/order";
 
 export interface OrderState {
-  order: TOrderResponse | null;
+  order: TOrder | null;
   orderRequest: boolean;
   orderFailed: boolean;
+  total: number;
 }
 
 const initialState: OrderState = {
   order: null,
   orderRequest: false,
   orderFailed: false,
+  total: 0,
 };
 
 export const orderReducer = (
@@ -43,6 +46,13 @@ export const orderReducer = (
         ...state,
         orderFailed: true,
         orderRequest: false,
+      };
+    }
+
+    case COUNT_TOTAL: {
+      return {
+        ...state,
+        total: action.payload,
       };
     }
     default: {

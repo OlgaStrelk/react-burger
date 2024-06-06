@@ -1,7 +1,9 @@
+import { useMemo } from "react";
 import { API_URL, ENDPOINT, optionsWithAuth } from "./consts";
 import {
   ITokenResponse,
   TAuthOptions,
+  TIngredient,
   TOptions,
   TRequestOptions,
 } from "./types";
@@ -38,8 +40,7 @@ export const refreshToken = () => {
     if (!refreshData.success) {
       return Promise.reject(refreshData);
     }
-    localStorage.setItem("refreshToken", refreshData.refreshToken);
-    localStorage.setItem("accessToken", refreshData.accessToken);
+    return refreshData;
   });
 };
 
@@ -54,7 +55,9 @@ export const fetchWithRefresh = async <U>(
     });
   } catch (err) {
     if (err.message === "jwt expired") {
-      await refreshToken();
+      let refreshData = await refreshToken();
+      localStorage.setItem("refreshToken", refreshData.refreshToken);
+      localStorage.setItem("accessToken", refreshData.accessToken);
       return await request<U>(url, {
         ...optionsWithAuth,
         method: "GET",
@@ -78,3 +81,21 @@ export const handleError = (err: Error) => {
     console.log(err.message);
   }
 };
+
+export const countTotal = (array: TIngredient[]): number =>
+  useMemo(() => {
+    const initialValue = 0;
+    if (!array) {
+      return 0;
+    } else {
+      const total = array.reduce(
+        (
+          accumulator: number,
+          currentValue: { price: number; quantity: number }
+        ) => accumulator + currentValue.price * currentValue.quantity,
+        initialValue
+      );
+
+      return total;
+    }
+  }, [array]);

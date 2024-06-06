@@ -10,7 +10,7 @@ import {
   wsConnecting as LiveOrdersWsConnecting,
   wsOpen as LiveOrdersWsOpen,
   wsClose as LiveOrdersWsClose,
-  wsMessage as LiveOrdersWsMessage,
+  wsFeed as LiveOrdersWsFeed,
   wsError as LiveOrdersWsError,
 } from "./actions/ws-orders.ts";
 
@@ -30,7 +30,7 @@ const wsActions = {
   wsConnecting: LiveOrdersWsConnecting,
   onOpen: LiveOrdersWsOpen,
   onClose: LiveOrdersWsClose,
-  onMessage: LiveOrdersWsMessage,
+  onMessage: LiveOrdersWsFeed,
   onError: LiveOrdersWsError,
 };
 const liveOrdersMiddleware = socketMiddleware(wsActions);

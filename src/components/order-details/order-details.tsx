@@ -1,8 +1,10 @@
+import { v4 as uuidv4 } from "uuid";
 import Price from "../price/price";
 import styles from "./order-details.module.css";
 import { useSelector } from "../../services/types/hooks";
 import Preloader from "../preloader/preloader";
-import { TIngredient } from "../../utils/types";
+import { useMemo } from "react";
+
 function OrderDetails() {
   const order = useSelector((store) => store.order.order);
   const ingredients = useSelector((store) => store.ingredients.ingredients);
@@ -11,37 +13,10 @@ function OrderDetails() {
     return <Preloader />;
   }
 
-  const statusText = order.status == "done" ? "Выполнен" : "";
-  const ingredientsArray = order.ingredients.map((id) => {
-    return ingredients.find((ingredient) => {
-      return ingredient._id === id;
-    });
-  });
-  console.log(ingredients);
-  const countedIds = order.ingredients.reduce(
-    (acc: { [id: string]: number }, i) => {
-      if (acc.hasOwnProperty(i)) {
-        acc[i] += 1;
-      } else {
-        acc[i] = 1;
-      }
-      return acc;
-    },
-    {}
-  );
-
-  let array: TIngredient[] = [];
-  for (let key in countedIds) {
-    let ingredient = ingredients.find((ing) => ing._id === key);
-    if (ingredient) {
-      array.push({ ...ingredient, quantity: countedIds[key] });
-    }
-  }
-
-  const ingredientsMarkup = array.map((ingredient) => {
+  const ingredientsMarkup = order.ingredients.map((ingredient) => {
     if (ingredient) {
       return (
-        <li className={styles.ingredient}>
+        <li key={crypto.randomUUID()} className={styles.ingredient}>
           <div className={styles.flexbox}>
             <img className={styles.img} src={ingredient.image} />
             <h3 className={styles.name}>{ingredient.name}</h3>
@@ -52,16 +27,34 @@ function OrderDetails() {
     }
   });
 
+   const countTotal = (): number =>
+    useMemo(() => {
+      const initialValue = 0;
+      if (!order.ingredients) {
+        return 0;
+      } else {
+        const total = order.ingredients.reduce(
+          (
+            accumulator: number,
+            currentValue: { price: number; quantity: number }
+          ) => accumulator + currentValue.price * currentValue.quantity,
+          initialValue
+        );
+  
+        return total;
+      }
+    }, [order.ingredients]);
+
   return (
     <div className={styles.container}>
       <span className={styles.number}>{`#${order.number}`}</span>
       <h1 className={styles.title}>{order.name}</h1>
-      <p className={styles.status}>{statusText}</p>
+      <p className={styles.status}>{order.status}</p>
       <h2 className={styles.subtitle}>Состав:</h2>
       <ul className={styles.list}>{ingredientsMarkup}</ul>
       <div className={styles.paragraph}>
         <span className={styles.date}>Вчера, 13:50</span>
-        <Price number={32732} />
+        <Price number={countTotal()} />
       </div>
     </div>
   );

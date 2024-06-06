@@ -3,10 +3,12 @@ import { ENDPOINT, optionsUnAuth, optionsWithAuth } from "../../utils/consts";
 import {
   IGetOrderResponse,
   IMakeOrderResponse,
+  TIngredient,
   TMakeOrderRequest,
-  TOrderResponse,
+  TOrder,
 } from "../../utils/types";
 import {
+  COUNT_TOTAL,
   GET_ORDER_FAILED,
   GET_ORDER_REQUEST,
   GET_ORDER_SUCCESS,
@@ -35,11 +37,16 @@ type TGetrderRequestAction = {
 
 type TGetOrderSuccessAction = {
   type: typeof GET_ORDER_SUCCESS;
-  payload: TOrderResponse;
+  payload: TOrder;
 };
 
 type TGetOrderFailedAction = {
   type: typeof GET_ORDER_FAILED;
+};
+
+type TOrderSumAction = {
+  type: typeof COUNT_TOTAL;
+  payload: number;
 };
 
 export type TOrderActions =
@@ -48,7 +55,8 @@ export type TOrderActions =
   | TMakeOrderFailedAction
   | TGetrderRequestAction
   | TGetOrderSuccessAction
-  | TGetOrderFailedAction;
+  | TGetOrderFailedAction
+  | TOrderSumAction;
 
 export const makeOrder =
   (data: TMakeOrderRequest) => (dispatch: AppDispatch) => {
@@ -67,18 +75,48 @@ export const makeOrder =
       });
   };
 
-export const getOrder = (number: string) => (dispatch: AppDispatch) => {
-  dispatch({ type: GET_ORDER_REQUEST });
+export const getOrder =
+  (number: string) => (dispatch: AppDispatch, getState: any) => {
+    dispatch({ type: GET_ORDER_REQUEST });
 
-  request<IGetOrderResponse>(`${ENDPOINT.orders}/${number}`, {
-    ...optionsUnAuth,
-    method: "GET",
-  })
-    .then((res) => {
-      dispatch({ type: GET_ORDER_SUCCESS, payload: res.orders[0] });
+    request<IGetOrderResponse>(`${ENDPOINT.orders}/${number}`, {
+      ...optionsUnAuth,
+      method: "GET",
     })
-    .catch((err) => {
-      handleError(err);
-      dispatch({ type: GET_ORDER_FAILED });
-    });
-};
+      .then((res) => {
+        const order = res.orders[0];
+        const countedIds = order.ingredients.reduce(
+          (acc: { [id: string]: number }, i) => {
+            if (acc.hasOwnProperty(i)) {
+              acc[i] += 1;
+            } else {
+              acc[i] = 1;
+            }
+            return acc;
+          },
+          {}
+        );
+
+        let array: TIngredient[] = [];
+        for (let key in countedIds) {
+          let ingredient = getState().ingredients.ingredients.find(
+            (ing) => ing._id === key
+          );
+          if (ingredient) {
+            array.push({
+              ...ingredient,
+              quantity: ingredient.type === "bun" ? 2 : countedIds[key],
+            });
+          }
+        }
+
+        dispatch({
+          type: GET_ORDER_SUCCESS,
+          payload: { ...order, ingredients: array },
+        });
+      })
+      .catch((err) => {
+        handleError(err);
+        dispatch({ type: GET_ORDER_FAILED });
+      });
+  };

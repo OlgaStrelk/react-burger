@@ -1,12 +1,13 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { TWsOrder, WebsocketStatus } from "../types/ws";
+import { WebsocketStatus } from "../types/ws";
 import {
   wsClose,
   wsConnecting,
   wsError,
   wsOpen,
-  wsMessage,
+  wsFeed,
 } from "../actions/ws-orders";
+import { TOrder, TWsOrder } from "../../utils/types";
 
 export interface FeedStore {
   status: WebsocketStatus;
@@ -38,8 +39,16 @@ export const FeedReducer = createReducer(initialState, (builder) => {
     .addCase(wsClose, (state) => {
       state.status = WebsocketStatus.OFFLINE;
     })
-    .addCase(wsMessage, (state, action) => {
-      state.orders = action.payload.orders;
+    .addCase(wsFeed, (state, action) => {
+      state.orders = action.payload.orders.map((item) => ({
+        ...item,
+        status:
+          item.status == "done"
+            ? "Выполнен"
+            : item.status == "pending"
+            ? "Готовится"
+            : "Создан",
+      }));
       state.total = action.payload.total;
       state.totalToday = action.payload.totalToday;
     });

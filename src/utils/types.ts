@@ -33,8 +33,8 @@ export interface INavBar {
   icon: ReactNode | string;
 }
 
-export type TOrder = {
-  // buns: number;
+export type TOrder = Omit<TWsOrder, "ingredients"> & {
+  ingredients: TIngredient[];
 };
 
 export type TTitles = {
@@ -94,16 +94,18 @@ export interface IMakeOrderResponse extends ISuccessResponse {
   };
 }
 
-export type TOrderResponse = {
+export type TWsOrder = {
   ingredients: string[];
+  _id: string;
   owner: string;
-  status: "done" | "" | "";
+  status: "done" | "pending" | "created" | "Выполнен" | "Готовится" | "Создан";
   name: string;
   createdAt: string;
   updatedAt: string;
   number: number;
 };
+
 export interface IGetOrderResponse extends ISuccessResponse {
-  orders: TOrderResponse[];
+  orders: TWsOrder[];
 }
 export type TMakeOrderRequest = { ingredients: string[] };

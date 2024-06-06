@@ -1,12 +1,5 @@
-export type TWsOrder = {
-  ingredients: string[];
-  _id: string;
-  status: "done";
-  name: string;
-  number: number;
-  createdAt: string;
-  updatedAt: string;
-};
+import { TWsOrder } from "../../utils/types";
+
 export type TWsOrdersResonse = {
   success: boolean;
   orders: TWsOrder[];
