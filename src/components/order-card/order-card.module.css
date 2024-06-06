@@ -43,7 +43,7 @@
   padding: 2px;
   background: linear-gradient(to right, #801ab2, #4c4cff);
   border-radius: 50%;
-
+  z-index: 1;
   margin-right: -1.5em;
 }
 
