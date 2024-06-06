@@ -109,3 +109,16 @@ export interface IGetOrderResponse extends ISuccessResponse {
   orders: TWsOrder[];
 }
 export type TMakeOrderRequest = { ingredients: string[] };
+
+export type TWsFeedResponse = {
+  success: boolean;
+  orders: TWsOrder[];
+  total: number;
+  totalToday: number;
+};
+
+export enum WebsocketStatus {
+  CONNECTING = "CONNECTING...",
+  ONLINE = "ONLINE",
+  OFFLINE = "OFFLINE",
+}

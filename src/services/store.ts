@@ -5,17 +5,27 @@ import {
 } from "redux";
 import { thunk } from "redux-thunk";
 import {
-  connect as LiveOrdersWsConnect,
-  disconnect as LiveOrdersWsDisconnect,
-  wsConnecting as LiveOrdersWsConnecting,
-  wsOpen as LiveOrdersWsOpen,
-  wsClose as LiveOrdersWsClose,
-  wsFeed as LiveOrdersWsFeed,
-  wsError as LiveOrdersWsError,
-} from "./actions/ws-orders.ts";
+  connect as LiveFeedWsConnect,
+  disconnect as LiveFeedWsDisconnect,
+  wsConnecting as LiveFeedWsConnecting,
+  wsOpen as LiveFeedWsOpen,
+  wsClose as LiveFeedWsClose,
+  wsFeed as LiveFeedWsOrders,
+  wsError as LiveFeedWsError,
+} from "./actions/ws-feed.ts";
+
+import {
+  connect as LiveProfileOrdersWsConnect,
+  disconnect as LiveProfileOrdersWsDisconnect,
+  wsConnecting as LiveProfileOrdersWsConnecting,
+  wsOpen as LiveProfileOrdersWsOpen,
+  wsClose as LiveProfileOrdersWsClose,
+  wsProfileOrders as LiveProfileOrdersWsOrders,
+  wsError as LiveProfileOrdersWsError,
+} from "./actions/ws-profile-orders.ts";
 
 import { rootReducer } from "./reducers/index.ts";
-import { socketMiddleware } from "../middleware/socketMiddleware.ts";
+import { socketMiddleware } from "./middleware/socketMiddleware.ts";
 
 const composeEnhancers =
   //@ts-ignore
@@ -24,17 +34,31 @@ const composeEnhancers =
       window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
     : compose;
 
-const wsActions = {
-  wsConnect: LiveOrdersWsConnect,
-  wsDisconnect: LiveOrdersWsDisconnect,
-  wsConnecting: LiveOrdersWsConnecting,
-  onOpen: LiveOrdersWsOpen,
-  onClose: LiveOrdersWsClose,
-  onMessage: LiveOrdersWsFeed,
-  onError: LiveOrdersWsError,
+const wsFeedActions = {
+  wsConnect: LiveFeedWsConnect,
+  wsDisconnect: LiveFeedWsDisconnect,
+  wsConnecting: LiveFeedWsConnecting,
+  onOpen: LiveFeedWsOpen,
+  onClose: LiveFeedWsClose,
+  onMessage: LiveFeedWsOrders,
+  onError: LiveFeedWsError,
 };
-const liveOrdersMiddleware = socketMiddleware(wsActions);
-const enhancer = composeEnhancers(applyMiddleware(thunk, liveOrdersMiddleware));
+const wsProfileOrdersActions = {
+  wsConnect: LiveProfileOrdersWsConnect,
+  wsDisconnect: LiveProfileOrdersWsDisconnect,
+  wsConnecting: LiveProfileOrdersWsConnecting,
+  onOpen: LiveProfileOrdersWsOpen,
+  onClose: LiveProfileOrdersWsClose,
+  onMessage: LiveProfileOrdersWsOrders,
+  onError: LiveProfileOrdersWsError,
+};
+const liveFeedMiddleware = socketMiddleware(wsFeedActions);
+
+const liveProfileOrdersMiddleware = socketMiddleware(wsProfileOrdersActions);
+
+const enhancer = composeEnhancers(
+  applyMiddleware(thunk, liveFeedMiddleware, liveProfileOrdersMiddleware)
+);
 const store = createStore(rootReducer, enhancer);
 
 export default store;

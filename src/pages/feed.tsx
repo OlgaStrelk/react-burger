@@ -5,18 +5,18 @@ import { useEffect } from "react";
 import { useAppDispatch } from "../services/types";
 import { useSelector } from "../services/types/hooks";
 import { WSURL } from "../utils/consts";
-import { connect, disconnect } from "../services/actions/ws-orders";
+import { connect, disconnect } from "../services/actions/ws-feed";
 import OrderCard from "../components/order-card/order-card";
 
 function FeedPage() {
   const dispatch = useAppDispatch();
   const { orders } = useSelector((state) => state.wsFeed);
-  const connectLiveOrders = () => dispatch(connect(WSURL));
-  const disconnectLiveOrders = () => dispatch(disconnect());
+  const connectLiveFeed = () => dispatch(connect(WSURL));
+  const disconnectLiveFeed = () => dispatch(disconnect());
   useEffect(() => {
-    connectLiveOrders();
+    connectLiveFeed();
     return () => {
-      disconnectLiveOrders();
+      disconnectLiveFeed();
     };
   }, []);
 
