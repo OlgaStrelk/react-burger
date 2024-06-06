@@ -52,21 +52,21 @@ const OrderCard: FC<IOrderCardProps> = ({ order }) => {
   const imagesArrayMarkup = imagesArray.map((item, index) => {
     if (index == 0) {
       return isHidden ? (
-        <li key={crypto.randomUUID()} className={styles.list_item}>
+        <li key={index} className={styles.list_item}>
           <div className={styles.cover}>
             <img className={styles.shadowed_icon} src={item} />
           </div>
           <span className={styles.rest}>{`+${imagesArray.length - 6}`}</span>
         </li>
       ) : (
-        <li key={crypto.randomUUID()} className={styles.list_item}>
+        <li key={index} className={styles.list_item}>
           <img className={styles.img} src={item} />
         </li>
       );
     }
     if (index >= 1 && index < 6) {
       return (
-        <li key={crypto.randomUUID()} className={styles.list_item}>
+        <li key={index} className={styles.list_item}>
           <img className={styles.img} src={item} />
         </li>
       );
