@@ -51,6 +51,22 @@ function OrderDetails() {
   //     }
   //   }, [order.ingredients]);
 
+  const countTotal = (): number => {
+    const initialValue = 0;
+    if (order.ingredients.length == 0) {
+      return 0;
+    } else {
+      const total = order.ingredients.reduce(
+        (
+          accumulator: number,
+          currentValue: { price: number; quantity: number }
+        ) => accumulator + currentValue.price * currentValue.quantity,
+        initialValue
+      );
+
+      return total;
+    }
+  };
   return (
     <div className={styles.container}>
       <span className={styles.number}>{`#${order.number}`}</span>
@@ -61,6 +77,7 @@ function OrderDetails() {
       <div className={styles.paragraph}>
         <span className={styles.date}>Вчера, 13:50</span>
         {/* <Price number={countTotal()} /> */}
+        <Price number={countTotal()} />
       </div>
     </div>
   );
