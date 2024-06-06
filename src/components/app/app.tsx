@@ -49,7 +49,6 @@ function App() {
     profileOrder,
   } = PATHS;
 
-  console.log("state?.backgroundLocation", state?.backgroundLocation);
   return (
     <>
       <AppHeader />
@@ -107,17 +106,14 @@ function App() {
           <Route
             path={order}
             element={
-              <Modal path={ordersHistory}>
+              <Modal path={ordersList}>
                 <OrderDetails />
               </Modal>
             }
           />
-        </Routes>
-      )}
-      {/* {state?.backgroundLocation.pathname == ordersHistory && (
-        <Routes>
+
           <Route
-            path={order}
+            path={profileOrder}
             element={
               <Modal path={ordersHistory}>
                 <OrderDetails />
@@ -125,7 +121,7 @@ function App() {
             }
           />
         </Routes>
-      )} */}
+      )}
     </>
   );
 }

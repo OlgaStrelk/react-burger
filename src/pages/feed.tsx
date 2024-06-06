@@ -1,6 +1,6 @@
 import styles from "./feed.module.css";
 import OrdersPanel from "../components/orders-panel/orders-panel";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useAppDispatch } from "../services/types";
 import { useSelector } from "../services/types/hooks";
@@ -10,6 +10,8 @@ import OrderCard from "../components/order-card/order-card";
 
 function FeedPage() {
   const dispatch = useAppDispatch();
+  const location = useLocation();
+
   const { orders } = useSelector((state) => state.wsFeed);
   const connectLiveFeed = () => dispatch(connect(WSURL));
   const disconnectLiveFeed = () => dispatch(disconnect());
@@ -21,7 +23,12 @@ function FeedPage() {
   }, []);
 
   const orderCardsMarkup = orders.map((item) => (
-    <Link key={item.number} className={styles.link} to={String(item.number)}>
+    <Link
+      key={item.number}
+      className={styles.link}
+      state={{ backgroundLocation: location }}
+      to={String(item.number)}
+    >
       <OrderCard order={item} />
     </Link>
   ));
