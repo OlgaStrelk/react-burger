@@ -19,7 +19,7 @@ function OrdersHistoryPage() {
       disconnectLiveProfileOrders();
     };
   }, []);
-  const ordersHistoryMarkup = orders.map((order) => (
+  const ordersHistoryMarkup = orders?.map((order) => (
     <li className={styles.item} key={order.number}>
       <Link
         className={styles.link}
@@ -31,7 +31,7 @@ function OrdersHistoryPage() {
     </li>
   ));
   return (
-    { orders } && (
+    orders && (
       <div className={styles.wrap}>
         <ul className={styles.list}>{ordersHistoryMarkup}</ul>
       </div>

@@ -7,9 +7,8 @@ import { useMemo } from "react";
 
 function OrderDetails() {
   const order = useSelector((store) => store.order.order);
-  const ingredients = useSelector((store) => store.ingredients.ingredients);
 
-  if (!order || !ingredients) {
+  if (!order) {
     return <Preloader />;
   }
 

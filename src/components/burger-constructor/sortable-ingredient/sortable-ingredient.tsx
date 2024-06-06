@@ -10,6 +10,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useAppDispatch, useSelector } from "../../../services/types/hooks";
 import { TConstructorIngredient } from "../../../utils/types";
+import { sortIngredients } from "../../../services/actions/constructor-ingredients";
 export interface ISortableIngredientProps {
   data: TConstructorIngredient;
   index: number;
@@ -35,8 +36,7 @@ export const SortableIngredient = ({
     const newIngredients = [...ingredients];
     newIngredients.splice(dragIndex, 1);
     newIngredients.splice(hoverIndex, 0, dragCard);
-    //@ts-ignore
-    dispatch(sortIngredients());
+    dispatch(sortIngredients(newIngredients));
   };
 
   const [{ handlerId }, drop] = useDrop<

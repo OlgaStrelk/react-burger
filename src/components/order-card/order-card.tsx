@@ -16,7 +16,6 @@ const OrderCard: FC<IOrderCardProps> = ({ order }) => {
     status,
     name,
     createdAt,
-    updatedAt,
     number,
   } = order;
   const ingredients = useSelector((store) => store.ingredients.ingredients);
