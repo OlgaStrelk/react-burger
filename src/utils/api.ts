@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { API_URL, ENDPOINT, optionsWithAuth } from "./consts";
+import { API_URL, ENDPOINT, optionsUnAuth, optionsWithAuth } from "./consts";
 import {
   ITokenResponse,
   TAuthOptions,
@@ -53,13 +53,20 @@ export const fetchWithRefresh = async <U>(
       ...optionsWithAuth,
       ...options,
     });
-  } catch (err) {
+  } catch (err: any) {
     if (err.message === "jwt expired") {
+      console.log("вошел");
       let refreshData = await refreshToken();
+
       localStorage.setItem("refreshToken", refreshData.refreshToken);
       localStorage.setItem("accessToken", refreshData.accessToken);
+
       return await request<U>(url, {
-        ...optionsWithAuth,
+        ...optionsUnAuth,
+        headers: {
+          ...optionsUnAuth.headers,
+          Authorization: refreshData.refreshToken as string,
+        },
         method: "GET",
       });
     } else {

@@ -23,7 +23,6 @@ const ProtectedRoute = ({ onlyUnAuth = false, component }: IProtectedRoute) => {
   }
 
   if (!onlyUnAuth && !user) {
-    console.log(location)
     return <Navigate to={PATHS.login} state={{ from: location }} />;
   }
 

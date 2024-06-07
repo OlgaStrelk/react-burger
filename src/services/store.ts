@@ -25,7 +25,7 @@ import {
 } from "./actions/ws-profile-orders.ts";
 
 import { rootReducer } from "./reducers/index.ts";
-import { socketMiddleware } from "./middleware/socketMiddleware.ts";
+import { socketMiddleware, socketMiddlewareWithReconnect } from "./middleware/socketMiddleware.ts";
 
 const composeEnhancers =
   //@ts-ignore
@@ -52,9 +52,14 @@ const wsProfileOrdersActions = {
   onMessage: LiveProfileOrdersWsOrders,
   onError: LiveProfileOrdersWsError,
 };
-const liveFeedMiddleware = socketMiddleware(wsFeedActions);
+// const liveFeedMiddleware = socketMiddleware(wsFeedActions);
 
-const liveProfileOrdersMiddleware = socketMiddleware(wsProfileOrdersActions);
+// const liveProfileOrdersMiddleware = socketMiddleware(wsProfileOrdersActions);
+
+const liveFeedMiddleware = socketMiddlewareWithReconnect(wsFeedActions);
+
+const liveProfileOrdersMiddleware = socketMiddlewareWithReconnect(wsProfileOrdersActions);
+
 
 const enhancer = composeEnhancers(
   applyMiddleware(thunk, liveFeedMiddleware, liveProfileOrdersMiddleware)

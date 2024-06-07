@@ -48,7 +48,6 @@ function App() {
     ordersList,
     profileOrder,
   } = PATHS;
-console.log(state?.backgroundLocation)
   return (
     <>
       <AppHeader />

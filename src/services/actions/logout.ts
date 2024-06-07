@@ -38,6 +38,8 @@ export const logout:AppThunk = () => (dispatch: AppDispatch) => {
         localStorage.removeItem("refreshToken");
         dispatch({ type: CLEAR_PROFILE_FORM });
       })
-      .catch((err) => handleError(LOGOUT_FAILED, err, dispatch));
+      .catch((err) => {handleError(err);
+        dispatch({type:LOGOUT_FAILED})
+      });
   } else throw Error("В хранилище нет токена");
 };
