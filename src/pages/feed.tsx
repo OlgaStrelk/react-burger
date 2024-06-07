@@ -22,14 +22,14 @@ function FeedPage() {
     };
   }, []);
 
-  const orderCardsMarkup = orders.map((item) => (
+  const orderCardsMarkup = orders.map((order) => (
     <Link
-      key={item.number}
+      key={order.number}
       className={styles.link}
       state={{ backgroundLocation: location }}
-      to={String(item.number)}
+      to={String(order.number)}
     >
-      <OrderCard order={item} />
+      <OrderCard order={order} />
     </Link>
   ));
   return (

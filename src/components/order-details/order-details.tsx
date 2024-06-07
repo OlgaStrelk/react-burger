@@ -16,11 +16,7 @@ function OrderDetails() {
   }, []);
   const order = useSelector((store) => store.order.order);
 
-  if (!order) {
-    return <Preloader />;
-  }
-
-  const ingredientsMarkup = order.ingredients.map((ingredient) => {
+  const ingredientsMarkup = order?.ingredients.map((ingredient) => {
     if (ingredient) {
       return (
         <li key={ingredient._id} className={styles.ingredient}>
@@ -33,13 +29,15 @@ function OrderDetails() {
       );
     }
   });
-
-  const countTotal = () => {
+  const memoKey = order?.ingredients.reduce((memo, item) => {
+    return memo + item._id;
+  }, "");
+  const countTotal = useMemo(() => {
     const initialValue = 0;
-    if (order.ingredients.length == 0) {
+    if (!order || order?.ingredients.length == 0) {
       return 0;
     } else {
-      const total = order.ingredients.reduce(
+      const total = order?.ingredients.reduce(
         (
           accumulator: number,
           currentValue: { price: number; quantity: number }
@@ -49,8 +47,8 @@ function OrderDetails() {
 
       return total;
     }
-  };
-  return (
+  }, [memoKey]);
+  return order ? (
     <div className={styles.container}>
       <span className={styles.number}>{`#${order.number}`}</span>
       <h1 className={styles.title}>{order.name}</h1>
@@ -61,9 +59,11 @@ function OrderDetails() {
         <span className={styles.date}>
           <FormattedDate date={new Date(order.createdAt)} />
         </span>
-        <Price number={countTotal()} />
+        <Price number={countTotal} />
       </div>
     </div>
+  ) : (
+    <Preloader />
   );
 }
 

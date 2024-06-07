@@ -64,14 +64,14 @@ function App() {
             path={ordersHistory}
             element={<OnlyAuth component={<OrdersHistoryPage />} />}
           />
+          <Route
+            path={profileOrder}
+            element={<OnlyAuth component={<OrderPage />} />}
+          />
         </Route>
 
         <Route path={ordersList} element={<FeedPage />} />
         <Route path={order} element={<OrderPage />} />
-        <Route
-          path={profileOrder}
-          element={<OnlyAuth component={<OrderPage />} />}
-        />
 
         <Route
           path={login}
