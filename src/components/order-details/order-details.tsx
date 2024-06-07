@@ -6,6 +6,7 @@ import Preloader from "../preloader/preloader";
 import { useEffect, useMemo } from "react";
 import { getOrder } from "../../services/actions/order";
 import { useParams } from "react-router-dom";
+import { FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
 
 function OrderDetails() {
   const { number } = useParams();
@@ -31,25 +32,7 @@ function OrderDetails() {
         </li>
       );
     }
-  });
-
-  // const countTotal = (): number =>
-  //   useMemo(() => {
-  //     const initialValue = 0;
-  //     if (order.ingredients.length == 0) {
-  //       return 0;
-  //     } else {
-  //       const total = order.ingredients.reduce(
-  //         (
-  //           accumulator: number,
-  //           currentValue: { price: number; quantity: number }
-  //         ) => accumulator + currentValue.price * currentValue.quantity,
-  //         initialValue
-  //       );
-
-  //       return total;
-  //     }
-  //   }, [order.ingredients]);
+  })
 
   const countTotal = (): number => {
     const initialValue = 0;
@@ -75,8 +58,7 @@ function OrderDetails() {
       <h2 className={styles.subtitle}>Состав:</h2>
       <ul className={styles.list}>{ingredientsMarkup}</ul>
       <div className={styles.paragraph}>
-        <span className={styles.date}>Вчера, 13:50</span>
-        {/* <Price number={countTotal()} /> */}
+        <span className={styles.date}><FormattedDate date={new Date(order.createdAt)}/></span>
         <Price number={countTotal()} />
       </div>
     </div>

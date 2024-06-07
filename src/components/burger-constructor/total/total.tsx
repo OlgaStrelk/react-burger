@@ -25,6 +25,7 @@ function Total() {
         return total;
       }
     }, [addedIngredients?.ingredients, addedIngredients?.buns]);
+    
   return (
     <>
       <span className="mr-1 text text_type_digits-medium">{countTotal()}</span>
