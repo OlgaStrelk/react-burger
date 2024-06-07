@@ -42,7 +42,9 @@ export const FeedReducer = createReducer(initialState, (builder) => {
       state.orders = action.payload.orders.map((item) => ({
         ...item,
         status:
-          item.status == "done"
+          item.status == "created"
+            ? "Создан"
+            : item.status == "done"
             ? "Выполнен"
             : item.status == "pending"
             ? "Готовится"

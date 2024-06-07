@@ -3,7 +3,7 @@ import Price from "../price/price";
 import styles from "./order-details.module.css";
 import { useAppDispatch, useSelector } from "../../services/types/hooks";
 import Preloader from "../preloader/preloader";
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { getOrder } from "../../services/actions/order";
 import { useParams } from "react-router-dom";
 import { FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";

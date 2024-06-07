@@ -112,7 +112,18 @@ export const getOrder =
 
         dispatch({
           type: GET_ORDER_SUCCESS,
-          payload: { ...order, ingredients: array },
+          payload: {
+            ...order,
+            ingredients: array,
+            status:
+              order.status == "created"
+                ? "Создан"
+                : order.status == "done"
+                ? "Выполнен"
+                : order.status == "pending"
+                ? "Готовится"
+                : "Создан",
+          },
         });
       })
       .catch((err) => {
