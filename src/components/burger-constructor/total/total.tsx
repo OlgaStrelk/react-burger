@@ -8,7 +8,7 @@ function Total() {
     (store) => store.burgerConstructor.addedIngredients
   );
 
-  const countTotal = () =>
+  const countTotal = 
     useMemo(() => {
       const initialValue = 0;
       if (!(addedIngredients.ingredients && addedIngredients.buns)) {
@@ -28,7 +28,7 @@ function Total() {
     
   return (
     <>
-      <span className="mr-1 text text_type_digits-medium">{countTotal()}</span>
+      <span className="mr-1 text text_type_digits-medium">{countTotal}</span>
       <img className="mr-10" src={CurrencyIconPath} alt="у.е." />
     </>
   );

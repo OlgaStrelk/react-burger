@@ -3,7 +3,7 @@ import Price from "../price/price";
 import styles from "./order-details.module.css";
 import { useAppDispatch, useSelector } from "../../services/types/hooks";
 import Preloader from "../preloader/preloader";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { getOrder } from "../../services/actions/order";
 import { useParams } from "react-router-dom";
 import { FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -32,9 +32,9 @@ function OrderDetails() {
         </li>
       );
     }
-  })
+  });
 
-  const countTotal = (): number => {
+  const countTotal = () => {
     const initialValue = 0;
     if (order.ingredients.length == 0) {
       return 0;
@@ -58,7 +58,9 @@ function OrderDetails() {
       <h2 className={styles.subtitle}>Состав:</h2>
       <ul className={styles.list}>{ingredientsMarkup}</ul>
       <div className={styles.paragraph}>
-        <span className={styles.date}><FormattedDate date={new Date(order.createdAt)}/></span>
+        <span className={styles.date}>
+          <FormattedDate date={new Date(order.createdAt)} />
+        </span>
         <Price number={countTotal()} />
       </div>
     </div>

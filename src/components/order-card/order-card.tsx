@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 
 import styles from "./order-card.module.css";
-import { FC } from "react";
+import { FC, useMemo } from "react";
 import Price from "../price/price";
 import { useSelector } from "../../services/types/hooks";
 import { TIngredient, TWsOrder } from "../../utils/types";
@@ -73,6 +73,26 @@ const OrderCard: FC<IOrderCardProps> = ({ order }) => {
     }
   });
 
+
+ const countTotal = 
+  useMemo(() => {
+    const initialValue = 0;
+    if (!array) {
+      return 0;
+    } else {
+      const total = array.reduce(
+        (
+          accumulator: number,
+          currentValue: { price: number; quantity: number }
+        ) => accumulator + currentValue.price * currentValue.quantity,
+        initialValue
+      );
+
+      return total;
+    }
+  }, [array]);
+
+
   return (
     <div className={styles.overlay}>
       <p className={styles.paragraph}>
@@ -85,7 +105,7 @@ const OrderCard: FC<IOrderCardProps> = ({ order }) => {
       <p className={styles.subtitle}>{status}</p>
       <div className={styles.line}>
         <ul className={styles.icons_list}>{imagesArrayMarkup}</ul>
-        <Price number={countTotal(array)} />
+        <Price number={countTotal} />
       </div>
     </div>
   );

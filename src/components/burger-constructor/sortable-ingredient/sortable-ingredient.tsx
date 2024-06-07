@@ -10,7 +10,8 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useAppDispatch, useSelector } from "../../../services/types/hooks";
 import { TConstructorIngredient } from "../../../utils/types";
-import { sortIngredients } from "../../../services/actions/constructor-ingredients";
+import { deleteIngredient, sortIngredients } from "../../../services/actions/constructor-ingredients";
+import { decreaseQuantity } from "../../../services/actions/ingredients";
 export interface ISortableIngredientProps {
   data: TConstructorIngredient;
   index: number;
@@ -92,9 +93,7 @@ export const SortableIngredient = ({
   drag(drop(ref));
 
   const onDelete = () => {
-    //@ts-ignore
     dispatch(deleteIngredient(data.id));
-    //@ts-ignore
     dispatch(decreaseQuantity(data._id));
   };
 

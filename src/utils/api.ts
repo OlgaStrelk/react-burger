@@ -81,21 +81,3 @@ export const handleError = (err: Error) => {
     console.log(err.message);
   }
 };
-
-export const countTotal = (array: TIngredient[]): number =>
-  useMemo(() => {
-    const initialValue = 0;
-    if (!array) {
-      return 0;
-    } else {
-      const total = array.reduce(
-        (
-          accumulator: number,
-          currentValue: { price: number; quantity: number }
-        ) => accumulator + currentValue.price * currentValue.quantity,
-        initialValue
-      );
-
-      return total;
-    }
-  }, [array]);
