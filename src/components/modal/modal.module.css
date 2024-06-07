@@ -7,11 +7,9 @@
   box-sizing: border-box;
   position: absolute;
   min-height: fit-content;
-  max-height: 85vh;
   text-align: center;
   padding-left: 45px;
   padding-right: 45px;
-  overflow: scroll;
 }
 
 .icon {

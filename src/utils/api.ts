@@ -60,7 +60,7 @@ export const fetchWithRefresh = async <U>(
 
       localStorage.setItem("refreshToken", refreshData.refreshToken);
       localStorage.setItem("accessToken", refreshData.accessToken);
-
+console.log(refreshData)
       return await request<U>(url, {
         ...optionsUnAuth,
         headers: {

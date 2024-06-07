@@ -75,10 +75,6 @@ export const fetchUser = () => async (dispatch: AppDispatch) => {
   await fetchWithRefresh<IUserSuccessResponse>(ENDPOINT.user, {
     ...optionsWithAuth,
     method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: localStorage.getItem("accessToken") as string,
-    },
   })
     .then((data) => {
       if (data && data.success) {

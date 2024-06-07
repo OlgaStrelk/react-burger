@@ -27,10 +27,14 @@
 
 .list {
   composes: mr-6 from global;
+  padding-inline-start:0;
   margin-block-start: 0;
   margin-block-end: 0;
   list-style: none;
   padding: 0;
+  padding-right: 30px;
+  max-height: 30vh;
+  overflow: scroll;
 }
 
 .ingredient {
@@ -41,23 +45,19 @@
 
 .img {
   border-radius: 50%;
-  position:absolute;
-  margin-left: 2px;
   height: 60px;
   width: 60px;
   object-fit: cover;
   background-color: var(--background);
 }
 
-.flexbox::before {
-  content: "";
-  position:relative;
+.img_wrap {
+  padding: 2px;
+  box-sizing: border-box;
   background: linear-gradient(to right, #801ab2, #4c4cff);
   width: 64px;
   height: 64px;
   border-radius: 50%;
-
-
 }
 
 .name {

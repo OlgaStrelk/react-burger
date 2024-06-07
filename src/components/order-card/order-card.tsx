@@ -5,7 +5,6 @@ import { FC, useMemo } from "react";
 import Price from "../price/price";
 import { useSelector } from "../../services/types/hooks";
 import { TIngredient, TWsOrder } from "../../utils/types";
-import { countTotal } from "../../utils/api";
 import { FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
 interface IOrderCardProps {
   order: TWsOrder;

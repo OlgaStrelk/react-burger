@@ -21,7 +21,7 @@ function OrderDetails() {
       return (
         <li key={ingredient._id} className={styles.ingredient}>
           <div className={styles.flexbox}>
-            <img className={styles.img} src={ingredient.image} />
+            <div className={styles.img_wrap}><img className={styles.img} src={ingredient.image} /></div>
             <h3 className={styles.name}>{ingredient.name}</h3>
           </div>
           <Price quantity={ingredient.quantity} number={ingredient.price} />

@@ -6,7 +6,7 @@
 
 .section {
   composes: pr-4 from global;
-  max-width: 600px;
+  width: 600px;
   overflow: scroll;
   overflow-x: hidden;
   max-height: calc(100vh - 200px);
