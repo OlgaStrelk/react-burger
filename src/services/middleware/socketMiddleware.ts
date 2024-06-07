@@ -4,7 +4,6 @@ import {
   Middleware,
 } from "@reduxjs/toolkit";
 import { refreshToken } from "../../utils/api";
-import { RootState } from "../types";
 
 export type TwsActionsTypes = {
   wsConnect: ActionCreatorWithPayload<string>;

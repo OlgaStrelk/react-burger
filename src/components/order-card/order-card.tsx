@@ -1,5 +1,3 @@
-import { v4 as uuidv4 } from "uuid";
-
 import styles from "./order-card.module.css";
 import { FC, useMemo } from "react";
 import Price from "../price/price";

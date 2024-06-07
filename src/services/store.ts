@@ -25,7 +25,7 @@ import {
 } from "./actions/ws-profile-orders.ts";
 
 import { rootReducer } from "./reducers/index.ts";
-import { socketMiddleware, socketMiddlewareWithReconnect } from "./middleware/socketMiddleware.ts";
+import { socketMiddlewareWithReconnect } from "./middleware/socketMiddleware.ts";
 
 const composeEnhancers =
   //@ts-ignore

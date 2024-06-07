@@ -1,9 +1,7 @@
-import { useMemo } from "react";
 import { API_URL, ENDPOINT, optionsUnAuth, optionsWithAuth } from "./consts";
 import {
   ITokenResponse,
   TAuthOptions,
-  TIngredient,
   TOptions,
   TRequestOptions,
 } from "./types";
@@ -29,6 +27,21 @@ export const checkResponse = <T>(res: CustomResponse): T => {
 };
 
 //() => Promise<undefined>
+// export const refreshToken = () => {
+//   return request<ITokenResponse>(ENDPOINT.refreshToken, {
+//     ...optionsWithAuth,
+//     method: "POST",
+//     body: JSON.stringify({
+//       token: localStorage.getItem("refreshToken"),
+//     }),
+//   }).then((refreshData) => {
+//     if (!refreshData.success) {
+//       return Promise.reject(refreshData);
+//     }
+//     return refreshData;
+//   });
+// };
+
 export const refreshToken = () => {
   return request<ITokenResponse>(ENDPOINT.refreshToken, {
     ...optionsWithAuth,
@@ -36,11 +49,6 @@ export const refreshToken = () => {
     body: JSON.stringify({
       token: localStorage.getItem("refreshToken"),
     }),
-  }).then((refreshData) => {
-    if (!refreshData.success) {
-      return Promise.reject(refreshData);
-    }
-    return refreshData;
   });
 };
 
@@ -55,24 +63,20 @@ export const fetchWithRefresh = async <U>(
     });
   } catch (err: any) {
     if (err.message === "jwt expired") {
-      console.log("вошел");
-      let refreshData = await refreshToken();
-
+      const refreshData = await refreshToken();
+      if (!refreshData.success) {
+        return Promise.reject(refreshData);
+      }
       localStorage.setItem("refreshToken", refreshData.refreshToken);
       localStorage.setItem("accessToken", refreshData.accessToken);
-console.log(refreshData)
+      optionsWithAuth.headers.Authorization = refreshData.accessToken;
       return await request<U>(url, {
-        ...optionsUnAuth,
-        headers: {
-          ...optionsUnAuth.headers,
-          Authorization: refreshData.refreshToken as string,
-        },
+        ...optionsWithAuth,
         method: "GET",
       });
     } else {
-      handleError(err);
+      return Promise.reject(err);
     }
-    return Promise.reject(err);
   }
 };
 

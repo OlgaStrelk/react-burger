@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from "uuid";
 import Price from "../price/price";
 import styles from "./order-details.module.css";
 import { useAppDispatch, useSelector } from "../../services/types/hooks";
