@@ -9,22 +9,21 @@ interface IProtectedRoute {
   component: ReactNode;
 }
 const ProtectedRoute = ({ onlyUnAuth = false, component }: IProtectedRoute) => {
-  const { isAuthChecked, user } = useSelector(
-    (state) => state.user
-  );
+  const { isAuthChecked, user } = useSelector((state) => state.user);
 
   const location = useLocation();
 
   if (!isAuthChecked) {
-    return <Preloader/>
+    return <Preloader />;
   }
 
   if (onlyUnAuth && user) {
     const { from } = location.state || { from: { pathname: PATHS.home } };
-    return <Navigate to={from} />;
+    return <Navigate to={from.pathname} />;
   }
 
   if (!onlyUnAuth && !user) {
+    console.log(location)
     return <Navigate to={PATHS.login} state={{ from: location }} />;
   }
 

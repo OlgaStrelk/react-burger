@@ -8,6 +8,7 @@ import { WSWithToken } from "../utils/consts";
 
 function OrdersHistoryPage() {
   const location = useLocation();
+  console.log('location',location)
   const dispatch = useAppDispatch();
 
   const { orders } = useSelector((state) => state.wsProfileOrders);

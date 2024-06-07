@@ -48,7 +48,7 @@ function App() {
     ordersList,
     profileOrder,
   } = PATHS;
-
+console.log(state?.backgroundLocation)
   return (
     <>
       <AppHeader />
@@ -64,12 +64,11 @@ function App() {
             path={ordersHistory}
             element={<OnlyAuth component={<OrdersHistoryPage />} />}
           />
-          <Route
-            path={profileOrder}
-            element={<OnlyAuth component={<OrderPage />} />}
-          />
         </Route>
-
+        <Route
+          path={profileOrder}
+          element={<OnlyAuth component={<OrderPage />} />}
+        />
         <Route path={ordersList} element={<FeedPage />} />
         <Route path={order} element={<OrderPage />} />
 
@@ -115,9 +114,13 @@ function App() {
           <Route
             path={profileOrder}
             element={
-              <Modal path={ordersHistory}>
-                <OrderDetails />
-              </Modal>
+              <OnlyAuth
+                component={
+                  <Modal path={ordersHistory}>
+                    <OrderDetails />
+                  </Modal>
+                }
+              />
             }
           />
         </Routes>

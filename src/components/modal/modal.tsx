@@ -1,9 +1,9 @@
-import { ReactNode, useEffect, useRef } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import ModalOverlay from "./modal-overlay/modal-overlay";
 import styles from "./modal.module.css";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import ReactDOM from "react-dom";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../services/types/hooks";
 
 const modalRoot = document.getElementById("react-modals");
@@ -23,6 +23,7 @@ function Modal({
   path,
   customStyle,
 }: PropsWithChildren<IModal>) {
+
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const overlayRef = useRef<HTMLDivElement>(null);
@@ -65,10 +66,12 @@ function Modal({
     document.addEventListener("keydown", handleEscClose);
     document.addEventListener("click", handleOverlayClick);
   };
+  
   const removeListeners = () => {
     document.removeEventListener("keydown", handleEscClose);
     document.removeEventListener("click", handleOverlayClick);
   };
+
   useEffect(() => {
     addListeners();
     return () => {
