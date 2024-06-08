@@ -1,30 +1,68 @@
-import { useSelector } from "react-redux";
-import CheckMarkIcon from "../../images/done.svg";
+import Price from "../price/price";
 import styles from "./order-details.module.css";
+import { useAppDispatch, useSelector } from "../../services/types/hooks";
 import Preloader from "../preloader/preloader";
+import { useEffect, useMemo } from "react";
+import { getOrder } from "../../services/actions/order";
+import { useParams } from "react-router-dom";
+import { FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
 
 function OrderDetails() {
-  //@ts-ignore
-  const isLoading = useSelector((store) => store.order.orderRequest);
-  //@ts-ignore
-  const orderNumber = useSelector((store) => store.order.order);
-  return isLoading ? (
-    <>
-      <h2 className={styles.title}>Мы уже начали оформлять ваш заказ</h2>
-      <Preloader />
-    </>
-  ) : (
-    <div className="mt-20 mb-15">
-      <div className={styles.wrapper}>
-        <span className={styles.digits}>{orderNumber}</span>
+  const { number } = useParams();
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(getOrder(String(number)));
+  }, []);
+  const order = useSelector((store) => store.order.order);
+
+  const ingredientsMarkup = order?.ingredients.map((ingredient) => {
+    if (ingredient) {
+      return (
+        <li key={ingredient._id} className={styles.ingredient}>
+          <div className={styles.flexbox}>
+            <div className={styles.img_wrap}><img className={styles.img} src={ingredient.image} /></div>
+            <h3 className={styles.name}>{ingredient.name}</h3>
+          </div>
+          <Price quantity={ingredient.quantity} number={ingredient.price} />
+        </li>
+      );
+    }
+  });
+  const memoKey = order?.ingredients.reduce((memo, item) => {
+    return memo + item._id;
+  }, "");
+  const countTotal = useMemo(() => {
+    const initialValue = 0;
+    if (!order || order?.ingredients.length == 0) {
+      return 0;
+    } else {
+      const total = order?.ingredients.reduce(
+        (
+          accumulator: number,
+          currentValue: { price: number; quantity: number }
+        ) => accumulator + currentValue.price * currentValue.quantity,
+        initialValue
+      );
+
+      return total;
+    }
+  }, [memoKey]);
+  return order ? (
+    <div className={styles.container}>
+      <span className={styles.number}>{`#${order.number}`}</span>
+      <h1 className={styles.title}>{order.name}</h1>
+      <p className={styles.status}>{order.status}</p>
+      <h2 className={styles.subtitle}>Состав:</h2>
+      <ul className={styles.list}>{ingredientsMarkup}</ul>
+      <div className={styles.paragraph}>
+        <span className={styles.date}>
+          <FormattedDate date={new Date(order.createdAt)} />
+        </span>
+        <Price number={countTotal} />
       </div>
-      <p className={styles.description}>идентификатор заказа</p>
-      <img src={CheckMarkIcon} />
-      <p className={styles.paragraph}>Ваш заказ начали готовить</p>
-      <p className={styles.paragraph_inactive}>
-        Дождитесь готовности на орбитальной станции
-      </p>
     </div>
+  ) : (
+    <Preloader />
   );
 }
 

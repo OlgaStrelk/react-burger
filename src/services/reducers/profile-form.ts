@@ -1,12 +1,22 @@
 import { passwordStub } from "../../utils/consts";
-import { CLEAR_PROFILE_FORM, EDIT_PROFILE_SET_VALUE } from "../actions/authForms";
+import { TUserWithPassword } from "../../utils/types";
+import { TEditProfileActions } from "../actions/profile-form";
 import {
-  EDIT_PROFILE_SUBMIT_SUCCESS,
-  EDIT_PROFILE_SUBMIT_FAILED,
-  EDIT_PROFILE_SUBMIT_REQUEST,
-} from "../actions/user";
+  CLEAR_PROFILE_FORM,
+  EDIT_PROFILE_SET_VALUE,
+} from "../constants/auth-forms";
+import {
+  EDIT_PROFILE_REQUEST,
+  EDIT_PROFILE_SUCCESS,
+  EDIT_PROFILE_FAILED,
+} from "../constants/user";
 
-const initialState = {
+export interface ProfileState {
+  form: TUserWithPassword;
+  editProfileRequest: boolean;
+  editProfileFailed: boolean;
+}
+const initialState: ProfileState = {
   form: {
     name: "",
     email: "",
@@ -15,11 +25,15 @@ const initialState = {
   editProfileRequest: false,
   editProfileFailed: false,
 };
-//@ts-ignore
-export const editProfileFormReducer = (state = initialState, action) => {
+
+export const editProfileFormReducer = (
+  state = initialState,
+  action: TEditProfileActions
+): ProfileState => {
   switch (action.type) {
     case EDIT_PROFILE_SET_VALUE: {
       return {
+        ...state,
         form: {
           ...state.form,
           [action.field]: action.value,
@@ -29,24 +43,25 @@ export const editProfileFormReducer = (state = initialState, action) => {
 
     case CLEAR_PROFILE_FORM: {
       return {
+        ...state,
         form: initialState.form,
       };
     }
 
-    case EDIT_PROFILE_SUBMIT_REQUEST: {
+    case EDIT_PROFILE_REQUEST: {
       return {
         ...state,
         editProfileRequest: true,
         editProfileFailed: false,
       };
     }
-    case EDIT_PROFILE_SUBMIT_SUCCESS: {
+    case EDIT_PROFILE_SUCCESS: {
       return {
         ...state,
         editProfileRequest: false,
       };
     }
-    case EDIT_PROFILE_SUBMIT_FAILED: {
+    case EDIT_PROFILE_FAILED: {
       return {
         ...state,
         editProfileRequest: false,

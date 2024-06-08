@@ -1,22 +1,32 @@
+import { TUser } from "../../utils/types";
+import { TUserActions } from "../actions/user";
 import {
   GET_USER_REQUEST,
   GET_USER_SUCCESS,
   GET_USER_FAILED,
+  DELETE_USER,
   SET_AUTH_CHECKED,
   UPDATE_USER_DATA,
-  DELETE_USER,
-} from "../actions/user";
-import { LOGOUT_REQUEST, LOGOUT_FAILED, LOGOUT_SUCCESS } from "../actions/auth";
-const initialState = {
+} from "../constants/user";
+
+export interface UserState {
+  user: TUser | null;
+  isAuthChecked: boolean;
+  userRequest: boolean;
+  userFailed: boolean;
+}
+
+const initialState: UserState = {
   user: null,
   isAuthChecked: false,
   userRequest: false,
   userFailed: false,
-  logoutRequest: false,
-  logoutFailed: false,
 };
-//@ts-ignore
-export const userReducer = (state = initialState, action) => {
+
+export const userReducer = (
+  state = initialState,
+  action: TUserActions
+): UserState => {
   switch (action.type) {
     case GET_USER_REQUEST: {
       return {
@@ -40,28 +50,6 @@ export const userReducer = (state = initialState, action) => {
       };
     }
 
-    case LOGOUT_REQUEST: {
-      return {
-        ...state,
-        logoutRequest: true,
-        logoutFailed: false,
-      };
-    }
-    case LOGOUT_SUCCESS: {
-      return {
-        ...state,
-        user: null,
-        logoutRequest: false,
-      };
-    }
-    case LOGOUT_FAILED: {
-      return {
-        ...state,
-        logoutFailed: true,
-        logoutRequest: false,
-      };
-    }
-
     case DELETE_USER: {
       return {
         ...state,
@@ -74,7 +62,6 @@ export const userReducer = (state = initialState, action) => {
     }
 
     case UPDATE_USER_DATA: {
-      //@ts-ignore
       return { ...state, user: { ...action.payload } };
     }
 

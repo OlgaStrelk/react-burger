@@ -1,52 +1,50 @@
-import type { Identifier, XYCoord } from 'dnd-core'
-
+import type { Identifier, XYCoord } from "dnd-core";
 import { useDrag, useDrop } from "react-dnd";
 import { useRef } from "react";
+
 import styles from "./sortable-ingredient.module.css";
+
 import {
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  decreaseQuantity,
-  SORT_INGREDIENTS,
-  deleteIngredient,
-} from "../../../services/actions/ingredients";
+import { useAppDispatch, useSelector } from "../../../services/types/hooks";
 import { TConstructorIngredient } from "../../../utils/types";
-
-
+import { deleteIngredient, sortIngredients } from "../../../services/actions/constructor-ingredients";
+import { decreaseQuantity } from "../../../services/actions/ingredients";
 export interface ISortableIngredientProps {
-  data: TConstructorIngredient
-  index: number
+  data: TConstructorIngredient;
+  index: number;
 }
 
 interface DragItem {
-  index: number
-  id: string
-  type: string
+  index: number;
+  id: string;
+  type: string;
 }
 
-export const SortableIngredient = ({ data, index }:ISortableIngredientProps) => {
-  const dispatch = useDispatch();
+export const SortableIngredient = ({
+  data,
+  index,
+}: ISortableIngredientProps) => {
+  const dispatch = useAppDispatch();
   const ingredients = useSelector(
-    //@ts-ignore
     (store) => store.burgerConstructor.addedIngredients.ingredients
   );
 
-  const moveListItem = (dragIndex: number, hoverIndex:number) => {
+  const moveListItem = (dragIndex: number, hoverIndex: number) => {
     const dragCard = ingredients[dragIndex];
     const newIngredients = [...ingredients];
     newIngredients.splice(dragIndex, 1);
     newIngredients.splice(hoverIndex, 0, dragCard);
-    dispatch({ type: SORT_INGREDIENTS, payload: newIngredients });
+    dispatch(sortIngredients(newIngredients));
   };
 
   const [{ handlerId }, drop] = useDrop<
-  DragItem,
-  void,
-  { handlerId: Identifier | null }
->({
+    DragItem,
+    void,
+    { handlerId: Identifier | null }
+  >({
     accept: "listItem",
     collect(monitor) {
       return {
@@ -88,7 +86,9 @@ export const SortableIngredient = ({ data, index }:ISortableIngredientProps) => 
     collect: (monitor) => ({ isDragging: monitor.isDragging() }),
   });
 
-  const opacity = isDragging ? styles.opacity_visible : styles.opacity_invisible;
+  const opacity = isDragging
+    ? styles.opacity_visible
+    : styles.opacity_invisible;
 
   drag(drop(ref));
 

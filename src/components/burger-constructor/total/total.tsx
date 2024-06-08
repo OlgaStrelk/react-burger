@@ -1,16 +1,14 @@
-import { useSelector } from "react-redux";
+import { useSelector } from "../../../services/types/hooks";
 import CurrencyIconPath from "../../../images/cur-icon.svg";
 // import styles from "./total.module.css";
 import { useMemo } from "react";
 
 function Total() {
   const addedIngredients = useSelector(
-    // @ts-ignore
     (store) => store.burgerConstructor.addedIngredients
   );
 
-
-  const countTotal = () =>
+  const countTotal = 
     useMemo(() => {
       const initialValue = 0;
       if (!(addedIngredients.ingredients && addedIngredients.buns)) {
@@ -18,17 +16,19 @@ function Total() {
       } else {
         const total =
           addedIngredients.ingredients.reduce(
-            (accumulator: number, currentValue: { price: number; }) => accumulator + currentValue.price,
+            (accumulator: number, currentValue: { price: number }) =>
+              accumulator + currentValue.price,
             initialValue
           ) +
-          addedIngredients?.buns?.price * 2;
+          addedIngredients.buns?.price * 2;
 
         return total;
       }
     }, [addedIngredients?.ingredients, addedIngredients?.buns]);
+    
   return (
     <>
-      <span className="mr-1 text text_type_digits-medium">{countTotal()}</span>
+      <span className="mr-1 text text_type_digits-medium">{countTotal}</span>
       <img className="mr-10" src={CurrencyIconPath} alt="у.е." />
     </>
   );

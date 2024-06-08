@@ -11,11 +11,19 @@ export const PATHS = {
   forgotPassword: "/forgot-password",
   resetPassword: "/reset-password",
   ingredient: "/ingredients/:id",
-  ordersHistory: "orders",
-  order: ":number",
-  ordersList: "orders",
+  profileOrder: "/profile/orders/:number",
+  ordersHistory: "/profile/orders",
+  order: "/feed/:number",
+  ordersList: "/feed",
   notFound: "/*",
 };
+
+const token = localStorage.getItem("accessToken")
+const tokenWithoutBearer = token?.replace("Bearer ", "");
+
+export const WS_BASE_URL = "wss://norma.nomoreparties.space/orders";
+export const WSURL = `${WS_BASE_URL}/all`;
+export const WSWithToken = `${WS_BASE_URL}?token=${tokenWithoutBearer}`;
 
 export const ENDPOINT = {
   ingredients: "ingredients",

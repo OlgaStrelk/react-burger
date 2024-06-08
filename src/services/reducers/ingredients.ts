@@ -1,20 +1,29 @@
+import { TIngredient } from "../../utils/types";
+import { TIngredientsActions } from "../actions/ingredients";
 import {
+  DECREASE_INGREDIENT_QUANTITY,
+  GET_INGREDIENTS_FAILED,
   GET_INGREDIENTS_REQUEST,
   GET_INGREDIENTS_SUCCESS,
-  GET_INGREDIENTS_FAILED,
   INCREASE_INGREDIENT_QUANTITY,
-  DECREASE_INGREDIENT_QUANTITY,
-  RESET_INGREDIENT_QUANTITY,
-} from "../actions/ingredients";
+  RESET_INGREDIENTS_QUANTITY,
+} from "../constants/ingredients";
 
-const initialState = {
+export interface IngredientsState {
+  ingredients: TIngredient[];
+  ingredientsRequest: boolean;
+  ingredientsFailed: boolean;
+}
+const initialState: IngredientsState = {
   ingredients: [],
   ingredientsRequest: false,
   ingredientsFailed: false,
-  currentIngredient: null,
 };
-//@ts-ignore
-export const ingredientsReducer = (state = initialState, action) => {
+
+export const ingredientsReducer = (
+  state = initialState,
+  action: TIngredientsActions
+): IngredientsState => {
   switch (action.type) {
     case GET_INGREDIENTS_REQUEST: {
       return {
@@ -24,10 +33,11 @@ export const ingredientsReducer = (state = initialState, action) => {
       };
     }
     case GET_INGREDIENTS_SUCCESS: {
+      let ingredients = action.payload;
       return {
         ...state,
-        //@ts-ignore
-        ingredients: action.payload.map((item) => {
+
+        ingredients: ingredients.map((item) => {
           return { ...item, quantity: 0 };
         }),
         ingredientsRequest: false,
@@ -42,47 +52,40 @@ export const ingredientsReducer = (state = initialState, action) => {
     }
 
     case INCREASE_INGREDIENT_QUANTITY: {
+      let ingredient = action.payload;
       return {
         ...state,
         ingredients: [...state.ingredients].map((item) =>
-          action.payload.type === "bun" &&
-          //@ts-ignore
+          ingredient.type === "bun" &&
           item.type === "bun" &&
-          //@ts-ignore
-          action.payload._id !== item._id
-            ? //@ts-ignore
-              { ...item, quantity: 0 }
-            : //@ts-ignore
-            action.payload.type === "bun" && action.payload._id === item._id
-            ? //@ts-ignore
-              { ...item, quantity: 2 }
-            : //@ts-ignore
-            action.payload._id === item._id
-            ? //@ts-ignore
-              { ...item, quantity: ++item.quantity }
+          ingredient._id !== item._id
+            ? { ...item, quantity: 0 }
+            : ingredient.type === "bun" && ingredient._id === item._id
+            ? { ...item, quantity: 2 }
+            : ingredient._id === item._id
+            ? { ...item, quantity: ++item.quantity }
             : item
         ),
       };
     }
 
     case DECREASE_INGREDIENT_QUANTITY: {
+      let ingredient = action.payload;
+
       return {
         ...state,
         ingredients: [...state.ingredients].map((item) =>
-          //@ts-ignore
-          action.payload === item._id
-            ? //@ts-ignore
-              { ...item, quantity: --item.quantity }
+          ingredient === item._id
+            ? { ...item, quantity: --item.quantity }
             : item
         ),
       };
     }
 
-    case RESET_INGREDIENT_QUANTITY: {
+    case RESET_INGREDIENTS_QUANTITY: {
       return {
         ...state,
         ingredients: [...state.ingredients].map((item) => {
-          //@ts-ignore
           return { ...item, quantity: 0 };
         }),
       };

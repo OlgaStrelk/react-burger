@@ -8,7 +8,10 @@
   position: absolute;
   min-height: fit-content;
   text-align: center;
+  padding-left: 45px;
+  padding-right: 45px;
 }
+
 .icon {
   position: absolute;
   width: 24px;

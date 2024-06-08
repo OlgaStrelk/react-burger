@@ -1,4 +1,4 @@
-import { API_URL, optionsWithAuth } from "./consts";
+import { API_URL, ENDPOINT, optionsUnAuth, optionsWithAuth } from "./consts";
 import {
   ITokenResponse,
   TAuthOptions,
@@ -20,53 +20,61 @@ interface CustomResponse extends Body {
   // readonly body: T;
 }
 
-const checkReponse = <T>(res: CustomResponse): T => {
+export const checkResponse = <T>(res: CustomResponse): T => {
   return res.ok
     ? res.json()
     : res.json().then((err: any) => Promise.reject(err));
 };
 
+//() => Promise<undefined>
+// export const refreshToken = () => {
+//   return request<ITokenResponse>(ENDPOINT.refreshToken, {
+//     ...optionsWithAuth,
+//     method: "POST",
+//     body: JSON.stringify({
+//       token: localStorage.getItem("refreshToken"),
+//     }),
+//   }).then((refreshData) => {
+//     if (!refreshData.success) {
+//       return Promise.reject(refreshData);
+//     }
+//     return refreshData;
+//   });
+// };
+
 export const refreshToken = () => {
-  return fetch(`${API_URL}auth/token`, {
+  return request<ITokenResponse>(ENDPOINT.refreshToken, {
+    ...optionsWithAuth,
     method: "POST",
-    headers: {
-      "Content-Type": "application/json;charset=utf-8",
-    },
     body: JSON.stringify({
       token: localStorage.getItem("refreshToken"),
     }),
-  })
-    .then(checkReponse<ITokenResponse>)
-    .then((refreshData) => {
-      if (!refreshData.success) {
-        return Promise.reject(refreshData);
-      }
-      localStorage.setItem("refreshToken", refreshData.refreshToken);
-      localStorage.setItem("accessToken", refreshData.accessToken);
-      return refreshData as ITokenResponse;
-    });
+  });
 };
 
 export const fetchWithRefresh = async <U>(
   url: string,
   options: TRequestOptions<TAuthOptions>
-) => {
+): Promise<U> => {
   try {
-    const res = await fetch(`${API_URL}${url}`, {
+    return await request<U>(url, {
       ...optionsWithAuth,
       ...options,
     });
-    return await (<U>checkReponse(res));
-  } catch (err) {
-    if (err instanceof Error) {
-      if (err.message === "jwt expired") {
-        const refreshData = await refreshToken();
-        options.headers.Authorization = refreshData.accessToken;
-        const res = await fetch(`${API_URL}${url}`, optionsWithAuth);
-        return await checkReponse(res);
-      } else {
-        console.log(err);
+  } catch (err: any) {
+    if (err.message === "jwt expired") {
+      const refreshData = await refreshToken();
+      if (!refreshData.success) {
+        return Promise.reject(refreshData);
       }
+      localStorage.setItem("refreshToken", refreshData.refreshToken);
+      localStorage.setItem("accessToken", refreshData.accessToken);
+      optionsWithAuth.headers.Authorization = refreshData.accessToken;
+      return await request<U>(url, {
+        ...optionsWithAuth,
+        method: "GET",
+      });
+    } else {
       return Promise.reject(err);
     }
   }
@@ -76,12 +84,11 @@ export const request = <T>(
   url: string,
   options: TRequestOptions<TOptions> | TRequestOptions<TAuthOptions>
 ): Promise<T> => {
-  return <Promise<T>>fetch(`${API_URL}${url}`, options).then(checkReponse);
+  return <Promise<T>>fetch(`${API_URL}${url}`, options).then(checkResponse);
 };
 
-export const handleError = (action: string, err: Error, dispatch: any) => {
+export const handleError = (err: Error) => {
   if (err instanceof Error) {
-    dispatch({ type: action });
     console.log(err.message);
   }
 };

@@ -5,35 +5,27 @@ import {
   EmailInput,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch, useSelector } from "react-redux";
 
 import { useForm } from "../hooks/useForm";
 import { ChangeEvent, SyntheticEvent, useEffect } from "react";
-import { editProfileFormValue } from "../services/actions/authForms";
 import { editProfile } from "../services/actions/user";
-import { TInput, TUser } from "../utils/types";
+import { TInput } from "../utils/types";
 import Preloader from "../components/preloader/preloader";
 import { passwordStub } from "../utils/consts";
+import { useAppDispatch, useSelector } from "../services/types/hooks";
+import { editProfileFormValue } from "../services/actions/profile-form";
+import { FETCHING_FAILED_ERROR_TEXT } from "../utils/errors";
 
 function ProfilePage() {
-  const user: TUser = useSelector(
-    //@ts-ignore
-    (state) => state.user.user
-  );
+  const { user, userRequest: isLoading } = useSelector((state) => state.user);
 
-  const { name, email }: TUser = useSelector(
-    //@ts-ignore
-    (state) => state.profile.form
-  );
+  const {
+    name: formName,
+    email: formEmail,
+    password: formPassword,
+  } = useSelector((state) => state.profile.form);
 
-  const password: string = useSelector(
-    //@ts-ignore
-    (state) => state.profile.form.password
-  );
-  //@ts-ignore
-  const isLoading: boolean = useSelector((state) => state.user.userRequest);
-  //@ts-ignore
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const { handleInput, handleSubmit } = useForm();
 
@@ -42,12 +34,11 @@ function ProfilePage() {
   }, []);
 
   const onPasswordFocus = () => {
-    //@ts-ignore
-    dispatch(editProfileFormValue("password", null));
+    dispatch(editProfileFormValue("password", ""));
   };
 
   const onPasswordBlur = () => {
-    if (password === "" || password === null || password.length < 8) {
+    if (formPassword === "" || formPassword.length < 8) {
       dispatch(editProfileFormValue("password", passwordStub));
     }
   };
@@ -61,8 +52,8 @@ function ProfilePage() {
   };
 
   const putInitialtValues = () => {
-    dispatch(editProfileFormValue("name", user.name));
-    dispatch(editProfileFormValue("email", user.email));
+    dispatch(editProfileFormValue("name", user?.name || ""));
+    dispatch(editProfileFormValue("email", user?.email || ""));
   };
 
   const resetForm = () => {
@@ -73,14 +64,14 @@ function ProfilePage() {
     {
       id: "1",
       name: "name",
-      value: name,
+      value: formName,
       placeholder: "Имя",
       type: "text",
     },
     {
       id: "2",
       name: "email",
-      value: email,
+      value: formEmail,
       placeholder: "Логин",
       type: "email",
     },
@@ -88,7 +79,7 @@ function ProfilePage() {
       id: "3",
       name: "password",
       placeholder: "Пароль",
-      value: password as string,
+      value: formPassword,
       type: "password",
     },
   ];
@@ -146,7 +137,7 @@ function ProfilePage() {
     <>
       {isLoading ? (
         <Preloader />
-      ) : user.name && user.email ? (
+      ) : user?.name && user?.email ? (
         <>
           <p className={styles.paragraph}>
             В этом разделе вы можете изменить свои персональные данные
@@ -168,10 +159,7 @@ function ProfilePage() {
         </>
       ) : (
         <main className={styles.main_error}>
-          <h2 className={styles.title}>
-            Не&nbsp;удалось загрузить данные. Проверте соединение
-            с&nbsp;интернетом или попробуйте позже
-          </h2>
+          <h2 className={styles.title}>{FETCHING_FAILED_ERROR_TEXT.main}</h2>
         </main>
       )}
     </>

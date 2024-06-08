@@ -9,7 +9,7 @@
   grid-area: paragraph;
 }
 .form {
-  grid-area: form;
+  grid-area: content;
 }
 
 .link {
@@ -31,6 +31,7 @@
 }
 
 .buttons {
+  width: 480px;
   display: flex;
   justify-content: end;
 }

@@ -1,17 +1,17 @@
-import { ReactNode, useEffect, useRef } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import ModalOverlay from "./modal-overlay/modal-overlay";
 import styles from "./modal.module.css";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import ReactDOM from "react-dom";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../../services/types/hooks";
 
 const modalRoot = document.getElementById("react-modals");
 type PropsWithChildren<P = unknown> = P & { children: ReactNode };
 
 interface IModal {
   onClose?: () => void;
-  action: string | string[];
+  action?: string | string[];
   path?: string;
   customStyle?: string;
 }
@@ -23,8 +23,9 @@ function Modal({
   path,
   customStyle,
 }: PropsWithChildren<IModal>) {
+
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const overlayRef = useRef<HTMLDivElement>(null);
   const containerClassName = customStyle
     ? `${styles.container} ${customStyle}`
@@ -35,6 +36,7 @@ function Modal({
 
   const updateData = (action: string | string[]) => {
     [...action].forEach((element) => {
+      //@ts-ignore
       dispatch({ type: element });
     });
   };
@@ -43,7 +45,9 @@ function Modal({
     if (path) {
       navigate(path);
     } else if (onClose) onClose();
-    updateData(action);
+    else if (action) {
+      updateData(action);
+    }
   };
 
   const handleEscClose = (e: KeyboardEvent) => {
@@ -62,10 +66,12 @@ function Modal({
     document.addEventListener("keydown", handleEscClose);
     document.addEventListener("click", handleOverlayClick);
   };
+
   const removeListeners = () => {
     document.removeEventListener("keydown", handleEscClose);
     document.removeEventListener("click", handleOverlayClick);
   };
+
   useEffect(() => {
     addListeners();
     return () => {

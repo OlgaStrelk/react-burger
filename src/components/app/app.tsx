@@ -1,12 +1,8 @@
 import { Routes, Route } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 
 import AppHeader from "../app-header/app-header";
-import {
-  RESET_MODAL_INGREDIENT,
-  fetchIngredients,
-} from "../../services/actions/ingredients";
+import { fetchIngredients } from "../../services/actions/ingredients";
 import {
   HomePage,
   LoginPage,
@@ -18,7 +14,7 @@ import {
   NotFoundPage,
   OrderPage,
   OrdersHistoryPage,
-  OrdersListPage,
+  FeedPage,
 } from "../../pages";
 import { modalStyle } from "../../utils/consts";
 import { useLocation } from "react-router-dom";
@@ -28,15 +24,14 @@ import { OnlyAuth, OnlyUnAuth } from "../protected_route/protected-route";
 import { PATHS } from "../../utils/consts";
 import { checkUserAuth } from "../../services/actions/user";
 import MyAccountPage from "../../pages/my-account";
+import OrderDetails from "../order-details/order-details";
+import { useAppDispatch } from "../../services/types/hooks";
 function App() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   let location = useLocation();
   let state = location.state;
-  //@ts-ignore
-  useEffect(() => dispatch(fetchIngredients()), [dispatch]);
-
   useEffect(() => {
-    //@ts-ignore
+    dispatch(fetchIngredients());
     dispatch(checkUserAuth());
   }, [dispatch]);
   const {
@@ -51,6 +46,7 @@ function App() {
     order,
     notFound,
     ordersList,
+    profileOrder,
   } = PATHS;
   return (
     <>
@@ -66,18 +62,14 @@ function App() {
           <Route
             path={ordersHistory}
             element={<OnlyAuth component={<OrdersHistoryPage />} />}
-          >
-            <Route
-              path={order}
-              element={<OnlyAuth component={<OrderPage />} />}
-            />
-          </Route>
+          />
         </Route>
-
         <Route
-          path={ordersList}
-          element={<OnlyAuth component={<OrdersListPage />} />}
+          path={profileOrder}
+          element={<OnlyAuth component={<OrderPage />} />}
         />
+        <Route path={ordersList} element={<FeedPage />} />
+        <Route path={order} element={<OrderPage />} />
 
         <Route
           path={login}
@@ -103,13 +95,31 @@ function App() {
           <Route
             path={ingredient}
             element={
-              <Modal
-                customStyle={modalStyle.ingredient}
-                action={RESET_MODAL_INGREDIENT}
-                path={home}
-              >
+              <Modal customStyle={modalStyle.ingredient} path={home}>
                 <IngredientDetails />
               </Modal>
+            }
+          />
+
+          <Route
+            path={order}
+            element={
+              <Modal path={ordersList}>
+                <OrderDetails />
+              </Modal>
+            }
+          />
+
+          <Route
+            path={profileOrder}
+            element={
+              <OnlyAuth
+                component={
+                  <Modal path={ordersHistory}>
+                    <OrderDetails />
+                  </Modal>
+                }
+              />
             }
           />
         </Routes>

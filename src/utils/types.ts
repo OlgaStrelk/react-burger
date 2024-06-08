@@ -33,8 +33,8 @@ export interface INavBar {
   icon: ReactNode | string;
 }
 
-export type TOrder = {
-  // buns: number;
+export type TOrder = Omit<TWsOrder, "ingredients"> & {
+  ingredients: TIngredient[];
 };
 
 export type TTitles = {
@@ -62,7 +62,9 @@ export type TMethod = { method: "GET" | "POST" | "PATCH" };
 
 export type TRequestOptions<Auth> = TMethod & Auth;
 
-export type TUser = { name: string; email: string; password?: string };
+export type TUser = { name: string; email: string };
+
+export type TUserWithPassword = TUser & { password: string };
 export interface ISuccessResponse extends Response {
   success: true;
 }
@@ -85,11 +87,38 @@ export interface IIngredientsResponse extends ISuccessResponse {
   data: TIngredient[];
 }
 
-export interface IOrderResponse extends ISuccessResponse {
+export interface IMakeOrderResponse extends ISuccessResponse {
   name: string;
   order: {
     number: number;
   };
 }
 
-export type TOrderRequest = { ingredients: string[] };
+export type TWsOrder = {
+  ingredients: string[];
+  _id: string;
+  owner: string;
+  status: "done" | "pending" | "created" | "Выполнен" | "Готовится" | "Создан";
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+  number: number;
+};
+
+export interface IGetOrderResponse extends ISuccessResponse {
+  orders: TWsOrder[];
+}
+export type TMakeOrderRequest = { ingredients: string[] };
+
+export type TWsFeedResponse = {
+  success: boolean;
+  orders: TWsOrder[];
+  total: number;
+  totalToday: number;
+};
+
+export enum WebsocketStatus {
+  CONNECTING = "CONNECTING...",
+  ONLINE = "ONLINE",
+  OFFLINE = "OFFLINE",
+}

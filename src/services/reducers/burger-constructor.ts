@@ -1,55 +1,66 @@
+import { TConstructorIngredient } from "../../utils/types";
+import { TBurgerConstructorActions } from "../actions/constructor-ingredients";
 import {
   ADD_INGREDIENT,
   SORT_INGREDIENTS,
   DELETE_INGREDIENT,
   RESET_CONSTRUCTOR,
-} from "../actions/ingredients";
+} from "../constants/ingredients";
 
-const initialState = {
+export interface ConstructorState {
+  addedIngredients: {
+    buns: TConstructorIngredient | null;
+    ingredients: TConstructorIngredient[];
+  };
+}
+const initialState: ConstructorState = {
   addedIngredients: {
     buns: null,
     ingredients: [],
   },
 };
-//@ts-ignore
-export const constructorReducer = (state = initialState, action) => {
+
+export const constructorReducer = (
+  state = initialState,
+  action: TBurgerConstructorActions
+): ConstructorState => {
   switch (action.type) {
     case ADD_INGREDIENT: {
-      if (action.payload.type === "bun") {
+      const ingredient = action.payload;
+
+      if (ingredient.type === "bun") {
         return {
           ...state,
-          addedIngredients: { ...state.addedIngredients, buns: action.payload },
+          addedIngredients: { ...state.addedIngredients, buns: ingredient },
         };
       } else {
         return {
           ...state,
           addedIngredients: {
             ...state.addedIngredients,
-            ingredients: [
-              ...state.addedIngredients.ingredients,
-              action.payload,
-            ],
+            ingredients: [...state.addedIngredients.ingredients, ingredient],
           },
         };
       }
     }
     case SORT_INGREDIENTS:
+      const ingredients = action.payload;
       return {
         ...state,
         addedIngredients: {
           ...state.addedIngredients,
-          ingredients: action.payload,
+          ingredients: ingredients,
         },
       };
 
     case DELETE_INGREDIENT: {
+      const id = action.payload;
       return {
         ...state,
         addedIngredients: {
           ...state.addedIngredients,
           ingredients: [...state.addedIngredients.ingredients].filter(
-            //@ts-ignore
-            (item) => item.id !== action.payload
+            (item) => item.id !== id
           ),
         },
       };
@@ -58,10 +69,7 @@ export const constructorReducer = (state = initialState, action) => {
     case RESET_CONSTRUCTOR: {
       return {
         ...state,
-        addedIngredients: {
-          buns: null,
-          ingredients: [],
-        },
+        addedIngredients: initialState.addedIngredients,
       };
     }
 

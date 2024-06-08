@@ -1,5 +1,4 @@
-import { FunctionComponent, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import { useDrop } from "react-dnd";
 import { SortableIngredient } from "./sortable-ingredient/sortable-ingredient.tsx";
 import {
@@ -8,14 +7,15 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./burger-constructor.module.css";
 import Total from "./total/total.tsx";
-import {
-  makeOrder,
-  addIngredient,
-  INCREASE_INGREDIENT_QUANTITY,
-} from "../../services/actions/ingredients.ts";
+
 import { Navigate } from "react-router-dom";
 import { PATHS } from "../../utils/consts.ts";
-import { TConstructorIngredient, TIngredient } from "../../utils/types.ts";
+import { TConstructorIngredient } from "../../utils/types.ts";
+import { increaseQuantity } from "../../services/actions/ingredients.ts";
+import { addIngredient } from "../../services/actions/constructor-ingredients.ts";
+import { makeOrder } from "../../services/actions/order.ts";
+import { useAppDispatch, useSelector } from "../../services/types/hooks.ts";
+
 
 export interface IBurgerConstructorProps {
   onModalOpen: () => void;
@@ -28,13 +28,11 @@ function BurgerConstructor({ onModalOpen }: IBurgerConstructorProps) {
   const [isNavigated, setNavigated] = useState(false);
 
   const { ingredients, buns } = useSelector(
-    // @ts-ignore
     (state) => state.burgerConstructor.addedIngredients
   );
-  // @ts-ignore
   const user = useSelector((state) => state.user.user);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const validateConstructor = () => {
     if (!buns || !ingredients.length) {
@@ -47,14 +45,14 @@ function BurgerConstructor({ onModalOpen }: IBurgerConstructorProps) {
 
   useEffect(() => validateConstructor(), [ingredients, buns]);
 
-  const onDropHandler = (ingredient: TIngredient) => {
-    dispatch({ type: INCREASE_INGREDIENT_QUANTITY, payload: ingredient });
+  const onDropHandler = (ingredient: TConstructorIngredient) => {
+    dispatch(increaseQuantity(ingredient));
     dispatch(addIngredient(ingredient));
   };
 
   const [, dropRef] = useDrop({
     accept: "ingredients",
-    drop(item: TIngredient) {
+    drop(item: TConstructorIngredient) {
       onDropHandler(item);
     },
   });
@@ -73,7 +71,6 @@ function BurgerConstructor({ onModalOpen }: IBurgerConstructorProps) {
     let data = orderList();
     if (user && data) {
       onModalOpen();
-      //@ts-ignore
       dispatch(makeOrder(data));
     } else {
       setNavigated(true);
@@ -132,7 +129,7 @@ function BurgerConstructor({ onModalOpen }: IBurgerConstructorProps) {
   return (
     <>
       {!isNavigated ? (
-        <section className={`${styles.section} mt-25 ml-10`}>
+        <section className={styles.section}>
           <div className="ml-8" ref={dropRef}>
             {renderBunMarkup(" mb-2 pr-1", "top", "(верх)")}
             <ul
@@ -163,3 +160,4 @@ function BurgerConstructor({ onModalOpen }: IBurgerConstructorProps) {
 }
 
 export default BurgerConstructor;
+

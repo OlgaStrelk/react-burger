@@ -1,10 +1,9 @@
 import styles from "./ingredients-block.module.css";
 import { Fragment, memo, useMemo, forwardRef, SyntheticEvent } from "react";
-import { GET_MODAL_INGREDIENT } from "../../../services/actions/ingredients";
 
 import IngredientCard from "../ingredient-card/ingredient-card";
-import { useDispatch, useSelector } from "react-redux";
 import { TIngredient, TTitles } from "../../../utils/types";
+import { useSelector } from "../../../services/types/hooks";
 interface Props {
   titles: TTitles[];
   onScroll: (arg0: SyntheticEvent) => void;
@@ -13,14 +12,8 @@ export type Ref = HTMLUListElement;
 
 const IngredientsBlock = forwardRef<Ref, Props>(({ titles, onScroll }, ref) => {
 
-  const dispatch = useDispatch();
-  //@ts-ignore
-  const ingredients:TIngredient[] = useSelector((state) => state.ingredients.ingredients);
+  const ingredients = useSelector((state) => state.ingredients.ingredients);
 
-  const handleCardClick = (e: SyntheticEvent) => {
-    const id = e.currentTarget.id;
-    dispatch({ type: GET_MODAL_INGREDIENT, payload: id });
-  };
 
   const filterIngredients = (blockTitle: TTitles) =>
     useMemo(() => {
@@ -33,7 +26,7 @@ const IngredientsBlock = forwardRef<Ref, Props>(({ titles, onScroll }, ref) => {
   const renderFilteredIngredientsMarkup = (blockTitle: TTitles) => {
     const newArray = filterIngredients(blockTitle);
     return newArray.map((item: TIngredient) => (
-      <li key={item._id} id={item._id} onClick={handleCardClick}>
+      <li key={item._id} id={item._id}>
         <IngredientCard cardData={item} />
       </li>
     ));

@@ -1,64 +1,79 @@
-import { ENDPOINT, optionsUnAuth, optionsWithAuth } from "../../utils/consts";
-import { v4 as uuid } from "uuid";
+import { request, handleError } from "../../utils/api";
+import { ENDPOINT, optionsUnAuth } from "../../utils/consts";
 import {
   IIngredientsResponse,
-  IOrderResponse,
+  TConstructorIngredient,
   TIngredient,
-  TOrderRequest,
 } from "../../utils/types";
-import { handleError, request } from "../../utils/api";
+import {
+  GET_INGREDIENTS_REQUEST,
+  GET_INGREDIENTS_SUCCESS,
+  GET_INGREDIENTS_FAILED,
+  DECREASE_INGREDIENT_QUANTITY,
+  INCREASE_INGREDIENT_QUANTITY,
+  RESET_INGREDIENTS_QUANTITY,
+} from "../constants/ingredients";
+import { AppDispatch, AppThunk } from "../types";
 
-export const ADD_INGREDIENT = "ADD_INGREDIENT";
-export const SORT_INGREDIENTS = "SORT_INGREDIENTS";
-export const DELETE_INGREDIENT = "DELETE_INGREDIENT";
-export const RESET_CONSTRUCTOR = "RESET_CONSTRUCTOR";
-
-export const GET_MODAL_INGREDIENT = "GET_MODAL_INGREDIENT";
-export const RESET_MODAL_INGREDIENT = "RESET_MODAL_INGREDIENT";
-
-export const GET_INGREDIENTS_REQUEST = "GET_INGREDIENTS_REQUEST";
-export const GET_INGREDIENTS_SUCCESS = "GET_INGREDIENTS_SUCCESS";
-export const GET_INGREDIENTS_FAILED = "GET_INGREDIENTS_FAILED";
-
-export const INCREASE_INGREDIENT_QUANTITY = "INCREASE_INGREDIENT_QUANTITY";
-export const DECREASE_INGREDIENT_QUANTITY = "DECREASE_INGREDIENT_QUANTITY";
-export const RESET_INGREDIENT_QUANTITY = "RESET_INGREDIENT_QUANTITY";
-
-export const MAKE_ORDER_REQUEST = "MAKE_ORDER_REQUEST";
-export const MAKE_ORDER_SUCCESS = "MAKE_ORDER_SUCCESS";
-export const MAKE_ORDER_FAILED = "MAKE_ORDER_FAILED";
-
-export const addIngredient = (ingredient: TIngredient) => {
-  return { type: ADD_INGREDIENT, payload: { ...ingredient, id: uuid() } };
+type TGetIngredientRequestAction = {
+  type: typeof GET_INGREDIENTS_REQUEST;
 };
-export const deleteIngredient = (id: string) => {
-  return { type: DELETE_INGREDIENT, payload: id };
+
+type TGetIngredientSuccessAction = {
+  type: typeof GET_INGREDIENTS_SUCCESS;
+  payload: TIngredient[];
 };
-export const decreaseQuantity = (id: string) => {
+
+type TGetIngredientFailedAction = {
+  type: typeof GET_INGREDIENTS_FAILED;
+};
+
+type TIncreaseQuantityAction = {
+  type: typeof INCREASE_INGREDIENT_QUANTITY;
+  payload: TConstructorIngredient;
+};
+type TDecreaseQuantityAction = {
+  type: typeof DECREASE_INGREDIENT_QUANTITY;
+  payload: string;
+};
+type TResetQuantityAction = {
+  type: typeof RESET_INGREDIENTS_QUANTITY;
+};
+
+export type TIngredientsActions =
+  | TGetIngredientRequestAction
+  | TGetIngredientSuccessAction
+  | TGetIngredientFailedAction
+  | TIncreaseQuantityAction
+  | TDecreaseQuantityAction
+  | TResetQuantityAction;
+
+export const increaseQuantity = (
+  ingredient: TConstructorIngredient
+): TIncreaseQuantityAction => {
+  return { type: INCREASE_INGREDIENT_QUANTITY, payload: ingredient };
+};
+export const decreaseQuantity = (id: string): TDecreaseQuantityAction => {
   return { type: DECREASE_INGREDIENT_QUANTITY, payload: id };
 };
-//@ts-ignore
-export const fetchIngredients = () => (dispatch) => {
+
+export const receiveIngredients = (
+  ingredients: TIngredient[]
+): TGetIngredientSuccessAction => {
+  return { type: GET_INGREDIENTS_SUCCESS, payload: ingredients };
+};
+
+export const fetchIngredients: AppThunk = () => (dispatch: AppDispatch) => {
   dispatch({ type: GET_INGREDIENTS_REQUEST });
   request<IIngredientsResponse>(ENDPOINT.ingredients, {
     ...optionsUnAuth,
     method: "GET",
   })
     .then((res) => {
-      dispatch({ type: GET_INGREDIENTS_SUCCESS, payload: res.data });
+      dispatch(receiveIngredients(res.data));
     })
-    .catch((err) => handleError(GET_INGREDIENTS_FAILED, err, dispatch));
-};
-
-export const makeOrder = (data: TOrderRequest) => (dispatch: any) => {
-  dispatch({ type: MAKE_ORDER_REQUEST });
-  request<IOrderResponse>(ENDPOINT.orders, {
-    ...optionsWithAuth,
-    method: "POST",
-    body: JSON.stringify(data),
-  })
-    .then((res) =>
-      dispatch({ type: MAKE_ORDER_SUCCESS, payload: res.order.number })
-    )
-    .catch((err) => handleError(MAKE_ORDER_FAILED, err, dispatch));
+    .catch((err) => {
+      handleError(err);
+      dispatch({ type: GET_INGREDIENTS_FAILED });
+    });
 };

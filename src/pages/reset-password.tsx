@@ -1,6 +1,5 @@
 import formStyles from "./base-form.module.css";
 
-import { useSelector } from "react-redux";
 import { useState, useEffect, SyntheticEvent, ChangeEvent } from "react";
 
 import {
@@ -13,18 +12,20 @@ import Redirect from "../components/redirect/redirect";
 
 import { PATHS } from "../utils/consts";
 import { useForm } from "../hooks/useForm";
-import { resetPasswordTwoFormValue } from "../services/actions/authForms";
-import { resetPasswordStepTwo } from "../services/actions/auth";
 import { useNavigate } from "react-router-dom";
 import { TInput } from "../utils/types";
+import { useSelector } from "../services/types/hooks";
+import {
+  resetPasswordTwoFormValue,
+  resetPasswordStepTwo,
+} from "../services/actions/reset-form-two";
 
 function ResetPasswordPage() {
-  //@ts-ignore
   const { password, token } = useSelector((state) => state.resetFormTwo.form);
 
   const navigate = useNavigate();
   useEffect(() => {
-    if (!localStorage.getItem("emailsSent")) {
+    if (!localStorage.getItem("emailSent")) {
       navigate(PATHS.forgotPassword);
     }
   }, []);

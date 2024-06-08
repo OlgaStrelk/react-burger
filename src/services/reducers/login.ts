@@ -1,24 +1,32 @@
-import { LOGIN_SET_VALUE } from "../actions/authForms";
-import {
-  LOGIN_SUBMIT_SUCCESS,
-  LOGIN_SUBMIT_FAILED,
-  LOGIN_SUBMIT_REQUEST,
-} from "../actions/auth";
+import { TLoginActions } from "../actions/login";
+import { LOGIN_FAILED, LOGIN_REQUEST, LOGIN_SUCCESS } from "../constants/auth";
+import { LOGIN_SET_VALUE } from "../constants/auth-forms";
 
-const initialState = {
+export interface LoginState {
+  form: {
+    email: string;
+    password: string;
+  };
+  loginRequest: boolean;
+  loginFailed: boolean;
+}
+const initialState: LoginState = {
   form: {
     email: "",
     password: "",
   },
   loginRequest: false,
   loginFailed: false,
-  error: null,
 };
-//@ts-ignore
-export const loginReducer = (state = initialState, action) => {
+
+export const loginReducer = (
+  state = initialState,
+  action: TLoginActions
+): LoginState => {
   switch (action.type) {
     case LOGIN_SET_VALUE: {
       return {
+        ...state,
         form: {
           ...state.form,
           [action.field]: action.value,
@@ -26,14 +34,14 @@ export const loginReducer = (state = initialState, action) => {
       };
     }
 
-    case LOGIN_SUBMIT_REQUEST: {
+    case LOGIN_REQUEST: {
       return {
         ...state,
         loginRequest: true,
         loginFailed: false,
       };
     }
-    case LOGIN_SUBMIT_SUCCESS: {
+    case LOGIN_SUCCESS: {
       return {
         ...state,
         form: {
@@ -42,7 +50,7 @@ export const loginReducer = (state = initialState, action) => {
         loginRequest: false,
       };
     }
-    case LOGIN_SUBMIT_FAILED: {
+    case LOGIN_FAILED: {
       return {
         ...state,
         loginRequest: false,
