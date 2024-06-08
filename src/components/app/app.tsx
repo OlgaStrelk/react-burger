@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 
-import AppHeader from "../app-header/app-header"; 
+import AppHeader from "../app-header/app-header";
 import { fetchIngredients } from "../../services/actions/ingredients";
 import {
   HomePage,
