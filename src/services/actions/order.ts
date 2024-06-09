@@ -16,7 +16,7 @@ import {
   MAKE_ORDER_REQUEST,
   MAKE_ORDER_SUCCESS,
 } from "../constants/order";
-import { AppDispatch, AppThunk } from "../types";
+import { AppThunk } from "../types";
 
 type TMakeOrderRequestAction = {
   type: typeof MAKE_ORDER_REQUEST;

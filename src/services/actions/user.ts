@@ -17,7 +17,7 @@ import {
   EDIT_PROFILE_FAILED,
   EDIT_PROFILE_SUCCESS,
 } from "../constants/user";
-import { AppDispatch, AppThunk } from "../types";
+import { AppThunk } from "../types";
 
 type TUserRequestAction = {
   type: typeof GET_USER_REQUEST;

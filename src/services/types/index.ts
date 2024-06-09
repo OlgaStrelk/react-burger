@@ -17,5 +17,3 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   UnknownAction
 >
 
-export type AppDispatch = typeof store.dispatch
-export const useAppDispatch = useDispatch.withTypes<AppDispatch>()

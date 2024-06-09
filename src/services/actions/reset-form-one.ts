@@ -6,7 +6,7 @@ import {
   RESET_PASSWORD_FORM_ONE_FAILED,
 } from "../constants/auth";
 import { RESET_PASSWORD_FORM_ONE_SET_VALUE } from "../constants/auth-forms";
-import { AppDispatch, AppThunk } from "../types";
+import { AppThunk } from "../types";
 
 type TResetFormRequestAction = {
   type: typeof RESET_PASSWORD_FORM_ONE_REQUEST;

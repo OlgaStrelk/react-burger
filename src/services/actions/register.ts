@@ -7,7 +7,7 @@ import {
   REGISTER_FAILED,
 } from "../constants/auth";
 import { REGISTER_SET_VALUE } from "../constants/auth-forms";
-import { AppThunk, AppDispatch } from "../types";
+import { AppThunk } from "../types";
 import { updateUser } from "./user";
 
 type TRegisterRequestAction = {

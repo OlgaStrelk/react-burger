@@ -3,7 +3,7 @@ import { ENDPOINT, optionsUnAuth } from "../../utils/consts";
 import { TAuthorizationResonse } from "../../utils/types";
 import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILED } from "../constants/auth";
 import { LOGIN_SET_VALUE } from "../constants/auth-forms";
-import { AppDispatch, AppThunk, GetStateType, RootState } from "../types";
+import { AppThunk } from "../types";
 import { updateUser } from "./user";
 
 type TLoginRequestAction = {

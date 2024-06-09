@@ -8,7 +8,7 @@ import {
 } from "../constants/auth";
 import { CLEAR_PROFILE_FORM } from "../constants/auth-forms";
 import { DELETE_USER } from "../constants/user";
-import { AppDispatch, AppThunk } from "../types";
+import { AppThunk } from "../types";
 
 type TLogoutRequestAction = {
   type: typeof LOGOUT_REQUEST;

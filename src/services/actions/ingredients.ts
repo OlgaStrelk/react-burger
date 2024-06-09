@@ -13,7 +13,7 @@ import {
   INCREASE_INGREDIENT_QUANTITY,
   RESET_INGREDIENTS_QUANTITY,
 } from "../constants/ingredients";
-import { AppDispatch, AppThunk } from "../types";
+import { AppThunk } from "../types";
 
 type TGetIngredientRequestAction = {
   type: typeof GET_INGREDIENTS_REQUEST;
