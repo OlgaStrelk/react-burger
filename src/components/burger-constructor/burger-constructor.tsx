@@ -130,8 +130,8 @@ function BurgerConstructor({ onModalOpen }: IBurgerConstructorProps) {
     <>
       {!isNavigated ? (
         <section className={styles.section}>
-          <div className="ml-8" ref={dropRef}>
-            {renderBunMarkup(" mb-2 pr-1", "top", "(верх)")}
+          <div className="pl-4" ref={dropRef}>
+            {renderBunMarkup("ml-10 mb-2", "top", "(верх)")}
             <ul
               className={`${styles.container}  ${styles.column} custom-scroll`}
             >

@@ -101,7 +101,7 @@ export const SortableIngredient = ({
     <li
       ref={ref}
       id={data.id}
-      className={`${styles.item} mr-3`}
+      className={styles.item}
       data-handler-id={handlerId}
     >
       <DragIcon type="primary" />
