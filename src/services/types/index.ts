@@ -1,8 +1,7 @@
-import { Action, ActionCreator, UnknownAction } from "redux";
+import { UnknownAction } from "redux";
 import { ThunkAction } from "redux-thunk";
 import store from "../store";
 import { TAppActions } from "./actions";
-import { useDispatch } from "react-redux";
 
 export type AppStore = typeof store;
 export type RootState = ReturnType<AppStore["getState"]>;
