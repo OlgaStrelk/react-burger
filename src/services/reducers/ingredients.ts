@@ -24,6 +24,10 @@ export const ingredientsReducer = (
   state = initialState,
   action: TIngredientsActions
 ): IngredientsState => {
+  const newIngredients: TIngredient[] = JSON.parse(
+    JSON.stringify(state.ingredients)
+  );
+
   switch (action.type) {
     case GET_INGREDIENTS_REQUEST: {
       return {
@@ -52,10 +56,11 @@ export const ingredientsReducer = (
     }
 
     case INCREASE_INGREDIENT_QUANTITY: {
-      let ingredient = action.payload;
+      const ingredient = action.payload;
+
       return {
         ...state,
-        ingredients: [...state.ingredients].map((item) =>
+        ingredients: newIngredients.map((item) =>
           ingredient.type === "bun" &&
           item.type === "bun" &&
           ingredient._id !== item._id
@@ -70,11 +75,11 @@ export const ingredientsReducer = (
     }
 
     case DECREASE_INGREDIENT_QUANTITY: {
-      let ingredient = action.payload;
+      const ingredient = action.payload;
 
       return {
         ...state,
-        ingredients: [...state.ingredients].map((item) =>
+        ingredients: newIngredients.map((item) =>
           ingredient === item._id
             ? { ...item, quantity: --item.quantity }
             : item
@@ -85,7 +90,7 @@ export const ingredientsReducer = (
     case RESET_INGREDIENTS_QUANTITY: {
       return {
         ...state,
-        ingredients: [...state.ingredients].map((item) => {
+        ingredients: newIngredients.map((item) => {
           return { ...item, quantity: 0 };
         }),
       };
