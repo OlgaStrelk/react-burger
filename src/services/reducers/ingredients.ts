@@ -24,6 +24,7 @@ export const ingredientsReducer = (
   state = initialState,
   action: TIngredientsActions
 ): IngredientsState => {
+  
   const newIngredients: TIngredient[] = JSON.parse(
     JSON.stringify(state.ingredients)
   );
@@ -57,7 +58,6 @@ export const ingredientsReducer = (
 
     case INCREASE_INGREDIENT_QUANTITY: {
       const ingredient = action.payload;
-
       return {
         ...state,
         ingredients: newIngredients.map((item) =>
