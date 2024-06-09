@@ -1,4 +1,4 @@
-import { Action, ActionCreator } from "redux";
+import { Action, ActionCreator, UnknownAction } from "redux";
 import { ThunkAction } from "redux-thunk";
 import store from "../store";
 import { TAppActions } from "./actions";
@@ -9,9 +9,13 @@ export type RootState = ReturnType<AppStore["getState"]>;
 
 export type TApplicationActions = TAppActions;
 
-export type AppThunk<TReturn = void> = ActionCreator<
-  ThunkAction<TReturn, Action, RootState, TApplicationActions>
->;
+export type GetStateType=()=>RootState
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  UnknownAction
+>
 
 export type AppDispatch = typeof store.dispatch
 export const useAppDispatch = useDispatch.withTypes<AppDispatch>()

@@ -63,7 +63,7 @@ export const receiveIngredients = (
   return { type: GET_INGREDIENTS_SUCCESS, payload: ingredients };
 };
 
-export const fetchIngredients: AppThunk = () => (dispatch: AppDispatch) => {
+export const fetchIngredients = (): AppThunk => (dispatch) => {
   dispatch({ type: GET_INGREDIENTS_REQUEST });
   request<IIngredientsResponse>(ENDPOINT.ingredients, {
     ...optionsUnAuth,

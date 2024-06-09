@@ -6,7 +6,7 @@ import {
   RESET_PASSWORD_FORM_ONE_FAILED,
 } from "../constants/auth";
 import { RESET_PASSWORD_FORM_ONE_SET_VALUE } from "../constants/auth-forms";
-import { AppDispatch } from "../types";
+import { AppDispatch, AppThunk } from "../types";
 
 type TResetFormRequestAction = {
   type: typeof RESET_PASSWORD_FORM_ONE_REQUEST;
@@ -39,7 +39,7 @@ export const resetPasswordOneFormValue = (field: string, value: string) => ({
 });
 
 export const resetPasswordStepOne =
-  () => (dispatch: AppDispatch, getState: any) => {
+  ():AppThunk => (dispatch, getState) => {
     dispatch({ type: RESET_PASSWORD_FORM_ONE_REQUEST });
     request(ENDPOINT.resetPasswordStepOne, {
       ...optionsUnAuth,

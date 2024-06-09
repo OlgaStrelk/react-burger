@@ -3,7 +3,7 @@ import { ENDPOINT, optionsUnAuth } from "../../utils/consts";
 import { TAuthorizationResonse } from "../../utils/types";
 import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILED } from "../constants/auth";
 import { LOGIN_SET_VALUE } from "../constants/auth-forms";
-import { AppDispatch, AppThunk } from "../types";
+import { AppDispatch, AppThunk, GetStateType, RootState } from "../types";
 import { updateUser } from "./user";
 
 type TLoginRequestAction = {
@@ -36,13 +36,14 @@ export const loginFormValue = (field: string, value: string) => ({
   value,
 });
 
-export const login: AppThunk =
-  () => async (dispatch: AppDispatch, getState: any) => {
+export const login =
+  (): AppThunk<Promise<void>> => async (dispatch, getState) => {
+    const state = getState();
     dispatch({ type: LOGIN_REQUEST });
     const data = await request<TAuthorizationResonse>(ENDPOINT.login, {
       ...optionsUnAuth,
       method: "POST",
-      body: JSON.stringify(getState().login.form),
+      body: JSON.stringify(state.login.form),
     })
       .then((data) => {
         dispatch({ type: LOGIN_SUCCESS });

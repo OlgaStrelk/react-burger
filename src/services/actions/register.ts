@@ -40,26 +40,25 @@ export const registerFormValue = (field: string, value: string) => ({
   value,
 });
 
-export const register: AppThunk =
-  () => async (dispatch: AppDispatch, getState: any) => {
-    dispatch({ type: REGISTER_REQUEST });
-    const data = await request<TAuthorizationResonse>(ENDPOINT.register, {
-      ...optionsUnAuth,
-      method: "POST",
-      body: JSON.stringify(getState().register.form),
+export const register = (): AppThunk => async (dispatch, getState) => {
+  dispatch({ type: REGISTER_REQUEST });
+  const data = await request<TAuthorizationResonse>(ENDPOINT.register, {
+    ...optionsUnAuth,
+    method: "POST",
+    body: JSON.stringify(getState().register.form),
+  })
+    .then((data) => {
+      dispatch({ type: REGISTER_SUCCESS });
+      return data;
     })
-      .then((data) => {
-        dispatch({ type: REGISTER_SUCCESS });
-        return data;
-      })
-      .catch((err) => {
-        dispatch({ type: REGISTER_FAILED });
-        handleError(err);
-      });
+    .catch((err) => {
+      dispatch({ type: REGISTER_FAILED });
+      handleError(err);
+    });
 
-    if (data && data.success) {
-      dispatch(updateUser(data.user));
-      localStorage.setItem("accessToken", data.accessToken);
-      localStorage.setItem("refreshToken", data.refreshToken);
-    }
-  };
+  if (data && data.success) {
+    dispatch(updateUser(data.user));
+    localStorage.setItem("accessToken", data.accessToken);
+    localStorage.setItem("refreshToken", data.refreshToken);
+  }
+};
