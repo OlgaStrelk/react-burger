@@ -1,4 +1,4 @@
-import { API_URL, ENDPOINT, optionsUnAuth, optionsWithAuth } from "./consts";
+import { API_URL, ENDPOINT, optionsWithAuth } from "./consts";
 import {
   ITokenResponse,
   TAuthOptions,

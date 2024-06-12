@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useRef, useState } from "react";
+import { ReactNode, useEffect, useRef } from "react";
 import ModalOverlay from "./modal-overlay/modal-overlay";
 import styles from "./modal.module.css";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -14,6 +14,7 @@ interface IModal {
   action?: string | string[];
   path?: string;
   customStyle?: string;
+  type: string;
 }
 
 function Modal({
@@ -22,8 +23,8 @@ function Modal({
   action,
   path,
   customStyle,
+  type,
 }: PropsWithChildren<IModal>) {
-
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const overlayRef = useRef<HTMLDivElement>(null);
@@ -31,12 +32,11 @@ function Modal({
     ? `${styles.container} ${customStyle}`
     : styles.container;
   const iconClassName = customStyle
-    ? `${styles.icon} ${customStyle}`
-    : styles.icon;
+    ? `${styles.close_icon} ${customStyle}`
+    : styles.close_icon;
 
   const updateData = (action: string | string[]) => {
     [...action].forEach((element) => {
-      //@ts-ignore
       dispatch({ type: element });
     });
   };
@@ -82,9 +82,13 @@ function Modal({
   return ReactDOM.createPortal(
     <>
       <ModalOverlay innerRef={overlayRef}>
-        <div className={containerClassName}>
-          <div className={iconClassName}>
-            <CloseIcon type="primary" onClick={handleClose} />
+        <div data-cy={type} className={containerClassName}>
+          <div className={iconClassName}               data-cy="close-icon"
+>
+            <CloseIcon
+              type="primary"
+              onClick={handleClose}
+            />
           </div>
           {children}
         </div>

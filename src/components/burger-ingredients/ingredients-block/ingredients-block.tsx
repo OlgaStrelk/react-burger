@@ -26,7 +26,7 @@ const IngredientsBlock = forwardRef<Ref, Props>(({ titles, onScroll }, ref) => {
   const renderFilteredIngredientsMarkup = (blockTitle: TTitles) => {
     const newArray = filterIngredients(blockTitle);
     return newArray.map((item: TIngredient) => (
-      <li key={item._id} id={item._id}>
+      <li data-cy="ingredient-card" key={item._id} id={item._id}>
         <IngredientCard cardData={item} />
       </li>
     ));
