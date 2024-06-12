@@ -6,7 +6,7 @@ context("BurgerConstructor", () => {
     }).as("get-ingredients");
   });
 
-  it("should open modal with navigation", () => {
+  it("should open and close modal with navigation", () => {
     cy.get("[data-cy=ingredient-card]").first().click().as("firstCard");
     cy.location("pathname").should("include", "ingredients");
 
