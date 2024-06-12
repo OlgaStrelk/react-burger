@@ -81,7 +81,7 @@ function BurgerConstructor({ onModalOpen }: IBurgerConstructorProps) {
     if (!ingredients.length) {
       return (
         <li className={styles.stub}>
-          <div className="constructor-element 1 ml-8">
+          <div className="constructor-element 1 ml-10">
             <span className="constructor-element__row">
               <span className="constructor-element__text">
                 Выберите начинку
@@ -101,7 +101,7 @@ function BurgerConstructor({ onModalOpen }: IBurgerConstructorProps) {
   const renderBunMarkup = (style: string, type: TBunType, text: string) => {
     if (buns) {
       return (
-        <div className={`ml-8 mr-2 ${style}`}>
+        <div className={style}>
           <ConstructorElement
             type={type}
             isLocked={true}
@@ -113,7 +113,7 @@ function BurgerConstructor({ onModalOpen }: IBurgerConstructorProps) {
       );
     } else {
       return (
-        <div className={`ml-8 mr-2 ${style} ${styles.stub}`}>
+        <div className={`${style} ${styles.stub}`}>
           <div
             className={`constructor-element constructor-element_pos_${type}`}
           >
@@ -130,14 +130,14 @@ function BurgerConstructor({ onModalOpen }: IBurgerConstructorProps) {
     <>
       {!isNavigated ? (
         <section className={styles.section}>
-          <div className="pl-4" ref={dropRef}>
+          <div data-cy="ingredients-destination" className="pl-4" ref={dropRef}>
             {renderBunMarkup("ml-10 mb-2", "top", "(верх)")}
             <ul
               className={`${styles.container}  ${styles.column} custom-scroll`}
             >
               {renderInnerIngredientsMarkup()}
             </ul>
-            {renderBunMarkup("mt-2", "bottom", "(низ)")}
+            {renderBunMarkup("ml-10 mt-2", "bottom", "(низ)")}
           </div>
           <div className={`mt-10 ${styles.total}`}>
             <Total />
