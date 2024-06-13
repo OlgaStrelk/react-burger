@@ -1,4 +1,4 @@
-context("BurgerConstructor", () => {
+describe("BurgerConstructor", () => {
   beforeEach(() => {
     cy.visit("/");
     cy.intercept("GET", "https://norma.nomoreparties.space/api/ingredients", {
@@ -6,7 +6,9 @@ context("BurgerConstructor", () => {
     }).as("get-ingredients");
   });
 
-  it('should constructor be empty',()=>{})
+  it("should constructor be empty", () => {
+    cy.get("[data-cy=stub-text]").should("have.text", "Выберите булкиВыберите булки");
+  });
 
   it("should d&d", () => {
     cy.get("[data-cy=dragged-card]")

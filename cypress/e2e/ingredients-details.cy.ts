@@ -1,4 +1,4 @@
-context("IngredientsDetails", () => {
+describe("IngredientsDetails", () => {
   beforeEach(() => {
     cy.visit("/");
     cy.intercept("GET", "https://norma.nomoreparties.space/api/ingredients", {
