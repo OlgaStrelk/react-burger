@@ -81,7 +81,7 @@ function BurgerConstructor({ onModalOpen }: IBurgerConstructorProps) {
     if (!ingredients.length) {
       return (
         <li className={styles.stub}>
-          <BurgerStub style={"1 ml-10"} text={BUN_STUB_TEXT} />
+          <BurgerStub style={"1 ml-10"} text={FILLING_STUB_TEXT} />
         </li>
       );
     } else {
@@ -109,7 +109,7 @@ function BurgerConstructor({ onModalOpen }: IBurgerConstructorProps) {
       return (
         <div className={`${style} ${styles.stub}`}>
           <BurgerStub
-            text={FILLING_STUB_TEXT}
+            text={BUN_STUB_TEXT}
             style={`constructor-element_pos_${type}`}
           />
         </div>
@@ -138,6 +138,7 @@ function BurgerConstructor({ onModalOpen }: IBurgerConstructorProps) {
               size="large"
               onClick={handleSubmit}
               disabled={!isButtonActive}
+              data-cy="constructor-submit"
             >
               Оформить заказ
             </Button>

@@ -16,6 +16,7 @@ import { useForm } from "../hooks/useForm";
 import { TInput } from "../utils/types";
 import { useSelector } from "../services/types/hooks";
 import { loginFormValue, login } from "../services/actions/login";
+import { LOGIN_TITLE } from "../utils/text-contents";
 
 function LoginPage() {
   const { register, forgotPassword } = PATHS;
@@ -40,7 +41,7 @@ function LoginPage() {
   };
 
   const FORM_DATA = {
-    title: "Вход",
+    title: LOGIN_TITLE,
     btn: { text: "Войти" },
     redirect: [
       {
@@ -125,7 +126,9 @@ function LoginPage() {
   return (
     <>
       <main className={formStyles.main}>
-        <h1 className={formStyles.title}>{title}</h1>
+        <h1 data-cy="login-title" className={formStyles.title}>
+          {title}
+        </h1>
         <AuthForm onSubmit={onSubmit} btn={text} isValid={isValid}>
           {inputsMarkup}
         </AuthForm>

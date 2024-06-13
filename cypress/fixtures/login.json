@@ -1,0 +1,9 @@
+{
+  "success": true,
+  "accessToken": "Bearer nfgmnfgbxfmnbxcmbfhjesrnbrwehrkdbhj2847898239428i3j4b3jh457823",
+  "refreshToken": "8274uyewgrjhegr8eyuraweuyrd9tjwegrklrtore",
+  "user": {
+    "name": "Bob",
+    "email": "qwerty@qwe.com"
+  }
+}

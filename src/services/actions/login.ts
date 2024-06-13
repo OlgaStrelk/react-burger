@@ -47,6 +47,7 @@ export const login =
     })
       .then((data) => {
         dispatch({ type: LOGIN_SUCCESS });
+        console.log(data)
         return data;
       })
       .catch((err) => {

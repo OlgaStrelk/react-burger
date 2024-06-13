@@ -83,12 +83,8 @@ function Modal({
     <>
       <ModalOverlay innerRef={overlayRef}>
         <div data-cy={type} className={containerClassName}>
-          <div className={iconClassName}               data-cy="close-icon"
->
-            <CloseIcon
-              type="primary"
-              onClick={handleClose}
-            />
+          <div className={iconClassName} data-cy="close-icon">
+            <CloseIcon type="primary" onClick={handleClose} />
           </div>
           {children}
         </div>

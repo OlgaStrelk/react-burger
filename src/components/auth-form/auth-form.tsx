@@ -17,6 +17,7 @@ const AuthForm: FC<IAuthForm> = ({ onSubmit, btn, isValid, children }) => {
         size="large"
         extraClass={styles.button}
         disabled={!isValid}
+        data-cy="submit-button"
       >
         {btn}
       </Button>
