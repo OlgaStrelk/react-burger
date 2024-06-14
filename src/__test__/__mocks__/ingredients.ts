@@ -1,0 +1,92 @@
+import { TFetchedIngredient, TIngredient } from "../../utils/types";
+
+export const INGREDIENTS_FETCHED: TFetchedIngredient[] = [
+  {
+    _id: "643d69a5c3f7b9001cfa093d",
+    name: "Флюоресцентная булка R2-D3",
+    type: "bun",
+    proteins: 44,
+    fat: 26,
+    carbohydrates: 85,
+    calories: 643,
+    price: 988,
+    image: "https://code.s3.yandex.net/react/code/bun-01.png",
+    image_mobile: "https://code.s3.yandex.net/react/code/bun-01-mobile.png",
+    image_large: "https://code.s3.yandex.net/react/code/bun-01-large.png",
+  },
+
+  {
+    _id: "643d69a5c3f7b9001cfa0945",
+    name: "Соус с шипами Антарианского плоскоходца",
+    type: "sauce",
+    proteins: 101,
+    fat: 99,
+    carbohydrates: 100,
+    calories: 100,
+    price: 88,
+    image: "https://code.s3.yandex.net/react/code/sauce-01.png",
+    image_mobile: "https://code.s3.yandex.net/react/code/sauce-01-mobile.png",
+    image_large: "https://code.s3.yandex.net/react/code/sauce-01-large.png",
+  },
+
+  {
+    _id: "643d69a5c3f7b9001cfa094a",
+    name: "Сыр с астероидной плесенью",
+    type: "main",
+    proteins: 84,
+    fat: 48,
+    carbohydrates: 420,
+    calories: 3377,
+    price: 4142,
+    image: "https://code.s3.yandex.net/react/code/cheese.png",
+    image_mobile: "https://code.s3.yandex.net/react/code/cheese-mobile.png",
+    image_large: "https://code.s3.yandex.net/react/code/cheese-large.png",
+  },
+];
+
+export const INGREDIENTS: TIngredient[] = [
+  {
+    _id: "643d69a5c3f7b9001cfa093d",
+    name: "Флюоресцентная булка R2-D3",
+    type: "bun",
+    proteins: 44,
+    fat: 26,
+    carbohydrates: 85,
+    calories: 643,
+    price: 988,
+    image: "https://code.s3.yandex.net/react/code/bun-01.png",
+    image_mobile: "https://code.s3.yandex.net/react/code/bun-01-mobile.png",
+    image_large: "https://code.s3.yandex.net/react/code/bun-01-large.png",
+    quantity: 0,
+  },
+
+  {
+    _id: "643d69a5c3f7b9001cfa0945",
+    name: "Соус с шипами Антарианского плоскоходца",
+    type: "sauce",
+    proteins: 101,
+    fat: 99,
+    carbohydrates: 100,
+    calories: 100,
+    price: 88,
+    image: "https://code.s3.yandex.net/react/code/sauce-01.png",
+    image_mobile: "https://code.s3.yandex.net/react/code/sauce-01-mobile.png",
+    image_large: "https://code.s3.yandex.net/react/code/sauce-01-large.png",
+    quantity: 0,
+  },
+
+  {
+    _id: "643d69a5c3f7b9001cfa094a",
+    name: "Сыр с астероидной плесенью",
+    type: "main",
+    proteins: 84,
+    fat: 48,
+    carbohydrates: 420,
+    calories: 3377,
+    price: 4142,
+    image: "https://code.s3.yandex.net/react/code/cheese.png",
+    image_mobile: "https://code.s3.yandex.net/react/code/cheese-mobile.png",
+    image_large: "https://code.s3.yandex.net/react/code/cheese-large.png",
+    quantity: 0,
+  },
+];

@@ -1,7 +1,7 @@
 import { LegacyRef, ReactNode } from "react";
 export type TTitle = { title: string; value: string; id: number };
 
-export type TIngredient = {
+export type TFetchedIngredient = {
   _id: string;
   name: string;
   type: "bun" | "main" | "sauce";
@@ -13,8 +13,12 @@ export type TIngredient = {
   image: string;
   image_mobile: string;
   image_large: string;
+};
+
+export type TIngredient = TFetchedIngredient & {
   quantity: number;
 };
+export type TConstructorIngredient = TIngredient & { id: string };
 
 export type TInput = {
   id: number | string;
@@ -23,8 +27,6 @@ export type TInput = {
   type: "email" | "text" | "password" | undefined;
   value: string;
 };
-
-export type TConstructorIngredient = TIngredient & { id: string };
 
 export interface INavBar {
   id: string | number;
@@ -84,7 +86,7 @@ export interface IResetPasswordResponse extends ISuccessResponse {
 export type TAuthorizationResonse = IUserSuccessResponse & ITokenResponse;
 
 export interface IIngredientsResponse extends ISuccessResponse {
-  data: TIngredient[];
+  data: TFetchedIngredient[];
 }
 
 export interface IMakeOrderResponse extends ISuccessResponse {

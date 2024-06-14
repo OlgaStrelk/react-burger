@@ -31,7 +31,7 @@ describe("burger constructor reducer", () => {
       type: ADD_INGREDIENT,
       payload: FILLING_INGREDIENT,
     });
-    const expectedState: ConstructorState = {
+    const expectedState = {
       addedIngredients: {
         buns: null,
         ingredients: [FILLING_INGREDIENT],
@@ -68,7 +68,7 @@ describe("burger constructor reducer", () => {
       type: ADD_INGREDIENT,
       payload: BUN_INGREDIENT,
     });
-    const expectedState = {
+    const expectedState: ConstructorState = {
       addedIngredients: {
         buns: BUN_INGREDIENT,
         ingredients: [],

@@ -3,7 +3,7 @@ import { ENDPOINT, optionsUnAuth } from "../../utils/consts";
 import {
   IIngredientsResponse,
   TConstructorIngredient,
-  TIngredient,
+  TFetchedIngredient,
 } from "../../utils/types";
 import {
   GET_INGREDIENTS_REQUEST,
@@ -21,7 +21,7 @@ type TGetIngredientRequestAction = {
 
 type TGetIngredientSuccessAction = {
   type: typeof GET_INGREDIENTS_SUCCESS;
-  payload: TIngredient[];
+  payload: TFetchedIngredient[];
 };
 
 type TGetIngredientFailedAction = {
@@ -58,7 +58,7 @@ export const decreaseQuantity = (id: string): TDecreaseQuantityAction => {
 };
 
 export const receiveIngredients = (
-  ingredients: TIngredient[]
+  ingredients: TFetchedIngredient[]
 ): TGetIngredientSuccessAction => {
   return { type: GET_INGREDIENTS_SUCCESS, payload: ingredients };
 };
