@@ -6,6 +6,7 @@ import {
 import {
   ADD_INGREDIENT,
   DELETE_INGREDIENT,
+  RESET_CONSTRUCTOR,
   SORT_INGREDIENTS,
 } from "../constants/ingredients";
 import {
@@ -17,20 +18,20 @@ import {
   INGREDIENT_ARRAY_MINUS_ONE,
 } from "../../__test__/__mocks__/burger-constructor";
 
-const initialState = {
+const initialState: ConstructorState = {
   addedIngredients: {
     buns: null,
     ingredients: [],
   },
 };
 describe("burger constructor reducer", () => {
-  test("should handle a filling ingredient being added to empty constructor", () => {
+  test("should handle an ingredient being added to empty constructor", () => {
     const previousState: ConstructorState = initialState;
     const result = reducer(previousState, {
       type: ADD_INGREDIENT,
       payload: FILLING_INGREDIENT,
     });
-    const expectedState = {
+    const expectedState: ConstructorState = {
       addedIngredients: {
         buns: null,
         ingredients: [FILLING_INGREDIENT],
@@ -39,7 +40,7 @@ describe("burger constructor reducer", () => {
     expect(result).toEqual(expectedState);
   });
 
-  test("should handle a filling ingredient being added to an existing list", () => {
+  test("should handle an ingredient being added to an existing list", () => {
     const previousState: ConstructorState = {
       addedIngredients: {
         buns: BUN_INGREDIENT,
@@ -117,7 +118,7 @@ describe("burger constructor reducer", () => {
     expect(result).toEqual(expectedState);
   });
 
-  test("should handle a filling ingredient being deleted from constructor", () => {
+  test("should handle an ingredient being deleted from constructor", () => {
     const previousState: ConstructorState = {
       addedIngredients: {
         buns: BUN_INGREDIENT,
@@ -125,9 +126,11 @@ describe("burger constructor reducer", () => {
       },
     };
 
+    const deletedIngredientId = INGREDIENTS_ARRAY[1].id;
+
     const result = reducer(previousState, {
       type: DELETE_INGREDIENT,
-      payload: INGREDIENTS_ARRAY[1].id,
+      payload: deletedIngredientId,
     });
 
     const expectedState = {
@@ -136,6 +139,22 @@ describe("burger constructor reducer", () => {
         ingredients: INGREDIENT_ARRAY_MINUS_ONE,
       },
     };
+    expect(result).toEqual(expectedState);
+  });
+
+  test("should empty contructor", () => {
+    const previousState: ConstructorState = {
+      addedIngredients: {
+        buns: BUN_INGREDIENT,
+        ingredients: INGREDIENTS_ARRAY,
+      },
+    };
+
+    const result = reducer(previousState, {
+      type: RESET_CONSTRUCTOR,
+    });
+
+    const expectedState = initialState;
     expect(result).toEqual(expectedState);
   });
 });
