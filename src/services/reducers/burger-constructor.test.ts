@@ -18,7 +18,7 @@ const initialState = {
 describe("burger constructor reducer", () => {
   test("should handle a filling ingredient being added to constructor", () => {
     const previousState: ConstructorState = initialState;
-    const action = reducer(previousState, {
+    const result = reducer(previousState, {
       type: ADD_INGREDIENT,
       payload: FILLING_INGREDIENT,
     });
@@ -28,6 +28,21 @@ describe("burger constructor reducer", () => {
         ingredients: [FILLING_INGREDIENT],
       },
     };
-    expect(action).toEqual(expectedState);
+    expect(result).toEqual(expectedState);
+  });
+
+  test("should handle a bun being added to constructor", () => {
+    const previousState: ConstructorState = initialState;
+    const result = reducer(previousState, {
+      type: ADD_INGREDIENT,
+      payload: BUN_INGREDIENT,
+    });
+    const expectedState = {
+      addedIngredients: {
+        buns: BUN_INGREDIENT,
+        ingredients: [],
+      },
+    };
+    expect(result).toEqual(expectedState);
   });
 });
