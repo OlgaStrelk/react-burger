@@ -1,5 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { logoutReducer, logoutInitialState as initialState } from "./logout";
+import {
+  logoutReducer as reducer,
+  logoutInitialState as initialState,
+} from "./logout";
 import { TLogoutActions } from "../actions/logout";
 import {
   LOGOUT_REQUEST,
@@ -9,9 +12,8 @@ import {
 
 describe("logout reducer", () => {
   it("should return the initial state", () => {
-    expect(logoutReducer(undefined, {} as TLogoutActions)).toEqual(
-      initialState
-    );
+    const result = reducer(undefined, {} as TLogoutActions);
+    expect(result).toEqual(initialState);
   });
 
   it("should handle LOGOUT_REQUEST", () => {
@@ -22,7 +24,7 @@ describe("logout reducer", () => {
       logoutRequest: true,
       logoutFailed: false,
     };
-    const result = logoutReducer(initialState, action);
+    const result = reducer(initialState, action);
 
     expect(result).toEqual(expectedState);
   });
@@ -35,7 +37,7 @@ describe("logout reducer", () => {
       ...initialState,
       logoutRequest: false,
     };
-    const result = logoutReducer(initialState, action);
+    const result = reducer(initialState, action);
 
     expect(result).toEqual(expectedState);
   });
@@ -48,7 +50,7 @@ describe("logout reducer", () => {
       logoutFailed: true,
       logoutRequest: false,
     };
-    const result = logoutReducer(initialState, action);
+    const result = reducer(initialState, action);
 
     expect(result).toEqual(expectedState);
   });

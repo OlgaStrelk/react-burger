@@ -11,14 +11,14 @@ export interface OrderState {
   orderFailed: boolean;
 }
 
-const initialState: OrderState = {
+export const orderMadeInitialState: OrderState = {
   order: null,
   orderRequest: false,
   orderFailed: false,
 };
 
 export const orderMadeReducer = (
-  state = initialState,
+  state = orderMadeInitialState,
   action: TOrderActions
 ): OrderState => {
   switch (action.type) {
