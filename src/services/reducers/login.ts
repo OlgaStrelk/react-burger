@@ -10,7 +10,7 @@ export interface LoginState {
   loginRequest: boolean;
   loginFailed: boolean;
 }
-const initialState: LoginState = {
+export const loginInitialState: LoginState = {
   form: {
     email: "",
     password: "",
@@ -20,7 +20,7 @@ const initialState: LoginState = {
 };
 
 export const loginReducer = (
-  state = initialState,
+  state = loginInitialState,
   action: TLoginActions
 ): LoginState => {
   switch (action.type) {
@@ -45,7 +45,7 @@ export const loginReducer = (
       return {
         ...state,
         form: {
-          ...initialState.form,
+          ...loginInitialState.form,
         },
         loginRequest: false,
       };
