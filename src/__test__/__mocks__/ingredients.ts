@@ -1,92 +1,10 @@
-import { TFetchedIngredient, TIngredient } from "../../utils/types";
-
-export const INGREDIENTS_FETCHED: TFetchedIngredient[] = [
-  {
-    _id: "643d69a5c3f7b9001cfa093d",
-    name: "Флюоресцентная булка R2-D3",
-    type: "bun",
-    proteins: 44,
-    fat: 26,
-    carbohydrates: 85,
-    calories: 643,
-    price: 988,
-    image: "",
-    image_mobile: "",
-    image_large: "",
-  },
-
-  {
-    _id: "643d69a5c3f7b9001cfa0945",
-    name: "Соус с шипами Антарианского плоскоходца",
-    type: "sauce",
-    proteins: 101,
-    fat: 99,
-    carbohydrates: 100,
-    calories: 100,
-    price: 88,
-    image: "",
-    image_mobile: "",
-    image_large: "",
-  },
-
-  {
-    _id: "643d69a5c3f7b9001cfa094a",
-    name: "Сыр с астероидной плесенью",
-    type: "main",
-    proteins: 84,
-    fat: 48,
-    carbohydrates: 420,
-    calories: 3377,
-    price: 4142,
-    image: "",
-    image_mobile: "",
-    image_large: "",
-  },
-];
-
-export const INGREDIENTS: TIngredient[] = [
-  {
-    _id: "643d69a5c3f7b9001cfa093d",
-    name: "Флюоресцентная булка R2-D3",
-    type: "bun",
-    proteins: 44,
-    fat: 26,
-    carbohydrates: 85,
-    calories: 643,
-    price: 988,
-    image: "",
-    image_mobile: "",
-    image_large: "",
-    quantity: 0,
-  },
-
-  {
-    _id: "643d69a5c3f7b9001cfa0945",
-    name: "Соус с шипами Антарианского плоскоходца",
-    type: "sauce",
-    proteins: 101,
-    fat: 99,
-    carbohydrates: 100,
-    calories: 100,
-    price: 88,
-    image: "",
-    image_mobile: "",
-    image_large: "",
-    quantity: 0,
-  },
-
-  {
-    _id: "643d69a5c3f7b9001cfa094a",
-    name: "Сыр с астероидной плесенью",
-    type: "main",
-    proteins: 84,
-    fat: 48,
-    carbohydrates: 420,
-    calories: 3377,
-    price: 4142,
-    image: "",
-    image_mobile: "",
-    image_large: "",
-    quantity: 0,
-  },
-];
+export const mockFetchedIngredient = {
+  proteins: 0,
+  fat: 0,
+  carbohydrates: 0,
+  calories: 0,
+  price: 0,
+  image: 'mockImage',
+  image_mobile: 'mockImageMobile',
+  image_large: 'mockImageLarge',
+};

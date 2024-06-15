@@ -1,155 +1,179 @@
-import { expect, test, describe } from "vitest";
+import { describe, expect, it } from "vitest";
 import {
-  ConstructorState,
   constructorReducer as reducer,
   constructorInitialState as initialState,
+  ConstructorState,
 } from "./burger-constructor";
+import { TBurgerConstructorActions } from "../actions/constructor-ingredients";
 import {
   ADD_INGREDIENT,
+  SORT_INGREDIENTS,
   DELETE_INGREDIENT,
   RESET_CONSTRUCTOR,
-  SORT_INGREDIENTS,
 } from "../constants/ingredients";
+import { TConstructorIngredient } from "./burger-constructor";
 import {
-  FILLING_INGREDIENT,
-  BUN_INGREDIENT,
-  INGREDIENTS_ARRAY,
-  SORTED_ARRAY,
-  NEW_BUN_INGREDIENT,
-  INGREDIENT_ARRAY_MINUS_ONE,
+  mockBun,
+  mockIngredient,
 } from "../../__test__/__mocks__/burger-constructor";
+import { mockFetchedIngredient } from "../../__test__/__mocks__/ingredients";
 
-describe("burger constructor reducer", () => {
-  test("should handle an ingredient being added to empty constructor", () => {
-    const previousState: ConstructorState = initialState;
-    const result = reducer(previousState, {
-      type: ADD_INGREDIENT,
-      payload: FILLING_INGREDIENT,
+describe("Burger Constructor Reducer", () => {
+  it("should return the initial state", () => {
+    const result = reducer(undefined, {} as TBurgerConstructorActions);
+    expect(result).toEqual(initialState);
+  });
+
+  describe("should handle ADD_INGREDIENT", () => {
+    it("should add a bun to the state", () => {
+      const action: TBurgerConstructorActions = {
+        type: ADD_INGREDIENT,
+        payload: mockBun,
+      };
+      const expectedState: ConstructorState = {
+        ...initialState,
+        addedIngredients: {
+          buns: mockBun,
+          ingredients: [],
+        },
+      };
+      const result = reducer(initialState, action);
+      expect(result).toEqual(expectedState);
     });
-    const expectedState = {
+
+    it("should add an ingredient to the state", () => {
+      const action: TBurgerConstructorActions = {
+        type: ADD_INGREDIENT,
+        payload: mockIngredient,
+      };
+      const expectedState: ConstructorState = {
+        ...initialState,
+        addedIngredients: {
+          buns: null,
+          ingredients: [mockIngredient],
+        },
+      };
+      const result = reducer(initialState, action);
+      expect(result).toEqual(expectedState);
+    });
+  });
+
+  it("should sort ingredients", () => {
+    const mockIngredients: TConstructorIngredient[] = [
+      {
+        _id: "1",
+        name: "Ingredient 1",
+        type: "main",
+        quantity: 0,
+        ...mockFetchedIngredient,
+        id: "ingredientId1",
+      },
+      {
+        _id: "2",
+        name: "Ingredient 2",
+        type: "sauce",
+        quantity: 0,
+        ...mockFetchedIngredient,
+        id: "ingredientId2",
+      },
+    ];
+    const action: TBurgerConstructorActions = {
+      type: SORT_INGREDIENTS,
+      payload: mockIngredients,
+    };
+    const expectedState: ConstructorState = {
+      ...initialState,
       addedIngredients: {
         buns: null,
-        ingredients: [FILLING_INGREDIENT],
+        ingredients: mockIngredients,
       },
     };
+    const result = reducer(initialState, action);
     expect(result).toEqual(expectedState);
   });
 
-  test("should handle an ingredient being added to an existing list", () => {
-    const previousState: ConstructorState = {
+  it("should handle an ingredient being deleted from constructor", () => {
+    const mockIngredients: TConstructorIngredient[] = [
+      {
+        _id: "1",
+        name: "Ingredient 1",
+        type: "main",
+        quantity: 0,
+        ...mockFetchedIngredient,
+        id: "ingredientId1",
+      },
+      {
+        _id: "2",
+        name: "Ingredient 2",
+        type: "sauce",
+        quantity: 0,
+        ...mockFetchedIngredient,
+        id: "ingredientId2",
+      },
+    ];
+    const initialStateWithIngredients: ConstructorState = {
+      ...initialState,
       addedIngredients: {
-        buns: BUN_INGREDIENT,
-        ingredients: INGREDIENTS_ARRAY,
+        buns: null,
+        ingredients: mockIngredients,
       },
     };
-
-    const result = reducer(previousState, {
-      type: ADD_INGREDIENT,
-      payload: FILLING_INGREDIENT,
-    });
-
-    const expectedState = {
-      addedIngredients: {
-        buns: BUN_INGREDIENT,
-        ingredients: [...INGREDIENTS_ARRAY, FILLING_INGREDIENT],
-      },
-    };
-    expect(result).toEqual(expectedState);
-  });
-
-  test("should handle a bun being added to empty constructor", () => {
-    const previousState: ConstructorState = initialState;
-    const result = reducer(previousState, {
-      type: ADD_INGREDIENT,
-      payload: BUN_INGREDIENT,
-    });
-    const expectedState: ConstructorState = {
-      addedIngredients: {
-        buns: BUN_INGREDIENT,
-        ingredients: [],
-      },
-    };
-    expect(result).toEqual(expectedState);
-  });
-
-  test("should handle a bun being added to constructor with existing bun and replace it", () => {
-    const previousState: ConstructorState = {
-      addedIngredients: {
-        buns: BUN_INGREDIENT,
-        ingredients: INGREDIENTS_ARRAY,
-      },
-    };
-    const result = reducer(previousState, {
-      type: ADD_INGREDIENT,
-      payload: NEW_BUN_INGREDIENT,
-    });
-    const expectedState = {
-      addedIngredients: {
-        buns: NEW_BUN_INGREDIENT,
-        ingredients: INGREDIENTS_ARRAY,
-      },
-    };
-    expect(result).toEqual(expectedState);
-  });
-
-  test("should sort ingredients", () => {
-    const previousState: ConstructorState = {
-      addedIngredients: {
-        buns: BUN_INGREDIENT,
-        ingredients: INGREDIENTS_ARRAY,
-      },
-    };
-
-    const result = reducer(previousState, {
-      type: SORT_INGREDIENTS,
-      payload: SORTED_ARRAY,
-    });
-    const expectedState = {
-      addedIngredients: {
-        buns: BUN_INGREDIENT,
-        ingredients: SORTED_ARRAY,
-      },
-    };
-    expect(result).toEqual(expectedState);
-  });
-
-  test("should handle an ingredient being deleted from constructor", () => {
-    const previousState: ConstructorState = {
-      addedIngredients: {
-        buns: BUN_INGREDIENT,
-        ingredients: INGREDIENTS_ARRAY,
-      },
-    };
-
-    const deletedIngredientId = INGREDIENTS_ARRAY[1].id;
-
-    const result = reducer(previousState, {
+    const action: TBurgerConstructorActions = {
       type: DELETE_INGREDIENT,
-      payload: deletedIngredientId,
-    });
-
-    const expectedState = {
+      payload: "ingredientId1",
+    };
+    const expectedState: ConstructorState = {
+      ...initialStateWithIngredients,
       addedIngredients: {
-        buns: BUN_INGREDIENT,
-        ingredients: INGREDIENT_ARRAY_MINUS_ONE,
+        buns: null,
+        ingredients: [
+          {
+            _id: "2",
+            name: "Ingredient 2",
+            type: "sauce",
+            quantity: 0,
+            ...mockFetchedIngredient,
+            id: "ingredientId2",
+          },
+        ],
       },
     };
+    const result = reducer(initialStateWithIngredients, action);
+
     expect(result).toEqual(expectedState);
   });
 
-  test("should empty contructor", () => {
-    const previousState: ConstructorState = {
+  it("should empty contructor", () => {
+    const initialStateWithIngredients: ConstructorState = {
+      ...initialState,
       addedIngredients: {
-        buns: BUN_INGREDIENT,
-        ingredients: INGREDIENTS_ARRAY,
+        buns: {
+          _id: "1",
+          name: "Bun",
+          type: "bun",
+          quantity: 0,
+          ...mockFetchedIngredient,
+          id: "bunId",
+        },
+        ingredients: [
+          {
+            _id: "2",
+            name: "Ingredient",
+            type: "main",
+            quantity: 0,
+            ...mockFetchedIngredient,
+            id: "ingredientId",
+          },
+        ],
       },
     };
-
-    const result = reducer(previousState, {
+    const action: TBurgerConstructorActions = {
       type: RESET_CONSTRUCTOR,
-    });
-
-    const expectedState = initialState;
+    };
+    const expectedState: ConstructorState = {
+      ...initialState,
+    };
+    const result = reducer(initialStateWithIngredients, action);
     expect(result).toEqual(expectedState);
   });
 });

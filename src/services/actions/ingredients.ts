@@ -4,6 +4,7 @@ import {
   IIngredientsResponse,
   TConstructorIngredient,
   TFetchedIngredient,
+  TIngredient,
 } from "../../utils/types";
 import {
   GET_INGREDIENTS_REQUEST,
@@ -30,7 +31,7 @@ type TGetIngredientFailedAction = {
 
 type TIncreaseQuantityAction = {
   type: typeof INCREASE_INGREDIENT_QUANTITY;
-  payload: TConstructorIngredient;
+  payload: TIngredient;
 };
 type TDecreaseQuantityAction = {
   type: typeof DECREASE_INGREDIENT_QUANTITY;

@@ -1,4 +1,4 @@
-// import { TIngredient } from "../../utils/types";
+import { TIngredient } from "../../utils/types";
 import { TIngredientsActions } from "../actions/ingredients";
 import {
   DECREASE_INGREDIENT_QUANTITY,
@@ -9,23 +9,7 @@ import {
   RESET_INGREDIENTS_QUANTITY,
 } from "../constants/ingredients";
 
-export type TFetchedIngredient = {
-  _id: string;
-  name: string;
-  type: "bun" | "main" | "sauce";
-  proteins: number;
-  fat: number;
-  carbohydrates: number;
-  calories: number;
-  price: number;
-  image: string;
-  image_mobile: string;
-  image_large: string;
-};
 
-export type TIngredient = TFetchedIngredient & {
-  quantity: number;
-};
 export interface IngredientsState {
   ingredients: TIngredient[];
   ingredientsRequest: boolean;
