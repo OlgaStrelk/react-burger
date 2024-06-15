@@ -1,4 +1,4 @@
-import { TConstructorIngredient, TIngredient } from "../../utils/types";
+import { TIngredient } from "../../utils/types";
 import { TIngredientsActions } from "../actions/ingredients";
 import {
   DECREASE_INGREDIENT_QUANTITY,
@@ -42,8 +42,8 @@ export const ingredientsReducer = (
       return {
         ...state,
 
-        ingredients: ingredients.map((item) => {
-          return { ...item, quantity: 0 };
+        ingredients: ingredients.map((newIngredient) => {
+          return { ...newIngredient, quantity: 0 };
         }),
         ingredientsRequest: false,
       };
@@ -60,16 +60,16 @@ export const ingredientsReducer = (
       const ingredient = action.payload;
       return {
         ...state,
-        ingredients: newIngredients.map((item) =>
+        ingredients: newIngredients.map((newIngredient) =>
           ingredient.type === "bun" &&
-          item.type === "bun" &&
-          ingredient._id !== item._id
-            ? { ...item, quantity: 0 }
-            : ingredient.type === "bun" && ingredient._id === item._id
-            ? { ...item, quantity: 2 }
-            : ingredient._id === item._id
-            ? { ...item, quantity: ++item.quantity }
-            : item
+          newIngredient.type === "bun" &&
+          ingredient._id !== newIngredient._id
+            ? { ...newIngredient, quantity: 0 }
+            : ingredient.type === "bun" && ingredient._id === newIngredient._id
+            ? { ...newIngredient, quantity: 2 }
+            : ingredient._id === newIngredient._id
+            ? { ...newIngredient, quantity: ++newIngredient.quantity }
+            : newIngredient
         ),
       };
     }
@@ -79,10 +79,10 @@ export const ingredientsReducer = (
 
       return {
         ...state,
-        ingredients: newIngredients.map((item) =>
-          ingredient === item._id
-            ? { ...item, quantity: --item.quantity }
-            : item
+        ingredients: newIngredients.map((newIngredient) =>
+          ingredient === newIngredient._id
+            ? { ...newIngredient, quantity: --newIngredient.quantity }
+            : newIngredient
         ),
       };
     }
@@ -90,8 +90,8 @@ export const ingredientsReducer = (
     case RESET_INGREDIENTS_QUANTITY: {
       return {
         ...state,
-        ingredients: newIngredients.map((item) => {
-          return { ...item, quantity: 0 };
+        ingredients: newIngredients.map((newIngredient) => {
+          return { ...newIngredient, quantity: 0 };
         }),
       };
     }

@@ -10,9 +10,9 @@ export const INGREDIENTS_FETCHED: TFetchedIngredient[] = [
     carbohydrates: 85,
     calories: 643,
     price: 988,
-    image: "https://code.s3.yandex.net/react/code/bun-01.png",
-    image_mobile: "https://code.s3.yandex.net/react/code/bun-01-mobile.png",
-    image_large: "https://code.s3.yandex.net/react/code/bun-01-large.png",
+    image: "",
+    image_mobile: "",
+    image_large: "",
   },
 
   {
@@ -24,9 +24,9 @@ export const INGREDIENTS_FETCHED: TFetchedIngredient[] = [
     carbohydrates: 100,
     calories: 100,
     price: 88,
-    image: "https://code.s3.yandex.net/react/code/sauce-01.png",
-    image_mobile: "https://code.s3.yandex.net/react/code/sauce-01-mobile.png",
-    image_large: "https://code.s3.yandex.net/react/code/sauce-01-large.png",
+    image: "",
+    image_mobile: "",
+    image_large: "",
   },
 
   {
@@ -38,9 +38,9 @@ export const INGREDIENTS_FETCHED: TFetchedIngredient[] = [
     carbohydrates: 420,
     calories: 3377,
     price: 4142,
-    image: "https://code.s3.yandex.net/react/code/cheese.png",
-    image_mobile: "https://code.s3.yandex.net/react/code/cheese-mobile.png",
-    image_large: "https://code.s3.yandex.net/react/code/cheese-large.png",
+    image: "",
+    image_mobile: "",
+    image_large: "",
   },
 ];
 
@@ -54,9 +54,9 @@ export const INGREDIENTS: TIngredient[] = [
     carbohydrates: 85,
     calories: 643,
     price: 988,
-    image: "https://code.s3.yandex.net/react/code/bun-01.png",
-    image_mobile: "https://code.s3.yandex.net/react/code/bun-01-mobile.png",
-    image_large: "https://code.s3.yandex.net/react/code/bun-01-large.png",
+    image: "",
+    image_mobile: "",
+    image_large: "",
     quantity: 0,
   },
 
@@ -69,9 +69,9 @@ export const INGREDIENTS: TIngredient[] = [
     carbohydrates: 100,
     calories: 100,
     price: 88,
-    image: "https://code.s3.yandex.net/react/code/sauce-01.png",
-    image_mobile: "https://code.s3.yandex.net/react/code/sauce-01-mobile.png",
-    image_large: "https://code.s3.yandex.net/react/code/sauce-01-large.png",
+    image: "",
+    image_mobile: "",
+    image_large: "",
     quantity: 0,
   },
 
@@ -84,9 +84,9 @@ export const INGREDIENTS: TIngredient[] = [
     carbohydrates: 420,
     calories: 3377,
     price: 4142,
-    image: "https://code.s3.yandex.net/react/code/cheese.png",
-    image_mobile: "https://code.s3.yandex.net/react/code/cheese-mobile.png",
-    image_large: "https://code.s3.yandex.net/react/code/cheese-large.png",
+    image: "",
+    image_mobile: "",
+    image_large: "",
     quantity: 0,
   },
 ];
