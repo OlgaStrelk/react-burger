@@ -1,4 +1,4 @@
-// import { TConstructorIngredient } from "../../utils/types";
+import { TConstructorIngredient } from "../../utils/types";
 import { TBurgerConstructorActions } from "../actions/constructor-ingredients";
 import {
   ADD_INGREDIENT,
@@ -6,24 +6,7 @@ import {
   DELETE_INGREDIENT,
   RESET_CONSTRUCTOR,
 } from "../constants/ingredients";
-export type TFetchedIngredient = {
-  _id: string;
-  name: string;
-  type: "bun" | "main" | "sauce";
-  proteins: number;
-  fat: number;
-  carbohydrates: number;
-  calories: number;
-  price: number;
-  image: string;
-  image_mobile: string;
-  image_large: string;
-};
 
-export type TIngredient = TFetchedIngredient & {
-  quantity: number;
-};
-export type TConstructorIngredient = TIngredient & { id: string };
 export interface ConstructorState {
   addedIngredients: {
     buns: TConstructorIngredient | null;
@@ -95,3 +78,4 @@ export const constructorReducer = (
     }
   }
 };
+
