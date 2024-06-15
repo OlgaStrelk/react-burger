@@ -47,4 +47,8 @@ describe("burger constructor reducer", () => {
     };
     expect(result).toEqual(expectedState);
   });
+
+  test("should handle bun's quantity equal 2",()=>{
+    
+  })
 });
