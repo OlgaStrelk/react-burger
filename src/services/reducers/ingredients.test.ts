@@ -4,6 +4,7 @@ import { TIngredient } from '../../utils/types';
 import {
   ingredientsReducer,
   ingredientsInitialState,
+  IngredientsState,
 } from './ingredients';
 import { TIngredientsActions } from '../actions/ingredients';
 import {
