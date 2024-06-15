@@ -16,7 +16,7 @@ export interface ProfileState {
   editProfileRequest: boolean;
   editProfileFailed: boolean;
 }
-const initialState: ProfileState = {
+export const editProfileFormInitialState: ProfileState = {
   form: {
     name: "",
     email: "",
@@ -27,7 +27,7 @@ const initialState: ProfileState = {
 };
 
 export const editProfileFormReducer = (
-  state = initialState,
+  state = editProfileFormInitialState,
   action: TEditProfileActions
 ): ProfileState => {
   switch (action.type) {
@@ -44,7 +44,7 @@ export const editProfileFormReducer = (
     case CLEAR_PROFILE_FORM: {
       return {
         ...state,
-        form: initialState.form,
+        form: editProfileFormInitialState.form,
       };
     }
 
