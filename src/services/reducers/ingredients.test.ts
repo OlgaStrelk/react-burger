@@ -1,12 +1,8 @@
 import { expect, test, describe } from "vitest";
-import { IngredientsState, ingredientsReducer as reducer } from "./ingredients";
+import { IngredientsState, ingredientsReducer as reducer, ingredientsInitialState as initialState } from "./ingredients";
 import { GET_INGREDIENTS_FAILED, GET_INGREDIENTS_REQUEST, GET_INGREDIENTS_SUCCESS } from "../constants/ingredients";
 import { INGREDIENTS, INGREDIENTS_FETCHED } from "../../__test__/__mocks__/ingredients";
-const initialState: IngredientsState = {
-  ingredients: [],
-  ingredientsRequest: false,
-  ingredientsFailed: false,
-};
+
 describe("burger constructor reducer", () => {
   test("should start ingredients request", () => {
     const previousState: IngredientsState = initialState;

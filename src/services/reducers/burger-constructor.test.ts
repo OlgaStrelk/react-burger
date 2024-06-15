@@ -2,6 +2,7 @@ import { expect, test, describe } from "vitest";
 import {
   ConstructorState,
   constructorReducer as reducer,
+  constructorInitialState as initialState,
 } from "./burger-constructor";
 import {
   ADD_INGREDIENT,
@@ -18,12 +19,6 @@ import {
   INGREDIENT_ARRAY_MINUS_ONE,
 } from "../../__test__/__mocks__/burger-constructor";
 
-const initialState: ConstructorState = {
-  addedIngredients: {
-    buns: null,
-    ingredients: [],
-  },
-};
 describe("burger constructor reducer", () => {
   test("should handle an ingredient being added to empty constructor", () => {
     const previousState: ConstructorState = initialState;

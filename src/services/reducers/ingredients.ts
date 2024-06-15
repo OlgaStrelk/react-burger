@@ -14,14 +14,14 @@ export interface IngredientsState {
   ingredientsRequest: boolean;
   ingredientsFailed: boolean;
 }
-const initialState: IngredientsState = {
+export const ingredientsInitialState: IngredientsState = {
   ingredients: [],
   ingredientsRequest: false,
   ingredientsFailed: false,
 };
 
 export const ingredientsReducer = (
-  state = initialState,
+  state = ingredientsInitialState,
   action: TIngredientsActions
 ): IngredientsState => {
   
