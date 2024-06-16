@@ -1,7 +1,9 @@
+import { API_URL, ENDPOINT } from "../../src/utils/consts";
+
 describe("IngredientsDetails", () => {
   beforeEach(() => {
     cy.visit("/");
-    cy.intercept("GET", "https://norma.nomoreparties.space/api/ingredients", {
+    cy.intercept("GET", `${API_URL}${ENDPOINT.ingredients}`, {
       fixture: "ingredients.json",
     }).as("get-ingredients");
   });
