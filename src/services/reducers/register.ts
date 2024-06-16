@@ -12,7 +12,7 @@ export interface RegisterState {
   resetPasswordRequest: boolean;
   resetPasswordFailed: boolean;
 }
-const initialState: RegisterState = {
+export const registerInitialState: RegisterState = {
   form: {
     email: "",
     password: "",
@@ -23,7 +23,7 @@ const initialState: RegisterState = {
 };
 
 export const registerReducer = (
-  state = initialState,
+  state = registerInitialState,
   action: TRegisterActions
 ): RegisterState => {
   switch (action.type) {
@@ -48,7 +48,7 @@ export const registerReducer = (
       return {
         ...state,
         form: {
-          ...initialState.form,
+          ...registerInitialState.form,
         },
         resetPasswordRequest: false,
       };
