@@ -12,7 +12,7 @@ export interface ResetFormTwoState {
   resetPasswordFailed: boolean;
 }
 
-const initialState: ResetFormTwoState = {
+export const resetFormTwoInitialState: ResetFormTwoState = {
   form: {
     password: "",
     token: "",
@@ -22,7 +22,7 @@ const initialState: ResetFormTwoState = {
 };
 
 export const resetFormTwoReducer = (
-  state = initialState,
+  state = resetFormTwoInitialState,
   action: TResetFormTwoActions
 ): ResetFormTwoState => {
   switch (action.type) {
@@ -47,7 +47,7 @@ export const resetFormTwoReducer = (
       return {
         ...state,
         form: {
-          ...initialState.form,
+          ...resetFormTwoInitialState.form,
         },
         resetPasswordRequest: false,
       };

@@ -15,7 +15,8 @@ import { increaseQuantity } from "../../services/actions/ingredients.ts";
 import { addIngredient } from "../../services/actions/constructor-ingredients.ts";
 import { makeOrder } from "../../services/actions/order.ts";
 import { useAppDispatch, useSelector } from "../../services/types/hooks.ts";
-
+import BurgerStub from "../burger-stub/burger-stub.tsx";
+import { BUN_STUB_TEXT, FILLING_STUB_TEXT } from "../../utils/text-contents.ts";
 
 export interface IBurgerConstructorProps {
   onModalOpen: () => void;
@@ -36,7 +37,6 @@ function BurgerConstructor({ onModalOpen }: IBurgerConstructorProps) {
 
   const validateConstructor = () => {
     if (!buns || !ingredients.length) {
-      // setError("Добавьте ингредиенты в конструктор для заказа");
       setButtonActive(false);
     } else {
       setButtonActive(true);
@@ -81,13 +81,7 @@ function BurgerConstructor({ onModalOpen }: IBurgerConstructorProps) {
     if (!ingredients.length) {
       return (
         <li className={styles.stub}>
-          <div className="constructor-element 1 ml-8">
-            <span className="constructor-element__row">
-              <span className="constructor-element__text">
-                Выберите начинку
-              </span>
-            </span>
-          </div>
+          <BurgerStub style={"1 ml-10"} text={FILLING_STUB_TEXT} />
         </li>
       );
     } else {
@@ -101,7 +95,7 @@ function BurgerConstructor({ onModalOpen }: IBurgerConstructorProps) {
   const renderBunMarkup = (style: string, type: TBunType, text: string) => {
     if (buns) {
       return (
-        <div className={`ml-8 mr-2 ${style}`}>
+        <div className={`${styles.bun} ${style}`}>
           <ConstructorElement
             type={type}
             isLocked={true}
@@ -113,14 +107,11 @@ function BurgerConstructor({ onModalOpen }: IBurgerConstructorProps) {
       );
     } else {
       return (
-        <div className={`ml-8 mr-2 ${style} ${styles.stub}`}>
-          <div
-            className={`constructor-element constructor-element_pos_${type}`}
-          >
-            <span className="constructor-element__row">
-              <span className="constructor-element__text">Выберите булки</span>
-            </span>
-          </div>
+        <div className={`${style} ${styles.stub}`}>
+          <BurgerStub
+            text={BUN_STUB_TEXT}
+            style={`constructor-element_pos_${type}`}
+          />
         </div>
       );
     }
@@ -130,14 +121,14 @@ function BurgerConstructor({ onModalOpen }: IBurgerConstructorProps) {
     <>
       {!isNavigated ? (
         <section className={styles.section}>
-          <div className="ml-8" ref={dropRef}>
-            {renderBunMarkup(" mb-2 pr-1", "top", "(верх)")}
+          <div data-cy="ingredients-destination" className="pl-4" ref={dropRef}>
+            {renderBunMarkup("ml-10 mb-2", "top", "(верх)")}
             <ul
               className={`${styles.container}  ${styles.column} custom-scroll`}
             >
               {renderInnerIngredientsMarkup()}
             </ul>
-            {renderBunMarkup("mt-2", "bottom", "(низ)")}
+            {renderBunMarkup("ml-10 mt-2", "bottom", "(низ)")}
           </div>
           <div className={`mt-10 ${styles.total}`}>
             <Total />
@@ -147,6 +138,7 @@ function BurgerConstructor({ onModalOpen }: IBurgerConstructorProps) {
               size="large"
               onClick={handleSubmit}
               disabled={!isButtonActive}
+              data-cy="constructor-submit"
             >
               Оформить заказ
             </Button>
@@ -160,4 +152,3 @@ function BurgerConstructor({ onModalOpen }: IBurgerConstructorProps) {
 }
 
 export default BurgerConstructor;
-

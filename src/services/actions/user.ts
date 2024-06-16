@@ -17,7 +17,7 @@ import {
   EDIT_PROFILE_FAILED,
   EDIT_PROFILE_SUCCESS,
 } from "../constants/user";
-import { AppDispatch } from "../types";
+import { AppThunk } from "../types";
 
 type TUserRequestAction = {
   type: typeof GET_USER_REQUEST;
@@ -69,7 +69,7 @@ export const receiveUser = (user: TUser): TUserSuccessAction => ({
   payload: user,
 });
 
-export const fetchUser = () => async (dispatch: AppDispatch) => {
+export const fetchUser = ():AppThunk<Promise<void>> => async (dispatch) => {
   dispatch({ type: GET_USER_REQUEST });
 
   await fetchWithRefresh<IUserSuccessResponse>(ENDPOINT.user, {
@@ -87,8 +87,8 @@ export const fetchUser = () => async (dispatch: AppDispatch) => {
     });
 };
 
-export const checkUserAuth = () => {
-  return (dispatch: AppDispatch) => {
+export const checkUserAuth = ():AppThunk => {
+  return (dispatch) => {
     if (localStorage.getItem("accessToken")) {
       try {
         dispatch(fetchUser());
@@ -107,7 +107,7 @@ export const checkUserAuth = () => {
 };
 
 export const editProfile =
-  () => async (dispatch: AppDispatch, getState: any) => {
+  ():AppThunk => async (dispatch, getState) => {
     dispatch({ type: EDIT_PROFILE_REQUEST });
     let form: TUserWithPassword = getState().profile.form;
     const { name, email, password }: TUserWithPassword = form;

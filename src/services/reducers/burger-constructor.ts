@@ -13,7 +13,7 @@ export interface ConstructorState {
     ingredients: TConstructorIngredient[];
   };
 }
-const initialState: ConstructorState = {
+export const constructorInitialState: ConstructorState = {
   addedIngredients: {
     buns: null,
     ingredients: [],
@@ -21,7 +21,7 @@ const initialState: ConstructorState = {
 };
 
 export const constructorReducer = (
-  state = initialState,
+  state = constructorInitialState,
   action: TBurgerConstructorActions
 ): ConstructorState => {
   switch (action.type) {
@@ -69,7 +69,7 @@ export const constructorReducer = (
     case RESET_CONSTRUCTOR: {
       return {
         ...state,
-        addedIngredients: initialState.addedIngredients,
+        addedIngredients: constructorInitialState.addedIngredients,
       };
     }
 
@@ -78,3 +78,4 @@ export const constructorReducer = (
     }
   }
 };
+

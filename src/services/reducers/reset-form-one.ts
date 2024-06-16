@@ -11,7 +11,7 @@ export interface ResetFormState {
   resetPasswordRequest: boolean;
   resetPasswordFailed: boolean;
 }
-const initialState: ResetFormState = {
+export const ResetFormOneInitialState: ResetFormState = {
   form: {
     email: "",
   },
@@ -20,7 +20,7 @@ const initialState: ResetFormState = {
 };
 
 export const resetFormReducer = (
-  state = initialState,
+  state = ResetFormOneInitialState,
   action: TResetFormActions
 ): ResetFormState => {
   switch (action.type) {
@@ -45,7 +45,7 @@ export const resetFormReducer = (
       return {
         ...state,
         form: {
-          ...initialState.form,
+          ...ResetFormOneInitialState.form,
         },
         resetPasswordRequest: false,
       };

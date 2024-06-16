@@ -15,14 +15,14 @@ export interface ProfileOrdersStore {
   total: number;
   totalToday: number;
 }
-const initialState: ProfileOrdersStore = {
+export const wsProfileInitialState: ProfileOrdersStore = {
   status: WebsocketStatus.OFFLINE,
   error: "",
   orders: [],
   total: 0,
   totalToday: 0,
 };
-export const ProfileOrdersReducer = createReducer(initialState, (builder) => {
+export const ProfileOrdersReducer = createReducer(wsProfileInitialState, (builder) => {
   builder
     .addCase(wsConnecting, (state) => {
       state.status = WebsocketStatus.CONNECTING;

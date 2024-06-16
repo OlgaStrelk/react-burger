@@ -15,14 +15,14 @@ export interface FeedStore {
   total: number;
   totalToday: number;
 }
-const initialState: FeedStore = {
+export const WsFeedInitialState: FeedStore = {
   status: WebsocketStatus.OFFLINE,
   error: "",
   orders: [],
   total: 0,
   totalToday: 0,
 };
-export const FeedReducer = createReducer(initialState, (builder) => {
+export const FeedReducer = createReducer(WsFeedInitialState, (builder) => {
   builder
     .addCase(wsConnecting, (state) => {
       state.status = WebsocketStatus.CONNECTING;

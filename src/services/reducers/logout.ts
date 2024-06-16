@@ -10,13 +10,13 @@ export interface LogoutState {
   logoutFailed: boolean;
 }
 
-const initialState: { logoutRequest: boolean; logoutFailed: boolean } = {
+export const logoutInitialState: { logoutRequest: boolean; logoutFailed: boolean } = {
   logoutRequest: false,
   logoutFailed: false,
 };
 
 export const logoutReducer = (
-  state = initialState,
+  state = logoutInitialState,
   action: TLogoutActions
 ): LogoutState => {
   switch (action.type) {

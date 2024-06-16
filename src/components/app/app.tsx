@@ -95,7 +95,7 @@ function App() {
           <Route
             path={ingredient}
             element={
-              <Modal customStyle={modalStyle.ingredient} path={home}>
+              <Modal type='ingredient-modal' customStyle={modalStyle.ingredient} path={home}>
                 <IngredientDetails />
               </Modal>
             }
@@ -104,7 +104,7 @@ function App() {
           <Route
             path={order}
             element={
-              <Modal path={ordersList}>
+              <Modal type="feed-modal" path={ordersList}>
                 <OrderDetails />
               </Modal>
             }
@@ -115,7 +115,7 @@ function App() {
             element={
               <OnlyAuth
                 component={
-                  <Modal path={ordersHistory}>
+                  <Modal type='orders-history-modal' path={ordersHistory}>
                     <OrderDetails />
                   </Modal>
                 }

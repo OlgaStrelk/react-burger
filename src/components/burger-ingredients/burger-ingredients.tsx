@@ -1,5 +1,3 @@
-import styles from "./burger-ingredients.module.css";
-
 import Tabbar from "../tab-bar/tab-bar";
 import IngredientsBlock from "./ingredients-block/ingredients-block";
 import { SetStateAction, SyntheticEvent, useRef, useState } from "react";

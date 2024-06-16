@@ -3,6 +3,7 @@
   text-decoration: none;
 }
 .container {
+  composes: ml-4 mb-8 from global;
   position: relative;
   max-width: 272px;
   min-height: 208px;

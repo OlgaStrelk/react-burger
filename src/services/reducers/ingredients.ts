@@ -9,21 +9,27 @@ import {
   RESET_INGREDIENTS_QUANTITY,
 } from "../constants/ingredients";
 
+
 export interface IngredientsState {
   ingredients: TIngredient[];
   ingredientsRequest: boolean;
   ingredientsFailed: boolean;
 }
-const initialState: IngredientsState = {
+export const ingredientsInitialState: IngredientsState = {
   ingredients: [],
   ingredientsRequest: false,
   ingredientsFailed: false,
 };
 
 export const ingredientsReducer = (
-  state = initialState,
+  state = ingredientsInitialState,
   action: TIngredientsActions
 ): IngredientsState => {
+  
+  const newIngredients: TIngredient[] = JSON.parse(
+    JSON.stringify(state.ingredients)
+  );
+
   switch (action.type) {
     case GET_INGREDIENTS_REQUEST: {
       return {
@@ -37,8 +43,8 @@ export const ingredientsReducer = (
       return {
         ...state,
 
-        ingredients: ingredients.map((item) => {
-          return { ...item, quantity: 0 };
+        ingredients: ingredients.map((newIngredient) => {
+          return { ...newIngredient, quantity: 0 };
         }),
         ingredientsRequest: false,
       };
@@ -52,32 +58,32 @@ export const ingredientsReducer = (
     }
 
     case INCREASE_INGREDIENT_QUANTITY: {
-      let ingredient = action.payload;
+      const ingredient = action.payload;
       return {
         ...state,
-        ingredients: [...state.ingredients].map((item) =>
+        ingredients: newIngredients.map((newIngredient) =>
           ingredient.type === "bun" &&
-          item.type === "bun" &&
-          ingredient._id !== item._id
-            ? { ...item, quantity: 0 }
-            : ingredient.type === "bun" && ingredient._id === item._id
-            ? { ...item, quantity: 2 }
-            : ingredient._id === item._id
-            ? { ...item, quantity: ++item.quantity }
-            : item
+          newIngredient.type === "bun" &&
+          ingredient._id !== newIngredient._id
+            ? { ...newIngredient, quantity: 0 }
+            : ingredient.type === "bun" && ingredient._id === newIngredient._id
+            ? { ...newIngredient, quantity: 2 }
+            : ingredient._id === newIngredient._id
+            ? { ...newIngredient, quantity: ++newIngredient.quantity }
+            : newIngredient
         ),
       };
     }
 
     case DECREASE_INGREDIENT_QUANTITY: {
-      let ingredient = action.payload;
+      const ingredientId = action.payload;
 
       return {
         ...state,
-        ingredients: [...state.ingredients].map((item) =>
-          ingredient === item._id
-            ? { ...item, quantity: --item.quantity }
-            : item
+        ingredients: newIngredients.map((newIngredient) =>
+          ingredientId === newIngredient._id
+            ? { ...newIngredient, quantity: --newIngredient.quantity }
+            : newIngredient
         ),
       };
     }
@@ -85,8 +91,8 @@ export const ingredientsReducer = (
     case RESET_INGREDIENTS_QUANTITY: {
       return {
         ...state,
-        ingredients: [...state.ingredients].map((item) => {
-          return { ...item, quantity: 0 };
+        ingredients: newIngredients.map((newIngredient) => {
+          return { ...newIngredient, quantity: 0 };
         }),
       };
     }

@@ -14,7 +14,7 @@ export interface OrderState {
   total: number;
 }
 
-const initialState: OrderState = {
+export const orderInitialState: OrderState = {
   order: null,
   orderRequest: false,
   orderFailed: false,
@@ -22,7 +22,7 @@ const initialState: OrderState = {
 };
 
 export const orderReducer = (
-  state = initialState,
+  state = orderInitialState,
   action: TOrderActions
 ): OrderState => {
   switch (action.type) {

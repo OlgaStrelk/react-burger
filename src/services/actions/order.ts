@@ -16,7 +16,7 @@ import {
   MAKE_ORDER_REQUEST,
   MAKE_ORDER_SUCCESS,
 } from "../constants/order";
-import { AppDispatch } from "../types";
+import { AppThunk } from "../types";
 
 type TMakeOrderRequestAction = {
   type: typeof MAKE_ORDER_REQUEST;
@@ -59,7 +59,8 @@ export type TOrderActions =
   | TOrderSumAction;
 
 export const makeOrder =
-  (data: TMakeOrderRequest) => (dispatch: AppDispatch) => {
+  (data: TMakeOrderRequest): AppThunk =>
+  (dispatch) => {
     dispatch({ type: MAKE_ORDER_REQUEST });
     request<IMakeOrderResponse>(ENDPOINT.orders, {
       ...optionsWithAuth,
@@ -76,7 +77,8 @@ export const makeOrder =
   };
 
 export const getOrder =
-  (number: string) => (dispatch: AppDispatch, getState: any) => {
+  (number: string): AppThunk =>
+  (dispatch, getState) => {
     dispatch({ type: GET_ORDER_REQUEST });
 
     request<IGetOrderResponse>(`${ENDPOINT.orders}/${number}`, {

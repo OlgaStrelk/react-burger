@@ -30,7 +30,9 @@ function HomePage() {
         </main>
       ) : ingredients.length == 0 ? (
         <main className={styles.main_error}>
-          <h2 className={styles.error_text}>{FETCHING_FAILED_ERROR_TEXT.main}</h2>
+          <h2 className={styles.error_text}>
+            {FETCHING_FAILED_ERROR_TEXT.main}
+          </h2>
         </main>
       ) : (
         <>
@@ -45,6 +47,7 @@ function HomePage() {
           </DndProvider>
           {isOpen && (
             <Modal
+              type="order-modal"
               onClose={onClose}
               action={[RESET_CONSTRUCTOR, RESET_INGREDIENTS_QUANTITY]}
               customStyle={modalStyle.order}

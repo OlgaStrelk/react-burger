@@ -22,7 +22,7 @@ function IngredientCard({ cardData }: IIngredientCard) {
       to={`/ingredients/${cardData._id}`}
       state={{ backgroundLocation: location }}
     >
-      <div ref={dragRef} className={`${styles.container} ml-4 mb-8`}>
+      <div data-cy='dragged-card' ref={dragRef} className={styles.container}>
         <Counter count={cardData.quantity} size="default" extraClass="m-1" />
         <img
           className={`pl-4 pr-4 ${styles.image}`}
