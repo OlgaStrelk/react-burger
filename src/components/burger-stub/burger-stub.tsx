@@ -8,7 +8,10 @@ const BurgerStub: FC<IBurgerStub> = ({ style, text }) => {
   return (
     <div className={`constructor-element ${style}`}>
       <span className="constructor-element__row">
-        <span data-cy="stub-text" className="constructor-element__text">
+        <span
+          data-cy="stub-text"
+          className={`constructor-element__text ${styles.text}`}
+        >
           {text}
         </span>
       </span>
