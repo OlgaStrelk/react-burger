@@ -11,12 +11,10 @@ import {
   DELETE_INGREDIENT,
   RESET_CONSTRUCTOR,
 } from "../constants/ingredients";
-import {
-  mockBun,
-  mockIngredient,
-} from "../../__test__/__mocks__/burger-constructor";
-import { mockFetchedIngredient } from "../../__test__/__mocks__/ingredients";
+
+import { mockFetchedIngredient } from "../../test/__mocks__/ingredients";
 import { TConstructorIngredient } from "../../utils/types";
+import { mockBun, mockIngredient } from "../../test/__mocks__/burger-constructor";
 
 describe("Burger Constructor Reducer", () => {
   it("should return the initial state", () => {

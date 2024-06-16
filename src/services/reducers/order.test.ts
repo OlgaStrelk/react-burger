@@ -8,7 +8,7 @@ import {
   COUNT_TOTAL,
 } from '../constants/order';
 import { TIngredient, TOrder, TWsOrder } from '../../utils/types';
-import { mockFetchedIngredient } from '../../__test__/__mocks__/ingredients';
+import { mockFetchedIngredient } from '../../test/__mocks__/ingredients';
 
 describe('orderReducer', () => {
   it('should return the initial state', () => {

@@ -10,7 +10,7 @@ import {
   RESET_INGREDIENTS_QUANTITY,
 } from '../constants/ingredients';
 import { TIngredient } from '../../utils/types';
-import { mockFetchedIngredient } from '../../__test__/__mocks__/ingredients';
+import { mockFetchedIngredient } from '../../test/__mocks__/ingredients';
 
 
 describe('ingredients reducer', () => {
