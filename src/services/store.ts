@@ -1,10 +1,3 @@
-// import {
-//   legacy_createStore as createStore,
-//   applyMiddleware,
-//   compose,
-// } from "redux";
-// import logger from "redux-logger";
-
 import { configureStore } from "@reduxjs/toolkit";
 
 import { thunk } from "redux-thunk";
@@ -31,13 +24,6 @@ import {
 import { rootReducer } from "./reducers/index.ts";
 import { socketMiddlewareWithReconnect } from "./middleware/socketMiddleware.ts";
 
-// const composeEnhancers =
-//   //@ts-ignore
-//   typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-//     ? //@ts-ignore
-//       window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
-//     : compose;
-
 const wsFeedActions = {
   wsConnect: LiveFeedWsConnect,
   wsDisconnect: LiveFeedWsDisconnect,
@@ -56,9 +42,6 @@ const wsProfileOrdersActions = {
   onMessage: LiveProfileOrdersWsOrders,
   onError: LiveProfileOrdersWsError,
 };
-// const liveFeedMiddleware = socketMiddleware(wsFeedActions);
-
-// const liveProfileOrdersMiddleware = socketMiddleware(wsProfileOrdersActions);
 
 const liveFeedMiddleware = socketMiddlewareWithReconnect(wsFeedActions);
 
@@ -66,28 +49,16 @@ const liveProfileOrdersMiddleware = socketMiddlewareWithReconnect(
   wsProfileOrdersActions
 );
 
-// const enhancer = composeEnhancers(
-//   applyMiddleware(thunk, liveFeedMiddleware, liveProfileOrdersMiddleware)
-// );
-// const store = createStore(rootReducer, enhancer);
-
 const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
       .prepend(
-        // correctly typed middlewares can just be used
         thunk,
         liveFeedMiddleware,
         liveProfileOrdersMiddleware
-        // you can also type middlewares manually
-        // untypedMiddleware as Middleware<
-        //   (action: Action<'specialAction'>) => number,
-        //   RootState
-        // >,
       )
-      // prepend and concat calls can be chained
-      // .concat(logger),
+
 });
 
 export default store;
