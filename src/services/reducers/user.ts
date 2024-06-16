@@ -1,4 +1,4 @@
-import { TUser } from "../../utils/types";
+// import { TUser } from "../../utils/types";
 import { TUserActions } from "../actions/user";
 import {
   GET_USER_REQUEST,
@@ -8,6 +8,7 @@ import {
   SET_AUTH_CHECKED,
   UPDATE_USER_DATA,
 } from "../constants/user";
+export type TUser = { name: string; email: string };
 
 export interface UserState {
   user: TUser | null;
@@ -16,7 +17,7 @@ export interface UserState {
   userFailed: boolean;
 }
 
-const initialState: UserState = {
+export const userInitialState: UserState = {
   user: null,
   isAuthChecked: false,
   userRequest: false,
@@ -24,7 +25,7 @@ const initialState: UserState = {
 };
 
 export const userReducer = (
-  state = initialState,
+  state = userInitialState,
   action: TUserActions
 ): UserState => {
   switch (action.type) {
