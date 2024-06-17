@@ -3,8 +3,19 @@ import {
   ActionCreatorWithoutPayload,
   Middleware,
 } from "@reduxjs/toolkit";
-import { refreshToken } from "../../utils/api";
-
+import { request } from "../../utils/api";
+import { ENDPOINT, optionsWithAuth } from "../../utils/consts";
+import { ITokenResponse } from "../../utils/types";
+// import { refreshToken } from "../../utils/api";
+export const refreshToken = () => {
+  return request<ITokenResponse>(ENDPOINT.refreshToken, {
+    ...optionsWithAuth,
+    method: "POST",
+    body: JSON.stringify({
+      token: localStorage.getItem("refreshToken"),
+    }),
+  });
+};
 export type TwsActionsTypes = {
   wsConnect: ActionCreatorWithPayload<string>;
   wsDisconnect: ActionCreatorWithoutPayload;
@@ -14,49 +25,6 @@ export type TwsActionsTypes = {
   onError: ActionCreatorWithPayload<string>;
   onClose: ActionCreatorWithPayload<string>;
 };
-
-export const socketMiddleware = (wsActions: TwsActionsTypes): Middleware => {
-  return (store) => {
-    let socket: WebSocket | null = null;
-
-    return (next) => (action) => {
-      const { dispatch } = store;
-      const { wsConnect, onOpen, onClose, onError, onMessage, wsDisconnect } =
-        wsActions;
-      if (wsConnect.match(action)) {
-        socket = new WebSocket(action.payload);
-      }
-      if (socket) {
-        socket.onopen = () => {
-          dispatch(onOpen());
-        };
-
-        socket.onerror = (event) => {
-          dispatch(onError(String(event)));
-        };
-
-        socket.onmessage = (event) => {
-          const { data } = event;
-
-          const parsedData = JSON.parse(data);
-          dispatch(onMessage(parsedData));
-        };
-
-        socket.onclose = (event) => {
-          dispatch(onClose(event.code.toString()));
-        };
-
-        if (wsDisconnect.match(action)) {
-          socket.close(1000);
-          dispatch(onClose("1000"));
-        }
-      }
-
-      next(action);
-    };
-  };
-};
-const RECONNECT_PERIOD = 3000;
 
 export const socketMiddlewareWithReconnect = (
   wsActions: TwsActionsTypes,
@@ -119,7 +87,6 @@ export const socketMiddlewareWithReconnect = (
           };
 
           socket.onclose = (event) => {
-            if (socket && socket.readyState === 1)
             dispatch(onClose(event.code.toString()));
           };
 
@@ -144,3 +111,46 @@ export const socketMiddlewareWithReconnect = (
     };
   };
 };
+
+export const socketMiddleware = (wsActions: TwsActionsTypes): Middleware => {
+  return (store) => {
+    let socket: WebSocket | null = null;
+
+    return (next) => (action) => {
+      const { dispatch } = store;
+      const { wsConnect, onOpen, onClose, onError, onMessage, wsDisconnect } =
+        wsActions;
+      if (wsConnect.match(action)) {
+        socket = new WebSocket(action.payload);
+      }
+      if (socket) {
+        socket.onopen = () => {
+          dispatch(onOpen());
+        };
+
+        socket.onerror = (event) => {
+          dispatch(onError(String(event)));
+        };
+
+        socket.onmessage = (event) => {
+          const { data } = event;
+
+          const parsedData = JSON.parse(data);
+          dispatch(onMessage(parsedData));
+        };
+
+        socket.onclose = (event) => {
+          dispatch(onClose(event.code.toString()));
+        };
+
+        if (wsDisconnect.match(action)) {
+          socket.close(1000);
+          dispatch(onClose("1000"));
+        }
+      }
+
+      next(action);
+    };
+  };
+};
+const RECONNECT_PERIOD = 3000;

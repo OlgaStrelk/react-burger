@@ -18,8 +18,8 @@ import { mockBun, mockIngredient } from "../../test/__mocks__/burger-constructor
 
 describe("Burger Constructor Reducer", () => {
   it("should return the initial state", () => {
-    const result = reducer(undefined, {} as TBurgerConstructorActions);
-    expect(result).toEqual(initialState);
+    const resultingState = reducer(undefined, {} as TBurgerConstructorActions);
+    expect(resultingState).toEqual(initialState);
   });
 
   describe("should handle ADD_INGREDIENT", () => {
@@ -35,8 +35,8 @@ describe("Burger Constructor Reducer", () => {
           ingredients: [],
         },
       };
-      const result = reducer(initialState, action);
-      expect(result).toEqual(expectedState);
+      const resultingState = reducer(initialState, action);
+      expect(resultingState).toEqual(expectedState);
     });
 
     it("should add an ingredient to the state", () => {
@@ -51,8 +51,8 @@ describe("Burger Constructor Reducer", () => {
           ingredients: [mockIngredient],
         },
       };
-      const result = reducer(initialState, action);
-      expect(result).toEqual(expectedState);
+      const resultingState = reducer(initialState, action);
+      expect(resultingState).toEqual(expectedState);
     });
   });
 
@@ -86,8 +86,8 @@ describe("Burger Constructor Reducer", () => {
         ingredients: mockIngredients,
       },
     };
-    const result = reducer(initialState, action);
-    expect(result).toEqual(expectedState);
+    const resultingState = reducer(initialState, action);
+    expect(resultingState).toEqual(expectedState);
   });
 
   it("should handle an ingredient being deleted from constructor", () => {
@@ -136,9 +136,9 @@ describe("Burger Constructor Reducer", () => {
         ],
       },
     };
-    const result = reducer(initialStateWithIngredients, action);
+    const resultingState = reducer(initialStateWithIngredients, action);
 
-    expect(result).toEqual(expectedState);
+    expect(resultingState).toEqual(expectedState);
   });
 
   it("should empty contructor", () => {
@@ -171,7 +171,7 @@ describe("Burger Constructor Reducer", () => {
     const expectedState: ConstructorState = {
       ...initialState,
     };
-    const result = reducer(initialStateWithIngredients, action);
-    expect(result).toEqual(expectedState);
+    const resultingState = reducer(initialStateWithIngredients, action);
+    expect(resultingState).toEqual(expectedState);
   });
 });

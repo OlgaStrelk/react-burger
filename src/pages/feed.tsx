@@ -4,19 +4,24 @@ import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useAppDispatch, useSelector } from "../services/types/hooks";
 import { WSURL } from "../utils/consts";
-import { connect } from "../services/actions/ws-feed";
+import { connect, disconnect } from "../services/actions/ws-feed";
 import OrderCard from "../components/order-card/order-card";
 
 function FeedPage() {
   const dispatch = useAppDispatch();
   const location = useLocation();
 
-  const { orders } = useSelector((state) => state.wsFeed);
+  const { orders, status } = useSelector((state) => state.wsFeed);
   const connectLiveFeed = () => dispatch(connect(WSURL));
+  const disconnectLiveFeed = () => dispatch(disconnect());
+
   useEffect(() => {
     connectLiveFeed();
+    return () => {
+      disconnectLiveFeed();
+    };
   }, []);
-
+  console.log(status);
   const orderCardsMarkup = orders.map((order) => (
     <Link
       key={order.number}
