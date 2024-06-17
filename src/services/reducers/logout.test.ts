@@ -12,8 +12,8 @@ import {
 
 describe("logout reducer", () => {
   it("should return the initial state", () => {
-    const result = reducer(undefined, {} as TLogoutActions);
-    expect(result).toEqual(initialState);
+    const resultingState = reducer(undefined, {} as TLogoutActions);
+    expect(resultingState).toEqual(initialState);
   });
 
   it("should handle LOGOUT_REQUEST", () => {
@@ -24,9 +24,9 @@ describe("logout reducer", () => {
       logoutRequest: true,
       logoutFailed: false,
     };
-    const result = reducer(initialState, action);
+    const resultingState = reducer(initialState, action);
 
-    expect(result).toEqual(expectedState);
+    expect(resultingState).toEqual(expectedState);
   });
 
   it("should handle LOGOUT_SUCCESS", () => {
@@ -37,9 +37,9 @@ describe("logout reducer", () => {
       ...initialState,
       logoutRequest: false,
     };
-    const result = reducer(initialState, action);
+    const resultingState = reducer(initialState, action);
 
-    expect(result).toEqual(expectedState);
+    expect(resultingState).toEqual(expectedState);
   });
 
   it("should handle LOGOUT_FAILED", () => {
@@ -50,8 +50,8 @@ describe("logout reducer", () => {
       logoutFailed: true,
       logoutRequest: false,
     };
-    const result = reducer(initialState, action);
+    const resultingState = reducer(initialState, action);
 
-    expect(result).toEqual(expectedState);
+    expect(resultingState).toEqual(expectedState);
   });
 });
