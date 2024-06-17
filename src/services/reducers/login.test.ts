@@ -1,6 +1,9 @@
 import { expect, test, describe } from "vitest";
 
-import { loginReducer, loginInitialState as initialState } from "./login";
+import {
+  loginReducer as reducer,
+  loginInitialState as initialState,
+} from "./login";
 import { TLoginActions } from "../actions/login";
 import { LOGIN_FAILED, LOGIN_REQUEST, LOGIN_SUCCESS } from "../constants/auth";
 import { LOGIN_SET_VALUE } from "../constants/auth-forms";
@@ -8,7 +11,8 @@ import { LOGIN_SET_VALUE } from "../constants/auth-forms";
 describe("login reducer", () => {
   test("should return the initial state", () => {
     // Проверка на возврат initialState при пустом action
-    expect(loginReducer(undefined, {} as TLoginActions)).toEqual(initialState);
+    const resultingState = reducer(undefined, {} as TLoginActions);
+    expect(resultingState).toEqual(initialState);
   });
 
   test("should handle LOGIN_SET_VALUE", () => {
@@ -25,7 +29,8 @@ describe("login reducer", () => {
         email: "test@example.com",
       },
     };
-    expect(loginReducer(initialState, action)).toEqual(expectedState);
+    const resultingState = reducer(initialState, action);
+    expect(resultingState).toEqual(expectedState);
   });
 
   test("should handle LOGIN_REQUEST", () => {
@@ -38,7 +43,8 @@ describe("login reducer", () => {
       loginRequest: true,
       loginFailed: false,
     };
-    expect(loginReducer(initialState, action)).toEqual(expectedState);
+    const resultingState = reducer(initialState, action);
+    expect(resultingState).toEqual(expectedState);
   });
 
   test("should handle LOGIN_SUCCESS", () => {
@@ -53,7 +59,8 @@ describe("login reducer", () => {
       },
       loginRequest: false,
     };
-    expect(loginReducer(initialState, action)).toEqual(expectedState);
+    const resultingState = reducer(initialState, action);
+    expect(resultingState).toEqual(expectedState);
   });
 
   test("should handle LOGIN_FAILED", () => {
@@ -66,6 +73,7 @@ describe("login reducer", () => {
       loginRequest: false,
       loginFailed: true,
     };
-    expect(loginReducer(initialState, action)).toEqual(expectedState);
+    const resultingState = reducer(initialState, action);
+    expect(resultingState).toEqual(expectedState);
   });
 });
