@@ -13,8 +13,8 @@ import {
 
 describe("orderMadeReducer", () => {
   it("should return the initial state", () => {
-    const result = reducer(undefined, {} as TOrderActions);
-    expect(result).toEqual(initialState);
+    const resultingState = reducer(undefined, {} as TOrderActions);
+    expect(resultingState).toEqual(initialState);
   });
 
   it("should handle MAKE_ORDER_REQUEST", () => {
@@ -26,8 +26,8 @@ describe("orderMadeReducer", () => {
       orderRequest: true,
       orderFailed: false,
     };
-    const result = reducer(initialState, action);
-    expect(result).toEqual(expectedState);
+    const resultingState = reducer(initialState, action);
+    expect(resultingState).toEqual(expectedState);
   });
 
   it("should handle MAKE_ORDER_SUCCESS", () => {
@@ -41,8 +41,8 @@ describe("orderMadeReducer", () => {
       order: mockOrderNumber,
       orderRequest: false,
     };
-    const result = reducer(initialState, action);
-    expect(result).toEqual(expectedState);
+    const resultingState = reducer(initialState, action);
+    expect(resultingState).toEqual(expectedState);
   });
 
   it("should handle MAKE_ORDER_FAILED", () => {
@@ -54,7 +54,7 @@ describe("orderMadeReducer", () => {
       orderFailed: true,
       orderRequest: false,
     };
-    const result = reducer(initialState, action);
-    expect(result).toEqual(expectedState);
+    const resultingState = reducer(initialState, action);
+    expect(resultingState).toEqual(expectedState);
   });
 });

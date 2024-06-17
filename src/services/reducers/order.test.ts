@@ -12,7 +12,8 @@ import { mockFetchedIngredient } from '../../test/__mocks__/ingredients';
 
 describe('orderReducer', () => {
   it('should return the initial state', () => {
-    expect(reducer(undefined, {} as TOrderActions)).toEqual(initialState);
+    const resultingState = reducer(undefined, {} as TOrderActions)
+    expect(resultingState).toEqual(initialState);
   });
 
   it('should handle GET_ORDER_REQUEST', () => {
@@ -24,7 +25,8 @@ describe('orderReducer', () => {
       orderRequest: true,
       orderFailed: false,
     };
-    expect(reducer(initialState, action)).toEqual(expectedState);
+    const resultingState = reducer(initialState, action)
+    expect(resultingState).toEqual(expectedState);
   });
 
   it('should handle GET_ORDER_SUCCESS', () => {
@@ -56,7 +58,8 @@ describe('orderReducer', () => {
       order: mockOrder,
       orderRequest: false,
     };
-    expect(reducer(initialState, action)).toEqual(expectedState);
+    const resultingState = reducer(initialState, action)
+    expect(resultingState).toEqual(expectedState);
   });
 
   it('should handle GET_ORDER_FAILED', () => {
@@ -68,7 +71,8 @@ describe('orderReducer', () => {
       orderFailed: true,
       orderRequest: false,
     };
-    expect(reducer(initialState, action)).toEqual(expectedState);
+    const resultingState = reducer(initialState, action)
+    expect(resultingState).toEqual(expectedState);
   });
 
   it('should handle COUNT_TOTAL', () => {
@@ -80,6 +84,7 @@ describe('orderReducer', () => {
       ...initialState,
       total: 500,
     };
-    expect(reducer(initialState, action)).toEqual(expectedState);
+    const resultingState = reducer(initialState, action)
+    expect(resultingState).toEqual(expectedState);
   });
 });
