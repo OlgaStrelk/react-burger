@@ -1,8 +1,9 @@
 {
   "name": "react-burger",
   "private": false,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
+  "homepage": "https://olgastrelk.github.io/react-burger/",
 
   "scripts": {
     "dev": "vite",
